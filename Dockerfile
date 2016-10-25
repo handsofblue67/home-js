@@ -1,7 +1,7 @@
 FROM node:latest
 
 RUN mkdir -p /opt/home-js
-RUN mkdir -p /opt/home-js/src
+# RUN mkdir -p /opt/home-js/src
 WORKDIR /opt/home-js
 
 ADD server.js /opt/home-js

@@ -10,3 +10,7 @@ services:
       - db
   db:
     image: "mongo:latest"
+  broker:
+    image: "ansi/mosquitto"
+    ports:
+      - "1883:1883"

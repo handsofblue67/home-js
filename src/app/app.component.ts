@@ -9,5 +9,4 @@ import { BackendService } from './backend.service'
 })
 export class AppComponent {
   constructor(private backend: BackendService) { }
-  title = 'app works!';
 }

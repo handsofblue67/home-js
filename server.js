@@ -13,13 +13,18 @@ function dbConnect(callback) {
 }
 
 mqtt.on('connect', () => {
-  mqtt.subscribe('test/#')
-  mqtt.publish('testRes/server', 'Hello mqtt')
+  mqtt.subscribe('/status/+/state')
 })
 
 mqtt.on('message', (topic, message) => {
+  dbConnect(db => {
+    db.collection('mcuStates')
+      .insertOne(JSON.parse(message.toString()), (err, result) => {
+        console.log(result.insertedId)
+      })
+  })
   console.log(message.toString())
-  mqtt.end()
+  // mqtt.end()
 })
 
 const app = express()
@@ -35,7 +40,6 @@ const app = express()
     console.log(chalk.blue(JSON.stringify(req.body, null, 2)))
     db.collection('devices')
       .insertOne(req.body, (err, result) => {
-        console.log(chalk.green(JSON.stringify(result, null, 2)))
         res.send(result.insertedId)
       })
     })
@@ -45,7 +49,6 @@ const app = express()
   dbConnect((db) => {
     db.collection('devices')
       .find({}).toArray((err, docs) => {
-        console.log(chalk.green(JSON.stringify(docs, null, 2)))
         res.send(docs)
       })
     })
@@ -53,17 +56,15 @@ const app = express()
 
 .get('/mcuStates', (req, res) => {
   dbConnect((db) => {
-    console.log(chalk.blue(JSON.stringify(req.body, null, 2)))
     db.collection('mcuStates')
-      .insertOne(req.body, (err, result) => {
-        console.log(chalk.green(JSON.stringify(result, null, 2)))
-        res.send(result.insertedId)
+      .find({}).toArray((err, docs) => {
+        res.send(docs)
       })
     })
 })
 
-.post('/publish/:topic', (req, res) => {
-  mqtt.publish(`testRes/${req.params.topic}`, req.body.message)
+.post('/publish', (req, res) => {
+  mqtt.publish(`${req.body.topic}`, req.body.message)
   res.status(200).send('message published')
 })
 

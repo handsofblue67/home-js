@@ -10,14 +10,13 @@ import { Mqtt } from './models'
 @Injectable()
 export class BackendService {
   private deviceSource = new BehaviorSubject<Array<{}>>([])
-  private dataSource = new BehaviorSubject<Array<{}>>([])
+  // private dataSource = new BehaviorSubject<Array<{}>>([])
   devices$ = this.deviceSource.asObservable()
-  data$ = this.dataSource.asObservable()
+  // data$ = this.dataSource.asObservable()
   headers = new Headers({ 'Content-Type': 'application/json' })
 
   constructor(private http: Http) {
     this.getDevices().subscribe(o => this.deviceSource.next(o))
-    this.getData().subscribe(o => this.dataSource.next(o))
   }
 
   getDevices(): Observable<Array<{}>> {
@@ -25,10 +24,16 @@ export class BackendService {
       .map(res => res.json())
   }
 
-  getData(): Observable<Array<{}>> {
-    return this.http.get('mcuStates')
-      .map(res => res.json())    
+  getDataByID(id: number): Array<{}>  {
+    let data = [] 
+    this.getDeviceData(id).subscribe(res => data = res)
+    return data
   }
+
+  getDeviceData(id: number): Observable<Array<{}>> {
+    return this.http.get(`mcuStates/${id}`)
+      .map(res => res.json())
+  }  
 
   publish(mqtt: Mqtt = <Mqtt>{'topic': '/status/13774646/toggle', 'message': new Date()}): void {
     this.http.post('publish', JSON.stringify(mqtt), {headers: this.headers})

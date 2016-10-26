@@ -1,6 +1,5 @@
 <md-toolbar color="primary">
-  <button md-icon-button><md-icon>menu</md-icon></button>
-  HomeJS
+	<button md-icon-button><md-icon>menu</md-icon></button> HomeJS
 </md-toolbar>
 
 <button md-raised-button color="accent" (click)="backend.publish()">Toggle</button>
@@ -9,5 +8,13 @@
 <!--<div>Green<md-slider min="0" max="1023" #green (slide)="backend.publishRGB(red.value, green.value, blue.value)"></md-slider></div>-->
 <!--<div>Blue<md-slider min="0" max="1023" #blue (slide)="backend.publishRGB(red.value, green.value, blue.value)"></md-slider></div>-->
 
-<!--{{backend.devices$ | async | json}}-->
+<md-card *ngFor="let device of backend.devices$ | async">
+	<md-card-title>{{device}}</md-card-title>
+	<md-card-content>
+		<div *ngFor="let data of backend.getDataByID(device)">
+			{{data?.lightSensor}}
+		</div>
+	</md-card-content>
+</md-card>
+
 <!--{{backend.data$ | async | json}}-->

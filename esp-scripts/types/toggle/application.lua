@@ -19,22 +19,6 @@ local function toggle_state()
   send_state()
 end
 
-local function setup_rgb()
-  settings.RGB={
-    RED={ PIN=8, CLOCK=500, DUTY=512 },
-    GREEN={ PIN=6, CLOCK=500, DUTY=512 },
-    BLUE={ PIN=7, CLOCK=500, DUTY=512 }
-  }
-
-  pwm.setup(settings.RGB.RED.PIN, settings.RGB.RED.CLOCK, settings.RGB.RED.DUTY)
-  pwm.setup(settings.RGB.GREEN.PIN, settings.RGB.GREEN.CLOCK, settings.RGB.GREEN.DUTY)
-  pwm.setup(settings.RGB.BLUE.PIN, settings.RGB.BLUE.CLOCK, settings.RGB.BLUE.DUTY)
-
-  pwm.start(settings.RGB.RED.PIN)
-  pwm.start(settings.RGB.GREEN.PIN)
-  pwm.start(settings.RGB.BLUE.PIN)
-end
-
 local function init_settings()
   settings.ID=config.ID
   -- initial output pin state
@@ -50,10 +34,8 @@ local function init_settings()
   gpio.mode(settings.BUTTON_PIN, gpio.INPUT)
   gpio.trig(settings.BUTTON_PIN, "down", toggle_state)
 
-  setup_rgb()
-
-  -- report every minute by default (just sends state of the controller)
-  settings.checkinFreq = 60000
+  -- report on change
+  settings.checkinFreq = "On Change"
 end
 
 local function adjust_rgb(data)
@@ -80,11 +62,9 @@ local function mqtt_start()
 
     if data ~= nil then
       print(topic .. ": " .. data)
-      if topic == config.ENDPOINT .. config.ID .. "/toggle" then
-        toggle_state()
-      elseif topic == config.ENDPOINT .. config.ID .. "/rgb" then
-         adjust_rgb(cjson.decode(data))
-      end
+      -- if topic == config.ENDPOINT .. config.ID .. "/toggle" then
+        -- toggle_state()
+      -- end
     end
   end)
 
@@ -92,10 +72,9 @@ local function mqtt_start()
   m:connect(config.HOST, config.PORT, 0, 1, function(con)
     init_settings()
     register_myself()
-    tmr.stop(6)
-    tmr.alarm(6, settings.checkinFreq, 1, send_state)
+    -- tmr.stop(6)
+    -- tmr.alarm(6, settings.checkinFreq, 1, send_state)
   end)
-
 end
 
 function module.start()

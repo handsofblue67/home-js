@@ -11,8 +11,6 @@ mqtt.on('connect', () => {
   mqtt.subscribe('/status/#')
 })
 
-
-
 MongoClient.connect('mongodb://db', (err, db) => {
 
   mqtt.on('message', (topic, message) => {

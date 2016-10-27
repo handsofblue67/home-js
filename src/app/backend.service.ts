@@ -4,7 +4,11 @@ import { Http, Response, Headers } from '@angular/http'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import { Observable } from 'rxjs/Observable'
 import './shared'
+import * as _ from 'lodash'
+import * as moment from 'moment'
+
 import { Mqtt, Device, DeviceData } from './models'
+
 
 @Injectable()
 export class BackendService {
@@ -31,7 +35,10 @@ export class BackendService {
       .map(res => {
         let deviceData = <Array<DeviceData>>res.json()
         _.find(this.devices, (device: DeviceData) => device.deviceID === deviceData[0].deviceID).deviceData = [...deviceData]
-        return deviceData
+        return _.map(deviceData, dataEntry => {
+          dataEntry.timestamp = moment(<number>dataEntry.timestamp*1000).date()
+
+        })
       })
 
       .catch(this.handleError)

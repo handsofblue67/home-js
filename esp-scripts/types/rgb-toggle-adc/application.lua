@@ -1,7 +1,4 @@
--- module.STATUS = "/status/" .. module.ID
--- module.rgb = "/set/" .. module.ID
--- module.TOGGLE = "/toggle/" .. module.ID
--- module.SETTINGS = "/settings/" .. module.ID-- file : application.lua
+-- TODO: decouple settings and status/state
 
 local module = {}
 m = nil
@@ -11,7 +8,7 @@ local settings = {}
 local function send_state()
   print(cjson.encode(settings))
   settings.lightSensor = adc.read(0)
-  -- TODO: decouple settings and status/state
+  settings.timestamp = rtctime.get()
   m:publish(config.STATUS, cjson.encode(settings),0,0)
 end
 
@@ -27,14 +24,14 @@ end
 
 local function setup_rgb()
   settings.rgb={
-    red={ pin=8, CLOCK=500, DUTY=512 },
-    green={ pin=6, CLOCK=500, DUTY=512 },
-    blue={ pin=7, CLOCK=500, DUTY=512 }
+    red={ pin=8, clock=500, duty=512 },
+    green={ pin=6, clock=500, duty=512 },
+    blue={ pin=7, clock=500, duty=512 }
   }
 
-  pwm.setup(settings.rgb.red.pin, settings.rgb.red.CLOCK, settings.rgb.red.DUTY)
-  pwm.setup(settings.rgb.green.pin, settings.rgb.green.CLOCK, settings.rgb.green.DUTY)
-  pwm.setup(settings.rgb.blue.pin, settings.rgb.blue.CLOCK, settings.rgb.blue.DUTY)
+  pwm.setup(settings.rgb.red.pin, settings.rgb.red.clock, settings.rgb.red.duty)
+  pwm.setup(settings.rgb.green.pin, settings.rgb.green.clock, settings.rgb.green.duty)
+  pwm.setup(settings.rgb.blue.pin, settings.rgb.blue.clock, settings.rgb.blue.duty)
 
   pwm.start(settings.rgb.red.pin)
   pwm.start(settings.rgb.green.pin)
@@ -42,7 +39,7 @@ local function setup_rgb()
 end
 
 local function init_settings()
-  settings.ID=config.ID
+  settings.deviceID=config.ID
   -- initial output pin state
   settings.pinState=gpio.LOW
 
@@ -66,6 +63,8 @@ local function init_settings()
     config.TOGGLE,
     config.SETTINGS
   }
+
+  settings.timestamp = rtctime.get()
 end
 
 -- TODO: make settings more ..settable
@@ -77,12 +76,12 @@ end
 
 local function adjust_rgb(data)
   settings.rgb=data.rgb
-  pwm.setduty(settings.rgb.red.pin, settings.rgb.red.DUTY)
-  pwm.setduty(settings.rgb.green.pin, settings.rgb.green.DUTY)
-  pwm.setduty(settings.rgb.blue.pin, settings.rgb.blue.DUTY)
-  pwm.setclock(settings.rgb.red.pin, settings.rgb.red.CLOCK)
-  pwm.setclock(settings.rgb.green.pin, settings.rgb.green.CLOCK)
-  pwm.setclock(settings.rgb.blue.pin, settings.rgb.blue.CLOCK)
+  pwm.setduty(settings.rgb.red.pin, settings.rgb.red.duty)
+  pwm.setduty(settings.rgb.green.pin, settings.rgb.green.duty)
+  pwm.setduty(settings.rgb.blue.pin, settings.rgb.blue.duty)
+  pwm.setclock(settings.rgb.red.pin, settings.rgb.red.clock)
+  pwm.setclock(settings.rgb.green.pin, settings.rgb.green.clock)
+  pwm.setclock(settings.rgb.blue.pin, settings.rgb.blue.clock)
 end
 
 -- Sends my id to the broker for registration

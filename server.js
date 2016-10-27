@@ -5,75 +5,65 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const mqtt = require('mqtt').connect('mqtt://broker')
 const chalk = require('chalk')
-
-function dbConnect(callback) {
-  MongoClient.connect('mongodb://db', (err, db) => {
-    callback(db)
-    db.close()
-  })
-}
-
-mqtt.on('connect', () => {
-  mqtt.subscribe('/status/#')
-})
-
-mqtt.on('message', (topic, message) => {
-  dbConnect(db => {
-    db.collection('mcuStates')
-      .insertOne(JSON.parse(message.toString()), (err, result) => {
-      })
-  })
-})
-
 const app = express()
 
-.use(bodyParser.json())
-.use(bodyParser.urlencoded({ extended: true }))
-.use(require('morgan')('dev'))
+MongoClient.connect('mongodb://db', (err, db) => {
+  mqtt.on('connect', () => {
+    mqtt.subscribe('/status/#')
+  })
 
-.use(express.static(path.join(__dirname, 'dist')))
-
-.get('/devices', (req, res) => {
-  dbConnect((db) => {
+  mqtt.on('message', (topic, message) => {
     db.collection('mcuStates')
-      .distinct('ID', (err, results) => {
-        res.send(results)
-      })
-    })
-})
-
-.get('/mcuStates', (req, res) => {
-  dbConnect((db) => {
-    db.collection('mcuStates')
-      .find({}).toArray((err, docs) => {
-        res.send(docs)
-      })
-    })
-})
-
-.get('/mcuStates/:id', (req, res) => {
-  dbConnect((db) => {
-    db.collection('mcuStates')
-      .find({id: req.params.id}).toArray((err, docs) => {
-        res.send(docs)
-      })
-    })
-})
-
-.post('/publish', (req, res) => {
-  mqtt.publish(`${req.body.topic}`, req.body.message)
-  res.status(200).send('message published')
-})
-
-.delete('/mcuState/:id', (req, res) => {
-  dbConnect(db => {
-    db.collection('mcuStates')
-      .deleteOne({_id: new objectID(req.params.id)}, (err, result) => {
-        res.send(result)
+      .insertOne(JSON.parse(message.toString()), (err, result) => {
+        if (err) console.log(err)
+        console.log(`inserted ${result.insertedId}`)
+        console.log(JSON.stringify(JSON.parse(message.toString())))
       })
   })
+
+  app.use(bodyParser.json())
+    .use(bodyParser.urlencoded({ extended: true }))
+    .use(require('morgan')('dev'))
+
+    .use(express.static(path.join(__dirname, 'dist')))
+
+    .get('/devices', (req, res) => {
+      db.collection('mcuStates')
+        .distinct('deviceID', (err, results) => {
+          if (err) console.log(err)
+          res.send(results)
+        })
+    })
+
+    .get('/mcuStates/:deviceID', (req, res) => {
+      console.log(req.params.id)
+      db.collection('mcuStates')
+        .find({ 'deviceID': +req.params.deviceID })
+        // .limit(100)
+        .toArray((err, docs) => {
+          if (err) console.log(err)
+          console.log(JSON.stringify(docs, null, 2))
+          res.send(docs)
+        })
+    })
+
+    .post('/publish', (req, res) => {
+      mqtt.publish(`${req.body.topic}`, req.body.message)
+      res.status(200).send('message published')
+    })
+
+    .delete('/mcuState/:id', (req, res) => {
+      db.collection('mcuStates')
+        .deleteOne({ _id: new objectID(req.params.id) }, (err, result) => {
+          if (err) console.log(err)
+          res.send(result)
+        })
+    })
+
+    .get('/broker', (req, res) => {
+      res.send('mqtt//broker')
+    })
+
+    .listen(3000)
 })
-
-.listen(3000)
-
 module.exports = app;

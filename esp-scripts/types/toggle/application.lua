@@ -2,37 +2,34 @@
 local module = {}
 m = nil
 
-local settings = {}
-
 local function send_state()
-  print(cjson.encode(settings))
   m:publish(config.ENDPOINT .. config.ID .. "/state", cjson.encode(settings),0,0)
 end
 
 local function toggle_state()
-  if settings.PIN_STATE == gpio.HIGH then
-    settings.PIN_STATE = gpio.LOW
+  if module.pinState == gpio.HIGH then
+    module.pinState = gpio.LOW
   else
-    settings.PIN_STATE = gpio.HIGH
+    module.pinState = gpio.HIGH
   end
-  gpio.write(settings.OUTPUT_PIN, settings.PIN_STATE)
+  gpio.write(module.outputPin, module.pinState)
   send_state()
 end
 
 local function init_settings()
-  settings.ID=config.ID
+  module.deviceID = config.ID
   -- initial output pin state
-  settings.PIN_STATE=gpio.LOW
+  module.pinState=gpio.LOW
 
   -- initialize pin 1 (gpio15) for output
-  settings.OUTPUT_PIN=1
-  gpio.mode(settings.OUTPUT_PIN, gpio.OUTPUT)
-  gpio.write(settings.OUTPUT_PIN, settings.PIN_STATE)
+  module.outputPin=1
+  gpio.mode(module.outputPin, gpio.OUTPUT)
+  gpio.write(module.outputPin, module.pinState)
 
   -- initialize pin 2(gpio04) for input
-  settings.BUTTON_PIN=2
-  gpio.mode(settings.BUTTON_PIN, gpio.INPUT)
-  gpio.trig(settings.BUTTON_PIN, "down", toggle_state)
+  module.buttonPin=2
+  gpio.mode(module.buttonPin, gpio.INPUT)
+  gpio.trig(module.buttonPin, "down", toggle_state)
 
   -- report on change
   settings.checkinFreq = "On Change"

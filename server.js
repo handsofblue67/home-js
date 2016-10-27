@@ -7,10 +7,13 @@ const mqtt = require('mqtt').connect('mqtt://broker')
 const chalk = require('chalk')
 const app = express()
 
+mqtt.on('connect', () => {
+  mqtt.subscribe('/status/#')
+})
+
+
+
 MongoClient.connect('mongodb://db', (err, db) => {
-  mqtt.on('connect', () => {
-    mqtt.subscribe('/status/#')
-  })
 
   mqtt.on('message', (topic, message) => {
     db.collection('mcuStates')
@@ -20,7 +23,7 @@ MongoClient.connect('mongodb://db', (err, db) => {
         console.log(JSON.stringify(JSON.parse(message.toString())))
       })
   })
-
+  
   app.use(bodyParser.json())
     .use(bodyParser.urlencoded({ extended: true }))
     .use(require('morgan')('dev'))

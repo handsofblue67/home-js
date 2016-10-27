@@ -29,8 +29,8 @@ export class AppComponent {
   }
 
   createChart(deviceData: Array<DeviceData>): void {
-    console.log(deviceData)
     if (_.find(deviceData, 'lightSensor') === undefined) return
+
 
     this.charts = [
       ...this.charts, {
@@ -44,14 +44,25 @@ export class AppComponent {
         yAxis: {
           title: { text: 'Light levels' }
         },
-        series: [{
-          name: new Date((deviceData[0].timestamp) * 1000).toLocaleDateString(),
-          data: _.reduce(deviceData, (acc, dataPoint: DeviceData) => {
-            return [...acc, [dataPoint.timestamp * 1000, dataPoint.lightSensor]]
-          }, [])
-        }],
-        legend: { enabled: false },
+        series: this.separateByDay(deviceData),
+        // legend: { enabled: false },
       }]
+  }
+
+  separateByDay(deviceData: Array<DeviceData>) {
+    let series = _.groupBy(deviceData, dataPoint => moment(dataPoint.timestamp * 1000).startOf('day').format('MM/DD/YY'))
+
+    let thing = _.map(series, (dayOfData, date) => {
+      return {
+        name: date,
+        data: _.reduce(dayOfData, (acc, dataPoint: DeviceData) => {
+          return [...acc, [moment(dataPoint.timestamp * 1000).format('hh:mm'), dataPoint.lightSensor]]
+        }, [])
+      }
+    })
+
+    console.log(thing)
+    return thing
 
   }
 

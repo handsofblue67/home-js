@@ -1,7 +1,7 @@
 -- file: setup.lua
 local module = {}
 
-local function wifi_wait_ip()  
+local function wifi_wait_ip()
   if wifi.sta.getip()== nil then
     print("IP unavailable, Waiting...")
   else
@@ -11,11 +11,12 @@ local function wifi_wait_ip()
     print("MAC address is: " .. wifi.ap.getmac())
     print("IP is "..wifi.sta.getip())
     print("====================================")
+    sntp.sync("pool.ntp.org", function() print(rtctime.get()) end, print)
     app.start()
   end
 end
 
-local function wifi_start(list_aps)  
+local function wifi_start(list_aps)
     if list_aps then
         for key,value in pairs(list_aps) do
             if config.SSID and config.SSID[key] then
@@ -32,10 +33,10 @@ local function wifi_start(list_aps)
     end
 end
 
-function module.start()  
+function module.start()
   print("Configuring Wifi ...")
   wifi.setmode(wifi.STATION);
   wifi.sta.getap(wifi_start)
 end
 
-return module  
+return module

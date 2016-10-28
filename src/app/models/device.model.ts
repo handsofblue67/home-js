@@ -6,7 +6,7 @@ export class DeviceData {
     lightSensor?: number
     checkinFreq?: number
     toggleOutput?: number
-    timestamp?: number
+    timestamp?: number | Date
     rgb?: {
         green?: {
             clock?: number

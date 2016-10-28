@@ -30,43 +30,36 @@ export class AppComponent {
 
   createChart(deviceData: Array<DeviceData>): void {
     if (_.find(deviceData, 'lightSensor') === undefined) return
-
-
     this.charts = [
       ...this.charts, {
         chart: { zoomType: 'x' },
         title: { text: 'Light Sensor' },
         xAxis: {
           type: 'datetime',
-          dateTimeLabelFormats: { time: '%h:%mm' },
+          dateTimeLabelFormats: {
+            second: '%H:%M:%S',
+          },
           title: { text: 'Time' },
         },
         yAxis: {
           title: { text: 'Light levels' }
         },
         series: this.separateByDay(deviceData),
-        // legend: { enabled: false },
       }]
   }
 
   separateByDay(deviceData: Array<DeviceData>) {
-    let series = _.groupBy(deviceData, dataPoint => moment(dataPoint.timestamp * 1000).startOf('day').format('MM/DD/YY'))
+    let series = _.groupBy(deviceData, dataPoint => moment(+dataPoint.timestamp * 1000).startOf('day').format('MM/DD/YY'))
 
-    let thing = _.map(series, (dayOfData, date) => {
+    return _.map(series, (dayOfData, date) => {
       return {
         name: date,
         data: _.reduce(dayOfData, (acc, dataPoint: DeviceData) => {
-          return [...acc, [moment(dataPoint.timestamp * 1000).format('hh:mm'), dataPoint.lightSensor]]
+          return [...acc, [moment(+dataPoint.timestamp * 1000).format(), dataPoint.lightSensor]]
         }, [])
       }
     })
-
-    console.log(thing)
-    return thing
-
   }
-
-
 
   toggle(id: string) {
     this.backend.publish({ 'topic': `/toggle/${id}`, 'message': new Date() })

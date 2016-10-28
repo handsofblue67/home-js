@@ -2,65 +2,64 @@
 local module = {}
 m = nil
 
-local function send_state()
+local function send_status()
   local status = {
     deviceID = config.ID,
-    pinState = pinState,
+    pinState = module.pinState,
     timestamp = rtctime.get()
   }
   m:publish(settings.topics.publish.status, cjson.encode(status),0,0)
+  print(cjson.encode(status))
 end
 
 local function toggle_state()
-  if pinState == gpio.HIGH then
-    pinState = gpio.LOW
+  if module.pinState == gpio.HIGH then
+    module.pinState = gpio.LOW
   else
-    pinState = gpio.HIGH
+    module.pinState = gpio.HIGH
   end
-  gpio.write(outputPin, pinState)
-  send_state(pinState)
+  gpio.write(settings.outputPin, module.pinState)
+  send_status()
 end
 
 local function init_settings()
 
-  -- initialize pin 1 (gpio15) for output
-  module.outputPin=1
-
   -- initial output pin state
   module.pinState=gpio.LOW
 
-  gpio.mode(outputPin, gpio.OUTPUT)
-  gpio.write(outputPin, pinState)
+  gpio.mode(settings.outputPin, gpio.OUTPUT)
+  gpio.write(settings.outputPin, module.pinState)
 
-  -- initialize pin 2(gpio04) for input
-  buttonPin=2
-  gpio.mode(buttonPin, gpio.INPUT)
-  gpio.trig(buttonPin, "down", toggle_state)
+  gpio.mode(settings.inputPin, gpio.INPUT)
+  gpio.trig(settings.inputPin, "down", toggle_state)
 
 end
 
 -- Sends my id to the broker for registration
-local function register_myself()
-  local sub = settings.topics.subscribe
-  m:subscribe({[sub.toggle]=0, [sub.settings]=0},function(conn)
-    print("Successfully subscribed to data endpoint: " sub.toggle .. ", " sub.settings)
+local function register_myself(topics)
+  -- sub = settings.topics.subscribe
+  m:subscribe({[topics.toggle]=0, [topics.settings]=0, [topics.reqStatus]=0},function(conn)
+    print("Successfully subscribed to data endpoint: " .. topics.toggle .. ", " .. topics.settings .. ", " .. topics.reqStatus)
   end)
 end
 
-local function alter_settings(data)
-  m:publish(settings.topics.publish.settings, cjson.encode(settings),0,0)
+local function alter_settings(topic)
+  m:publish(topic, cjson.encode(settings),0,0)
 end
 
-local function mqtt_start()
+local function mqtt_start(topics)
   m = mqtt.Client(config.ID, 120)
   -- register message callback beforehand
   m:on("message", function(conn, topic, data)
     if data ~= nil then
       print(topic .. ": " .. data)
-      if topic == settings.topics.subscribe.toggle then
+      if topic == topics.toggle then
+        print(topic)
         toggle_state()
-      elseif topic == settings.topics.subscribe.settings then
-        alter_settings(cjson.decode(data))
+      elseif topic == topics.settings then
+        alter_settings(settings.topics.publish.currentSettings)
+      elseif topic == topics.reqStatus then
+        send_status()
       end
     end
   end)
@@ -68,12 +67,12 @@ local function mqtt_start()
   -- Connect to broker
   m:connect(config.HOST, config.PORT, 0, 1, function(con)
     init_settings()
-    register_myself()
+    register_myself(settings.topics.subscribe)
   end)
 end
 
 function module.start()
-  mqtt_start()
+  mqtt_start(settings.topics.subscribe)
 end
 
 return module

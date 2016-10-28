@@ -6,10 +6,14 @@
 <!--<div>Green<md-slider min="0" max="1023" #green (slide)="backend.publishRGB(red.value, green.value, blue.value)"></md-slider></div>-->
 <!--<div>Blue<md-slider min="0" max="1023" #blue (slide)="backend.publishRGB(red.value, green.value, blue.value)"></md-slider></div>-->
 
-<!--<md-card *ngFor="let chart of charts">-->
-	<!--<md-card-title>{{chart.title.title}}</md-card-title>-->
-	<!--<md-card-content>-->
+<md-card *ngFor="let chart of charts">
+	<md-card-title>{{chart.title.title}}</md-card-title>
+	<md-card-content>
     <chart *ngFor="let chart of charts" [options]="chart"></chart>
-	<!--</md-card-content>-->
-<!--</md-card>-->
- <!--<button md-raised-button color="accent" (click)="toggle(chart.title)">Toggle</button>-->
+	</md-card-content>
+</md-card>
+
+<md-card *ngFor="let device of toggleDevices">
+	<md-card-title>{{device.deviceID}}</md-card-title>
+	<button md-raised-button color="accent" (click)="toggle(device.deviceData)">Toggle</button>
+</md-card>

@@ -1,15 +1,21 @@
 local module = {}
 
-module.type = 'toggle'
+module.deviceID = config.ID
+module.name = config.ID
+module.type = "toggle"
+
+module.outputPin=1
+module.inputPin=2
 
 module.topics = {
   subscribe = {
     toggle = "/toggle/" .. config.ID,
-    settings = "/settings/" ..config.ID
+    settings = "/settings/" ..config.ID,
+    reqStatus = "/reqStatus/" ..config.ID
   },
   publish = {
     status = "/status/" .. config.ID,
-    settings = "/currentSettings/" .. config.ID
+    currentSettings = "/currentSettings/" .. config.ID
   }
 }
 

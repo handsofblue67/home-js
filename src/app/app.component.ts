@@ -1,11 +1,11 @@
 import { Component } from '@angular/core'
 
 import * as _ from 'lodash'
+import * as moment from 'moment'
+// import * as mqtt from 'mqtt'
 
 import { BackendService } from './backend.service'
-import { Device, DeviceData } from './models'
-// import * as mqtt from 'mqtt'
-import * as moment from 'moment'
+import { Device, DeviceData, Mqtt } from './models'
 
 @Component({
   selector: 'app-root',
@@ -15,6 +15,7 @@ import * as moment from 'moment'
 export class AppComponent {
   charts: Array<any> = []
   devices: Array<Device>
+  toggleDevices: Array<Device> = []
 
   constructor(private backend: BackendService) {
     backend.devices$.subscribe(devices => this.handleDevices(devices))
@@ -24,6 +25,7 @@ export class AppComponent {
     _.each(devices, (device: Device) => {
       this.backend.getDeviceData(device.deviceID).subscribe((deviceData: Array<DeviceData>) => {
         this.createChart(deviceData)
+        this.createToggle(deviceData)
       }, err => console.log(`failed to load device data ${err}`))
     })
   }
@@ -50,18 +52,31 @@ export class AppComponent {
 
   separateByDay(deviceData: Array<DeviceData>) {
     let series = _.groupBy(deviceData, dataPoint => moment(+dataPoint.timestamp * 1000).startOf('day').format('MM/DD/YY'))
-
     return _.map(series, (dayOfData, date) => {
       return {
         name: date,
         data: _.reduce(dayOfData, (acc, dataPoint: DeviceData) => {
-          return [...acc, [moment(+dataPoint.timestamp * 1000).format(), dataPoint.lightSensor]]
+          return [...acc, [moment(+dataPoint.timestamp * 1000).format('hh:mm'), dataPoint.lightSensor]]
         }, [])
       }
     })
   }
 
-  toggle(id: string) {
-    this.backend.publish({ 'topic': `/toggle/${id}`, 'message': new Date() })
+  createToggle(deviceData: Array<DeviceData>): void {
+   let toggleable =  _.find(deviceData, ['type', 'toggle'])
+    if (toggleable === undefined) return
+    this.toggleDevices = [
+      ...this.toggleDevices, 
+      { deviceID: toggleable.deviceID, deviceData: deviceData}
+    ]
+  }
+
+  toggle(deviceData: Array<DeviceData>): void {
+    let data = _.find(deviceData, 'topics.subscribe.toggle')
+    if (data === undefined) return
+
+    let topic = data.topics.subscribe.toggle
+    let mqtt = { topic: topic, message: (new Date()).toString() }
+    this.backend.publish(mqtt).subscribe(console.log)
   }
 }

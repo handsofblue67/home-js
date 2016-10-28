@@ -1,6 +1,14 @@
 export class DeviceData {
     deviceID: number
+    type?: string | Array<string>
+    name?: string
+    outputPin?: number | Array<number>
+    inputPin?: number | Array<number>
     pinState?: number
+    topics?: {
+        subscribe: any,
+        publish: any
+    }
     subscriptions?: Array<string>
     toggleInput?: number
     lightSensor?: number

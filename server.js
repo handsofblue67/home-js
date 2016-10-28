@@ -9,9 +9,8 @@ const app = express()
 
 mqtt.on('connect', () => {
   mqtt.subscribe('/status/#')
+  mqtt.subscribe('/currentSettings/#')
 })
-
-
 
 MongoClient.connect('mongodb://db', (err, db) => {
 

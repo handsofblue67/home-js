@@ -33,13 +33,13 @@ export class BackendService {
         _.find(this.devices, (device: DeviceData) => device.deviceID === deviceData[0].deviceID).deviceData = [...deviceData]
         return deviceData
       })
-
       .catch(this.handleError)
   }  
 
-  publish(mqtt: Mqtt): void {
-    this.http.post('publish', JSON.stringify(mqtt), {headers: this.headers})
-      .subscribe(res => console.log('published'))
+  publish(mqtt: Mqtt): Observable<any> {
+    return this.http.post('publish', JSON.stringify(mqtt), {headers: this.headers})
+      .map(res => res)
+      .catch(this.handleError)
   }
 
   publishRGB(redDuty: number, greenDuty: number, blueDuty: number) {

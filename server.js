@@ -15,14 +15,37 @@ mqtt.on('connect', () => {
 MongoClient.connect('mongodb://db', (err, db) => {
 
   mqtt.on('message', (topic, message) => {
-    db.collection('mcuStates')
-      .insertOne(JSON.parse(message.toString()), (err, result) => {
-        if (err) console.log(err)
-        console.log(`inserted ${result.insertedId}`)
-        console.log(JSON.stringify(JSON.parse(message.toString())))
-      })
+    message = JSON.parse(message.toString())
+      (/settings\/.*/.test(topic)) ? updateDevice(message) : addStatus(message)
   })
-  
+
+  // each device and its current settings (one document per device)
+  let updateDevice = message => {
+    db.collection('devices')
+      .updateOne({ 'deviceID': message.deviceID }, { $set: message }, { upsert: true })
+  }
+
+  // inputs usually append a document, outputs just need a single document to reflect current state
+  let addStatus = message => {
+    db.collection.findOne({ 'deviceID': message.deviceID }, (err, result) => {
+      switch (result.type) {
+        case 'digitalOutput':
+          db.collection('statuses')
+            .updateOne({ 'deviceID': message.deviceID }, { $set: message }, { upsert: true })
+          break
+        case 'digitalInput':
+          db.collection('statuses').insertOne(message)
+          break
+        case 'analogOutput':
+          db.collection('statuses')
+            .updateOne({ 'deviceID': message.deviceID }, { $set: message }, { upsert: true })
+        case 'analogInput':
+          db.collection('statuses').insertOne(message)
+          break
+      }
+    })
+  }
+
   app.use(bodyParser.json())
     .use(bodyParser.urlencoded({ extended: true }))
     .use(require('morgan')('dev'))
@@ -30,18 +53,16 @@ MongoClient.connect('mongodb://db', (err, db) => {
     .use(express.static(path.join(__dirname, 'dist')))
 
     .get('/devices', (req, res) => {
-      db.collection('mcuStates')
-        .distinct('deviceID', (err, results) => {
-          if (err) console.log(err)
-          res.send(results)
+      db.collection('devices')
+        .find({}).toArray((err, docs) => {
+          res.send(docs)
         })
     })
 
-    .get('/mcuStates/:deviceID', (req, res) => {
+    .get('/statuses/:deviceID', (req, res) => {
       console.log(req.params.id)
-      db.collection('mcuStates')
+      db.collection('statuses')
         .find({ 'deviceID': +req.params.deviceID })
-        // .limit(100)
         .toArray((err, docs) => {
           if (err) console.log(err)
           console.log(JSON.stringify(docs, null, 2))
@@ -54,8 +75,8 @@ MongoClient.connect('mongodb://db', (err, db) => {
       res.status(200).send('message published')
     })
 
-    .delete('/mcuState/:id', (req, res) => {
-      db.collection('mcuStates')
+    .delete('/statuses/:id', (req, res) => {
+      db.collection('statuses')
         .deleteOne({ _id: new objectID(req.params.id) }, (err, result) => {
           if (err) console.log(err)
           res.send(result)

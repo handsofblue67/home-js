@@ -2,8 +2,10 @@ export class Device {
     deviceID: number
     name?: string
     topics?: Topics
-    timestamp: Date | number
-    primaryType: DeviceType
+    timestamp?: Date | number
+    primaryType?: DeviceType
+    status?: Array<DeviceStatus>
+    checkinFreq: number
 }
 
 export class DeviceStatus {

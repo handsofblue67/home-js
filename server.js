@@ -16,8 +16,10 @@ MongoClient.connect('mongodb://db', (err, db) => {
 
   mqtt.on('message', (topic, message) => {
     message = JSON.parse(message.toString())
+    console.log(JSON.stringify(message))
     // message is a device defintion or a devices status report
-    (/settings\/.*/.test(topic)) ? updateDevice(message) : addStatus(message)
+    topicRegExp = new RegExp(/currentSettings\/.*/)
+    topicRegExp.test(topic) ? updateDevice(message) : addStatus(message)
   })
 
   // each device and its current settings (one document per device)
@@ -28,7 +30,7 @@ MongoClient.connect('mongodb://db', (err, db) => {
 
   // inputs usually append a document, outputs usually update a single document (its current state)
   let addStatus = status => {
-    db.collection.findOne({ 'deviceID': status.deviceID }, (err, result) => {
+    db.collection('devices').findOne({ 'deviceID': status.deviceID }, (err, result) => {
       switch (result.primaryType) {
         case 'digitalOutput':
           db.collection('statuses')

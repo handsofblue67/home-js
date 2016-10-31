@@ -4,18 +4,18 @@ m = nil
 
 local function send_status()
   seconds, millis=rtctime.get()
-  module.status.timestamp=tonumber(tostring(seconds) .. tostring(lua_numbertointeger(millis/1000)))
+  module.status.timestamp=tonumber(tostring(seconds) .. tostring(math.floor(millis/1000)))
   m:publish(settings.topics.pub.status, cjson.encode(module.status),0,0)
-  print(cjson.encode(status))
+  print(cjson.encode(module.status))
 end
 
 local function toggle_state()
-  if module.status.pins[0].pinState == gpio.HIGH then
-    module.status.pins[0].pinState = gpio.LOW
+  if module.status.pins[0].status == gpio.HIGH then
+    module.status.pins[0].status = gpio.LOW
   else
-    module.status.pins[0].pinState = gpio.HIGH
+    module.status.pins[0].status = gpio.HIGH
   end
-  gpio.write(module.status.pins[0].outputPin, module.status.pins[0].pinState)
+  gpio.write(module.status.pins[0].number, module.status.pins[0].status)
   send_status()
 end
 
@@ -25,26 +25,35 @@ local function init_settings()
   module.status.deviceID=config.ID
   module.status.pins={}
 
-  -- pin type at index 0 is the most important
-  module.status[0]={
-    number=1,
+  module.status.pins[0]={
+    number=6,
     type="digitalOutput",
     purpose="Toggle lights",
     status=gpio.LOW
   }
-  module.status[1]={
+  module.status.pins[1]={
     number=2,
     type="digitalInput",
     purpose="Physical toggle button",
     status=nil
   }
 
-  gpio.mode(module.status.pins[0].outputPin, gpio.OUTPUT)
-  gpio.write(module.status.pins[0].outputPin, module.status.pins[0].status)
+  print(tostring(cjson.encode(module.status)))
 
-  gpio.mode(module.status.pins[1].inputPin, gpio.inputPin)
-  gpio.trig(module.status.pins[1].inputPin, "down", toggle_state)
+  gpio.mode(module.status.pins[0].number, gpio.OUTPUT)
+  gpio.write(module.status.pins[0].number, module.status.pins[0].status)
 
+  gpio.mode(module.status.pins[1].number, gpio.INPUT)
+  gpio.trig(module.status.pins[1].number, "down", toggle_state)
+
+end
+
+local function alter_settings(topic)
+  send_settings()
+end
+
+local function send_settings()
+  m:publish(settings.topics.pub.currentSettings, cjson.encode(settings),0,0)
 end
 
 -- Sends my id to the broker for registration
@@ -53,10 +62,6 @@ local function register_myself(topics)
   m:subscribe({[topics.toggle]=0, [topics.settings]=0, [topics.reqStatus]=0},function(conn)
     print("Successfully subscribed to data endpoint: " .. topics.toggle .. ", " .. topics.settings .. ", " .. topics.reqStatus)
   end)
-end
-
-local function alter_settings(topic)
-  m:publish(topic, cjson.encode(settings),0,0)
 end
 
 local function mqtt_start(topics)

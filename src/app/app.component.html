@@ -15,5 +15,5 @@
 
 <md-card *ngFor="let device of toggleDevices">
 	<md-card-title>{{device.deviceID}}</md-card-title>
-	<button md-raised-button color="accent" (click)="toggle(device.deviceData)">Toggle</button>
+	<button md-raised-button color="accent" (click)="toggle(device)">Toggle</button>
 </md-card>

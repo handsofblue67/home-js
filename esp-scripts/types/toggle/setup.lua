@@ -11,7 +11,12 @@ local function wifi_wait_ip()
     print("MAC address is: " .. wifi.ap.getmac())
     print("IP is "..wifi.sta.getip())
     print("====================================")
-    sntp.sync("pool.ntp.org", function() print(rtctime.get()) end, print)
+
+    sntp.sync("pool.ntp.org", function()
+      seconds, millis=rtctime.get()
+      print(tonumber(tostring(seconds) .. tostring(math.floor(millis/1000))))
+    end, print)
+
     app.start()
   end
 end

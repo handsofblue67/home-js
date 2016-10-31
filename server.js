@@ -16,31 +16,32 @@ MongoClient.connect('mongodb://db', (err, db) => {
 
   mqtt.on('message', (topic, message) => {
     message = JSON.parse(message.toString())
-      (/settings\/.*/.test(topic)) ? updateDevice(message) : addStatus(message)
+    // message is a device defintion or a devices status report
+    (/settings\/.*/.test(topic)) ? updateDevice(message) : addStatus(message)
   })
 
   // each device and its current settings (one document per device)
-  let updateDevice = message => {
+  let updateDevice = device => {
     db.collection('devices')
-      .updateOne({ 'deviceID': message.deviceID }, { $set: message }, { upsert: true })
+      .updateOne({ 'deviceID': device.deviceID }, { $set: device }, { upsert: true })
   }
 
-  // inputs usually append a document, outputs just need a single document to reflect current state
-  let addStatus = message => {
-    db.collection.findOne({ 'deviceID': message.deviceID }, (err, result) => {
-      switch (result.type) {
+  // inputs usually append a document, outputs usually update a single document (its current state)
+  let addStatus = status => {
+    db.collection.findOne({ 'deviceID': status.deviceID }, (err, result) => {
+      switch (result.primaryType) {
         case 'digitalOutput':
           db.collection('statuses')
-            .updateOne({ 'deviceID': message.deviceID }, { $set: message }, { upsert: true })
+            .updateOne({ 'deviceID': status.deviceID }, { $set: status }, { upsert: true })
           break
         case 'digitalInput':
-          db.collection('statuses').insertOne(message)
+          db.collection('statuses').insertOne(status)
           break
         case 'analogOutput':
           db.collection('statuses')
-            .updateOne({ 'deviceID': message.deviceID }, { $set: message }, { upsert: true })
+            .updateOne({ 'deviceID': status.deviceID }, { $set: status }, { upsert: true })
         case 'analogInput':
-          db.collection('statuses').insertOne(message)
+          db.collection('statuses').insertOne(status)
           break
       }
     })

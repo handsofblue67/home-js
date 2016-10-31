@@ -17,7 +17,10 @@ export class BackendService {
     this.getDevices().subscribe(
       devices => {
         this.devices = _.map(devices, device => {
-          this.getDeviceData(device).subscribe(status => device.status = status)
+          this.getDeviceData(device).subscribe(
+            status => device.status = status,
+            err => console.error(`Error getting device data: ${err}`),
+            () => this.deviceSource.next(this.devices))
           return device
         })
       },

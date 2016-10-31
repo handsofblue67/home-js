@@ -57,7 +57,7 @@ export class AppComponent {
       return {
         name: date,
         data: _.reduce(dayOfData, (acc, dataPoint: DeviceStatus) => {
-          return [...acc, dataPoint.timestamp, dataPoint.pins[0].status]
+          return [...acc, moment(+dataPoint.timestamp).format("H:mm"), dataPoint.pins[0].status]
         }, [])
       }
     })

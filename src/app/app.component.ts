@@ -23,17 +23,19 @@ export class AppComponent {
   }
 
   handleDevices(devices: Array<Device>): void {
-    this.groupedDevices = _.groupBy(devices, 'primaryType')
+    this.devices = devices
+    this.groupedDevices = _.groupBy(this.devices, 'primaryType')
     this.createToggle(this.groupedDevices.digitalOutput)
     this.createChart(this.groupedDevices.analogInput)
   }
 
   createChart(devices: Array<Device>): void {
     this.charts = _.map(devices, device => {
-      console.log(device.checkinFreq)
-      _.each(device.status, status => console.log(status))
       return {
-        chart: { zoomType: 'x' },
+        chart: {
+          zoomType: 'x',
+          type: 'line'
+        },
         title: { text: 'Light Sensor' },
         xAxis: {
           type: 'datetime',
@@ -45,7 +47,6 @@ export class AppComponent {
         yAxis: {
           title: { text: 'Light levels' }
         },
-        // series: this.separateByDay(device.status),
         series: this.separateByDay(device.status),
       }
     })
@@ -57,19 +58,20 @@ export class AppComponent {
       return {
         name: date,
         data: _.reduce(dayOfData, (acc, dataPoint: DeviceStatus) => {
-          return [...acc, moment(+dataPoint.timestamp).format("H:mm"), dataPoint.pins[0].status]
+          return [...acc, [moment(+dataPoint.timestamp).format("H:mm"), dataPoint.pins[0].status]]
         }, [])
       }
     })
   }
 
-  createToggle(device): void {
-    // this.toggleDevices = [ ...this.toggleDevices, device ]
+  createToggle(devices: Array<Device>): void {
+    this.toggleDevices = devices
   }
 
-    toggle(device: Device): void {
-      let topic = device.topics.sub.toggle
-      let mqtt = { topic: topic, message: (new Date()).toString() }
-      this.backend.publish(mqtt).subscribe(console.log)
-    }
+  toggle(device: Device): void {
+    let topic = device.topics.sub.toggle
+    let mqtt = { topic: topic, message: (new Date()).toString() }
+    let cb = () => this.backend.publish(mqtt).subscribe(res => console.log(res))
+    _.throttle(cb, 300)
+  }
 }

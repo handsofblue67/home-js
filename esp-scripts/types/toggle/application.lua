@@ -26,7 +26,7 @@ local function init_settings()
   module.status.pins={}
 
   module.status.pins[0]={
-    number=6,
+    number=1,
     type="digitalOutput",
     purpose="Toggle lights",
     status=gpio.LOW
@@ -43,7 +43,7 @@ local function init_settings()
   gpio.mode(module.status.pins[0].number, gpio.OUTPUT)
   gpio.write(module.status.pins[0].number, module.status.pins[0].status)
 
-  gpio.mode(module.status.pins[1].number, gpio.INPUT)
+  gpio.mode(module.status.pins[1].number, gpio.INT, gpio.PULLUP)
   gpio.trig(module.status.pins[1].number, "down", toggle_state)
 
 end
@@ -60,7 +60,8 @@ end
 local function register_myself(topics)
   -- sub = settings.topics.subscribe
   m:subscribe({[topics.toggle]=0, [topics.settings]=0, [topics.reqStatus]=0},function(conn)
-    print("Successfully subscribed to data endpoint: " .. topics.toggle .. ", " .. topics.settings .. ", " .. topics.reqStatus)
+    print("Successfully subscribed to data endpoints: " .. cjson.encode(topics) )
+    send_settings()
   end)
 end
 

@@ -71,7 +71,6 @@ export class AppComponent {
   toggle(device: Device): void {
     let topic = device.topics.sub.toggle
     let mqtt = { topic: topic, message: (new Date()).toString() }
-    let cb = () => this.backend.publish(mqtt).subscribe(res => console.log(res))
-    _.throttle(cb, 300)
+    this.backend.publish(mqtt).subscribe(res => console.log(res))
   }
 }

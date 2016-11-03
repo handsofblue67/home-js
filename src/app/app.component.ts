@@ -40,26 +40,17 @@ export class AppComponent {
         xAxis: {
           type: 'datetime',
           title: { text: 'Time' },
+          dateTimeFormat: {
+
+          }
         },
         yAxis: {
           title: { text: 'Light levels' }
         },
         series: this.separateByDay(device.status),
-        // series: this.sortByDate(device.status)
       }
     })
-    console.log(this.charts)
   }
-
-  // sortByDate(status: Array<DeviceStatus>) {
-  //   return [{
-  //     data: _
-  //       .chain(status)
-  //       .sortBy('timestamp')
-  //       .reduce((acc, status) => [...acc, [status.timestamp, status.pins[0].status]], [])
-  //       .value()
-  //   }]
-  // }
 
   separateByDay(deviceStatus: Array<DeviceStatus> | DeviceStatus) {
     let series = _.groupBy(deviceStatus, (dataPoint: DeviceStatus) => moment(+dataPoint.timestamp).utcOffset(0).startOf('day').format('MM/DD/YY'))
@@ -67,8 +58,8 @@ export class AppComponent {
       return {
         name: date,
         data: _.reduce(dayOfData, (acc, dataPoint: DeviceStatus) => {
-          return [...acc, [+dataPoint.timestamp, dataPoint.pins[0].status]]
-        }, [])
+          return [...acc, [+moment(+dataPoint.timestamp), dataPoint.pins[0].status]]
+        }, []),
       }
     })
   }

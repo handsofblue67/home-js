@@ -1,0 +1,9 @@
+.card-container {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.card-container md-card {
+  margin: 0 16px 16px 0;
+  width: 600px;
+}

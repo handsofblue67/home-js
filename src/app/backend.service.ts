@@ -8,40 +8,37 @@ import { Mqtt, Device, DeviceStatus, DeviceType, Topics } from './models'
 
 @Injectable()
 export class BackendService {
-  devices: Array<Device>
-  private deviceSource = new BehaviorSubject<Array<Device>>([])
-  devices$ = this.deviceSource.asObservable()
   headers = new Headers({ 'Content-Type': 'application/json' })
 
+  // TODO: clean this up, way too many calls to deviceSource.next()
   constructor(private http: Http) {
-    this.getDevices().subscribe(
-      devices => {
-        this.devices = _.map(devices, device => {
-          this.getDeviceData(device).subscribe(
-            status => device.status = status,
-            err => console.error(`Error getting device data: ${err}`),
-            () => this.deviceSource.next(this.devices))
-          return device
-        })
-      },
-      err => console.error(`Error getting devices ${err}`),
-      () => this.deviceSource.next(this.devices))
+    // this.getDevices().subscribe(
+    //   devices => {
+    //     this.devices = _.map(devices, device => {
+    //       this.getDeviceData(device).subscribe(
+    //         status => device.status = status,
+    //         err => console.error(`Error getting device data: ${err}`))
+    //       return device
+    //     })
+    //   },
+    //   err => console.error(`Error getting devices ${err}`),
+    //   () => this.deviceSource.next(this.devices))
   }
 
-  getDevices(): Observable<Array<Device>> {
-    return this.http.get('devices')
+  getDevicesByType(type: string): Observable<Array<Device>> {
+    return this.http.get(`api/devices/${type}`)
       .map(res => res.json())
       .catch(this.handleError)
   }
 
   getDeviceData(device: Device): Observable<Array<DeviceStatus>> {
-    return this.http.get(`statuses/${device.deviceID}`)
+    return this.http.get(`api/statuses/${device.deviceID}`)
       .map(res => res.json())
       .catch(this.handleError)
   }
 
   publish(mqtt: Mqtt): Observable<any> {
-    return this.http.post('publish', JSON.stringify(mqtt), { headers: this.headers })
+    return this.http.post('api/publish', JSON.stringify(mqtt), { headers: this.headers })
       .map(res => res)
       .catch(this.handleError)
   }

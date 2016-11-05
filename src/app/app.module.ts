@@ -9,7 +9,8 @@ import { ChartModule } from 'angular2-highcharts'
 import { AppComponent } from './app.component'
 import { BackendService } from './backend.service'
 import { TogglePipe } from './toggle.pipe'
-import { MqttService } from './mqtt.service'
+import { ToggleService } from './toggle.service'
+import { ChartService } from './chart.service'
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { MqttService } from './mqtt.service'
     MaterialModule.forRoot(),
     ChartModule,
   ],
-  providers: [ BackendService, /*MqttService*/ ],
+  providers: [ BackendService, ChartService,ToggleService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

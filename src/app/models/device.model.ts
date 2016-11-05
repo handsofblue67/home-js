@@ -4,14 +4,14 @@ export class Device {
     topics?: Topics
     timestamp?: Date | number
     primaryType?: DeviceType
-    status?: Array<DeviceStatus>
+    status: Array<DeviceStatus>
     checkinFreq: number
 }
 
 export class DeviceStatus {
     deviceID: number
     timestamp?: Date | number
-    pins?: Array<Pin>
+    pins: Array<Pin>
 }
 
 export enum DeviceType { digitalOutput, digitalInput, analogOutput, analogInput }

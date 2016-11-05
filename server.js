@@ -16,7 +16,6 @@ MongoClient.connect('mongodb://db', (err, db) => {
 
   mqtt.on('message', (topic, message) => {
     message = JSON.parse(message.toString())
-    console.log(JSON.stringify(message))
     // message is a device defintion or a devices status report
     topicRegExp = new RegExp(/currentSettings\/.*/)
     topicRegExp.test(topic) ? updateDevice(message) : addStatus(message)
@@ -55,30 +54,37 @@ MongoClient.connect('mongodb://db', (err, db) => {
 
     .use(express.static(path.join(__dirname, 'dist')))
 
-    .get('/devices', (req, res) => {
+    .get('api/devices', (req, res) => {
       db.collection('devices')
         .find({}).toArray((err, docs) => {
           res.send(docs)
         })
     })
 
-    .get('/statuses/:deviceID', (req, res) => {
-      console.log(req.params.id)
-      db.collection('statuses')
-        .find({ 'deviceID': +req.params.deviceID })
+    .get('api/devices/:type', (req, res) => {
+      db.collection('devices')
+        .find({'primaryType':req.params.type})
         .toArray((err, docs) => {
           if (err) console.log(err)
-          console.log(JSON.stringify(docs, null, 2))
           res.send(docs)
         })
     })
 
-    .post('/publish', (req, res) => {
+    .get('api/statuses/:deviceID', (req, res) => {
+      db.collection('statuses')
+        .find({'deviceID':+req.params.deviceID})
+        .toArray((err, docs) => {
+          if (err) console.log(err)
+          res.send(docs)
+        })
+    })
+
+    .post('api/publish', (req, res) => {
       mqtt.publish(`${req.body.topic}`, req.body.message)
       res.status(200).send('message published')
     })
 
-    .delete('/statuses/:id', (req, res) => {
+    .delete('api/statuses/:id', (req, res) => {
       db.collection('statuses')
         .deleteOne({ _id: new objectID(req.params.id) }, (err, result) => {
           if (err) console.log(err)
@@ -86,7 +92,7 @@ MongoClient.connect('mongodb://db', (err, db) => {
         })
     })
 
-    .get('/broker', (req, res) => {
+    .get('api/broker', (req, res) => {
       res.send('mqtt//broker')
     })
 

@@ -13,9 +13,9 @@
 		</md-card-content>
 	</md-card>
 
-	<md-card *ngFor="let switch of toggleService.switches$ | async">
-		<md-card-title>{{switch.switchID}}</md-card-title>
-		<button md-raised-button color="accent" (click)="toggle(switch)">Toggle</button>
-		{{switch.status[0]?.pins[0].status}}
+	<md-card *ngFor="let switch of toggleService.switch$ | async">
+		<md-card-title>{{switch.name || switch.deviceID}}</md-card-title>
+		<button *ngIf="switch.status[0]?.pins[0].status" md-raised-button color="accent" (click)="toggle(switch)">On</button>
+		<button *ngIf="!switch.status[0]?.pins[0].status" md-raised-button color="warn" (click)="toggle(switch)">Off</button>
 	</md-card>
 </div>

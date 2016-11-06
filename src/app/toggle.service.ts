@@ -9,38 +9,30 @@ import { Device, DeviceType, DeviceStatus, Mqtt } from './models'
 
 @Injectable()
 export class ToggleService {
-  switches: Array<Device>
+  switches: Array<Device> = []
   private switchSource = new BehaviorSubject<Array<Device>>([])
   switch$ = this.switchSource.asObservable()
 
   constructor(private backend: BackendService) {
     backend.getDevicesByType('digitalOutput').subscribe(devices => {
-      this.switches = _.map(devices, device => {
-        let curriedNormalize;
-        backend.getDeviceData(device).subscribe(status => curriedNormalize = this.normalize(status))
-        return curriedNormalize(device)
-      })
-      this.switchSource.next(this.switches)
+      _.each(devices, device => this.getData(device))
     })
   }
 
+  // TODO: fix this so we don't have to use a timer
   toggleDevice(device: Device) {
     let topic = device.topics.sub.toggle
     let mqtt = { topic: topic, message: (new Date()).toString() }
-    this.backend.publish(mqtt).subscribe(() => {
+    this.backend.publish(mqtt).subscribe(() => setTimeout(() => {
       this.backend.getDeviceData(device).subscribe(status => {
-        this.switches = [
-          ..._.reject(this.switches, ['deviceID', device.deviceID]),
-          this.normalize(status)(device)
-        ]
-        this.switchSource.next(this.switches)
+        this.normalize(_.reject(this.switches, ['deviceID', device.deviceID]), device, status)
       })
-    })
+    }, 500))
   }
 
-  private normalize(statuses: Array<DeviceStatus>): (device: Device) => Device {
-    return (device: Device): Device => {
-      return {
+  private normalize(switches: Array<Device>, device: Device, statuses: Array<DeviceStatus>): void {
+    this.switches = [
+      ...switches, {
         deviceID: device.deviceID,
         name: device.name,
         topics: device.topics,
@@ -49,6 +41,13 @@ export class ToggleService {
         status: statuses,
         checkinFreq: device.checkinFreq,
       }
-    }
+    ]
+    this.switchSource.next(this.switches)
+  }
+
+  private getData(device: Device) {
+    this.backend.getDeviceData(device).subscribe(status => {
+      this.normalize(this.switches, device, status)
+    })
   }
 }

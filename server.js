@@ -51,17 +51,9 @@ MongoClient.connect('mongodb://db', (err, db) => {
   app.use(bodyParser.json())
     .use(bodyParser.urlencoded({ extended: true }))
     .use(require('morgan')('dev'))
-
     .use(express.static(path.join(__dirname, 'dist')))
 
-    .get('api/devices', (req, res) => {
-      db.collection('devices')
-        .find({}).toArray((err, docs) => {
-          res.send(docs)
-        })
-    })
-
-    .get('api/devices/:type', (req, res) => {
+    .get('/api/devices/:type', (req, res) => {
       db.collection('devices')
         .find({'primaryType':req.params.type})
         .toArray((err, docs) => {
@@ -70,7 +62,14 @@ MongoClient.connect('mongodb://db', (err, db) => {
         })
     })
 
-    .get('api/statuses/:deviceID', (req, res) => {
+    .get('/api/devices', (req, res) => {
+      db.collection('devices')
+        .find({}).toArray((err, docs) => {
+          res.send(docs)
+        })
+    })
+
+    .get('/api/statuses/:deviceID', (req, res) => {
       db.collection('statuses')
         .find({'deviceID':+req.params.deviceID})
         .toArray((err, docs) => {
@@ -79,12 +78,12 @@ MongoClient.connect('mongodb://db', (err, db) => {
         })
     })
 
-    .post('api/publish', (req, res) => {
+    .post('/api/publish', (req, res) => {
       mqtt.publish(`${req.body.topic}`, req.body.message)
       res.status(200).send('message published')
     })
 
-    .delete('api/statuses/:id', (req, res) => {
+    .delete('/api/statuses/:id', (req, res) => {
       db.collection('statuses')
         .deleteOne({ _id: new objectID(req.params.id) }, (err, result) => {
           if (err) console.log(err)
@@ -92,8 +91,30 @@ MongoClient.connect('mongodb://db', (err, db) => {
         })
     })
 
-    .get('api/broker', (req, res) => {
+    .get('/api/broker', (req, res) => {
       res.send('mqtt//broker')
+    })
+
+    .get('api/geofence', (req, res) => {
+      db.collection('geofence')
+        .distinct('device', (err, result) => {
+          if (err) console.log(err)
+          res.send(result)
+        })
+    })
+
+    .post('/api/geofence', (req, res) => {
+      console.log(req.body)
+      db.collection('geofence').insertOne(req.body)
+    })
+
+    .get('api/geofence/:device', (req, res) => {
+      db.collection('geofence')
+        .find({'device':req.params.device})
+        .toArray((err, docs) => {
+          if (err) console.log(err)
+          res.send(docs)
+        })
     })
 
     .listen(3000)

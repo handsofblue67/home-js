@@ -16,37 +16,30 @@ export class ChartService {
   chart$ = this.chartSource.asObservable()
 
   constructor(private backend: BackendService) {
-    backend.getDevicesByType('digitalOutput').subscribe(devices => {
-      this.createChart(devices)
-      this.devices = _.map(devices, device => {
-        let curriedNormalize;
-        backend.getDeviceData(device).subscribe(status => curriedNormalize = this.normalize(status))
-        return curriedNormalize(device)
+    backend.getDevicesByType('analogInput').subscribe(devices => {
+      _.each(devices, device => {
+         backend.getDeviceData(device)
+          .subscribe(status => this.createChart(this.normalize(device, status)))
       })
     })
   }
 
-  createChart(devices: Array<Device>): void {
-    this.charts = _.map(devices, device => {
-      return {
-        chart: {
-          zoomType: 'x',
-          type: 'line'
-        },
-        title: { text: 'Light Sensor' },
-        xAxis: {
-          type: 'datetime',
-          title: { text: 'Time' },
-          dateTimeFormat: {
-
-          }
-        },
-        yAxis: {
-          title: { text: 'Light levels' }
-        },
-        series: this.separateByDay(device.status),
-      }
-    })
+  createChart(device: Device): void {
+    this.charts = [ ...this.charts, {
+      chart: {
+        zoomType: 'x',
+        type: 'line'
+      },
+      title: { text: 'Light Sensor' },
+      xAxis: {
+        type: 'datetime',
+        title: { text: 'Time' },
+      },
+      yAxis: {
+        title: { text: 'Light levels' }
+      },
+      series: this.separateByDay(device.status),
+    }]
     this.chartSource.next(this.charts)
   }
 
@@ -62,17 +55,22 @@ export class ChartService {
     })
   }
 
-  private normalize(statuses: Array<DeviceStatus>): (device: Device) => Device {
-    return (device: Device): Device => {
-      return {
-        deviceID: device.deviceID,
-        name: device.name,
-        topics: device.topics,
-        timestamp: device.timestamp,
-        primaryType: device.primaryType,
-        status: statuses,
-        checkinFreq: device.checkinFreq,
-      }
+  private normalize(device: Device, statuses: Array<DeviceStatus>): Device {
+    return {
+      deviceID: device.deviceID,
+      name: device.name,
+      topics: device.topics,
+      timestamp: device.timestamp,
+      primaryType: device.primaryType,
+      status: statuses,
+      checkinFreq: device.checkinFreq,
     }
+  }
+
+  private getData(device: Device) {
+    let updatedDevice;
+    this.backend.getDeviceData(device)
+      .subscribe(status => updatedDevice = this.normalize(device, status))
+    return updatedDevice
   }  
 }

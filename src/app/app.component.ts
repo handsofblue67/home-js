@@ -2,7 +2,6 @@ import { Component } from '@angular/core'
 
 import * as _ from 'lodash'
 import * as moment from 'moment'
-import { Subject } from 'rxjs/Subject'
 import './shared'
 
 import { ChartService } from './chart.service'
@@ -15,15 +14,13 @@ import { Device, DeviceStatus, DeviceType, Mqtt } from './models'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   devices: Array<Device>
   groupedDevices: any
+  toggle: Function
 
-  constructor(
-    private chartService: ChartService,
-    private toggleService: ToggleService
-  ) { }
-
-  toggle(device: Device): void {
-    this.toggleService.toggleDevice(device)
+  constructor(private chartService: ChartService, private toggleService: ToggleService) {
+    this.toggle = _.debounce((device: Device) => this.toggleService.toggleDevice(device), 200)
   }
+
 }

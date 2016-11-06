@@ -1,5 +1,5 @@
 {
-    "/api": {
+    "/": {
         "target": "http://handsofblue67.mynetgear.com:3000",
         "secure": false
     }

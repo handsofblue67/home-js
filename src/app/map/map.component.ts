@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import * as moment from 'moment'
+
 import { GeofenceService } from './geofence.service'
 
 @Component({
@@ -18,10 +20,8 @@ export class MapComponent implements OnInit {
         return {
           lat: +map.latitude,
           lng: +map.longitude,
-          trigger: map.trigger,
-          marker: (map.trigger === 'enter') ?
-            'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|FF3333' :
-            'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|3FFF33'
+          info: moment(+map.timestamp*1000).calendar(),
+          marker: `http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=M|${(map.trigger === 'enter') ?'3FFF33' : 'FF3333'}`
         }
       })
     })

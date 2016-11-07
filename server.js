@@ -5,6 +5,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const mqtt = require('mqtt').connect('mqtt://broker')
 const chalk = require('chalk')
+const moment = require('moment')
 const app = express()
 
 mqtt.on('connect', () => {
@@ -12,9 +13,19 @@ mqtt.on('connect', () => {
   mqtt.subscribe('/currentSettings/#')
 })
 
-let auth = express.basicAuth((user, pass, cb) => {
-  cb(null, (user === 'handsofblue67' && pass === '@basicAuth'))
-})
+let auth = (req, res, next) => {
+  let user = basicAuth(req)
+  if (!user || !user.name || !user.pass) {
+    res.set('WWW-Authenticate', 'Basic realm=Authorization Required')
+    res.sendStatus(401)
+  }
+  if (user.name === 'handsofblue67' && user.pass === '@basicAuth') {
+    next();
+  } else {
+    res.set('WWW-Authenticate', 'Basic realm=Authorization Required')
+    res.sendStatus(401)
+  }
+}
 
 MongoClient.connect('mongodb://db', (err, db) => {
 

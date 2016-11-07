@@ -1,23 +1,18 @@
-<md-toolbar color="primary">
-	<button md-icon-button><md-icon>menu</md-icon></button> HomeJS
-</md-toolbar>
+<md-sidenav-layout class="sidenav-layout">
+	<md-sidenav #nav mode="side">
+		<div><button md-button routerLink="/charts">Charts</button></div>
+		<div><button md-button routerLink="/lights">Lights</button></div>
+		<div><button md-button routerLink="/maps">Map</button></div>
+	</md-sidenav>
 
-<map></map>
-
-<!--<div>Red<md-slider min="0" max="1023" #red (slide)="backend.publishRGB(red.value, green.value, blue.value)"></md-slider></div>-->
-<!--<div>Green<md-slider min="0" max="1023" #green (slide)="backend.publishRGB(red.value, green.value, blue.value)"></md-slider></div>-->
-<!--<div>Blue<md-slider min="0" max="1023" #blue (slide)="backend.publishRGB(red.value, green.value, blue.value)"></md-slider></div>-->
-<div class="card-container">
-	<md-card *ngFor="let chart of chartService.chart$ | async">
-		<md-card-title>{{chart.title.title}}</md-card-title>
-		<md-card-content>
-			<chart [options]="chart"></chart>
-		</md-card-content>
-	</md-card>
-
-	<md-card *ngFor="let switch of toggleService.switch$ | async">
-		<md-card-title>{{switch.name || switch.deviceID}}</md-card-title>
-		<button *ngIf="switch.status[0]?.pins[0].status" md-raised-button color="accent" (click)="toggle(switch)">On</button>
-		<button *ngIf="!switch.status[0]?.pins[0].status" md-raised-button color="warn" (click)="toggle(switch)">Off</button>
-	</md-card>
-</div>
+	<md-toolbar color="primary">
+		<button md-icon-button (click)="nav.toggle()"><md-icon>menu</md-icon></button> HomeJS
+	</md-toolbar>
+	
+	<!--<div>Red<md-slider min="0" max="1023" #red (slide)="backend.publishRGB(red.value, green.value, blue.value)"></md-slider></div>-->
+	<!--<div>Green<md-slider min="0" max="1023" #green (slide)="backend.publishRGB(red.value, green.value, blue.value)"></md-slider></div>-->
+	<!--<div>Blue<md-slider min="0" max="1023" #blue (slide)="backend.publishRGB(red.value, green.value, blue.value)"></md-slider></div>-->
+	<div class="card-container">
+		<router-outlet></router-outlet>
+	</div>
+</md-sidenav-layout>

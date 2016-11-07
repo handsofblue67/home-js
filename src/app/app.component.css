@@ -7,3 +7,11 @@
   margin: 0 16px 16px 0;
   width: 600px;
 }
+
+md-sidenav {
+  padding: 10px;
+}
+
+.sidenav-content {
+  padding: 15px;
+}

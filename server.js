@@ -133,6 +133,8 @@ MongoClient.connect('mongodb://db', (err, db) => {
       db.collection('geofence')
         //.find({'device':req.params.device,'timestamp':{$gte:start,$lt:end}})
         .find({'device':req.params.device})
+        .sort({'timestamp':-1})
+        .limit(2)
         .toArray((err, docs) => {
           if (err) console.log(err)
           res.send(docs)

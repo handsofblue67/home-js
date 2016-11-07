@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ChartService } from '../chart.service'
+import { ChartService } from './chart.service'
 import { Device, DeviceStatus, DeviceType, Mqtt } from '../models'
 
 @Component({

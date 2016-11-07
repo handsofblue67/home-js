@@ -42,7 +42,11 @@ export class ToggleService {
   getState(): Observable<any> {
     let observable = new Observable(observer => {
       this.socket = io('/')
-      this.socket.on('stateChange', observer.next)
+      this.socket.on('stateChange', state => {
+        console.log('state changed (toggle service)')
+        observer.next(state)
+      })
+
       return () => this.socket.disconnect()
     })
     return observable;

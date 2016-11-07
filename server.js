@@ -11,22 +11,7 @@ const app = express()
 let http = require('http').Server(app)
 let io = require('socket.io')(http)
 
-io.on('connection', (socket) => {
-  console.log('user connected')
-  
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
-  })
-  
-  socket.on('changeState', (message) => {
-    io.emit('updatedState', {type:'state', text: message})
-  })
-})
 
-mqtt.on('connect', () => {
-  mqtt.subscribe('/status/#')
-  mqtt.subscribe('/currentSettings/#')
-})
 
 let auth = (req, res, next) => {
   let user = basicAuth(req)
@@ -43,41 +28,58 @@ let auth = (req, res, next) => {
 }
 
 MongoClient.connect('mongodb://db', (err, db) => {
-
-  mqtt.on('message', (topic, message) => {
-    message = JSON.parse(message.toString())
-    // message is a device defintion or a devices status report
-    topicRegExp = new RegExp(/currentSettings\/.*/)
-    topicRegExp.test(topic) ? updateDevice(message) : addStatus(message)
-  })
-
-  // each device and its current settings (one document per device)
-  let updateDevice = device => {
-    db.collection('devices')
-      .updateOne({ 'deviceID': device.deviceID }, { $set: device }, { upsert: true })
-  }
-
-  // inputs usually append a document, outputs usually update a single document (its current state)
-  let addStatus = status => {
-    db.collection('devices').findOne({ 'deviceID': status.deviceID }, (err, result) => {
-      switch (result.primaryType) {
-        case 'digitalOutput':
-          db.collection('statuses')
-            .updateOne({ 'deviceID': status.deviceID }, { $set: status }, { upsert: true })
-          break
-        case 'digitalInput':
-          db.collection('statuses').insertOne(status)
-          break
-        case 'analogOutput':
-          db.collection('statuses')
-            .updateOne({ 'deviceID': status.deviceID }, { $set: status }, { upsert: true })
-        case 'analogInput':
-          db.collection('statuses').insertOne(status)
-          break
-      }
+  
+  io.on('connection', socket => {
+    console.log('user connected')
+  
+    socket.on('disconnect', () => {
+      console.log('user disconnected');
     })
-  }
+  
+    socket.on('doChange', () => {
+      // mqtt.publish(`${req.body.topic}`, req.body.message)
+    })
 
+    mqtt.on('connect', () => {
+      mqtt.subscribe('/status/#')
+      mqtt.subscribe('/currentSettings/#')
+    })  
+
+    mqtt.on('message', (topic, message) => {
+      message = JSON.parse(message.toString())
+      // message is a device defintion or a devices status report
+      topicRegExp = new RegExp(/currentSettings\/.*/)
+      topicRegExp.test(topic) ? updateDevice(message) : addStatus(message)
+    })
+
+    // each device and its current settings (one document per device)
+    let updateDevice = device => {
+      db.collection('devices')
+        .updateOne({ 'deviceID': device.deviceID }, { $set: device }, { upsert: true })
+    }
+
+    // inputs usually append a document, outputs usually update a single document (its current state)
+    let addStatus = status => {
+      db.collection('devices').findOne({ 'deviceID': status.deviceID }, (err, result) => {
+        switch (result.primaryType) {
+          case 'digitalOutput':
+            db.collection('statuses')
+              .updateOne({ 'deviceID': status.deviceID }, { $set: status }, { upsert: true })
+              io.emit('stateChange', {type:'state', text: status})
+            break
+          case 'digitalInput':
+            db.collection('statuses').insertOne(status)
+            break
+          case 'analogOutput':
+            db.collection('statuses')
+              .updateOne({ 'deviceID': status.deviceID }, { $set: status }, { upsert: true })
+          case 'analogInput':
+            db.collection('statuses').insertOne(status)
+            break
+        }
+      })
+    }
+  })
   app.use(bodyParser.json())
     .use(bodyParser.urlencoded({ extended: true }))
     .use(require('morgan')('dev'))

@@ -3,17 +3,16 @@ import { NgModule } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
 import { MaterialModule } from '@angular/material'
-import { RouterModule }   from '@angular/router';
+import { RouterModule }   from '@angular/router'
 
 import { ChartModule } from 'angular2-highcharts'
 import { AgmCoreModule } from 'angular2-google-maps/core'
 
 import { AppComponent } from './app.component'
 import { BackendService } from './backend.service'
-import { ChartService } from './chart.service'
-import { GeofenceService, MapComponent } from './map';
-import { ChartComponent } from './chart/chart.component';
-import { ToggleComponent, ToggleService } from './toggle';
+import { GeofenceService, MapComponent } from './map'
+import { ChartComponent, ChartService } from './chart'
+import { ToggleComponent, ToggleService } from './toggle'
 
 @NgModule({
   declarations: [

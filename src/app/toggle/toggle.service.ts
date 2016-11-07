@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core'
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
+import { Subject } from 'rxjs/Subject'
+import { Observable } from 'rxjs/Observable'
 import '../shared'
 import * as _ from 'lodash'
+import * as io from 'socket.io-client'
 
 import { BackendService } from '../backend.service'
 import { Device, DeviceType, DeviceStatus, Mqtt } from '../models'
@@ -12,6 +15,8 @@ export class ToggleService {
   switches: Array<Device> = []
   private switchSource = new BehaviorSubject<Array<Device>>([])
   switch$ = this.switchSource.asObservable()
+
+  private socket
 
   constructor(private backend: BackendService) {
     backend.getDevicesByType('digitalOutput').subscribe(devices => {
@@ -28,6 +33,19 @@ export class ToggleService {
         this.normalize(_.reject(this.switches, ['deviceID', device.deviceID]), device, status)
       })
     }, 500))
+  }
+
+  toggle() {
+    this.socket.emit('toggle', true)
+  }
+
+  getState() {
+    let observable = new Observable(observer => {
+      this.socket = io('/')
+      this.socket.on('stateChange', observer.next)
+      return () => this.socket.disconnect()
+    })
+    return observable;
   }
 
   private normalize(switches: Array<Device>, device: Device, statuses: Array<DeviceStatus>): void {

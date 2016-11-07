@@ -8,6 +8,20 @@ const chalk = require('chalk')
 const moment = require('moment')
 const basicAuth = require('basic-auth')
 const app = express()
+let http = require('http').Server(app)
+let io = require('socket.io')(http);
+
+io.on('connection', (socket) => {
+  console.log('user connected')
+  
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  })
+  
+  socket.on('changeState', (message) => {
+    io.emit('updatedState', {type:'state', text: message})
+  })
+})
 
 mqtt.on('connect', () => {
   mqtt.subscribe('/status/#')
@@ -141,7 +155,8 @@ MongoClient.connect('mongodb://db', (err, db) => {
           res.send(docs)
         })
     })
-
-    .listen(3000)
 })
-module.exports = app;
+
+http.listen(3000)
+
+// module.exports = app;

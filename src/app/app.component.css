@@ -3,15 +3,8 @@
   flex-flow: column nowrap;
 }
 
-.card-container md-card {
-  margin: 0 16px 16px 0;
-  width: 600px;
-}
 
-md-sidenav {
-  padding: 10px;
-}
 
-.sidenav-content {
-  padding: 15px;
-}
+md-sidenav { padding: 10px; }
+
+.sidenav-layout {  min-height: 100%; }

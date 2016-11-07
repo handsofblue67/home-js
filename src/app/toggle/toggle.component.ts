@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ToggleService } from '../toggle.service'
+import { ToggleService } from './toggle.service'
 import { Device, DeviceStatus, DeviceType, Mqtt } from '../models'
 
 @Component({

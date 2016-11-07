@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core'
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
-import './shared'
+import '../shared'
 import * as _ from 'lodash'
 
-import { BackendService } from './backend.service'
-import { Device, DeviceType, DeviceStatus, Mqtt } from './models'
+import { BackendService } from '../backend.service'
+import { Device, DeviceType, DeviceStatus, Mqtt } from '../models'
 
 @Injectable()
 export class ToggleService {

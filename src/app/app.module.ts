@@ -10,17 +10,14 @@ import { AgmCoreModule } from 'angular2-google-maps/core'
 
 import { AppComponent } from './app.component'
 import { BackendService } from './backend.service'
-import { TogglePipe } from './toggle.pipe'
-import { ToggleService } from './toggle.service'
 import { ChartService } from './chart.service'
 import { GeofenceService, MapComponent } from './map';
 import { ChartComponent } from './chart/chart.component';
-import { ToggleComponent } from './toggle/toggle.component';
+import { ToggleComponent, ToggleService } from './toggle';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TogglePipe,
     MapComponent,
     ChartComponent,
     ToggleComponent

@@ -67,6 +67,9 @@ MongoClient.connect('mongodb://db', (err, db) => {
     .use(bodyParser.urlencoded({ extended: true }))
     .use(require('morgan')('dev'))
     .use(express.static(path.join(__dirname, 'dist')))
+    .use('/lights', express.static(path.join(__dirname, 'dist')))
+    .use('/maps', express.static(path.join(__dirname, 'dist')))
+    .use('/charts', express.static(path.join(__dirname, 'dist')))
 
     .get('/api/devices/:type', (req, res) => {
       db.collection('devices')

@@ -39,7 +39,7 @@ export class ToggleService {
     this.socket.emit('toggle', true)
   }
 
-  getState() {
+  getState(): Observable<any> {
     let observable = new Observable(observer => {
       this.socket = io('/')
       this.socket.on('stateChange', observer.next)

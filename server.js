@@ -9,7 +9,7 @@ const moment = require('moment')
 const basicAuth = require('basic-auth')
 const app = express()
 let http = require('http').Server(app)
-let io = require('socket.io')(http);
+let io = require('socket.io')(http)
 
 io.on('connection', (socket) => {
   console.log('user connected')
@@ -155,6 +155,7 @@ MongoClient.connect('mongodb://db', (err, db) => {
           res.send(docs)
         })
     })
+    // app.listen(3000)
 })
 
 http.listen(3000)

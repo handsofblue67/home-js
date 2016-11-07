@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const mqtt = require('mqtt').connect('mqtt://broker')
 const chalk = require('chalk')
 const moment = require('moment')
+const basicAuth = require('basic-auth')
 const app = express()
 
 mqtt.on('connect', () => {

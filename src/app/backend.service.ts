@@ -10,20 +10,7 @@ import { Mqtt, Device, DeviceStatus, DeviceType, Topics } from './models'
 export class BackendService {
   headers = new Headers({ 'Content-Type': 'application/json' })
 
-  // TODO: clean this up, way too many calls to deviceSource.next()
-  constructor(private http: Http) {
-    // this.getDevices().subscribe(
-    //   devices => {
-    //     this.devices = _.map(devices, device => {
-    //       this.getDeviceData(device).subscribe(
-    //         status => device.status = status,
-    //         err => console.error(`Error getting device data: ${err}`))
-    //       return device
-    //     })
-    //   },
-    //   err => console.error(`Error getting devices ${err}`),
-    //   () => this.deviceSource.next(this.devices))
-  }
+  constructor(private http: Http) { }
 
   getDevicesByType(type: string): Observable<Array<Device>> {
     return this.http.get(`api/devices/${type}`)
@@ -55,4 +42,17 @@ export class BackendService {
       err.status ? `${err.status} - ${err.statusTest}` : 'Server error'
     return Observable.throw(errMsg)
   }
+
+  getGeofenceDevices() {
+    return this.http.get('api/geofence')
+      .map(res => res.json())
+      .catch(this.handleError)
+  }
+
+  getGeofenceByDevice(id: string) {
+    return this.http.get(`api/geofence/${id}`)
+      .map(res => res.json())
+      .catch(this.handleError)
+  }
+
 }

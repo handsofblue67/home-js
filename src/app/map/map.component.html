@@ -1,0 +1,6 @@
+<div *ngIf="maps.length">
+  <!--<sebm-google-map  [latitude]="40.2649337" [longitude]="-111.6839472">-->
+  <sebm-google-map  [latitude]="maps[0]?.lat" [longitude]="maps[0]?.lng">
+      <sebm-google-map-marker *ngFor="let map of maps" [latitude]="map?.lat" [longitude]="map?.lng"></sebm-google-map-marker>
+  </sebm-google-map>
+</div>

@@ -12,6 +12,10 @@ mqtt.on('connect', () => {
   mqtt.subscribe('/currentSettings/#')
 })
 
+let auth = express.basicAuth((user, pass, cb) => {
+  cb(null, (user === 'handsofblue67' && pass === '@basicAuth'))
+})
+
 MongoClient.connect('mongodb://db', (err, db) => {
 
   mqtt.on('message', (topic, message) => {
@@ -95,7 +99,7 @@ MongoClient.connect('mongodb://db', (err, db) => {
       res.send('mqtt//broker')
     })
 
-    .get('api/geofence', (req, res) => {
+    .get('/api/geofence', (req, res) => {
       db.collection('geofence')
         .distinct('device', (err, result) => {
           if (err) console.log(err)
@@ -103,14 +107,17 @@ MongoClient.connect('mongodb://db', (err, db) => {
         })
     })
 
-    .post('/api/geofence', (req, res) => {
+    .post('/api/geofence', auth, (req, res) => {
       console.log(req.body)
       db.collection('geofence').insertOne(req.body)
+      res.status(200).send('geofence event saved')
     })
 
-    .get('api/geofence/:device', (req, res) => {
+    .get('/api/geofence/:device', (req, res) => {
+      const start = moment().startOf('day')
+      const end = moment().endOf('day')
       db.collection('geofence')
-        .find({'device':req.params.device})
+        .find({'device':req.params.device,'timestamp':{$gte:start,$lt:end}})
         .toArray((err, docs) => {
           if (err) console.log(err)
           res.send(docs)

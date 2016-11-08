@@ -111,7 +111,10 @@ mqtt.on('connect', () => {
 
       .get('/api/statuses/:deviceID', (req, res) => {
         db.collection('statuses')
-          .find({ 'deviceID': +req.params.deviceID })
+          .aggregate({
+            $match: {'deviceID': +req.params.deviceID},
+            $sample: {size: 1000}
+          })
           .toArray((err, docs) => {
             if (err) console.log(err)
             res.send(docs)

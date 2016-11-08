@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
+import { Subscription } from 'rxjs/Subscription'
+
 import { ToggleService } from './toggle.service'
 import { Device, DeviceStatus, DeviceType, Mqtt } from '../models'
 
@@ -9,28 +11,25 @@ import { Device, DeviceStatus, DeviceType, Mqtt } from '../models'
   styleUrls: ['./toggle.component.css']
 })
 export class ToggleComponent implements OnInit, OnDestroy {
-  toggle: Function
+  // toggle: Function
   
   states: Array<any> = []
-  connection
+  connection: Subscription
 
   constructor(private toggleService: ToggleService) {
-    this.toggle = _.debounce((device: Device) => this.toggleService.toggleDevice(device), 200)
+    // this.toggle = _.debounce((device: Device) => this.toggleService.toggleDevice(device), 200)
   }
 
-  doToggle() {
-    this.toggleService.toggle()
-  }
+  toggle(device: Device) { this.toggleService.toggle(device) }
 
   ngOnInit() {
     this.connection = this.toggleService.getState().subscribe(state => {
-      this.states = [ ...this.states, state ]
-      console.log(state)
+      // this.states = [ ...this.states, state ]
+      // console.log(state)
     })
   }
 
   ngOnDestroy() {
     this.connection.unsubscribe()
   }
-
 }

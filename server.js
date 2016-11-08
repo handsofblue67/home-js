@@ -11,8 +11,6 @@ const app = express()
 let http = require('http').Server(app)
 let io = require('socket.io')(http)
 
-
-
 let auth = (req, res, next) => {
   let user = basicAuth(req)
   if (!user || !user.name || !user.pass) {
@@ -27,139 +25,147 @@ let auth = (req, res, next) => {
   }
 }
 
-MongoClient.connect('mongodb://db', (err, db) => {
-  
-  io.on('connection', socket => {
-    console.log('user connected')
-  
-    socket.on('disconnect', () => {
-      console.log('user disconnected');
-    })
-  
-    socket.on('doChange', () => {
-      // mqtt.publish(`${req.body.topic}`, req.body.message)
-    })
+mqtt.on('connect', () => {
+  mqtt.subscribe('/status/#')
+  mqtt.subscribe('/currentSettings/#')
 
-    mqtt.on('connect', () => {
-      mqtt.subscribe('/status/#')
-      mqtt.subscribe('/currentSettings/#')
-    })  
+  MongoClient.connect('mongodb://db', (err, db) => {
+    if (err) console.error('error connecting to mongodb ' + err)
 
-    mqtt.on('message', (topic, message) => {
-      message = JSON.parse(message.toString())
-      // message is a device defintion or a devices status report
-      topicRegExp = new RegExp(/currentSettings\/.*/)
-      topicRegExp.test(topic) ? updateDevice(message) : addStatus(message)
-    })
+    io.on('connection', socket => {
+      console.log('user connected')
 
-    // each device and its current settings (one document per device)
-    let updateDevice = device => {
-      db.collection('devices')
-        .updateOne({ 'deviceID': device.deviceID }, { $set: device }, { upsert: true })
-    }
+      // on web client disconnect
+      socket.on('disconnect', () => console.log('user disconnected'))
 
-    // inputs usually append a document, outputs usually update a single document (its current state)
-    let addStatus = status => {
-      db.collection('devices').findOne({ 'deviceID': status.deviceID }, (err, result) => {
-        switch (result.primaryType) {
-          case 'digitalOutput':
-            db.collection('statuses')
-              .updateOne({ 'deviceID': status.deviceID }, { $set: status }, { upsert: true })
-              io.emit('stateChange', {type:'state', text: status})
-            break
-          case 'digitalInput':
-            db.collection('statuses').insertOne(status)
-            break
-          case 'analogOutput':
-            db.collection('statuses')
-              .updateOne({ 'deviceID': status.deviceID }, { $set: status }, { upsert: true })
-          case 'analogInput':
-            db.collection('statuses').insertOne(status)
-            break
-        }
+      // on toggle from web client
+      socket.on('toggle', pub => mqtt.publish(pub.topic, pub.message))
+
+      mqtt.on('message', (topic, message) => {
+        message = JSON.parse(message.toString())
+        // message is a device defintion or a devices status report
+        topicRegExp = new RegExp(/currentSettings\/.*/)
+        console.log(topic)
+        topicRegExp.test(topic) ? updateDevice(message) : addStatus(message)
       })
-    }
-  })
-  app.use(bodyParser.json())
-    .use(bodyParser.urlencoded({ extended: true }))
-    .use(require('morgan')('dev'))
-    .use(express.static(path.join(__dirname, 'dist')))
-    .use('/lights', express.static(path.join(__dirname, 'dist')))
-    .use('/maps', express.static(path.join(__dirname, 'dist')))
-    .use('/charts', express.static(path.join(__dirname, 'dist')))
 
-    .get('/api/devices/:type', (req, res) => {
-      db.collection('devices')
-        .find({'primaryType':req.params.type})
-        .toArray((err, docs) => {
-          if (err) console.log(err)
-          res.send(docs)
+      // each device and its current settings (one document per device)
+      let updateDevice = device => {
+        db.collection('devices')
+          .updateOne({ 'deviceID': device.deviceID }, { $set: device }, { upsert: true })
+      }
+
+      // inputs usually append a document, outputs usually update a single document (its current state)
+      let addStatus = status => {
+        db.collection('devices').findOne({ 'deviceID': status.deviceID }, (err, result) => {
+          switch (result.primaryType) {
+            case 'digitalOutput':
+              db.collection('statuses')
+                .updateOne({ 'deviceID': status.deviceID }, { $set: status }, { upsert: true }, () => {
+                  io.emit('stateChange', { type: 'state', status: status })
+                })
+              break
+            case 'digitalInput':
+              db.collection('statuses').insertOne(status, () => {
+                io.emit('digitalInputChange', { type: 'state', status: status })
+              })
+              break
+            case 'analogOutput':
+              db.collection('statuses')
+                .updateOne({ 'deviceID': status.deviceID }, { $set: status }, { upsert: true }, () => {
+                  io.emit('analogStateChange', { type: 'state', status: status })
+              })
+            case 'analogInput':
+              db.collection('statuses').insertOne(status, () => {
+                io.emit('analogInputChange', { type: 'state', status: status })
+              })
+              break
+          }
         })
+      }
     })
 
-    .get('/api/devices', (req, res) => {
-      db.collection('devices')
-        .find({}).toArray((err, docs) => {
-          res.send(docs)
-        })
-    })
+    app.use(bodyParser.json())
+      .use(bodyParser.urlencoded({ extended: true }))
+      .use(require('morgan')('dev'))
+      .use(express.static(path.join(__dirname, 'dist')))
+      .use('/lights', express.static(path.join(__dirname, 'dist')))
+      .use('/maps', express.static(path.join(__dirname, 'dist')))
+      .use('/charts', express.static(path.join(__dirname, 'dist')))
 
-    .get('/api/statuses/:deviceID', (req, res) => {
-      db.collection('statuses')
-        .find({'deviceID':+req.params.deviceID})
-        .toArray((err, docs) => {
-          if (err) console.log(err)
-          res.send(docs)
-        })
-    })
+      .get('/api/devices/:type', (req, res) => {
+        db.collection('devices')
+          .find({ 'primaryType': req.params.type })
+          .toArray((err, docs) => {
+            if (err) console.log(err)
+            res.send(docs)
+          })
+      })
 
-    .post('/api/publish', (req, res) => {
-      mqtt.publish(`${req.body.topic}`, req.body.message)
-      res.status(200).send('message published')
-    })
+      .get('/api/devices', (req, res) => {
+        db.collection('devices')
+          .find({}).toArray((err, docs) => {
+            res.send(docs)
+          })
+      })
 
-    .delete('/api/statuses/:id', (req, res) => {
-      db.collection('statuses')
-        .deleteOne({ _id: new objectID(req.params.id) }, (err, result) => {
-          if (err) console.log(err)
-          res.send(result)
-        })
-    })
+      .get('/api/statuses/:deviceID', (req, res) => {
+        db.collection('statuses')
+          .find({ 'deviceID': +req.params.deviceID })
+          .toArray((err, docs) => {
+            if (err) console.log(err)
+            res.send(docs)
+          })
+      })
 
-    .get('/api/broker', (req, res) => {
-      res.send('mqtt//broker')
-    })
+      .post('/api/publish', (req, res) => {
+        mqtt.publish(`${req.body.topic}`, req.body.message)
+        res.status(200).send('message published')
+      })
 
-    .get('/api/geofence', (req, res) => {
-      db.collection('geofence')
-        .distinct('device', (err, result) => {
-          if (err) console.log(err)
-          res.send(result)
-        })
-    })
+      .delete('/api/statuses/:id', (req, res) => {
+        db.collection('statuses')
+          .deleteOne({ _id: new objectID(req.params.id) }, (err, result) => {
+            if (err) console.log(err)
+            res.send(result)
+          })
+      })
 
-    .post('/api/geofence', auth, (req, res) => {
-      console.log(req.body)
-      db.collection('geofence').insertOne(req.body)
-      res.status(200).send('geofence event saved')
-    })
+      .get('/api/broker', (req, res) => {
+        res.send('mqtt//broker')
+      })
 
-    .get('/api/geofence/:device', (req, res) => {
-      const start = moment().startOf('day')
-      const end = moment().endOf('day')
-      db.collection('geofence')
-        //.find({'device':req.params.device,'timestamp':{$gte:start,$lt:end}})
-        .find({'device':req.params.device})
-        .sort({'timestamp':-1})
-        .limit(2)
-        .toArray((err, docs) => {
-          if (err) console.log(err)
-          res.send(docs)
-        })
-    })
+      .get('/api/geofence', (req, res) => {
+        db.collection('geofence')
+          .distinct('device', (err, result) => {
+            if (err) console.log(err)
+            res.send(result)
+          })
+      })
+
+      .post('/api/geofence', auth, (req, res) => {
+        console.log(req.body)
+        db.collection('geofence').insertOne(req.body)
+        res.status(200).send('geofence event saved')
+      })
+
+      .get('/api/geofence/:device', (req, res) => {
+        const start = moment().startOf('day')
+        const end = moment().endOf('day')
+        db.collection('geofence')
+          //.find({'device':req.params.device,'timestamp':{$gte:start,$lt:end}})
+          .find({ 'device': req.params.device })
+          .sort({ 'timestamp': -1 })
+          .limit(2)
+          .toArray((err, docs) => {
+            if (err) console.log(err)
+            res.send(docs)
+          })
+      })
     // app.listen(3000)
-})
+    http.listen(3000)
+  })
 
-http.listen(3000)
+})
 
 // module.exports = app;

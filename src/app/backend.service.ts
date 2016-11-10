@@ -20,7 +20,11 @@ export class BackendService {
 
   getDeviceData(device: Device): Observable<Array<DeviceStatus>> {
     return this.http.get(`api/statuses/${device.deviceID}`)
-      .map(res => res.json())
+      .map(res => {
+        let body = res.json()
+        console.log(body.length)
+        return body
+      })
       .catch(this.handleError)
   }
 

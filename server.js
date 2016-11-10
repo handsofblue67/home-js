@@ -111,19 +111,16 @@ mqtt.on('connect', () => {
 
       .get('/api/statuses/:deviceID', (req, res) => {
         db.collection('statuses')
-	  .aggregate(
-	    {$match:{'deviceID':+req.params.deviceID}},
-	    {$sample:{size:500}})
-	  .toArray((err, docs) => {
-	    if (err) console.log(err)
-   	    res.send(docs)
-	  })
-          //.find({ 'deviceID': +req.params.deviceID })
-          //.toArray((err, docs) => {
-           // if (err) console.log(err)
-            //res.send(docs)
-//          })
-      })
+      	  .aggregate([
+    	      {$match:{'deviceID':+req.params.deviceID}},
+    	      {$sample:{size:500}},
+            {$sort:{timestamp:1}}
+          ])
+          .toArray((err, docs) => {
+      	    if (err) console.log(err)
+      	    res.send(docs)
+  	      })
+       })
 
       .post('/api/publish', (req, res) => {
         mqtt.publish(`${req.body.topic}`, req.body.message)

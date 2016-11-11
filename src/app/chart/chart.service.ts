@@ -44,13 +44,22 @@ export class ChartService {
   }
 
   separateByDay(deviceStatus: Array<DeviceStatus> | DeviceStatus) {
-    let series = _.groupBy(deviceStatus, (dataPoint: DeviceStatus) => moment(+dataPoint.timestamp).utcOffset(0).startOf('day').format('MM/DD/YY'))
+    let series = _.groupBy(deviceStatus, (dataPoint: DeviceStatus) => {
+      moment(+dataPoint.timestamp).utcOffset(0).startOf('day').format('MM/DD/YY')
+    })
     return _.map(series, (dayOfData, date) => {
       return {
         name: date,
-        data: _.reduce(dayOfData, (acc, dataPoint: DeviceStatus) => {
-          return [...acc, [+moment(+dataPoint.timestamp), dataPoint.pins[0].status]]
-        }, []),
+        data: _.chain(dayOfData)
+          .sortBy('timestamp')
+          .reduce((acc, dataPoint: DeviceStatus) => {
+            let time = new Date(+dataPoint.timestamp)
+            time.setDate(1)
+            time.setMonth(1)
+            time.setFullYear(1970)
+            return [...acc, [+moment(+time), dataPoint.pins[0].status]]
+          }, [])
+          .value(),
       }
     })
   }

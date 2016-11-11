@@ -10,7 +10,7 @@ export class Device {
 
 export class DeviceStatus {
     deviceID: number
-    timestamp?: Date | number
+    timestamp?: number
     pins: Array<Pin>
 }
 

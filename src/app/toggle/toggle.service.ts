@@ -23,27 +23,9 @@ export class ToggleService {
     })
   }
 
-  // TODO: fix this so we don't have to use a timer
-  toggleDevice(device: Device) {
-    let topic = device.topics.sub.toggle
-    let mqtt = { topic: topic, message: (new Date()).toString() }
-    this.backend.publish(mqtt).subscribe(() => setTimeout(() => {
-      this.backend.getDeviceData(device).subscribe(status => {
-        this.normalize(_.reject(this.switches, ['deviceID', device.deviceID]), device, status)
-      })
-    }, 500))
-  }
-
   toggle(device: Device) {
     let topic = device.topics.sub.toggle
     let mqtt = { topic: topic, message: (new Date()).toString() }
-
-    // this.backend.publish(mqtt).subscribe(() => setTimeout(() => {
-    //   this.backend.getDeviceData(device).subscribe(status => {
-    //     this.normalize(_.reject(this.switches, ['deviceID', device.deviceID]), device, status)
-    //   })
-    // }, 500))
-
     this.socket.emit('toggle', mqtt)
   }
 
@@ -54,15 +36,7 @@ export class ToggleService {
         state = state.status
         console.log(state)
         let updatedDevice: Device = _.find(this.switches, ['deviceID',state.deviceID])
-        this.switches = [ ..._.reject(this.switches, ['deviceID', state.deviceID]), {
-          deviceID: updatedDevice.deviceID,
-          name: updatedDevice.name,
-          topics: updatedDevice.topics,
-          timestamp: updatedDevice.timestamp,
-          primaryType: updatedDevice.primaryType,
-          status: state,
-          checkinFreq: updatedDevice.checkinFreq
-        }]
+        updatedDevice.status = state
         this.switchSource.next(this.switches)
         // console.log(this.switches)
         // observer.next(state)

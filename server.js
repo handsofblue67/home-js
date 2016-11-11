@@ -41,6 +41,8 @@ mqtt.on('connect', () => {
       // on toggle from web client
       socket.on('toggle', pub => mqtt.publish(pub.topic, pub.message))
 
+    })
+
       mqtt.on('message', (topic, message) => {
         message = JSON.parse(message.toString())
         // message is a device defintion or a devices status report
@@ -83,7 +85,6 @@ mqtt.on('connect', () => {
           }
         })
       }
-    })
 
     app.use(bodyParser.json())
       .use(bodyParser.urlencoded({ extended: true }))
@@ -169,7 +170,6 @@ mqtt.on('connect', () => {
     // app.listen(3000)
     http.listen(3000)
   })
-
 })
 
 // module.exports = app;

@@ -34,12 +34,10 @@ export class ToggleService {
       this.socket = io('/')
       this.socket.on('stateChange', state => {
         state = state.status
-        console.log(state)
-        let updatedDevice: Device = _.find(this.switches, ['deviceID',state.deviceID])
-        updatedDevice.status = state
-        this.switchSource.next(this.switches)
-        // console.log(this.switches)
-        // observer.next(state)
+        this.normalize(
+          _.reject(this.switches, ['deviceID', state.deviceID]),
+          _.find(this.switches, ['deviceID',state.deviceID]),
+          [state])
       })
       return () => this.socket.disconnect()
     })
@@ -57,6 +55,7 @@ export class ToggleService {
         checkinFreq: device.checkinFreq,
       }
     ]
+    console.log(this.switches)
     this.switchSource.next(this.switches)
   }
 

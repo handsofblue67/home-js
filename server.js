@@ -29,6 +29,7 @@ mqtt.on('connect', () => {
   mqtt.subscribe('/status/#')
   mqtt.subscribe('/currentSettings/#')
   mqtt.subscribe('$SYS/#')
+  mqtt.subscribe('#')
 
   MongoClient.connect('mongodb://db', (err, db) => {
     if (err) console.error('error connecting to mongodb ' + err)
@@ -46,7 +47,7 @@ mqtt.on('connect', () => {
 
       mqtt.on('message', (topic, message) => {
         // message is a device defintion or a devices status report
-        io.emit('log', { type: 'event', event: {topic: topic, message: message}})
+        io.emit('log', { type: 'event', event: {topic: topic, message: JSON.parse(message.toString()) || message}})
         settingsRegExp = new RegExp(/currentSettings\/.*/)
         statusRegExp = new RegExp(/status\/.*/)
         console.log(topic)

@@ -28,6 +28,7 @@ let auth = (req, res, next) => {
 mqtt.on('connect', () => {
   mqtt.subscribe('/status/#')
   mqtt.subscribe('/currentSettings/#')
+  mqtt.subscribe('$SYS/#')
 
   MongoClient.connect('mongodb://db', (err, db) => {
     if (err) console.error('error connecting to mongodb ' + err)
@@ -44,11 +45,15 @@ mqtt.on('connect', () => {
     })
 
       mqtt.on('message', (topic, message) => {
-        message = JSON.parse(message.toString())
         // message is a device defintion or a devices status report
-        topicRegExp = new RegExp(/currentSettings\/.*/)
+        io.emit('log', { type: 'event', event: {topic: topic, message: message}})
+        settingsRegExp = new RegExp(/currentSettings\/.*/)
+        statusRegExp = new RegExp(/status\/.*/)
         console.log(topic)
-        topicRegExp.test(topic) ? updateDevice(message) : addStatus(message)
+
+        if (settingsRegExp.test(topic)) updateDevice(JSON.parse(message.toString())) 
+
+        else if (statusRegExp.test(topic)) addStatus(JSON.parse(message.toString()))
       })
 
       // each device and its current settings (one document per device)
@@ -93,6 +98,7 @@ mqtt.on('connect', () => {
       .use('/lights', express.static(path.join(__dirname, 'dist')))
       .use('/maps', express.static(path.join(__dirname, 'dist')))
       .use('/charts', express.static(path.join(__dirname, 'dist')))
+      .use('/debug', express.static(path.join(__dirname, 'dist')))
 
       .get('/api/devices/:type', (req, res) => {
         db.collection('devices')

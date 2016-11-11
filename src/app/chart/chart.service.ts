@@ -25,43 +25,42 @@ export class ChartService {
   }
 
   createChart(device: Device): void {
-    this.charts = [ ...this.charts, {
-      chart: {
-        zoomType: 'x',
-        type: 'line'
-      },
-      title: { text: 'Light Sensor' },
-      xAxis: {
-        type: 'datetime',
-        title: { text: 'Time' },
-      },
-      yAxis: {
-        title: { text: 'Light levels' }
-      },
-      series: this.separateByDay(device.status),
+    this.charts = [
+      ...this.charts, {
+        chart: { zoomType: 'x', type: 'line' },
+        title: { text: 'Light Sensor' },
+        xAxis: {
+          type: 'datetime',
+          title: { text: 'Time' },
+          dateTimeFormat: {
+            day: 'HH:mm:ss'
+          }
+        },
+        yAxis: { title: { text: 'Light levels' } },
+        series: this.separateByDay(device.status),
     }]
     this.chartSource.next(this.charts)
   }
 
   separateByDay(deviceStatus: Array<DeviceStatus> | DeviceStatus) {
-    let series = _.groupBy(deviceStatus, (dataPoint: DeviceStatus) => {
-      moment(+dataPoint.timestamp).utcOffset(0).startOf('day').format('MM/DD/YY')
-    })
-    return _.map(series, (dayOfData, date) => {
-      return {
-        name: date,
-        data: _.chain(dayOfData)
-          .sortBy('timestamp')
-          .reduce((acc, dataPoint: DeviceStatus) => {
-            let time = new Date(+dataPoint.timestamp)
-            time.setDate(1)
-            time.setMonth(1)
-            time.setFullYear(1970)
-            return [...acc, [+moment(+time), dataPoint.pins[0].status]]
-          }, [])
-          .value(),
-      }
-    })
+    return _
+      .chain(deviceStatus)
+      .groupBy((dataPoint: DeviceStatus) => {
+        return moment(+dataPoint.timestamp).startOf('day').format('MM/DD/YY')
+      })
+      .map((dayOfData, date) => {
+        return {
+          name: date,
+          data: _.reduce(dayOfData, (acc, dataPoint: DeviceStatus) => {
+              let time = new Date(+dataPoint.timestamp)
+              time.setDate(1)
+              time.setMonth(1)
+              time.setFullYear(1971)
+              return [...acc, [+moment(+time), dataPoint.pins[0].status]]
+            }, [])
+        }
+      })
+      .value()
   }
 
   private normalize(device: Device, statuses: Array<DeviceStatus>): Device {

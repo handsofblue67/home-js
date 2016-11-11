@@ -13,13 +13,15 @@ import { BackendService } from './backend.service'
 import { GeofenceService, MapComponent } from './map'
 import { ChartComponent, ChartService } from './chart'
 import { ToggleComponent, ToggleService } from './toggle'
+import { BrokerComponent, BrokerService } from './broker'
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent,
+    BrokerComponent,
     ChartComponent,
-    ToggleComponent
+    MapComponent,
+    ToggleComponent,
   ],
   imports: [
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDb-Foka_83ay6ofqqwuB33F_p11vtlBjY'}),
@@ -33,9 +35,16 @@ import { ToggleComponent, ToggleService } from './toggle'
       { path: 'maps', component: MapComponent },
       { path: 'charts', component: ChartComponent },
       { path: 'lights', component: ToggleComponent },
+      { path: 'debug', component: BrokerComponent },
     ])
   ],
-  providers: [ BackendService, ChartService, GeofenceService, ToggleService ],
+  providers: [
+    BackendService,
+    BrokerService,
+    ChartService,
+    GeofenceService,
+    ToggleService,
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

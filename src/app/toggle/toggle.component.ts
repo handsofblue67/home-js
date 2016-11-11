@@ -11,8 +11,6 @@ import { Device, DeviceStatus, DeviceType, Mqtt } from '../models'
   styleUrls: ['./toggle.component.css']
 })
 export class ToggleComponent implements OnInit, OnDestroy {
-  // toggle: Function
-  
   states: Array<any> = []
   connection: Subscription
 

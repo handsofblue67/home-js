@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Observable'
 import { Subject } from 'rxjs/Subject'
 import '../shared'
 
+import { Angular2AutoScroll } from 'angular2-auto-scroll/lib/angular2-auto-scroll.directive'
+
 @Injectable()
 export class BrokerService {
   private socket

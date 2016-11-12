@@ -17,7 +17,7 @@ export class BrokerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.connection = this.brokerService.getLog().subscribe(event => {
-      this.log = [ ...this.log, event]
+      this.log = [ event, ...this.log ]
     })
   }
 

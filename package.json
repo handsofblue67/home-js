@@ -25,6 +25,7 @@
     "@types/lodash": "^4.14.37",
     "@types/mqtt": "0.0.32",
     "@types/socket.io-client": "^1.4.28",
+    "angular2-auto-scroll": "^1.0.12",
     "angular2-google-maps": "^0.15.0",
     "angular2-highcharts": "^0.3.4",
     "basic-auth": "^1.0.4",

@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core'
 import { Http, Response, Headers } from '@angular/http'
 
+import { AuthHttp } from 'angular2-jwt'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import { Observable } from 'rxjs/Observable'
 import './shared'
+
 import { Mqtt, Device, DeviceStatus, DeviceType, Topics } from './models'
 
 @Injectable()
 export class BackendService {
   headers = new Headers({ 'Content-Type': 'application/json' })
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private authHttp: AuthHttp) { }
 
   getDevicesByType(type: string): Observable<Array<Device>> {
     return this.http.get(`api/devices/${type}`)

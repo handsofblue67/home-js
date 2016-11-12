@@ -7,7 +7,7 @@ import '../shared'
 
 @Injectable()
 export class BrokerService {
-  private socket
+  private socket: SocketIOClient.Socket
 
   constructor() { }
 

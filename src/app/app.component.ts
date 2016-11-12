@@ -1,8 +1,6 @@
 import { Component } from '@angular/core'
 
-import * as _ from 'lodash'
-import * as moment from 'moment'
-import './shared'
+import { AuthService } from './auth.service'
 
 @Component({
   selector: 'app-root',
@@ -10,5 +8,5 @@ import './shared'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor() { }
+  constructor(private auth: AuthService) { }
 }

@@ -10,6 +10,8 @@ const basicAuth = require('basic-auth')
 const app = express()
 let http = require('http').Server(app)
 let io = require('socket.io')(http)
+const jwt = require('express-jwt')
+const cors = require('cors')
 
 let auth = (req, res, next) => {
   let user = basicAuth(req)
@@ -24,6 +26,11 @@ let auth = (req, res, next) => {
     res.sendStatus(401)
   }
 }
+
+const authCheck = jwt({
+  secret: new Buffer('US8c50SXMeTQH8LD0axQj3prPHKDok0W', 'base64'),
+  audience: 'handsofblue67.auth0.com'
+})
 
 mqtt.on('connect', () => {
   mqtt.subscribe('/status/#')
@@ -100,8 +107,10 @@ mqtt.on('connect', () => {
       .use('/maps', express.static(path.join(__dirname, 'dist')))
       .use('/charts', express.static(path.join(__dirname, 'dist')))
       .use('/debug', express.static(path.join(__dirname, 'dist')))
+      .use('/home', express.static(path.join(__dirname, 'dist')))
+      .use(cors())
 
-      .get('/api/devices/:type', (req, res) => {
+      .get('/api/devices/:type', authCheck, (req, res) => {
         db.collection('devices')
           .find({ 'primaryType': req.params.type })
           .toArray((err, docs) => {
@@ -110,14 +119,14 @@ mqtt.on('connect', () => {
           })
       })
 
-      .get('/api/devices', (req, res) => {
+      .get('/api/devices', authCheck, (req, res) => {
         db.collection('devices')
           .find({}).toArray((err, docs) => {
             res.send(docs)
           })
       })
 
-      .get('/api/statuses/:deviceID', (req, res) => {
+      .get('/api/statuses/:deviceID', authCheck,  (req, res) => {
         db.collection('statuses')
       	  .aggregate([
     	      {$match:{'deviceID':+req.params.deviceID}},
@@ -130,12 +139,12 @@ mqtt.on('connect', () => {
   	      })
        })
 
-      .post('/api/publish', (req, res) => {
+      .post('/api/publish', authCheck, (req, res) => {
         mqtt.publish(`${req.body.topic}`, req.body.message)
         res.status(200).send('message published')
       })
 
-      .delete('/api/statuses/:id', (req, res) => {
+      .delete('/api/statuses/:id', authCheck, (req, res) => {
         db.collection('statuses')
           .deleteOne({ _id: new objectID(req.params.id) }, (err, result) => {
             if (err) console.log(err)
@@ -143,11 +152,11 @@ mqtt.on('connect', () => {
           })
       })
 
-      .get('/api/broker', (req, res) => {
+      .get('/api/broker', authCheck, (req, res) => {
         res.send('mqtt//broker')
       })
 
-      .get('/api/geofence', (req, res) => {
+      .get('/api/geofence', authCheck, (req, res) => {
         db.collection('geofence')
           .distinct('device', (err, result) => {
             if (err) console.log(err)
@@ -161,7 +170,7 @@ mqtt.on('connect', () => {
         res.status(200).send('geofence event saved')
       })
 
-      .get('/api/geofence/:device', (req, res) => {
+      .get('/api/geofence/:device', authCheck, (req, res) => {
         const start = moment().startOf('day')
         const end = moment().endOf('day')
         db.collection('geofence')

@@ -5,8 +5,10 @@ import { HttpModule } from '@angular/http'
 import { MaterialModule } from '@angular/material'
 import { RouterModule }   from '@angular/router'
 
+import { AUTH_PROVIDERS } from 'angular2-jwt'
 import { ChartModule } from 'angular2-highcharts'
 import { AgmCoreModule } from 'angular2-google-maps/core'
+import { AuthHttp } from 'angular2-jwt'
 
 import { AppComponent } from './app.component'
 import { BackendService } from './backend.service'
@@ -14,6 +16,10 @@ import { GeofenceService, MapComponent } from './map'
 import { ChartComponent, ChartService } from './chart'
 import { ToggleComponent, ToggleService } from './toggle'
 import { BrokerComponent, BrokerService } from './broker'
+import { AuthService } from './auth.service'
+import { AuthGuard } from './auth-guard.service'
+import { routing } from './app.routing'
+import { HomeComponent } from './home'
 
 @NgModule({
   declarations: [
@@ -22,6 +28,7 @@ import { BrokerComponent, BrokerService } from './broker'
     ChartComponent,
     MapComponent,
     ToggleComponent,
+    HomeComponent,
   ],
   imports: [
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDb-Foka_83ay6ofqqwuB33F_p11vtlBjY'}),
@@ -30,15 +37,13 @@ import { BrokerComponent, BrokerService } from './broker'
     FormsModule,
     HttpModule,
     MaterialModule.forRoot(),
-    RouterModule.forRoot([
-      { path: '', redirectTo: '/lights', pathMatch: 'full' },
-      { path: 'maps', component: MapComponent },
-      { path: 'charts', component: ChartComponent },
-      { path: 'lights', component: ToggleComponent },
-      { path: 'debug', component: BrokerComponent },
-    ])
+    routing
   ],
   providers: [
+    AuthHttp,
+    AuthGuard,
+    AuthService,
+    AUTH_PROVIDERS,
     BackendService,
     BrokerService,
     ChartService,

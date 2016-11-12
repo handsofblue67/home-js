@@ -46,7 +46,6 @@ mqtt.on('connect', () => {
     io.on('connection', socket => {
       console.log('user connected')
       
-      
       socket.on('join', data => {
         socket.join(data.email)
         db.collection('chat')
@@ -55,10 +54,9 @@ mqtt.on('connect', () => {
           .limit(100)
           .toArray((err, docs) => {
             if (err) console.log(err)
-            io.sockets.in(data.email).emit('init', {messages: docs})
+            io.sockets.in(data.email).emit('init', docs)
           }) 
       })
-
 
       // on web client disconnect
       socket.on('disconnect', () => console.log('user disconnected'))

@@ -4,12 +4,12 @@
     <button md-raised-button color="accent" (click)="sendMessage()">Send</button>
   </md-card-content>
 </md-card>
-<md-card *ngIf="messages.length" class="debugWindow">
+<md-card class="debugWindow">
   <md-list>
     <md-list-item dense *ngFor="let message of messages">
-      <h3 md-line>{{message | json}}</h3>
-      <p md-line>{{message.message.timestamp}}</p>
-      <p md-line>{{message.message.text}}</p>
+      <h3 md-line>{{message.user}}</h3>
+      <p md-line>{{message.timestamp}}</p>
+      <p md-line>{{message.text}}</p>
     </md-list-item>
   </md-list>
 </md-card>

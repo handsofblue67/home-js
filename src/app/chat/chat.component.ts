@@ -20,8 +20,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.connection = this.chatService
       .getMessages()
       .subscribe(messages => {
-        this.messages = [ ...messages ]
-        console.log(this.messages)
+        this.messages = messages
       })
   }
 

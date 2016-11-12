@@ -20,8 +20,8 @@ export class ChatService {
       this.socket.emit('join', {email: JSON.parse(localStorage.getItem('profile')).email})
 
       this.socket.on('init', messages => {
+        this.messages = messages
         console.log(messages)
-        this.messages = [ ...messages ]
         observer.next(messages)
       })
 

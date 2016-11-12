@@ -13,6 +13,8 @@ let io = require('socket.io')(http)
 const jwt = require('express-jwt')
 const cors = require('cors')
 
+let socketUsers = {}
+
 let auth = (req, res, next) => {
   let user = basicAuth(req)
   if (!user || !user.name || !user.pass) {
@@ -43,7 +45,20 @@ mqtt.on('connect', () => {
 
     io.on('connection', socket => {
       console.log('user connected')
-      console.log(socket.handshake.query.collection)
+      
+      
+      socket.on('join', data => {
+        socket.join(data.email)
+        db.collection('chat')
+          .find({})
+          .sort({ 'timestamp': -1 })
+          .limit(100)
+          .toArray((err, docs) => {
+            if (err) console.log(err)
+            io.sockets.in(data.emaila).emit('init', {messages: docs})
+          }) 
+      })
+
 
       // on web client disconnect
       socket.on('disconnect', () => console.log('user disconnected'))

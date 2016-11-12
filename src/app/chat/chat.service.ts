@@ -19,7 +19,12 @@ export class ChatService {
   getMessages(): Observable<any> {
     this.backendService.getChat().subscribe(history => this.messages = history)
     return new Observable(observer => {
-      this.socket = io('/?collection=chat')
+      this.socket = io('/')
+      this.socket.emit('join', {email: JSON.parse(localStorage.getItem('profile')).email})
+      this.socket.on('init', messages => {
+        this.messages = [ ...messages ]
+        observer.next(messages)
+      })
       this.socket.on('newMessage', message => {
         this.messages = [ message, ...this.messages]
         observer.next(this.messages)

@@ -1,8 +1,8 @@
 <md-card>
   <md-list>
-    <md-list-item *ngFor="let event of log">
+    <md-list-item dense *ngFor="let event of log">
       <h3 md-line>{{event.event.topic}}</h3> 
-      <p md-line>{{event.event.message | json}}</p>
+      <p md-line>{{event.event | json}}</p>
     </md-list-item>
   </md-list>
 </md-card>

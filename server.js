@@ -55,7 +55,7 @@ mqtt.on('connect', () => {
           .limit(100)
           .toArray((err, docs) => {
             if (err) console.log(err)
-            io.sockets.in(data.emaila).emit('init', {messages: docs})
+            io.sockets.in(data.email).emit('init', {messages: docs})
           }) 
       })
 

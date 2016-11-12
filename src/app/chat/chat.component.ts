@@ -17,11 +17,11 @@ export class ChatComponent implements OnInit, OnDestroy {
   constructor(private chatService: ChatService) { }
 
   ngOnInit() {
-    console.log(this.messages)
     this.connection = this.chatService
       .getMessages()
       .subscribe(messages => {
-        this.messages = [ ...this.messages ]
+        this.messages = [ ...messages ]
+        console.log(this.messages)
       })
   }
 

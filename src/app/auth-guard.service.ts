@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { CanActivate } from '@angular/router';
+import { Injectable } from '@angular/core'
+import { Router } from '@angular/router'
+import { CanActivate } from '@angular/router'
 // Import our authentication service
-import { AuthService } from './auth.service';
+import { AuthService } from './auth.service'
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -11,11 +11,9 @@ export class AuthGuard implements CanActivate {
 
   canActivate() {
     // If user is not logged in we'll send them to the homepage 
-    if (!this.auth.loggedIn()) {
-      this.router.navigate(['']);
-      return false;
-    }
-    return true;
-  }
+    if (this.auth.loggedIn()) { return true } 
 
+    this.router.navigate(['/'])
+    return false
+  }
 }

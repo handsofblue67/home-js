@@ -11,6 +11,7 @@ import { AuthHttp } from 'angular2-jwt'
 
 import { AppComponent } from './app.component'
 import { BackendService } from './backend.service'
+import { ChatService } from './chat'
 import { GeofenceService } from './map'
 import { ChartService } from './chart'
 import { ToggleService } from './toggle'
@@ -41,6 +42,7 @@ import { routing, routedComponents } from './app.routing'
     BackendService,
     BrokerService,
     ChartService,
+    ChatService,
     GeofenceService,
     ToggleService,
   ],

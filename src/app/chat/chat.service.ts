@@ -28,11 +28,12 @@ export class ChatService {
     })
   }
 
-  addMessage(message: string) {
-    this.socket.emit('addMesage', {
+  sendMessage(message): void {
+    this.socket.emit('addMessage', JSON.stringify({
       text: message,
       user: JSON.parse(localStorage.getItem('profile')).nickname,
-      timestamp: moment()
-    })
+      timestamp: moment(),
+    }))
   }
+
 }

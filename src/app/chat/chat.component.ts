@@ -12,6 +12,7 @@ import { ChatService } from './chat.service'
 export class ChatComponent implements OnInit, OnDestroy {
   messages: Array<any> = []
   connection: Subscription
+  message: string = ''
 
   constructor(private chatService: ChatService) { }
 
@@ -19,6 +20,11 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.connection = this.chatService.getMessages().subscribe(messages => {
       this.messages = [ ...this.messages ]
     })
+  }
+
+  sendMessage() {
+    this.chatService.sendMessage(this.message)
+    this.message = ''
   }
 
   ngOnDestroy() {

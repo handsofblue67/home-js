@@ -45,7 +45,7 @@ export class AuthService {
     localStorage.removeItem('id_token')
 
     // Send the user back to the public deals page after logout
-    this.router.navigate(['/home'])
+    this.router.navigate(['/'])
   }
 
   // Finally, this method will check to see if the user is logged in. We'll be able to tell by checking to see if they have a token and whether that token is valid or not.

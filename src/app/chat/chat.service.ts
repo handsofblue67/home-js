@@ -12,14 +12,14 @@ export class ChatService {
   private socket: SocketIOClient.Socket
   messages: Array<any> = []
 
-  constructor(private backendService: BackendService) {
-    backendService.getChat().subscribe(history => this.messages = history)
-  }
+  constructor(private backendService: BackendService) { }
+
 
   // TODO: break backend into modules, so there are separate websocket endpoints
   getMessages(): Observable<any> {
+    this.backendService.getChat().subscribe(history => this.messages = history)
     return new Observable(observer => {
-      this.socket = io('/')
+      this.socket = io('/?collection=chat')
       this.socket.on('newMessage', message => {
         this.messages = [ message, ...this.messages]
         observer.next(this.messages)

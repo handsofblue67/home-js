@@ -43,6 +43,7 @@ mqtt.on('connect', () => {
 
     io.on('connection', socket => {
       console.log('user connected')
+      console.log(socket.handshake.query.data)
 
       // on web client disconnect
       socket.on('disconnect', () => console.log('user disconnected'))

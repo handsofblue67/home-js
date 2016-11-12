@@ -7,7 +7,7 @@
 <md-card *ngIf="messages.length" class="debugWindow">
   <md-list>
     <md-list-item dense *ngFor="let message of messages">
-      <h3 md-line>{{message.message.user}}</h3>
+      <h3 md-line>{{message | json}}</h3>
       <p md-line>{{message.message.timestamp}}</p>
       <p md-line>{{message.message.text}}</p>
     </md-list-item>

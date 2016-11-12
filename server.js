@@ -68,7 +68,7 @@ mqtt.on('connect', () => {
       socket.on('addMessage', message => {
         message = JSON.parse(message)
         db.collection('chat').insertOne(message, () => {
-          io.emit('newMessage', { type: 'chatMessage', message: message })
+          io.emit('newMessage', message)
         })
       })
 

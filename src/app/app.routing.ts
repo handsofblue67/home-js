@@ -9,8 +9,8 @@ import { BrokerComponent } from './broker'
 import { HomeComponent } from './home'
 
 const appRoutes: Routes = [
-    // { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: '', component: HomeComponent },
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: 'home', component: HomeComponent },
     { path: 'maps', component: MapComponent, canActivate: [AuthGuard] },
     { path: 'charts', component: ChartComponent, canActivate: [AuthGuard] },
     { path: 'lights', component: ToggleComponent, canActivate: [AuthGuard] },
@@ -18,3 +18,11 @@ const appRoutes: Routes = [
 ]
 
 export const routing = RouterModule.forRoot(appRoutes);
+
+export const routedComponents = [
+    ToggleComponent,
+    ChartComponent,
+    MapComponent,
+    BrokerComponent,
+    HomeComponent, 
+]

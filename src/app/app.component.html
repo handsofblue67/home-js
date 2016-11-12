@@ -13,8 +13,8 @@
 		</button>
 		HomeJS
 		<span class="fill"></span>
-		<button md-button (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
-		<button md-button (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
+		<button md-button (click)="auth.login()" *ngIf="!auth.loggedIn()">Log In</button>
+		<button md-button (click)="auth.logout()" *ngIf="auth.loggedIn()">Log Out</button>
 	</md-toolbar>
 	
 	<!--<div>Red<md-slider min="0" max="1023" #red (slide)="backend.publishRGB(red.value, green.value, blue.value)"></md-slider></div>-->

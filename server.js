@@ -28,8 +28,8 @@ let auth = (req, res, next) => {
 }
 
 const authCheck = jwt({
-  secret: new Buffer('US8c50SXMeTQH8LD0axQj3prPHKDok0W', 'base64'),
-  audience: 'handsofblue67.auth0.com'
+  secret: new Buffer('yx1xNX0VlYL1khaVpuZVDSZ-c3m2Jw7jq5pSXqMQbpT8vcyLn8IQGjWaCb269GWl', 'base64'),
+  audience: 'US8c50SXMeTQH8LD0axQj3prPHKDok0W'
 })
 
 mqtt.on('connect', () => {
@@ -54,7 +54,7 @@ mqtt.on('connect', () => {
 
       mqtt.on('message', (topic, message) => {
         // message is a device defintion or a devices status report
-        io.emit('log', { type: 'event', event: {topic: topic, message: JSON.parse(message.toString()) || message}})
+        io.emit('log', { type: 'event', event: {topic: topic, message: message.toString()}})
         settingsRegExp = new RegExp(/currentSettings\/.*/)
         statusRegExp = new RegExp(/status\/.*/)
         console.log(topic)

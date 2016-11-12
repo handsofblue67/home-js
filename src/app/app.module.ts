@@ -22,7 +22,7 @@ import { routing, routedComponents } from './app.routing'
 @NgModule({
   declarations: [
     AppComponent,
-    routedComponents
+    routedComponents,
   ],
   imports: [
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDb-Foka_83ay6ofqqwuB33F_p11vtlBjY'}),

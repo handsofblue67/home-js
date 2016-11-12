@@ -49,4 +49,10 @@ export class BackendService {
       .catch(this.handleError)
   }
 
+  getChat() {
+    return this.authHttp.get('api/chat')
+      .map(res => res.json())
+      .catch(this.handleError)
+  }
+
 }

@@ -50,54 +50,61 @@ mqtt.on('connect', () => {
       // on toggle from web client
       socket.on('toggle', pub => mqtt.publish(pub.topic, pub.message))
 
-    })
-
-      mqtt.on('message', (topic, message) => {
-        // message is a device defintion or a devices status report
-        io.emit('log', { type: 'event', event: {topic: topic, message: message.toString()}})
-        settingsRegExp = new RegExp(/currentSettings\/.*/)
-        statusRegExp = new RegExp(/status\/.*/)
-        console.log(topic)
-
-        if (settingsRegExp.test(topic)) updateDevice(JSON.parse(message.toString())) 
-
-        else if (statusRegExp.test(topic)) addStatus(JSON.parse(message.toString()))
+      // on incoming chat message
+      socket.on('addMessage', message => {
+        db.collection('chat').insertOne(message, () => {
+          io.emit('newMessage', { type: 'chatMessage', message: message })
+        })
       })
 
-      // each device and its current settings (one document per device)
-      let updateDevice = device => {
-        db.collection('devices')
-          .updateOne({ 'deviceID': device.deviceID }, { $set: device }, { upsert: true })
-      }
+    })
 
-      // inputs usually append a document, outputs usually update a single document (its current state)
-      let addStatus = status => {
-        db.collection('devices').findOne({ 'deviceID': status.deviceID }, (err, result) => {
-          switch (result.primaryType) {
-            case 'digitalOutput':
-              db.collection('statuses')
-                .updateOne({ 'deviceID': status.deviceID }, { $set: status }, { upsert: true }, () => {
-                  io.emit('stateChange', { type: 'state', status: status })
-                })
-              break
-            case 'digitalInput':
-              db.collection('statuses').insertOne(status, () => {
-                io.emit('digitalInputChange', { type: 'state', status: status })
+    mqtt.on('message', (topic, message) => {
+      // message is a device defintion or a devices status report
+      io.emit('log', { type: 'event', event: { topic: topic, message: message.toString() } })
+      settingsRegExp = new RegExp(/currentSettings\/.*/)
+      statusRegExp = new RegExp(/status\/.*/)
+      console.log(topic)
+
+      if (settingsRegExp.test(topic)) updateDevice(JSON.parse(message.toString()))
+
+      else if (statusRegExp.test(topic)) addStatus(JSON.parse(message.toString()))
+    })
+
+    // each device and its current settings (one document per device)
+    let updateDevice = device => {
+      db.collection('devices')
+        .updateOne({ 'deviceID': device.deviceID }, { $set: device }, { upsert: true })
+    }
+
+    // inputs usually append a document, outputs usually update a single document (its current state)
+    let addStatus = status => {
+      db.collection('devices').findOne({ 'deviceID': status.deviceID }, (err, result) => {
+        switch (result.primaryType) {
+          case 'digitalOutput':
+            db.collection('statuses')
+              .updateOne({ 'deviceID': status.deviceID }, { $set: status }, { upsert: true }, () => {
+                io.emit('stateChange', { type: 'state', status: status })
               })
-              break
-            case 'analogOutput':
-              db.collection('statuses')
-                .updateOne({ 'deviceID': status.deviceID }, { $set: status }, { upsert: true }, () => {
-                  io.emit('analogStateChange', { type: 'state', status: status })
+            break
+          case 'digitalInput':
+            db.collection('statuses').insertOne(status, () => {
+              io.emit('digitalInputChange', { type: 'state', status: status })
+            })
+            break
+          case 'analogOutput':
+            db.collection('statuses')
+              .updateOne({ 'deviceID': status.deviceID }, { $set: status }, { upsert: true }, () => {
+                io.emit('analogStateChange', { type: 'state', status: status })
               })
-            case 'analogInput':
-              db.collection('statuses').insertOne(status, () => {
-                io.emit('analogInputChange', { type: 'state', status: status })
-              })
-              break
-          }
-        })
-      }
+          case 'analogInput':
+            db.collection('statuses').insertOne(status, () => {
+              io.emit('analogInputChange', { type: 'state', status: status })
+            })
+            break
+        }
+      })
+    }
 
     app.use(bodyParser.json())
       .use(bodyParser.urlencoded({ extended: true }))
@@ -108,6 +115,7 @@ mqtt.on('connect', () => {
       .use('/charts', express.static(path.join(__dirname, 'dist')))
       .use('/debug', express.static(path.join(__dirname, 'dist')))
       .use('/home', express.static(path.join(__dirname, 'dist')))
+      .use('/chat', express.static(path.join(__dirname, 'dist')))
       .use(cors())
 
       .get('/api/devices/:type', authCheck, (req, res) => {
@@ -126,18 +134,18 @@ mqtt.on('connect', () => {
           })
       })
 
-      .get('/api/statuses/:deviceID', authCheck,  (req, res) => {
+      .get('/api/statuses/:deviceID', authCheck, (req, res) => {
         db.collection('statuses')
-      	  .aggregate([
-    	      {$match:{'deviceID':+req.params.deviceID}},
-    	      {$sample:{size:500}},
-            {$sort:{timestamp:1}}
+          .aggregate([
+            { $match: { 'deviceID': +req.params.deviceID } },
+            { $sample: { size: 500 } },
+            { $sort: { timestamp: 1 } }
           ])
           .toArray((err, docs) => {
-      	    if (err) console.log(err)
-      	    res.send(docs)
-  	      })
-       })
+            if (err) console.log(err)
+            res.send(docs)
+          })
+      })
 
       .post('/api/publish', authCheck, (req, res) => {
         mqtt.publish(`${req.body.topic}`, req.body.message)
@@ -178,6 +186,17 @@ mqtt.on('connect', () => {
           .find({ 'device': req.params.device })
           .sort({ 'timestamp': -1 })
           .limit(2)
+          .toArray((err, docs) => {
+            if (err) console.log(err)
+            res.send(docs)
+          })
+      })
+
+      .get('/api/chat', authCheck, (req, res) => {
+        db.collection('chat')
+          .find({})
+          .sort({ 'timestamp': -1 })
+          .limit(1000)
           .toArray((err, docs) => {
             if (err) console.log(err)
             res.send(docs)

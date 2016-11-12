@@ -20,7 +20,6 @@ export class AuthService {
 
         localStorage.setItem('profile', JSON.stringify(profile))
       })
-
       this.lock.hide()
     })
   }

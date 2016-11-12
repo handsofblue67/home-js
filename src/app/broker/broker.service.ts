@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core'
 
 import * as io from 'socket.io-client'
 import { Observable } from 'rxjs/Observable'
-import { Subject } from 'rxjs/Subject'
 import '../shared'
 
 @Injectable()

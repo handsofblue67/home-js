@@ -21,14 +21,13 @@ export class ChatService {
 
       this.socket.on('init', messages => {
         this.messages = _.map(messages, (message: any) => {
-          console.log(moment(message.timestamp).calendar())
           return {
             text: message.text,
             user: message.user,
-            timestamp: moment(message.timestamp).calendar()
+            timestamp: moment(message.timestamp).calendar(),
+            avatar: message.avatar,
           }
         })
-        console.log(this.messages)
         observer.next(this.messages)
       })
 
@@ -37,7 +36,8 @@ export class ChatService {
           {
             text: message.text,
             user: message.user,
-            timestamp: moment(message.timestamp).calendar()
+            timestamp: moment(message.timestamp).calendar(),
+            avatar: message.avatar,
           },
           ...this.messages
         ]
@@ -48,10 +48,12 @@ export class ChatService {
   }
 
   sendMessage(message): void {
+    let profile = JSON.parse(localStorage.getItem('profile'))
     this.socket.emit('addMessage', JSON.stringify({
       text: message,
-      user: JSON.parse(localStorage.getItem('profile')).nickname,
+      user: profile.nickname,
       timestamp: moment(),
+      avatar: profile.user_metadata.picture || profile.picture,
     }))
   }
 }

@@ -20,13 +20,27 @@ export class ChatService {
       this.socket.emit('join', {email: JSON.parse(localStorage.getItem('profile')).email})
 
       this.socket.on('init', messages => {
-        this.messages = messages
-        console.log(messages)
-        observer.next(messages)
+        this.messages = _.map(messages, (message: any) => {
+          console.log(moment(message.timestamp).calendar())
+          return {
+            text: message.text,
+            user: message.user,
+            timestamp: moment(message.timestamp).calendar()
+          }
+        })
+        console.log(this.messages)
+        observer.next(this.messages)
       })
 
       this.socket.on('newMessage', message => {
-        this.messages = [ message, ...this.messages]
+        this.messages = [
+          {
+            text: message.text,
+            user: message.user,
+            timestamp: moment(message.timestamp).calendar()
+          },
+          ...this.messages
+        ]
         observer.next(this.messages)
       })
       return () => this.socket.disconnect()
@@ -40,5 +54,4 @@ export class ChatService {
       timestamp: moment(),
     }))
   }
-
 }

@@ -1,4 +1,7 @@
-.debugWindow {
-    height: 400px;
-    overflow-y: auto;
+.chatContainer {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.chatContainer md-card {
+  margin: 16px;
 }

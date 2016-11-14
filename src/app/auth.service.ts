@@ -20,6 +20,7 @@ export class AuthService {
 
         localStorage.setItem('profile', JSON.stringify(profile))
       })
+      router.navigate(['/lights'])
       this.lock.hide()
     })
   }

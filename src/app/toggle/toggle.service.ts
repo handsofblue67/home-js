@@ -55,7 +55,6 @@ export class ToggleService {
         checkinFreq: device.checkinFreq,
       }
     ]
-    console.log(this.switches)
     this.switchSource.next(this.switches)
   }
 

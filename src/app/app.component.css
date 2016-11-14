@@ -1,7 +1,8 @@
 .card-container {
   display: flex;
   flex-flow: column nowrap;
-  padding: 15px
+  padding: 15px;
+  
 }
 
 md-sidenav { padding: 10px; }

@@ -12,8 +12,8 @@
 		<button md-icon-button (click)="nav.toggle()">
 			<md-icon>menu</md-icon>
 		</button>
+		<md-icon svgSrc="/assets/homejs.svg"></md-icon>
 		<span>HomeJS</span>
-		<md-icon color="accent" svgSrc="/assets/homejs.svg"></md-icon>
 		<span class="fill"></span>
 		<button md-button (click)="auth.login()" *ngIf="!auth.loggedIn()">Log In</button>
 		<button md-button (click)="auth.logout()" *ngIf="auth.loggedIn()">Log Out</button>

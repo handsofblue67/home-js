@@ -5,91 +5,221 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const mqtt = require('mqtt').connect('mqtt://broker')
 const chalk = require('chalk')
+const moment = require('moment')
+const basicAuth = require('basic-auth')
 const app = express()
+let http = require('http').Server(app)
+let io = require('socket.io')(http)
+const jwt = require('express-jwt')
+const cors = require('cors')
+
+let socketUsers = {}
+
+let auth = (req, res, next) => {
+  let user = basicAuth(req)
+  if (!user || !user.name || !user.pass) {
+    res.set('WWW-Authenticate', 'Basic realm=Authorization Required')
+    res.sendStatus(401)
+  }
+  if (user.name === 'handsofblue67' && user.pass === '@basicAuth') {
+    next();
+  } else {
+    res.set('WWW-Authenticate', 'Basic realm=Authorization Required')
+    res.sendStatus(401)
+  }
+}
+
+const authCheck = jwt({
+  secret: new Buffer('yx1xNX0VlYL1khaVpuZVDSZ-c3m2Jw7jq5pSXqMQbpT8vcyLn8IQGjWaCb269GWl', 'base64'),
+  audience: 'US8c50SXMeTQH8LD0axQj3prPHKDok0W'
+})
 
 mqtt.on('connect', () => {
   mqtt.subscribe('/status/#')
   mqtt.subscribe('/currentSettings/#')
-})
+  mqtt.subscribe('$SYS/#')
+  mqtt.subscribe('#')
 
-MongoClient.connect('mongodb://db', (err, db) => {
+  MongoClient.connect('mongodb://db', (err, db) => {
+    if (err) console.error('error connecting to mongodb ' + err)
 
-  mqtt.on('message', (topic, message) => {
-    message = JSON.parse(message.toString())
-    console.log(JSON.stringify(message))
-    // message is a device defintion or a devices status report
-    topicRegExp = new RegExp(/currentSettings\/.*/)
-    topicRegExp.test(topic) ? updateDevice(message) : addStatus(message)
-  })
+    io.on('connection', socket => {
+      console.log('user connected')
+      
+      socket.on('join', data => {
+        socket.join(data.email)
+        db.collection('chat')
+          .find({})
+          .sort({ 'timestamp': -1 })
+          .limit(100)
+          .toArray((err, docs) => {
+            if (err) console.log(err)
+            io.sockets.in(data.email).emit('init', docs)
+          }) 
+      })
 
-  // each device and its current settings (one document per device)
-  let updateDevice = device => {
-    db.collection('devices')
-      .updateOne({ 'deviceID': device.deviceID }, { $set: device }, { upsert: true })
-  }
+      // on web client disconnect
+      socket.on('disconnect', () => console.log('user disconnected'))
 
-  // inputs usually append a document, outputs usually update a single document (its current state)
-  let addStatus = status => {
-    db.collection('devices').findOne({ 'deviceID': status.deviceID }, (err, result) => {
-      switch (result.primaryType) {
-        case 'digitalOutput':
-          db.collection('statuses')
-            .updateOne({ 'deviceID': status.deviceID }, { $set: status }, { upsert: true })
-          break
-        case 'digitalInput':
-          db.collection('statuses').insertOne(status)
-          break
-        case 'analogOutput':
-          db.collection('statuses')
-            .updateOne({ 'deviceID': status.deviceID }, { $set: status }, { upsert: true })
-        case 'analogInput':
-          db.collection('statuses').insertOne(status)
-          break
-      }
+      // on toggle from web client
+      socket.on('toggle', pub => mqtt.publish(pub.topic, pub.message))
+
+      // on incoming chat message
+      socket.on('addMessage', message => {
+        message = JSON.parse(message)
+        db.collection('chat').insertOne(message, () => {
+          io.emit('newMessage', message)
+        })
+      })
+
     })
-  }
 
-  app.use(bodyParser.json())
-    .use(bodyParser.urlencoded({ extended: true }))
-    .use(require('morgan')('dev'))
+    mqtt.on('message', (topic, message) => {
+      // message is a device defintion or a devices status report
+      io.emit('log', { type: 'event', event: { topic: topic, message: message.toString() } })
+      settingsRegExp = new RegExp(/currentSettings\/.*/)
+      statusRegExp = new RegExp(/status\/.*/)
+      console.log(topic)
 
-    .use(express.static(path.join(__dirname, 'dist')))
+      if (settingsRegExp.test(topic)) updateDevice(JSON.parse(message.toString()))
 
-    .get('/devices', (req, res) => {
+      else if (statusRegExp.test(topic)) addStatus(JSON.parse(message.toString()))
+    })
+
+    // each device and its current settings (one document per device)
+    let updateDevice = device => {
       db.collection('devices')
-        .find({}).toArray((err, docs) => {
-          res.send(docs)
-        })
-    })
+        .updateOne({ 'deviceID': device.deviceID }, { $set: device }, { upsert: true })
+    }
 
-    .get('/statuses/:deviceID', (req, res) => {
-      console.log(req.params.id)
-      db.collection('statuses')
-        .find({ 'deviceID': +req.params.deviceID })
-        .toArray((err, docs) => {
-          if (err) console.log(err)
-          console.log(JSON.stringify(docs, null, 2))
-          res.send(docs)
-        })
-    })
+    // inputs usually append a document, outputs usually update a single document (its current state)
+    let addStatus = status => {
+      db.collection('devices').findOne({ 'deviceID': status.deviceID }, (err, result) => {
+        switch (result.primaryType) {
+          case 'digitalOutput':
+            db.collection('statuses')
+              .updateOne({ 'deviceID': status.deviceID }, { $set: status }, { upsert: true }, () => {
+                io.emit('stateChange', { type: 'state', status: status })
+              })
+            break
+          case 'digitalInput':
+            db.collection('statuses').insertOne(status, () => {
+              io.emit('digitalInputChange', { type: 'state', status: status })
+            })
+            break
+          case 'analogOutput':
+            db.collection('statuses')
+              .updateOne({ 'deviceID': status.deviceID }, { $set: status }, { upsert: true }, () => {
+                io.emit('analogStateChange', { type: 'state', status: status })
+              })
+          case 'analogInput':
+            db.collection('statuses').insertOne(status, () => {
+              io.emit('analogInputChange', { type: 'state', status: status })
+            })
+            break
+        }
+      })
+    }
 
-    .post('/publish', (req, res) => {
-      mqtt.publish(`${req.body.topic}`, req.body.message)
-      res.status(200).send('message published')
-    })
+    app.use(bodyParser.json())
+      .use(bodyParser.urlencoded({ extended: true }))
+      .use(require('morgan')('dev'))
+      .use(express.static(path.join(__dirname, 'dist')))
+      .use('/lights', express.static(path.join(__dirname, 'dist')))
+      .use('/maps', express.static(path.join(__dirname, 'dist')))
+      .use('/charts', express.static(path.join(__dirname, 'dist')))
+      .use('/debug', express.static(path.join(__dirname, 'dist')))
+      .use('/home', express.static(path.join(__dirname, 'dist')))
+      .use('/chat', express.static(path.join(__dirname, 'dist')))
+      .use(cors())
 
-    .delete('/statuses/:id', (req, res) => {
-      db.collection('statuses')
-        .deleteOne({ _id: new objectID(req.params.id) }, (err, result) => {
-          if (err) console.log(err)
-          res.send(result)
-        })
-    })
+      .get('/api/devices/:type', authCheck, (req, res) => {
+        db.collection('devices')
+          .find({ 'primaryType': req.params.type })
+          .toArray((err, docs) => {
+            if (err) console.log(err)
+            res.send(docs)
+          })
+      })
 
-    .get('/broker', (req, res) => {
-      res.send('mqtt//broker')
-    })
+      .get('/api/devices', authCheck, (req, res) => {
+        db.collection('devices')
+          .find({}).toArray((err, docs) => {
+            res.send(docs)
+          })
+      })
 
-    .listen(3000)
+      .get('/api/statuses/:deviceID', authCheck, (req, res) => {
+        db.collection('statuses')
+          .aggregate([
+            { $match: { 'deviceID': +req.params.deviceID } },
+            { $sample: { size: 500 } },
+            { $sort: { timestamp: 1 } }
+          ])
+          .toArray((err, docs) => {
+            if (err) console.log(err)
+            res.send(docs)
+          })
+      })
+
+      .post('/api/publish', authCheck, (req, res) => {
+        mqtt.publish(`${req.body.topic}`, req.body.message)
+        res.status(200).send('message published')
+      })
+
+      .delete('/api/statuses/:id', authCheck, (req, res) => {
+        db.collection('statuses')
+          .deleteOne({ _id: new objectID(req.params.id) }, (err, result) => {
+            if (err) console.log(err)
+            res.send(result)
+          })
+      })
+
+      .get('/api/broker', authCheck, (req, res) => {
+        res.send('mqtt//broker')
+      })
+
+      .get('/api/geofence', authCheck, (req, res) => {
+        db.collection('geofence')
+          .distinct('device', (err, result) => {
+            if (err) console.log(err)
+            res.send(result)
+          })
+      })
+
+      .post('/api/geofence', auth, (req, res) => {
+        console.log(req.body)
+        db.collection('geofence').insertOne(req.body)
+        res.status(200).send('geofence event saved')
+      })
+
+      .get('/api/geofence/:device', authCheck, (req, res) => {
+        const start = moment().startOf('day')
+        const end = moment().endOf('day')
+        db.collection('geofence')
+          //.find({'device':req.params.device,'timestamp':{$gte:start,$lt:end}})
+          .find({ 'device': req.params.device })
+          .sort({ 'timestamp': -1 })
+          .limit(2)
+          .toArray((err, docs) => {
+            if (err) console.log(err)
+            res.send(docs)
+          })
+      })
+
+      .get('/api/chat', authCheck, (req, res) => {
+        db.collection('chat')
+          .find({})
+          .sort({ 'timestamp': -1 })
+          .limit(1000)
+          .toArray((err, docs) => {
+            if (err) console.log(err)
+            res.send(docs)
+          })
+      })
+    // app.listen(3000)
+    http.listen(3000)
+  })
 })
-module.exports = app;
+
+// module.exports = app;

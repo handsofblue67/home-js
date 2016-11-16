@@ -4,26 +4,48 @@ import { FormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
 import { MaterialModule } from '@angular/material'
 
+import { AUTH_PROVIDERS } from 'angular2-jwt'
 import { ChartModule } from 'angular2-highcharts'
+import { AgmCoreModule } from 'angular2-google-maps/core'
+import { AuthHttp } from 'angular2-jwt'
 
 import { AppComponent } from './app.component'
 import { BackendService } from './backend.service'
-import { TogglePipe } from './toggle.pipe'
-import { MqttService } from './mqtt.service'
+import { ChatService } from './chat'
+import { GeofenceService } from './map'
+import { ChartService } from './chart'
+import { ToggleService } from './toggle'
+import { BrokerService } from './broker'
+import { AuthService } from './auth.service'
+import { AuthGuard } from './auth-guard.service'
+import { routing, routedComponents } from './app.routing'
 
 @NgModule({
   declarations: [
     AppComponent,
-    TogglePipe
+    routedComponents,
   ],
   imports: [
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyDb-Foka_83ay6ofqqwuB33F_p11vtlBjY'}),
     BrowserModule,
+    ChartModule,
     FormsModule,
     HttpModule,
     MaterialModule.forRoot(),
-    ChartModule,
+    routing
   ],
-  providers: [ BackendService, /*MqttService*/ ],
+  providers: [
+    AuthHttp,
+    AuthGuard,
+    AuthService,
+    AUTH_PROVIDERS,
+    BackendService,
+    BrokerService,
+    ChartService,
+    ChatService,
+    GeofenceService,
+    ToggleService,
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

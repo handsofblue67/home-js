@@ -7,8 +7,8 @@ module.primaryType="digitalOutput"
 module.topics={
   sub={
     toggle="/toggle/" .. config.ID,
-    settings="/settings/" ..config.ID,
-    reqStatus="/reqStatus/" ..config.ID
+    settings="/settings/" .. config.ID,
+    reqStatus="/reqStatus/" .. config.ID
   },
   pub={
     status="/status/" .. config.ID,

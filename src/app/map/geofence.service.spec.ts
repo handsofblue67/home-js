@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { MqttService } from './mqtt.service';
+import { GeofenceService } from './geofence.service';
 
-describe('Service: Mqtt', () => {
+describe('Service: Geofence', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MqttService]
+      providers: [GeofenceService]
     });
   });
 
-  it('should ...', inject([MqttService], (service: MqttService) => {
+  it('should ...', inject([GeofenceService], (service: GeofenceService) => {
     expect(service).toBeTruthy();
   }));
 });

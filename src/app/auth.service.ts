@@ -7,7 +7,12 @@ declare var Auth0Lock: any
 @Injectable()
 export class AuthService {
   // We'll use the Auth0 Lock widget for capturing user credentials
-  lockOptions = { allowSignUp: false }
+  lockOptions = {
+    auth: {
+      responseType: 'token'
+    },
+    allowSignUp: false
+  }
   lock = new Auth0Lock('US8c50SXMeTQH8LD0axQj3prPHKDok0W', 'handsofblue67.auth0.com', this.lockOptions)
 
   constructor(private router: Router) {

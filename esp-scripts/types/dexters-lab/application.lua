@@ -34,20 +34,20 @@ local function initSettings()
   module.status.pins={}
 
   module.status.pins[0]={
-    number=0,
+    number=2,
     type="digitalInput",
     purpose="PIR sensor, detects motion in Lab",
     status=nil
   }
   module.status.pins[1]={
-    number=1,
-    type="digitalOutput"
+    number=6,
+    type="digitalOutput",
     purpose="Operates Exhaust Fan",
-    status=GPIO.LOW
+    status=0
   }
 
   gpio.mode(module.status.pins[0].number, gpio.INPUT)
-  gpio.trig(module.status.pins[0].number, "down", startTimer)
+  gpio.trig(module.status.pins[0].number, "up", startTimer)
 
   gpio.mode(module.status.pins[1].number, gpio.OUTPUT)
   gpio.write(module.status.pins[1].number, module.status.pins[1].status)
@@ -87,8 +87,8 @@ local function mqttStart(topics)
   m:connect(config.HOST, config.PORT, 0, 1, function(con)
     initSettings()
     registerMyself(settings.topics.sub)
-    tmr.stop(6)
-    tmr.alarm(6, settings.checkinFreq, 1, sendState)
+    -- tmr.stop(6)
+    -- tmr.alarm(6, settings.checkinFreq, 1, sendState)
   end)
 
 end

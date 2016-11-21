@@ -4,7 +4,7 @@ module.deviceID=config.ID
 module.name='Dexter\'s Lab'
 module.primaryType='digitalInput'
 
--- module.checkinFreq=60000
+module.checkinFreq='On Change'
 
 module.topics={
   sub={

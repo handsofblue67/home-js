@@ -3,32 +3,33 @@
 local module = {}
 m = nil
 
-local function sendState()
+local function sendState(event)
   seconds, millis=rtctime.get()
+  module.status.pins[0].status=event or nil
   module.status.timestamp=tonumber(tostring(seconds) .. tostring(math.floor(millis/1000)))
-  module.status.pins[0].status=adc.read(module.status.pins[0].number)
   m:publish(settings.topics.pub.status, cjson.encode(module.status),0,0)
   print(cjson.encode(module.status))
 end
 
-local function startFan()
-  tmr.stop(2)
-  sendState()
-  tmr.alarm(2, settings.fanDelay, tmr.ALARM_SINGLE, stopFan)
-  module.status.pins[1].status=GPIO.HIGH
-  gpio.write(module.status.pins[1].number, module.status.pins[1].status)
+local function stopFan()
+  module.status.pins[1].status=gpio.LOW
+  gpio.write(module.status.pins[1].number, gpio.LOW)
+  sendState("Stopping exhaust")
 end
 
-local function stopFan()
-  module.status.pins[1].status=GPIO.LOW
-  sendState()
-  gpio.write(module.status.pins[1].number, module.status.pins[1].status)
+local function startFan()
+  tmr.stop(2)
+  sendState("Starting exhaust. Will run for " .. settings.exhaustTime/1000 .. " seconds")
+  module.status.pins[1].status=gpio.HIGH
+  gpio.write(module.status.pins[1].number, gpio.HIGH)
+  tmr.alarm(2, settings.exhaustTime, tmr.ALARM_SINGLE, stopFan)
 end
 
 local function startTimer() 
+  -- if count down to starting the fan already triggered, cancel and start another
   tmr.stop(2)
-  sendState()
-  tmr.alarm(2, settings.fanTime, tmr.ALARM_SINGLE, startFan)
+  sendState("Motion detected. Starting exhaust in " .. settings.fanDelay/1000 .. " seconds")
+  tmr.alarm(2, settings.fanDelay, tmr.ALARM_SINGLE, startFan)
 end
 
 local function initSettings()
@@ -43,10 +44,10 @@ local function initSettings()
     status=nil
   }
   module.status.pins[1]={
-    number=6,
+    number=1,
     type="digitalOutput",
     purpose="Operates Exhaust Fan",
-    status=0
+    status=gpio.LOW
   }
 
   gpio.mode(module.status.pins[0].number, gpio.INPUT)

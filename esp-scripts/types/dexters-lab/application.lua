@@ -13,19 +13,22 @@ end
 
 local function startFan()
   tmr.stop(2)
-  tmr.alarm(2, 300000, tmr.ALARM_SINGLE, stopFan)
+  sendState()
+  tmr.alarm(2, settings.fanDelay, tmr.ALARM_SINGLE, stopFan)
   module.status.pins[1].status=GPIO.HIGH
   gpio.write(module.status.pins[1].number, module.status.pins[1].status)
 end
 
 local function stopFan()
   module.status.pins[1].status=GPIO.LOW
+  sendState()
   gpio.write(module.status.pins[1].number, module.status.pins[1].status)
 end
 
 local function startTimer() 
   tmr.stop(2)
-  tmr.alarm(2, 300000, tmr.ALARM_SINGLE, startFan)
+  sendState()
+  tmr.alarm(2, settings.fanTime, tmr.ALARM_SINGLE, startFan)
 end
 
 local function initSettings()

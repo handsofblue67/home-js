@@ -12,7 +12,6 @@ export class AuthService {
   lockOptions = {
     auth: {
       responseType: 'token',
-      redirectUrl: 'http://handsofblue67.mynetgear.com:3000'
     },
     allowSignUp: false
   }

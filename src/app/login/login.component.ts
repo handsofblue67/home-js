@@ -13,9 +13,7 @@ export class LoginComponent implements OnInit {
   loading = false
   error = ''
 
-  constructor(
-    private router: Router,
-    private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     // reset login status
@@ -24,13 +22,17 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loading = true
+    console.log(this.model)
     this.authService.login(this.model.username, this.model.password)
       .subscribe(result => {
         if (result === true) {
           // login successful
-          this.router.navigate(['/'])
+          console.log('login successful')
+          this.loading = false
+          this.router.navigate(['/home'])
         } else {
           // login failed
+          console.log('login failed')
           this.error = 'Username or password is incorrect'
           this.loading = false
         }

@@ -7,7 +7,7 @@ import * as _ from 'lodash'
 import * as io from 'socket.io-client'
 
 import { BackendService } from '../backend.service'
-import { Device, DeviceType, DeviceStatus, Mqtt } from '../models'
+import { Device, DeviceStatus } from '../models'
 
 @Injectable()
 export class ToggleService {
@@ -36,7 +36,7 @@ export class ToggleService {
         state = state.status
         this.normalize(
           _.reject(this.switches, ['deviceID', state.deviceID]),
-          _.find(this.switches, ['deviceID',state.deviceID]),
+          _.find(this.switches, ['deviceID', state.deviceID]),
           [state])
       })
       return () => this.socket.disconnect()

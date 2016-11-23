@@ -1,32 +1,38 @@
 import { Injectable } from '@angular/core'
-import { Http, Headers } from '@angular/http'
+import { Http, Headers, RequestOptions } from '@angular/http'
 
-import { AuthHttp } from 'angular2-jwt'
 import { Observable } from 'rxjs/Observable'
 import './shared'
 
 import { Mqtt, Device, DeviceStatus } from './models'
+import { AuthService } from './auth.service'
 
 @Injectable()
 export class BackendService {
   headers = new Headers({ 'Content-Type': 'application/json' })
 
-  constructor(private http: Http, private authHttp: AuthHttp) { }
+  constructor(private http: Http, private authService: AuthService) { }
 
   getDevicesByType(type: string): Observable<Array<Device>> {
-    return this.authHttp.get(`api/devices/${type}`)
+    this.headers.append('x-access-token', this.authService.token)
+    const options = new RequestOptions({ headers: this.headers })
+    return this.http.get(`api/devices/${type}`, options)
       .map(res => res.json())
       .catch(this.handleError)
   }
 
   getDeviceData(device: Device): Observable<Array<DeviceStatus>> {
-    return this.authHttp.get(`api/statuses/${device.deviceID}`)
+    this.headers.append('x-access-token', this.authService.token)
+    const options = new RequestOptions({ headers: this.headers })
+    return this.http.get(`api/statuses/${device.deviceID}`, options)
       .map(res => res.json())
       .catch(this.handleError)
   }
 
   publish(mqtt: Mqtt): Observable<any> {
-    return this.authHttp.post('api/publish', JSON.stringify(mqtt), { headers: this.headers })
+    this.headers.append('x-access-token', this.authService.token)
+    const options = new RequestOptions({ headers: this.headers })
+    return this.http.post('api/publish', JSON.stringify(mqtt), options)
       .map(res => res)
       .catch(this.handleError)
   }
@@ -38,13 +44,17 @@ export class BackendService {
   }
 
   getGeofenceDevices() {
-    return this.authHttp.get('api/geofence')
+    this.headers.append('x-access-token', this.authService.token)
+    const options = new RequestOptions({ headers: this.headers })
+    return this.http.get('api/geofence', options)
       .map(res => res.json())
       .catch(this.handleError)
   }
 
   getGeofenceByDevice(id: string) {
-    return this.authHttp.get(`api/geofence/${id}`)
+    this.headers.append('x-access-token', this.authService.token)
+    const options = new RequestOptions({ headers: this.headers })
+    return this.http.get(`api/geofence/${id}`, options)
       .map(res => res.json())
       .catch(this.handleError)
   }

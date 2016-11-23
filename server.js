@@ -32,11 +32,6 @@ let auth = (req, res, next) => {
   }
 }
 
-// const authCheck = jwt({
-//   secret: new Buffer('yx1xNX0VlYL1khaVpuZVDSZ-c3m2Jw7jq5pSXqMQbpT8vcyLn8IQGjWaCb269GWl', 'base64'),
-//   audience: 'US8c50SXMeTQH8LD0axQj3prPHKDok0W'
-// })
-
 mqtt.on('connect', () => {
   mqtt.subscribe('/status/#')
   mqtt.subscribe('/currentSettings/#')
@@ -46,16 +41,6 @@ mqtt.on('connect', () => {
   MongoClient.connect('mongodb://db', (err, db) => {
     if (err) console.error('error connecting to mongodb ' + err)
 
-
-    const secretCallback = function (req, payload, done) {
-      const issuer = payload.issuer
-
-      db.collection('users').findOne({ 'issuer': issuer }, (err, tenant) => {
-        if (err) return done(err)
-        if (!tenant) return done(new Error('missing_secret'))
-
-      })
-    }
     io.on('connection', socket => {
       console.log('user connected')
 
@@ -147,7 +132,6 @@ mqtt.on('connect', () => {
 
       .post('/api/authenticate', (req, res) => {
         db.collection('users').findOne({ username: req.body.username }, (err, user) => {
-          console.log(req.body.username, req.body.password)
           if (err) console.log(err)
 
           if (!user) {
@@ -185,11 +169,11 @@ mqtt.on('connect', () => {
         const token = req.body.token || req.query.token || req.headers['x-access-token']
 
         if (token) {
-          jwt.verify(token, app.get('superSecret'), (err, decode) => {
+          jwt.verify(token, app.get('superSecret'), (err, decoded) => {
             if (err) {
               return res.json({ success: false, message: 'Failed to authenticate token.' })
             } else {
-              req.decode = decoded
+              req.decoded = decoded
               next()
             }
           })

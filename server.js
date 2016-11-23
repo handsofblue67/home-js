@@ -10,8 +10,11 @@ const basicAuth = require('basic-auth')
 const app = express()
 let http = require('http').Server(app)
 let io = require('socket.io')(http)
-const jwt = require('express-jwt')
+const jwt = require('jsonwebtoken')
+const config = require('./jwt-config')
 const cors = require('cors')
+
+app.set('superSecret', config.secret)
 
 let socketUsers = {}
 
@@ -29,10 +32,10 @@ let auth = (req, res, next) => {
   }
 }
 
-const authCheck = jwt({
-  secret: new Buffer('yx1xNX0VlYL1khaVpuZVDSZ-c3m2Jw7jq5pSXqMQbpT8vcyLn8IQGjWaCb269GWl', 'base64'),
-  audience: 'US8c50SXMeTQH8LD0axQj3prPHKDok0W'
-})
+// const authCheck = jwt({
+//   secret: new Buffer('yx1xNX0VlYL1khaVpuZVDSZ-c3m2Jw7jq5pSXqMQbpT8vcyLn8IQGjWaCb269GWl', 'base64'),
+//   audience: 'US8c50SXMeTQH8LD0axQj3prPHKDok0W'
+// })
 
 mqtt.on('connect', () => {
   mqtt.subscribe('/status/#')
@@ -43,9 +46,19 @@ mqtt.on('connect', () => {
   MongoClient.connect('mongodb://db', (err, db) => {
     if (err) console.error('error connecting to mongodb ' + err)
 
+
+    const secretCallback = function (req, payload, done) {
+      const issuer = payload.issuer
+
+      db.collection('users').findOne({ 'issuer': issuer }, (err, tenant) => {
+        if (err) return done(err)
+        if (!tenant) return done(new Error('missing_secret'))
+
+      })
+    }
     io.on('connection', socket => {
       console.log('user connected')
-      
+
       socket.on('join', data => {
         socket.join(data.email)
         db.collection('chat')
@@ -55,7 +68,7 @@ mqtt.on('connect', () => {
           .toArray((err, docs) => {
             if (err) console.log(err)
             io.sockets.in(data.email).emit('init', docs)
-          }) 
+          })
       })
 
       // on web client disconnect
@@ -79,7 +92,6 @@ mqtt.on('connect', () => {
       io.emit('log', { type: 'event', event: { topic: topic, message: message.toString() } })
       settingsRegExp = new RegExp(/currentSettings\/.*/)
       statusRegExp = new RegExp(/status\/.*/)
-      console.log(topic)
 
       if (settingsRegExp.test(topic)) updateDevice(JSON.parse(message.toString()))
 
@@ -133,7 +145,63 @@ mqtt.on('connect', () => {
       .use('/chat', express.static(path.join(__dirname, 'dist')))
       .use(cors())
 
-      .get('/api/devices/:type', authCheck, (req, res) => {
+      .post('/api/authenticate', (req, res) => {
+        db.collection('users').findOne({ username: req.body.username }, (err, user) => {
+          if (err) console.log(err)
+
+          if (!user) {
+            res.json({ success: false, message: 'Authentication failed. User not fount.' })
+          } else if (user) {
+            if (user.password !== req.body.password) {
+              res.json({ success: false, message: 'Authentication failed. Wrong password' })
+            } else {
+              const token = jwt.sign(user, app.get('superSecret'), {
+                expiresInMinutes: 1440
+              })
+              res.json({
+                success: true,
+                message: 'Enjoy your token!',
+                token: token,
+              })
+            }
+          }
+        })
+      })
+
+      .get('/api/users', (req, res) => {
+        db.collection('users').find({}).toArray((err, users) => {
+          res.json(users)
+        })
+      })
+
+
+      .post('/api/geofence', auth, (req, res) => {
+        db.collection('geofence').insertOne(req.body)
+        res.status(200).send('geofence event saved')
+      })
+
+      .use((req, res, next) => {
+        const token = req.body.token || req.query.token || req.headers['x-access-token']
+
+        if (token) {
+          jwt.verify(token, app.get('superSecret'), (err, decode) => {
+            if (err) {
+              return res.json({ success: false, message: 'Failed to authenticate token.' })
+            } else {
+              req.decode = decoded
+              next()
+            }
+          })
+        } else {
+          return res.status(403).send({
+            success: false,
+            message: 'No token provided.'
+          })
+        }
+      })
+
+
+      .get('/api/devices/:type', (req, res) => {
         db.collection('devices')
           .find({ 'primaryType': req.params.type })
           .toArray((err, docs) => {
@@ -142,14 +210,14 @@ mqtt.on('connect', () => {
           })
       })
 
-      .get('/api/devices', authCheck, (req, res) => {
+      .get('/api/devices', (req, res) => {
         db.collection('devices')
           .find({}).toArray((err, docs) => {
             res.send(docs)
           })
       })
 
-      .get('/api/statuses/:deviceID', authCheck, (req, res) => {
+      .get('/api/statuses/:deviceID', (req, res) => {
         db.collection('statuses')
           .aggregate([
             { $match: { 'deviceID': +req.params.deviceID } },
@@ -162,12 +230,12 @@ mqtt.on('connect', () => {
           })
       })
 
-      .post('/api/publish', authCheck, (req, res) => {
+      .post('/api/publish', (req, res) => {
         mqtt.publish(`${req.body.topic}`, req.body.message)
         res.status(200).send('message published')
       })
 
-      .delete('/api/statuses/:id', authCheck, (req, res) => {
+      .delete('/api/statuses/:id', (req, res) => {
         db.collection('statuses')
           .deleteOne({ _id: new objectID(req.params.id) }, (err, result) => {
             if (err) console.log(err)
@@ -175,11 +243,11 @@ mqtt.on('connect', () => {
           })
       })
 
-      .get('/api/broker', authCheck, (req, res) => {
+      .get('/api/broker', (req, res) => {
         res.send('mqtt//broker')
       })
 
-      .get('/api/geofence', authCheck, (req, res) => {
+      .get('/api/geofence', (req, res) => {
         db.collection('geofence')
           .distinct('device', (err, result) => {
             if (err) console.log(err)
@@ -187,13 +255,9 @@ mqtt.on('connect', () => {
           })
       })
 
-      .post('/api/geofence', auth, (req, res) => {
-        console.log(req.body)
-        db.collection('geofence').insertOne(req.body)
-        res.status(200).send('geofence event saved')
-      })
 
-      .get('/api/geofence/:device', authCheck, (req, res) => {
+
+      .get('/api/geofence/:device', (req, res) => {
         const start = moment().startOf('day')
         const end = moment().endOf('day')
         db.collection('geofence')
@@ -207,7 +271,7 @@ mqtt.on('connect', () => {
           })
       })
 
-      .get('/api/chat', authCheck, (req, res) => {
+      .get('/api/chat', (req, res) => {
         db.collection('chat')
           .find({})
           .sort({ 'timestamp': -1 })
@@ -217,6 +281,8 @@ mqtt.on('connect', () => {
             res.send(docs)
           })
       })
+
+
     // app.listen(3000)
     http.listen(3000)
   })

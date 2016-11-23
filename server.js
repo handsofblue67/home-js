@@ -147,10 +147,11 @@ mqtt.on('connect', () => {
 
       .post('/api/authenticate', (req, res) => {
         db.collection('users').findOne({ username: req.body.username }, (err, user) => {
+          console.log(req.body.username, req.body.password)
           if (err) console.log(err)
 
           if (!user) {
-            res.json({ success: false, message: 'Authentication failed. User not fount.' })
+            res.json({ success: false, message: 'Authentication failed. User not found.' })
           } else if (user) {
             if (user.password !== req.body.password) {
               res.json({ success: false, message: 'Authentication failed. Wrong password' })

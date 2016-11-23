@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import '../shared'
 
+import * as _ from 'lodash'
+
 import { BackendService } from '../backend.service'
 
 @Injectable()

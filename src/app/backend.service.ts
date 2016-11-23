@@ -4,6 +4,7 @@ import { Http, Headers } from '@angular/http'
 import { AuthHttp } from 'angular2-jwt'
 import { Observable } from 'rxjs/Observable'
 import './shared'
+import * as _ from 'lodash'
 
 import { Mqtt, Device, DeviceStatus } from './models'
 

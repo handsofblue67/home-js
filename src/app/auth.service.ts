@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core'
 import { tokenNotExpired } from 'angular2-jwt'
 import { Router } from '@angular/router'
 
+import * as _ from 'lodash'
+
 declare var Auth0Lock: any
 
 @Injectable()
@@ -9,7 +11,8 @@ export class AuthService {
   // We'll use the Auth0 Lock widget for capturing user credentials
   lockOptions = {
     auth: {
-      responseType: 'token'
+      responseType: 'token',
+      redirectUrl: 'http://handsofblue67.mynetgear.com:3000'
     },
     allowSignUp: false
   }

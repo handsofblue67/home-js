@@ -4,6 +4,7 @@ import * as io from 'socket.io-client'
 import * as moment from 'moment'
 import { Observable } from 'rxjs/Observable'
 import '../shared'
+import * as _ from 'lodash'
 
 @Injectable()
 export class ChatService {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import * as moment from 'moment'
+import * as _ from 'lodash'
 
 import { GeofenceService } from './geofence.service'
 

@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import '../shared'
 
 import * as moment from 'moment'
+import * as _ from 'lodash'
 
 import { BackendService } from '../backend.service'
 import { Device, DeviceType, DeviceStatus, Mqtt } from '../models'

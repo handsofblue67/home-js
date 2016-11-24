@@ -12,7 +12,8 @@ let http = require('http').Server(app)
 let io = require('socket.io')(http)
 const jwt = require('jsonwebtoken')
 const config = require('./jwt-config')
-const cors = require('cors')
+const bcrypt = require('bcrypt')
+const SALT_WORK_FACTOR = 10
 
 app.set('superSecret', config.secret)
 
@@ -128,148 +129,147 @@ mqtt.on('connect', () => {
       .use('/debug', express.static(path.join(__dirname, 'dist')))
       .use('/home', express.static(path.join(__dirname, 'dist')))
       .use('/chat', express.static(path.join(__dirname, 'dist')))
-      .use(cors())
+      .use('/login', express.static(path.join(__dirname, 'dist')))
 
       .post('/api/authenticate', (req, res) => {
         db.collection('users').findOne({ username: req.body.username }, (err, user) => {
           if (err) console.log(err)
+          console.log('got user from database')
 
           if (!user) {
             res.json({ success: false, message: 'Authentication failed. User not found.' })
           } else if (user) {
-            if (user.password !== req.body.password) {
-              res.json({ success: false, message: 'Authentication failed. Wrong password' })
-            } else {
-              const token = jwt.sign(user, app.get('superSecret'), {
-                expiresIn: '7d'
-              })
-              res.json({
-                success: true,
-                message: 'Enjoy your token!',
-                token: token,
-              })
-            }
+            bcrypt.compare(req.body.password, user.password, (err, hash) => {
+              if (err) console.log(err)
+
+              if (user.password !== hash) {
+                res.json({ success: false, message: 'Authentication failed. Wrong password' })
+              } else {
+                const token = jwt.sign(user, app.get('superSecret'), {
+                  expiresIn: '7d'
+                })
+                res.json({
+                  success: true,
+                  message: 'Enjoy your token!',
+                  token: token,
+                })
+              }
+            })
           }
         })
-      })
+})
 
-      .get('/api/users', (req, res) => {
-        db.collection('users').find({}).toArray((err, users) => {
-          res.json(users)
-        })
-      })
+  .post('/api/geofence', auth, (req, res) => {
+    db.collection('geofence').insertOne(req.body)
+    res.status(200).send('geofence event saved')
+  })
 
+  .use((req, res, next) => {
+    const token = req.body.token || req.query.token || req.headers['x-access-token']
 
-      .post('/api/geofence', auth, (req, res) => {
-        db.collection('geofence').insertOne(req.body)
-        res.status(200).send('geofence event saved')
-      })
-
-      .use((req, res, next) => {
-        const token = req.body.token || req.query.token || req.headers['x-access-token']
-
-        if (token) {
-          jwt.verify(token, app.get('superSecret'), (err, decoded) => {
-            if (err) {
-              return res.json({ success: false, message: 'Failed to authenticate token.' })
-            } else {
-              req.decoded = decoded
-              next()
-            }
-          })
+    if (token) {
+      jwt.verify(token, app.get('superSecret'), (err, decoded) => {
+        if (err) {
+          return res.json({ success: false, message: 'Failed to authenticate token.' })
         } else {
-          return res.status(403).send({
-            success: false,
-            message: 'No token provided.'
-          })
+          req.decoded = decoded
+          next()
         }
       })
-
-
-      .get('/api/devices/:type', (req, res) => {
-        db.collection('devices')
-          .find({ 'primaryType': req.params.type })
-          .toArray((err, docs) => {
-            if (err) console.log(err)
-            res.send(docs)
-          })
+    } else {
+      return res.status(403).send({
+        success: false,
+        message: 'No token provided.'
       })
+    }
+  })
 
-      .get('/api/devices', (req, res) => {
-        db.collection('devices')
-          .find({}).toArray((err, docs) => {
-            res.send(docs)
-          })
+  .get('/api/users', (req, res) => {
+    db.collection('users').find({}).toArray((err, users) => {
+      res.json(users)
+    })
+  })
+
+  .get('/api/devices/:type', (req, res) => {
+    db.collection('devices')
+      .find({ 'primaryType': req.params.type })
+      .toArray((err, docs) => {
+        if (err) console.log(err)
+        res.send(docs)
       })
+  })
 
-      .get('/api/statuses/:deviceID', (req, res) => {
-        db.collection('statuses')
-          .aggregate([
-            { $match: { 'deviceID': +req.params.deviceID } },
-            { $sample: { size: 500 } },
-            { $sort: { timestamp: 1 } }
-          ])
-          .toArray((err, docs) => {
-            if (err) console.log(err)
-            res.send(docs)
-          })
+  .get('/api/devices', (req, res) => {
+    db.collection('devices')
+      .find({}).toArray((err, docs) => {
+        res.send(docs)
       })
+  })
 
-      .post('/api/publish', (req, res) => {
-        mqtt.publish(`${req.body.topic}`, req.body.message)
-        res.status(200).send('message published')
+  .get('/api/statuses/:deviceID', (req, res) => {
+    db.collection('statuses')
+      .aggregate([
+        { $match: { 'deviceID': +req.params.deviceID } },
+        { $sample: { size: 500 } },
+        { $sort: { timestamp: 1 } }
+      ])
+      .toArray((err, docs) => {
+        if (err) console.log(err)
+        res.send(docs)
       })
+  })
 
-      .delete('/api/statuses/:id', (req, res) => {
-        db.collection('statuses')
-          .deleteOne({ _id: new objectID(req.params.id) }, (err, result) => {
-            if (err) console.log(err)
-            res.send(result)
-          })
+  .post('/api/publish', (req, res) => {
+    mqtt.publish(`${req.body.topic}`, req.body.message)
+    res.status(200).send('message published')
+  })
+
+  .delete('/api/statuses/:id', (req, res) => {
+    db.collection('statuses')
+      .deleteOne({ _id: new objectID(req.params.id) }, (err, result) => {
+        if (err) console.log(err)
+        res.send(result)
       })
+  })
 
-      .get('/api/broker', (req, res) => {
-        res.send('mqtt//broker')
+  .get('/api/broker', (req, res) => {
+    res.send('mqtt//broker')
+  })
+
+  .get('/api/geofence', (req, res) => {
+    db.collection('geofence')
+      .distinct('device', (err, result) => {
+        if (err) console.log(err)
+        res.send(result)
       })
+  })
 
-      .get('/api/geofence', (req, res) => {
-        db.collection('geofence')
-          .distinct('device', (err, result) => {
-            if (err) console.log(err)
-            res.send(result)
-          })
+  .get('/api/geofence/:device', (req, res) => {
+    const start = moment().startOf('day')
+    const end = moment().endOf('day')
+    db.collection('geofence')
+      .find({ 'device': req.params.device })
+      .sort({ 'timestamp': -1 })
+      .limit(2)
+      .toArray((err, docs) => {
+        if (err) console.log(err)
+        res.send(docs)
       })
+  })
 
-
-
-      .get('/api/geofence/:device', (req, res) => {
-        const start = moment().startOf('day')
-        const end = moment().endOf('day')
-        db.collection('geofence')
-          //.find({'device':req.params.device,'timestamp':{$gte:start,$lt:end}})
-          .find({ 'device': req.params.device })
-          .sort({ 'timestamp': -1 })
-          .limit(2)
-          .toArray((err, docs) => {
-            if (err) console.log(err)
-            res.send(docs)
-          })
+  .get('/api/chat', (req, res) => {
+    db.collection('chat')
+      .find({})
+      .sort({ 'timestamp': -1 })
+      .limit(1000)
+      .toArray((err, docs) => {
+        if (err) console.log(err)
+        res.send(docs)
       })
+  })
 
-      .get('/api/chat', (req, res) => {
-        db.collection('chat')
-          .find({})
-          .sort({ 'timestamp': -1 })
-          .limit(1000)
-          .toArray((err, docs) => {
-            if (err) console.log(err)
-            res.send(docs)
-          })
-      })
-
-
-    // app.listen(3000)
-    http.listen(3000)
+// app.listen(3000)
+http.listen(3000)
   })
 })
 

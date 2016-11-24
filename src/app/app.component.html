@@ -1,11 +1,11 @@
 <md-sidenav-layout class="sidenav-layout">
 	<md-sidenav #nav mode="side">
 		<div><button md-button routerLink="/home">Home</button></div>
-		<div *ngIf="loggedIn"><button md-button routerLink="/charts">Charts</button></div>
-		<div *ngIf="loggedIn"><button md-button routerLink="/lights">Lights</button></div>
-		<div *ngIf="loggedIn"><button md-button routerLink="/maps">Map</button></div>
-		<div *ngIf="loggedIn"><button md-button routerLink="/chat">Chat</button></div>
-		<div *ngIf="loggedIn"><button md-button routerLink="/debug">Debug</button></div>
+		<div *ngIf="isLoggedIn()"><button md-button routerLink="/charts">Charts</button></div>
+		<div *ngIf="isLoggedIn()"><button md-button routerLink="/lights">Lights</button></div>
+		<div *ngIf="isLoggedIn()"><button md-button routerLink="/maps">Map</button></div>
+		<div *ngIf="isLoggedIn()"><button md-button routerLink="/chat">Chat</button></div>
+		<div *ngIf="isLoggedIn()"><button md-button routerLink="/debug">Debug</button></div>
 	</md-sidenav>
 
 	<md-toolbar color="primary">

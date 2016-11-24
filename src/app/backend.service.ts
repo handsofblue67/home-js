@@ -14,7 +14,9 @@ export class BackendService {
   constructor(private http: Http, private authService: AuthService) { }
 
   getDevicesByType(type: string): Observable<Array<Device>> {
-    this.headers.append('x-access-token', this.authService.token)
+    if (!this.headers['x-access-token']) {
+      this.headers.append('x-access-token', this.authService.token)
+    }
     const options = new RequestOptions({ headers: this.headers })
     return this.http.get(`api/devices/${type}`, options)
       .map(res => res.json())
@@ -22,7 +24,9 @@ export class BackendService {
   }
 
   getDeviceData(device: Device): Observable<Array<DeviceStatus>> {
-    this.headers.append('x-access-token', this.authService.token)
+    if (!this.headers['x-access-token']) {
+      this.headers.append('x-access-token', this.authService.token)
+    }
     const options = new RequestOptions({ headers: this.headers })
     return this.http.get(`api/statuses/${device.deviceID}`, options)
       .map(res => res.json())
@@ -30,7 +34,9 @@ export class BackendService {
   }
 
   publish(mqtt: Mqtt): Observable<any> {
-    this.headers.append('x-access-token', this.authService.token)
+    if (!this.headers['x-access-token']) {
+      this.headers.append('x-access-token', this.authService.token)
+    }
     const options = new RequestOptions({ headers: this.headers })
     return this.http.post('api/publish', JSON.stringify(mqtt), options)
       .map(res => res)
@@ -44,7 +50,9 @@ export class BackendService {
   }
 
   getGeofenceDevices() {
-    this.headers.append('x-access-token', this.authService.token)
+    if (!this.headers['x-access-token']) {
+      this.headers.append('x-access-token', this.authService.token)
+    }
     const options = new RequestOptions({ headers: this.headers })
     return this.http.get('api/geofence', options)
       .map(res => res.json())
@@ -52,7 +60,9 @@ export class BackendService {
   }
 
   getGeofenceByDevice(id: string) {
-    this.headers.append('x-access-token', this.authService.token)
+    if (!this.headers['x-access-token']) {
+      this.headers.append('x-access-token', this.authService.token)
+    }
     const options = new RequestOptions({ headers: this.headers })
     return this.http.get(`api/geofence/${id}`, options)
       .map(res => res.json())

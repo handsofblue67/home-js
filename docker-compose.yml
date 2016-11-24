@@ -6,8 +6,10 @@ services:
       - "3000:3000"
     volumes:
       - .:/opt/home-js
+      - /opt/home-js/node_modules
     depends_on:
       - db
+      - broker
   db:
     image: "mongo:latest"
   broker:

@@ -1,6 +1,7 @@
 version: '2'
 services:
   web:
+    dns: 8.8.8.8
     build: .
     ports:
       - "3000:3000"

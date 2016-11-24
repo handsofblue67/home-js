@@ -5,8 +5,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - .:/opt/home-js
-      - /opt/home-js/node_modules
+      - .:/home/app/home-js
+      - /home/app/home-js/node_modules
     depends_on:
       - db
       - broker

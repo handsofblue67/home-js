@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import '../shared'
@@ -21,5 +21,4 @@ export class GeofenceService {
         }))
     })
   }
-
 }

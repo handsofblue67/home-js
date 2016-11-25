@@ -4,4 +4,5 @@ export class User {
     firstName: string
     lastName: string
     admin: boolean
+    picture: string
 }

@@ -46,14 +46,14 @@ mqtt.on('connect', () => {
       console.log('user connected')
 
       socket.on('join', data => {
-        socket.join(data.email)
+        socket.join(data.username)
         db.collection('chat')
           .find({})
           .sort({ 'timestamp': -1 })
           .limit(100)
           .toArray((err, docs) => {
             if (err) console.log(err)
-            io.sockets.in(data.email).emit('init', docs)
+            io.sockets.in(data.username).emit('init', docs)
           })
       })
 
@@ -152,6 +152,9 @@ mqtt.on('connect', () => {
                   success: true,
                   message: 'Enjoy your token!',
                   token: token,
+                  picture: user.picture,
+                  firstName: user.firstName,
+                  lastName: user.lastName,
                 })
               }
             })

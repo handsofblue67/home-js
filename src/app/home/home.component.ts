@@ -4,6 +4,7 @@ import { User } from '../models'
 import { UserService } from '../user.service'
 
 @Component({
+  selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: [ './home.component.css' ]
 })
@@ -16,8 +17,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     // get users from secure api end point
     this.userService.getUsers()
-      .subscribe(users => {
-        this.users = users
-      })
+      .subscribe(users => this.users = users)
   }
 }

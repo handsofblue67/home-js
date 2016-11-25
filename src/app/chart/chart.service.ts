@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import '../shared'
 
 import * as moment from 'moment'
+import * as _ from 'lodash'
 
 import { BackendService } from '../backend.service'
-import { Device, DeviceType, DeviceStatus, Mqtt } from '../models'
+import { Device, DeviceStatus } from '../models'
 
 @Injectable()
 export class ChartService {
@@ -76,9 +77,9 @@ export class ChartService {
   }
 
   private getData(device: Device) {
-    let updatedDevice;
+    let updatedDevice
     this.backend.getDeviceData(device)
       .subscribe(status => updatedDevice = this.normalize(device, status))
     return updatedDevice
-  }  
+  }
 }

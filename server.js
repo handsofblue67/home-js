@@ -10,8 +10,12 @@ const basicAuth = require('basic-auth')
 const app = express()
 let http = require('http').Server(app)
 let io = require('socket.io')(http)
-const jwt = require('express-jwt')
-const cors = require('cors')
+const jwt = require('jsonwebtoken')
+const config = require('./jwt-config')
+const bcrypt = require('bcrypt')
+const SALT_WORK_FACTOR = 10
+
+app.set('superSecret', config.secret)
 
 let socketUsers = {}
 
@@ -29,11 +33,6 @@ let auth = (req, res, next) => {
   }
 }
 
-const authCheck = jwt({
-  secret: new Buffer('yx1xNX0VlYL1khaVpuZVDSZ-c3m2Jw7jq5pSXqMQbpT8vcyLn8IQGjWaCb269GWl', 'base64'),
-  audience: 'US8c50SXMeTQH8LD0axQj3prPHKDok0W'
-})
-
 mqtt.on('connect', () => {
   mqtt.subscribe('/status/#')
   mqtt.subscribe('/currentSettings/#')
@@ -45,17 +44,17 @@ mqtt.on('connect', () => {
 
     io.on('connection', socket => {
       console.log('user connected')
-      
+
       socket.on('join', data => {
-        socket.join(data.email)
+        socket.join(data.username)
         db.collection('chat')
           .find({})
           .sort({ 'timestamp': -1 })
           .limit(100)
           .toArray((err, docs) => {
             if (err) console.log(err)
-            io.sockets.in(data.email).emit('init', docs)
-          }) 
+            io.sockets.in(data.username).emit('init', docs)
+          })
       })
 
       // on web client disconnect
@@ -79,7 +78,6 @@ mqtt.on('connect', () => {
       io.emit('log', { type: 'event', event: { topic: topic, message: message.toString() } })
       settingsRegExp = new RegExp(/currentSettings\/.*/)
       statusRegExp = new RegExp(/status\/.*/)
-      console.log(topic)
 
       if (settingsRegExp.test(topic)) updateDevice(JSON.parse(message.toString()))
 
@@ -131,94 +129,150 @@ mqtt.on('connect', () => {
       .use('/debug', express.static(path.join(__dirname, 'dist')))
       .use('/home', express.static(path.join(__dirname, 'dist')))
       .use('/chat', express.static(path.join(__dirname, 'dist')))
-      .use(cors())
+      .use('/login', express.static(path.join(__dirname, 'dist')))
 
-      .get('/api/devices/:type', authCheck, (req, res) => {
-        db.collection('devices')
-          .find({ 'primaryType': req.params.type })
-          .toArray((err, docs) => {
-            if (err) console.log(err)
-            res.send(docs)
-          })
+      .post('/api/authenticate', (req, res) => {
+        db.collection('users').findOne({ username: req.body.username }, (err, user) => {
+          if (err) console.log(err)
+          console.log('got user from database')
+
+          if (!user) {
+            res.json({ success: false, message: 'Authentication failed. User not found.' })
+          } else if (user) {
+            bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
+              if (err) console.log(err)
+
+              if (isMatch === false) {
+                res.json({ success: false, message: 'Authentication failed. Wrong password' })
+              } else {
+                const token = jwt.sign(user, app.get('superSecret'), {
+                  expiresIn: '7d'
+                })
+                res.json({
+                  success: true,
+                  message: 'Enjoy your token!',
+                  token: token,
+                  picture: user.picture,
+                  firstName: user.firstName,
+                  lastName: user.lastName,
+                })
+              }
+            })
+          }
+        })
       })
 
-      .get('/api/devices', authCheck, (req, res) => {
-        db.collection('devices')
-          .find({}).toArray((err, docs) => {
-            res.send(docs)
-          })
-      })
+  .post('/api/geofence', auth, (req, res) => {
+    db.collection('geofence').insertOne(req.body)
+    res.status(200).send('geofence event saved')
+  })
 
-      .get('/api/statuses/:deviceID', authCheck, (req, res) => {
-        db.collection('statuses')
-          .aggregate([
-            { $match: { 'deviceID': +req.params.deviceID } },
-            { $sample: { size: 500 } },
-            { $sort: { timestamp: 1 } }
-          ])
-          .toArray((err, docs) => {
-            if (err) console.log(err)
-            res.send(docs)
-          })
-      })
+  .use((req, res, next) => {
+    const token = req.body.token || req.query.token || req.headers['x-access-token']
 
-      .post('/api/publish', authCheck, (req, res) => {
-        mqtt.publish(`${req.body.topic}`, req.body.message)
-        res.status(200).send('message published')
+    if (token) {
+      jwt.verify(token, app.get('superSecret'), (err, decoded) => {
+        if (err) {
+          return res.json({ success: false, message: 'Failed to authenticate token.' })
+        } else {
+          req.decoded = decoded
+          next()
+        }
       })
+    } else {
+      return res.status(403).send({
+        success: false,
+        message: 'No token provided.'
+      })
+    }
+  })
 
-      .delete('/api/statuses/:id', authCheck, (req, res) => {
-        db.collection('statuses')
-          .deleteOne({ _id: new objectID(req.params.id) }, (err, result) => {
-            if (err) console.log(err)
-            res.send(result)
-          })
-      })
+  .get('/api/users', (req, res) => {
+    db.collection('users').find({}).toArray((err, users) => {
+      res.json(users)
+    })
+  })
 
-      .get('/api/broker', authCheck, (req, res) => {
-        res.send('mqtt//broker')
+  .get('/api/devices/:type', (req, res) => {
+    db.collection('devices')
+      .find({ 'primaryType': req.params.type })
+      .toArray((err, docs) => {
+        if (err) console.log(err)
+        res.send(docs)
       })
+  })
 
-      .get('/api/geofence', authCheck, (req, res) => {
-        db.collection('geofence')
-          .distinct('device', (err, result) => {
-            if (err) console.log(err)
-            res.send(result)
-          })
+  .get('/api/devices', (req, res) => {
+    db.collection('devices')
+      .find({}).toArray((err, docs) => {
+        res.send(docs)
       })
+  })
 
-      .post('/api/geofence', auth, (req, res) => {
-        console.log(req.body)
-        db.collection('geofence').insertOne(req.body)
-        res.status(200).send('geofence event saved')
+  .get('/api/statuses/:deviceID', (req, res) => {
+    db.collection('statuses')
+      .aggregate([
+        { $match: { 'deviceID': +req.params.deviceID } },
+        { $sample: { size: 500 } },
+        { $sort: { timestamp: 1 } }
+      ])
+      .toArray((err, docs) => {
+        if (err) console.log(err)
+        res.send(docs)
       })
+  })
 
-      .get('/api/geofence/:device', authCheck, (req, res) => {
-        const start = moment().startOf('day')
-        const end = moment().endOf('day')
-        db.collection('geofence')
-          //.find({'device':req.params.device,'timestamp':{$gte:start,$lt:end}})
-          .find({ 'device': req.params.device })
-          .sort({ 'timestamp': -1 })
-          .limit(2)
-          .toArray((err, docs) => {
-            if (err) console.log(err)
-            res.send(docs)
-          })
-      })
+  .post('/api/publish', (req, res) => {
+    mqtt.publish(`${req.body.topic}`, req.body.message)
+    res.status(200).send('message published')
+  })
 
-      .get('/api/chat', authCheck, (req, res) => {
-        db.collection('chat')
-          .find({})
-          .sort({ 'timestamp': -1 })
-          .limit(1000)
-          .toArray((err, docs) => {
-            if (err) console.log(err)
-            res.send(docs)
-          })
+  .delete('/api/statuses/:id', (req, res) => {
+    db.collection('statuses')
+      .deleteOne({ _id: new objectID(req.params.id) }, (err, result) => {
+        if (err) console.log(err)
+        res.send(result)
       })
-    // app.listen(3000)
-    http.listen(3000)
+  })
+
+  .get('/api/broker', (req, res) => {
+    res.send('mqtt//broker')
+  })
+
+  .get('/api/geofence', (req, res) => {
+    db.collection('geofence')
+      .distinct('device', (err, result) => {
+        if (err) console.log(err)
+        res.send(result)
+      })
+  })
+
+  .get('/api/geofence/:device', (req, res) => {
+    const start = moment().startOf('day')
+    const end = moment().endOf('day')
+    db.collection('geofence')
+      .find({ 'device': req.params.device })
+      .sort({ 'timestamp': -1 })
+      .limit(2)
+      .toArray((err, docs) => {
+        if (err) console.log(err)
+        res.send(docs)
+      })
+  })
+
+  .get('/api/chat', (req, res) => {
+    db.collection('chat')
+      .find({})
+      .sort({ 'timestamp': -1 })
+      .limit(1000)
+      .toArray((err, docs) => {
+        if (err) console.log(err)
+        res.send(docs)
+      })
+  })
+
+// app.listen(3000)
+http.listen(3000)
   })
 })
 

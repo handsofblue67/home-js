@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 
-import { AuthService } from './auth.service'
+// import { AuthService } from './auth.service'
 
 @Component({
   selector: 'app-root',
@@ -8,5 +8,8 @@ import { AuthService } from './auth.service'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private auth: AuthService) { }
+  isLoggedIn() {
+    return localStorage.getItem('currentUser')
+  }
+  // constructor(private auth: AuthService) { }
 }

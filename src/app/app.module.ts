@@ -19,7 +19,8 @@ import { BrokerService } from './broker'
 import { AuthService } from './auth.service'
 import { UserService } from './user.service'
 import { AuthGuard } from './auth-guard.service'
-import { routing, routedComponents } from './app.routing';
+import { routing, routedComponents } from './app.routing'
+import { DextersLabService } from './dexters-lab'
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { routing, routedComponents } from './app.routing';
     BrokerService,
     ChartService,
     ChatService,
+    DextersLabService,
     GeofenceService,
     ToggleService,
     UserService,

@@ -5,8 +5,8 @@
       <div><md-input placeholder="username" name="username" [(ngModel)]="model.username" #username="ngModel" required></md-input></div>
       <div><md-input type="password" placeholder="password" name="password" [(ngModel)]="model.password" #password="ngModel" required></md-input></div>
       <div><button md-raised-button [disabled]="loading" color="primary">Login</button></div>
-      <md-progress-circle *ngIf="loading" mode="indeterminate"></md-progress-circle>
-      <div *ngIf="error">{{error}}</div>
     </form>
+    <md-spinner *ngIf="loading"></md-spinner>
+    <div *ngIf="error">{{error}}</div>
   </md-card-content>
 </md-card>

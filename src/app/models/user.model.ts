@@ -1,8 +1,8 @@
 export class User {
     username: string
-    password: string
+    password?: string
     firstName: string
     lastName: string
-    admin: boolean
+    admin?: boolean
     picture: string
 }

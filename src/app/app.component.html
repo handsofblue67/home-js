@@ -1,11 +1,11 @@
 <md-sidenav-layout class="sidenav-layout">
 	<md-sidenav #nav mode="side">
 		<div><button md-button routerLink="/home">Home</button></div>
-		<div *ngIf="isLoggedIn()"><button md-button routerLink="/charts">Charts</button></div>
-		<div *ngIf="isLoggedIn()"><button md-button routerLink="/lights">Lights</button></div>
-		<div *ngIf="isLoggedIn()"><button md-button routerLink="/maps">Map</button></div>
-		<div *ngIf="isLoggedIn()"><button md-button routerLink="/chat">Chat</button></div>
-		<div *ngIf="isLoggedIn()"><button md-button routerLink="/debug">Debug</button></div>
+		<div *ngIf="authService.currentUser"><button md-button routerLink="/charts">Charts</button></div>
+		<div *ngIf="authService.currentUser"><button md-button routerLink="/lights">Lights</button></div>
+		<div *ngIf="authService.currentUser"><button md-button routerLink="/maps">Map</button></div>
+		<div *ngIf="authService.currentUser"><button md-button routerLink="/chat">Chat</button></div>
+		<div *ngIf="authService.currentUser"><button md-button routerLink="/debug">Debug</button></div>
 	</md-sidenav>
 
 	<md-toolbar color="primary">
@@ -17,6 +17,8 @@
 		<span class="fill"></span>
 		<!--<button md-button (click)="auth.login()" *ngIf="!auth.loggedIn()">Log In</button>-->
 		<!--<button md-button (click)="auth.logout()" *ngIf="auth.loggedIn()">Log Out</button>-->
+		<span *ngIf="authService.currentUser">{{authService.currentUser.firstName}}</span>
+		<span *ngIf="authService.currentUser"><img md-card-avatar [src]="authService.currentUser.picture"></span>
 	</md-toolbar>
 
 	<!--<div>Red<md-slider min="0" max="1023" #red (slide)="backend.publishRGB(red.value, green.value, blue.value)"></md-slider></div>-->

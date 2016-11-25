@@ -1,15 +1,13 @@
 FROM node:6.9.1
-RUN useradd --user-group --create-home --shell /bin/false app &&\
-    npm install --global npm
 
-ENV HOME=/home/app
-RUN mkdir -p /home/app/home-js
+RUN npm rebuild
 
-COPY package.json $HOME/home-js/
-RUN chown -R app:app $HOME/*
+RUN mkdir -p /opt/home-js
+RUN mkdir -p /opt/home-js/node_modules
 
-USER app
-WORKDIR $HOME/home-js
+COPY package.json /opt/home-js/
+
+WORKDIR /opt/home-js
 
 RUN npm install
 EXPOSE 3000:3000

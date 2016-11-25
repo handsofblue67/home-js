@@ -1,13 +1,12 @@
 version: '2'
 services:
   web:
-    dns: 8.8.8.8
     build: .
     ports:
       - "3000:3000"
     volumes:
-      - .:/home/app/home-js
-      - /home/app/home-js/node_modules
+      - .:/opt/home-js
+      - /opt/home-js/node_modules
     depends_on:
       - db
       - broker

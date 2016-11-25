@@ -3,16 +3,15 @@ services:
   web:
     build: .
     ports:
-      - "3000:3000"
+      - '3000:3000'
     volumes:
       - .:/opt/home-js
       - /opt/home-js/node_modules
     depends_on:
       - db
-      - broker
   db:
-    image: "mongo:latest"
+    image: 'mongo:latest'
   broker:
-    image: "ansi/mosquitto"
+    image: 'ansi/mosquitto'
     ports:
-      - "1883:1883"
+      - '1883:1883'

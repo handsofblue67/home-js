@@ -139,10 +139,10 @@ mqtt.on('connect', () => {
           if (!user) {
             res.json({ success: false, message: 'Authentication failed. User not found.' })
           } else if (user) {
-            bcrypt.compare(req.body.password, user.password, (err, hash) => {
+            bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
               if (err) console.log(err)
 
-              if (user.password !== hash) {
+              if (isMatch === false) {
                 res.json({ success: false, message: 'Authentication failed. Wrong password' })
               } else {
                 const token = jwt.sign(user, app.get('superSecret'), {
@@ -157,7 +157,7 @@ mqtt.on('connect', () => {
             })
           }
         })
-})
+      })
 
   .post('/api/geofence', auth, (req, res) => {
     db.collection('geofence').insertOne(req.body)

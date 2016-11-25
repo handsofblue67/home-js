@@ -11,6 +11,7 @@ export class AuthService {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'))
     this.token = currentUser && currentUser.token
   }
+  public message = ''
 
   login(username: string, password: string): Observable<boolean> {
     const headers = new Headers({ 'Content-Type': 'application/json' })
@@ -37,6 +38,7 @@ export class AuthService {
           return true
         } else {
           // return false to indicate failed login
+          this.message = response.json().message
           return false
         }
       })

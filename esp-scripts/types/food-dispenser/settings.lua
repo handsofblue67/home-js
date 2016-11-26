@@ -1,7 +1,7 @@
 local module={}
 
 module.deviceID=config.ID
-module.name='food_dispensor'
+module.name="food_dispenser"
 module.primaryType="digitalOutput"
 
 module.topics={

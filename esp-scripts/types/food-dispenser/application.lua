@@ -1,6 +1,26 @@
 -- file : application.lua
+
+-- push
+-- "duty": 500
+-- "clock": 300
+
+-- pull
+-- "duty" : 500
+-- "clock" : 356,
+
+-- stop
+-- "duty": 0
+-- "clock": 1
+
 local module = {}
 m = nil
+
+local function syncTime() 
+  sntp.sync("pool.ntp.org", function()
+    seconds, millis=rtctime.get()
+    print(tonumber(tostring(seconds) .. tostring(math.floor(millis/1000))))
+  end, print)
+end
 
 local function send_status()
   seconds, millis=rtctime.get()
@@ -20,24 +40,26 @@ local function init_settings()
   -- initial output pin state
   module.status={}
   module.status.deviceID=config.ID
-  module.status.name=config.name
+  module.status.name=settings.name
   module.status.pins={}
   
   module.status.pins[0]={
     number=1,
     type="digitalOutput",
     purpose="pwm servo controller (forward/reverse)",
-    status=500
+    status={ duty=0, clock=1 }
   }
-  pwm.setup(module.status.pins[0].number, 50, module.status.pins[0].status);
-end
-
-local function alter_settings(topic)
-  send_settings()
+  pwm.setup(module.status.pins[0].number,
+            module.status.pins[0].status.duty,
+            module.status.pins[0].status.clock)
 end
 
 local function send_settings()
   m:publish(settings.topics.pub.currentSettings, cjson.encode(settings),0,0)
+end
+
+local function alter_settings(topic)
+  send_settings()
 end
 
 -- Sends my id to the broker for registration
@@ -70,6 +92,20 @@ local function mqtt_start(topics)
   m:connect(config.HOST, config.PORT, 0, 1, function(con)
     init_settings()
     register_myself(settings.topics.sub)
+    tmr.stop(6)
+    tmr.alarm(6, 6870947, tmr.ALARM_SEMI, syncTime)
+    tmr.stop(5)
+    tmr.alarm(5, 3600000, tmr.ALARM_SEMI, function()
+      currentTime=rtctime.epaoch2cal(rtctime.get())
+      print(currentTime["hour"])
+      if (currentTime["hour"] == 8) then
+        module.status.pins[0].status={ duty=500, clock=300 }
+        tmr.stop(4)
+        tmr.alarm(4, 30000, tmr.ALARM_SINGLE, function()
+          module.status.pins[0].status={ duty=0, clock=1 }
+        end)
+      end
+    end)
   end)
 end
 

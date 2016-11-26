@@ -46,34 +46,32 @@ mqtt.on('connect', () => {
       console.log('user connected')
 
       socket.on('join', data => {
-        socket.join(data.username)
+        socket.join(`chat/${data.username}`)
         db.collection('chat')
           .find({})
           .sort({ 'timestamp': -1 })
           .limit(100)
           .toArray((err, docs) => {
             if (err) console.log(err)
-            io.sockets.in(data.username).emit('init', docs)
+            io.sockets.in(`chat/${data.username}`).emit('init', docs)
           })
       })
 
       socket.on('joinFoodDispenser', data => {
-        socket.join(data.username)
+        socket.join(`foodDispenser/${data.username}`)
         db.collection('statuses')
-          .find({deviceID: 'food_dispenser'}, (err, device) => {
+          .findOne({name: 'food_dispenser'}, (err, device) => {
             if (err) console.log(err)
-            console.log(JSON.stringify(data, null, 2))
-            io.sockets.in(data.username).emit('initFoodDispenser', device)
+            io.sockets.in(`foodDispenser/${data.username}`)
+              .emit('initFoodDispenser', device)
           })
       })
-
-      socket.on('changeFoodDispenserStatus', pub => mqtt.publish(pub.topic, pub.message))
 
       // on web client disconnect
       socket.on('disconnect', () => console.log('user disconnected'))
 
       // on toggle from web client
-      socket.on('toggle', pub => mqtt.publish(pub.topic, pub.message))
+      socket.on('publish', pub => mqtt.publish(pub.topic, pub.message))
 
       // on incoming chat message
       socket.on('addMessage', message => {
@@ -142,6 +140,7 @@ mqtt.on('connect', () => {
       .use('/home', express.static(path.join(__dirname, 'dist')))
       .use('/chat', express.static(path.join(__dirname, 'dist')))
       .use('/login', express.static(path.join(__dirname, 'dist')))
+      .use('/food-dispenser', express.static(path.join(__dirname, 'dist')))
 
       .post('/api/authenticate', (req, res) => {
         db.collection('users').findOne({ username: req.body.username }, (err, user) => {
@@ -174,117 +173,117 @@ mqtt.on('connect', () => {
         })
       })
 
-  .post('/api/geofence', auth, (req, res) => {
-    db.collection('geofence').insertOne(req.body)
-    res.status(200).send('geofence event saved')
-  })
+      .post('/api/geofence', auth, (req, res) => {
+        db.collection('geofence').insertOne(req.body)
+        res.status(200).send('geofence event saved')
+      })
 
-  .use((req, res, next) => {
-    const token = req.body.token || req.query.token || req.headers['x-access-token']
+      .use((req, res, next) => {
+        const token = req.body.token || req.query.token || req.headers['x-access-token']
 
-    if (token) {
-      jwt.verify(token, app.get('superSecret'), (err, decoded) => {
-        if (err) {
-          return res.json({ success: false, message: 'Failed to authenticate token.' })
+        if (token) {
+          jwt.verify(token, app.get('superSecret'), (err, decoded) => {
+            if (err) {
+              return res.json({ success: false, message: 'Failed to authenticate token.' })
+            } else {
+              req.decoded = decoded
+              next()
+            }
+          })
         } else {
-          req.decoded = decoded
-          next()
+          return res.status(403).send({
+            success: false,
+            message: 'No token provided.'
+          })
         }
       })
-    } else {
-      return res.status(403).send({
-        success: false,
-        message: 'No token provided.'
+
+      .get('/api/users', (req, res) => {
+        db.collection('users').find({}).toArray((err, users) => {
+          res.json(users)
+        })
       })
-    }
-  })
 
-  .get('/api/users', (req, res) => {
-    db.collection('users').find({}).toArray((err, users) => {
-      res.json(users)
-    })
-  })
-
-  .get('/api/devices/:type', (req, res) => {
-    db.collection('devices')
-      .find({ 'primaryType': req.params.type })
-      .toArray((err, docs) => {
-        if (err) console.log(err)
-        res.send(docs)
+      .get('/api/devices/:type', (req, res) => {
+        db.collection('devices')
+          .find({ 'primaryType': req.params.type })
+          .toArray((err, docs) => {
+            if (err) console.log(err)
+            res.send(docs)
+          })
       })
-  })
 
-  .get('/api/devices', (req, res) => {
-    db.collection('devices')
-      .find({}).toArray((err, docs) => {
-        res.send(docs)
+      .get('/api/devices', (req, res) => {
+        db.collection('devices')
+          .find({}).toArray((err, docs) => {
+            res.send(docs)
+          })
       })
-  })
 
-  .get('/api/statuses/:deviceID', (req, res) => {
-    db.collection('statuses')
-      .aggregate([
-        { $match: { 'deviceID': +req.params.deviceID } },
-        { $sample: { size: 500 } },
-        { $sort: { timestamp: 1 } }
-      ])
-      .toArray((err, docs) => {
-        if (err) console.log(err)
-        res.send(docs)
+      .get('/api/statuses/:deviceID', (req, res) => {
+        db.collection('statuses')
+          .aggregate([
+            { $match: { 'deviceID': +req.params.deviceID } },
+            { $sample: { size: 500 } },
+            { $sort: { timestamp: 1 } }
+          ])
+          .toArray((err, docs) => {
+            if (err) console.log(err)
+            res.send(docs)
+          })
       })
-  })
 
-  .post('/api/publish', (req, res) => {
-    mqtt.publish(`${req.body.topic}`, req.body.message)
-    res.status(200).send('message published')
-  })
-
-  .delete('/api/statuses/:id', (req, res) => {
-    db.collection('statuses')
-      .deleteOne({ _id: new objectID(req.params.id) }, (err, result) => {
-        if (err) console.log(err)
-        res.send(result)
+      .post('/api/publish', (req, res) => {
+        mqtt.publish(`${req.body.topic}`, req.body.message)
+        res.status(200).send('message published')
       })
-  })
 
-  .get('/api/broker', (req, res) => {
-    res.send('mqtt//broker')
-  })
-
-  .get('/api/geofence', (req, res) => {
-    db.collection('geofence')
-      .distinct('device', (err, result) => {
-        if (err) console.log(err)
-        res.send(result)
+      .delete('/api/statuses/:id', (req, res) => {
+        db.collection('statuses')
+          .deleteOne({ _id: new objectID(req.params.id) }, (err, result) => {
+            if (err) console.log(err)
+            res.send(result)
+          })
       })
-  })
 
-  .get('/api/geofence/:device', (req, res) => {
-    const start = moment().startOf('day')
-    const end = moment().endOf('day')
-    db.collection('geofence')
-      .find({ 'device': req.params.device })
-      .sort({ 'timestamp': -1 })
-      .limit(2)
-      .toArray((err, docs) => {
-        if (err) console.log(err)
-        res.send(docs)
+      .get('/api/broker', (req, res) => {
+        res.send('mqtt//broker')
       })
-  })
 
-  .get('/api/chat', (req, res) => {
-    db.collection('chat')
-      .find({})
-      .sort({ 'timestamp': -1 })
-      .limit(1000)
-      .toArray((err, docs) => {
-        if (err) console.log(err)
-        res.send(docs)
+      .get('/api/geofence', (req, res) => {
+        db.collection('geofence')
+          .distinct('device', (err, result) => {
+            if (err) console.log(err)
+            res.send(result)
+          })
       })
-  })
 
-// app.listen(3000)
-http.listen(3000)
+      .get('/api/geofence/:device', (req, res) => {
+        const start = moment().startOf('day')
+        const end = moment().endOf('day')
+        db.collection('geofence')
+          .find({ 'device': req.params.device })
+          .sort({ 'timestamp': -1 })
+          .limit(2)
+          .toArray((err, docs) => {
+            if (err) console.log(err)
+            res.send(docs)
+          })
+      })
+
+      .get('/api/chat', (req, res) => {
+        db.collection('chat')
+          .find({})
+          .sort({ 'timestamp': -1 })
+          .limit(1000)
+          .toArray((err, docs) => {
+            if (err) console.log(err)
+            res.send(docs)
+          })
+      })
+
+    // app.listen(3000)
+    http.listen(3000)
   })
 })
 

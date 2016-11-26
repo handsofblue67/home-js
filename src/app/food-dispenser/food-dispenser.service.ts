@@ -10,12 +10,14 @@ export class FoodDispenserService {
   currentStatus: any = {}
 
   constructor() { }
+
   getStatus(): Observable<any> {
     return new Observable(observer => {
       this.socket = io('/')
       this.socket.emit('joinFoodDispenser', {username: JSON.parse(localStorage.getItem('currentUser')).username})
 
       this.socket.on('initFoodDispenser', currentStatus => {
+        console.log(currentStatus)
         this.currentStatus = currentStatus
         observer.next(this.currentStatus)
       })
@@ -29,8 +31,11 @@ export class FoodDispenserService {
   }
 
   updateStatus(status): void {
-    const publish: any = { topic: `/update/${this.currentStatus.deviceID}`, message: status }
-    this.socket.emit('changeFoodDispenserStatus', JSON.stringify(publish))
+    const publish: any = {
+      topic: '/update/12658677',
+      message: JSON.stringify(status)
+    }
+    this.socket.emit('publish', publish)
   }
 
 }

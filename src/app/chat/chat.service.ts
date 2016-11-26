@@ -18,9 +18,9 @@ export class ChatService {
   getMessages(): Observable<any> {
     return new Observable(observer => {
       this.socket = io('/')
-      this.socket.emit('join', {username: JSON.parse(localStorage.getItem('currentUser')).username})
+      this.socket.emit('joinChat', {username: JSON.parse(localStorage.getItem('currentUser')).username})
 
-      this.socket.on('init', messages => {
+      this.socket.on('initChat', messages => {
         this.messages = _.map(messages, (message: any) => {
           return {
             text: message.text,

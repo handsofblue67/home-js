@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core'
 
-import * as _ from 'lodash'
 import * as io from 'socket.io-client'
 import * as moment from 'moment'
 import { Observable } from 'rxjs/Observable'
 import '../shared'
+import * as _ from 'lodash'
 
 @Injectable()
 export class DextersLabService {
@@ -16,9 +16,9 @@ export class DextersLabService {
   getMessages(): Observable<any> {
     return new Observable(observer => {
       this.socket = io('/')
-      this.socket.emit('join', {dextersLab: JSON.parse(localStorage.getItem('profile')).email})
+      this.socket.emit('joinDextersLab', {username: JSON.parse(localStorage.getItem('currentUser')).username})
 
-      this.socket.on('init', events => {
+      this.socket.on('initDextersLab', events => {
         this.events = _.map(events, (message: any) => {
           return {
             text: message.text,
@@ -45,15 +45,4 @@ export class DextersLabService {
       return () => this.socket.disconnect()
     })
   }
-
-  sendMessage(message): void {
-    let profile = JSON.parse(localStorage.getItem('profile'))
-    this.socket.emit('addMessage', JSON.stringify({
-      text: message,
-      user: profile.nickname,
-      timestamp: moment(),
-      avatar: profile.user_metadata.picture || profile.picture,
-    }))
-  }
-
 }

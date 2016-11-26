@@ -45,7 +45,7 @@ mqtt.on('connect', () => {
     io.on('connection', socket => {
       console.log('user connected')
 
-      socket.on('join', data => {
+      socket.on('joinChat', data => {
         socket.join(data.username)
         db.collection('chat')
           .find({})
@@ -53,7 +53,7 @@ mqtt.on('connect', () => {
           .limit(100)
           .toArray((err, docs) => {
             if (err) console.log(err)
-            io.sockets.in(data.username).emit('init', docs)
+            io.sockets.in(data.username).emit('initChat', docs)
           })
       })
 

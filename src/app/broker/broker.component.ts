@@ -12,6 +12,7 @@ import { BrokerService } from './broker.service'
 export class BrokerComponent implements OnInit, OnDestroy {
   log: Array<string> = []
   connection: Subscription
+  systemMessages: boolean = false
 
   constructor(private brokerService: BrokerService) { }
 

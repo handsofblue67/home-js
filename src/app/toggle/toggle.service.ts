@@ -7,15 +7,14 @@ import * as _ from 'lodash'
 import * as io from 'socket.io-client'
 
 import { BackendService } from '../backend.service'
-import { Device, DeviceType, DeviceStatus, Mqtt } from '../models'
+import { Device, DeviceStatus } from '../models'
 
 @Injectable()
 export class ToggleService {
+  private socket
   switches: Array<Device> = []
   private switchSource = new BehaviorSubject<Array<Device>>([])
   switch$ = this.switchSource.asObservable()
-
-  private socket
 
   constructor(private backend: BackendService) {
     backend.getDevicesByType('digitalOutput').subscribe(devices => {
@@ -24,8 +23,8 @@ export class ToggleService {
   }
 
   toggle(device: Device) {
-    let topic = device.topics.sub.toggle
-    let mqtt = { topic: topic, message: (new Date()).toString() }
+    const topic = device.topics.sub.toggle
+    const mqtt = { topic: topic, message: (new Date()).toString() }
     this.socket.emit('toggle', mqtt)
   }
 
@@ -36,7 +35,7 @@ export class ToggleService {
         state = state.status
         this.normalize(
           _.reject(this.switches, ['deviceID', state.deviceID]),
-          _.find(this.switches, ['deviceID',state.deviceID]),
+          _.find(this.switches, ['deviceID', state.deviceID]),
           [state])
       })
       return () => this.socket.disconnect()

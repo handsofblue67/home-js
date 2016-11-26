@@ -17,8 +17,9 @@ import { ChartService } from './chart'
 import { ToggleService } from './toggle'
 import { BrokerService } from './broker'
 import { AuthService } from './auth.service'
+import { UserService } from './user.service'
 import { AuthGuard } from './auth-guard.service'
-import { routing, routedComponents } from './app.routing'
+import { routing, routedComponents } from './app.routing';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { routing, routedComponents } from './app.routing'
     ChatService,
     GeofenceService,
     ToggleService,
+    UserService,
   ],
   bootstrap: [ AppComponent ]
 })

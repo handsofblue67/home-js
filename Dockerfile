@@ -1,11 +1,12 @@
-FROM node:latest
+FROM node:6.9.1
 
-RUN mkdir -p /opt/home-js
-# RUN mkdir -p /opt/home-js/src
+RUN mkdir /opt/home-js && chown -R node:node /opt/home-js
 WORKDIR /opt/home-js
 
-ADD server.js /opt/home-js
+USER node
 
-EXPOSE 3000:3000
+COPY package.json /opt/home-js/
+
+RUN npm cache clean && npm install
 
 CMD ["node", "server.js"]

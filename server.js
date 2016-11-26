@@ -57,12 +57,13 @@ mqtt.on('connect', () => {
           })
       })
 
-      socket.on('joinFoodDispenser', socket => {
+      socket.on('joinFoodDispenser', data => {
         socket.join(data.username)
-        db.collection('devices')
+        db.collection('statuses')
           .find({deviceID: 'food_dispenser'}, (err, device) => {
             if (err) console.log(err)
-            io.sockets.in(data.username.emit('initFoodDispenser', device))
+            console.log(JSON.stringify(data, null, 2))
+            io.sockets.in(data.username).emit('initFoodDispenser', device)
           })
       })
 
@@ -90,9 +91,7 @@ mqtt.on('connect', () => {
       settingsRegExp = new RegExp(/currentSettings\/.*/)
       statusRegExp = new RegExp(/status\/.*/)
 
-      if (/\/status\/12658677.*/.test(topic)) io.emit('newStatus', message)
-
-      else if (settingsRegExp.test(topic)) updateDevice(JSON.parse(message.toString()))
+      if (settingsRegExp.test(topic)) updateDevice(JSON.parse(message.toString()))
 
       else if (statusRegExp.test(topic)) addStatus(JSON.parse(message.toString()))
     })

@@ -20,6 +20,7 @@ local function init_settings()
   -- initial output pin state
   module.status={}
   module.status.deviceID=config.ID
+  module.status.name=config.name
   module.status.pins={}
   
   module.status.pins[0]={

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 
 import { Subscription } from 'rxjs/Subscription'
 
-import { FoodDispenserService } from './'
+import { FoodDispenserService } from './food-dispenser.service'
 
 @Component({
   selector: 'app-food-dispenser',

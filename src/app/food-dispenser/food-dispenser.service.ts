@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core'
 import * as io from 'socket.io-client'
 import { Observable } from 'rxjs/Observable'
 import '../shared'
-import { Mqtt } from '../models'
 
 @Injectable()
 export class FoodDispenserService {
@@ -17,12 +16,12 @@ export class FoodDispenserService {
       this.socket.emit('joinFoodDispenser', {username: JSON.parse(localStorage.getItem('currentUser')).username})
 
       this.socket.on('initFoodDispenser', currentStatus => {
-        this.currentStatus = { }
+        this.currentStatus = currentStatus
         observer.next(this.currentStatus)
       })
 
-      this.socket.on('newStatus', message => {
-        this.currentStatus = { }
+      this.socket.on('stateChange', currentStatus => {
+        this.currentStatus = currentStatus
         observer.next(this.currentStatus)
       })
       return () => this.socket.disconnect()
@@ -30,7 +29,7 @@ export class FoodDispenserService {
   }
 
   updateStatus(status): void {
-    const publish: any = { topic: `update/${this.currentStatus.deviceID}`, message: status }
+    const publish: any = { topic: `/update/${this.currentStatus.deviceID}`, message: status }
     this.socket.emit('changeFoodDispenserStatus', JSON.stringify(publish))
   }
 

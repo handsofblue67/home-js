@@ -1,12 +1,12 @@
 local module={}
 
 module.deviceID=config.ID
-module.name=config.ID
+module.name='food_dispensor'
 module.primaryType="digitalOutput"
 
 module.topics={
   sub={
-    toggle="/toggle/" .. config.ID,
+    update="/update/" .. config.ID,
     settings="/settings/" .. config.ID,
     reqStatus="/reqStatus/" .. config.ID
   },

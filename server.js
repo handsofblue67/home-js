@@ -57,6 +57,17 @@ mqtt.on('connect', () => {
           })
       })
 
+      socket.on('joinFoodDispenser', socket => {
+        socket.join(data.username)
+        db.collection('devices')
+          .find({deviceID: 'food_dispenser'}, (err, device) => {
+            if (err) console.log(err)
+            io.sockets.in(data.username.emit('initFoodDispenser', device))
+          })
+      })
+
+      socket.on('changeFoodDispenserStatus', pub => mqtt.publish(pub.topic, pub.message))
+
       // on web client disconnect
       socket.on('disconnect', () => console.log('user disconnected'))
 
@@ -79,7 +90,9 @@ mqtt.on('connect', () => {
       settingsRegExp = new RegExp(/currentSettings\/.*/)
       statusRegExp = new RegExp(/status\/.*/)
 
-      if (settingsRegExp.test(topic)) updateDevice(JSON.parse(message.toString()))
+      if (/\/status\/12658677.*/.test(topic)) io.emit('newStatus', message)
+
+      else if (settingsRegExp.test(topic)) updateDevice(JSON.parse(message.toString()))
 
       else if (statusRegExp.test(topic)) addStatus(JSON.parse(message.toString()))
     })

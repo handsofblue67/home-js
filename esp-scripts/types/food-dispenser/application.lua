@@ -9,15 +9,10 @@ local function send_status()
   print(cjson.encode(module.status))
 end
 
-local function toggle_state()
-  if module.status.pins[0].status == 27 then
-    print('pulling')
-    module.status.pins[0].status = 123
-  else
-    print('pushing')
-    module.status.pins[0].status = 27
-  end
-  pwm.setduty(module.status.pins[0].number, module.status.pins[0].status);
+local function update_state(newState)
+  module.status.pins[0].status=newState
+  pwm.setclock(module.status.pins[0].number, module.status.pins[0].status.clock);
+  pwm.setduty(module.status.pins[0].number, module.status.pins[0].status.duty);
   send_status()
 end
 
@@ -31,7 +26,7 @@ local function init_settings()
     number=1,
     type="digitalOutput",
     purpose="pwm servo controller (forward/reverse)",
-    status=27
+    status=500
   }
   pwm.setup(module.status.pins[0].number, 50, module.status.pins[0].status);
 end
@@ -47,7 +42,7 @@ end
 -- Sends my id to the broker for registration
 local function register_myself(topics)
   -- sub = settings.topics.subscribe
-  m:subscribe({[topics.toggle]=0, [topics.settings]=0, [topics.reqStatus]=0},function(conn)
+  m:subscribe({[topics.update]=0, [topics.settings]=0, [topics.reqStatus]=0},function(conn)
     print("Successfully subscribed to data endpoints: " .. cjson.encode(topics) )
     send_settings()
   end)
@@ -59,9 +54,9 @@ local function mqtt_start(topics)
   m:on("message", function(conn, topic, data)
     if data ~= nil then
       print(topic .. ": " .. data)
-      if topic == topics.toggle then
+      if topic == topics.update then
         print(topic)
-        toggle_state()
+        update_state(cjson.decode(data))
       elseif topic == topics.settings then
         alter_settings(settings.topics.pub.currentSettings)
       elseif topic == topics.reqStatus then

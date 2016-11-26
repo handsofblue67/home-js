@@ -9,9 +9,16 @@ export class AuthService {
   public token: string
   public message = ''
   public currentUser: User
+
   constructor(private http: Http) {
     // set token if saved in local storage
     const currentUser = JSON.parse(localStorage.getItem('currentUser'))
+    this.currentUser = {
+      username: currentUser.username,
+      firstName: currentUser.firstName,
+      lastName: currentUser.lastName,
+      picture: currentUser.picture,
+    }
     this.token = currentUser && currentUser.token
   }
 

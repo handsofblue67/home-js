@@ -9,6 +9,7 @@ import { HomeComponent } from './home'
 import { LoginComponent } from './login'
 import { MapComponent } from './map'
 import { ToggleComponent } from './toggle'
+import { FoodDispenserComponent } from './food-dispenser'
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
     { path: 'lights', component: ToggleComponent, canActivate: [AuthGuard] },
     { path: 'debug', component: BrokerComponent, canActivate: [AuthGuard] },
     { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
+    { path: 'food-dispenser', component: FoodDispenserComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: ''}
 ]
 
@@ -28,6 +30,7 @@ export const routedComponents = [
     BrokerComponent,
     ChartComponent,
     ChatComponent,
+    FoodDispenserComponent,
     HomeComponent,
     LoginComponent,
     MapComponent,

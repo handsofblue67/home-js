@@ -25,7 +25,7 @@ export class ToggleService {
   toggle(device: Device) {
     const topic = device.topics.sub.toggle
     const mqtt = { topic: topic, message: (new Date()).toString() }
-    this.socket.emit('toggle', mqtt)
+    this.socket.emit('publish', mqtt)
   }
 
   getState(): Observable<any> {

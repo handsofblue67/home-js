@@ -20,7 +20,11 @@ import { AuthService } from './auth.service'
 import { UserService } from './user.service'
 import { AuthGuard } from './auth-guard.service'
 import { routing, routedComponents } from './app.routing'
+<<<<<<< HEAD
 import { DextersLabService } from './dexters-lab'
+=======
+import { FoodDispenserService } from './food-dispenser'
+>>>>>>> develop
 
 @NgModule({
   declarations: [
@@ -45,7 +49,11 @@ import { DextersLabService } from './dexters-lab'
     BrokerService,
     ChartService,
     ChatService,
+<<<<<<< HEAD
     DextersLabService,
+=======
+    FoodDispenserService,
+>>>>>>> develop
     GeofenceService,
     ToggleService,
     UserService,

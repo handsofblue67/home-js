@@ -79,11 +79,10 @@ mqtt.on('connect', () => {
               .find({ deviceID: { $in: deviceIDs } })
               .toArray((err, states) => {
                 if (err) console.log(err)
-                devices = _.map(devices, (device, index) => {
-                  return _.extend({}, device, { status: states[index] })
-                })
                 io.sockets.in(`toggle/${data.username}`)
-                  .emit('initToggle', devices)
+                  .emit('initToggle', _.map(devices, (device, index) => {
+                    return _.extend({}, device, { status: states[index] })
+                  }))
               })
           })
       })

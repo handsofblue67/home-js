@@ -14,6 +14,7 @@ const jwt = require('jsonwebtoken')
 const config = require('./jwt-config')
 const bcrypt = require('bcrypt')
 const SALT_WORK_FACTOR = 10
+const _ = require('lodash')
 
 app.set('superSecret', config.secret)
 
@@ -64,6 +65,26 @@ mqtt.on('connect', () => {
             if (err) console.log(err)
             io.sockets.in(`foodDispenser/${data.username}`)
               .emit('initFoodDispenser', device)
+          })
+      })
+
+      socket.on('joinToggle', data => {
+        socket.join(`toggle/${data.username}`)
+        db.collection('devices')
+          .find({ type: 'toggle',  })
+          .toArray((err, devices) => {
+            if (err) console.log(err)
+            const deviceIDs = _.reduce(devices, (acc, device) => [...acc, device.deviceID], [])
+            db.collection('statuses')
+              .find({ deviceID: { $in: deviceIDs } })
+              .toArray((err, states) => {
+                if (err) console.log(err)
+                devices = _.map(devices, (device, index) => {
+                  return _.extend({}, device, { status: states[index] })
+                })
+                io.sockets.in(`toggle/${data.username}`)
+                  .emit('initToggle', devices)
+              })
           })
       })
 

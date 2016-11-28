@@ -19,7 +19,9 @@ export class ToggleComponent implements OnInit, OnDestroy {
   toggle(device: Device) { this.toggleService.toggle(device) }
 
   ngOnInit() {
-    this.connection = this.toggleService.getState().subscribe(state => state)
+    this.connection = this.toggleService
+      .getStates()
+      .subscribe(states => this.states = states)
   }
 
   ngOnDestroy() {

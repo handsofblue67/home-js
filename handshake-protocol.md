@@ -1,28 +1,38 @@
 # Device to Server Protocol
 
-###### Handshake
-```{mermaid}
-graph LR
-dev[ESP8266]--Handshake - Publish /settings/deviceID -->broker[MQTT_Broker]
-broker-->api[Server]
-api-->Mongo/devices
-```
+## Handshake
 
+###### sd Handshake
 ```{mermaid}
 sequenceDiagram
-  ESP8266->>+Server: Initialize Handshake
-    alt is valid
-    Server-->>+ESP8266: Request State
-      ESP8266-->>-Server: Send State
-    else is invalid
-      loop lt 3 tries
-        Server-->>+ESP8266: Invalid
-        ESP8266-->>-Server: Resend State
-      end
+  ESP8266-xBroker:/settings/deviceID(state)
+  activate Broker
+  Broker-xServer:/settings/deviceID(state)
+  deactivate Broker
+  activate Server
+  activate Server
+  alt valid
+    Server-xDevice Collection: upsert(deviceID)
+    Server-x+Broker:/reqStatus/deviceID
+    deactivate Server
+    activate ESP8266
+    Broker-x-ESP8266:/reqStatus/deviceID
+    Note over ESP8266, Server: Update State
+    deactivate ESP8266
+  else invalid
+    loop attempts < max && invalid
+      Server-x+Broker:/reqSettings/deviceID('invalid')
+      deactivate Server
+      Broker-x-ESP8266:/reqSettings/deviceID('invalid')
+      activate ESP8266
+      ESP8266-xBroker:/settings/deviceID(state)
+      deactivate ESP8266
+      activate Broker
+      Broker-xServer:/settings/deviceID(state)
+      deactivate Broker
     end
+  end
 ```
-
-## Handshake
 
 1. Upon connection, a device publishes a description of itself, including checkin behaviors, publish/subscribe topics, alterable settings etc.
 2. The server, which subscribes to all topics, validates the devices announcement, and sets up the environment for it (adds/upserts a record of the device in table/collection of devices)
@@ -74,11 +84,12 @@ sequenceDiagram
 
 - Upon receiving a status from a known device
   - Compares state to current operatonal state in database if changed store old data (including length of time in that state) to a time-series collection or database (if time-series data)
+
+###### sd Status Update
 ```{mermaid}
-graph LR
-dev[ESP8266]--Status update Publish /status/deviceID -->broker[MQTT_Broker]
-broker-->api[Server]
-api-->upsert{Did change?}
-upsert--true-->Mongo/opStates
-upsert--false-->null
+sequenceDiagram
+  ESP8266-x+Server: /status/deviceID
+  Server->>Operational State: [State Change] upsert new state
+  Server-xTime Series: [State Change] oldState+=timeInState
+  Server-x-Client: [State Change] onChange
 ```

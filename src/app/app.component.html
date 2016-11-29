@@ -18,7 +18,7 @@
 		<span class="fill"></span>
 		<!--<button md-button (click)="auth.login()" *ngIf="!auth.loggedIn()">Log In</button>-->
 		<!--<button md-button (click)="auth.logout()" *ngIf="auth.loggedIn()">Log Out</button>-->
-		<button md-button *ngIf="authService.currentUser">{{authService.currentUser.firstName}}</button>
+		<button md-button *ngIf="authService.currentUser" routerLink="/home">{{authService.currentUser.firstName}}</button>
 		<span *ngIf="authService.currentUser?.picture"><img md-card-avatar [src]="authService.currentUser.picture"></span>
 	</md-toolbar>
 

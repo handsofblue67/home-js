@@ -5,31 +5,23 @@
 ###### sd Handshake
 ```{mermaid}
 sequenceDiagram
-  ESP8266-xBroker:/settings/deviceID(state)
-  activate Broker
-  Broker-xServer:/settings/deviceID(state)
-  deactivate Broker
+  ESP8266-xServer:/settings/deviceID(state)
   activate Server
   activate Server
   alt valid
     Server-xDevice Collection: upsert(deviceID)
-    Server-x+Broker:/reqStatus/deviceID
+    Server-x+ESP8266:/reqStatus/deviceID
     deactivate Server
     activate ESP8266
-    Broker-x-ESP8266:/reqStatus/deviceID
     Note over ESP8266, Server: Update State
     deactivate ESP8266
   else invalid
-    loop attempts < max && invalid
-      Server-x+Broker:/reqSettings/deviceID('invalid')
+    loop tries < max
+      Server-x+ESP8266:/reqSettings/deviceID('invalid')
       deactivate Server
-      Broker-x-ESP8266:/reqSettings/deviceID('invalid')
       activate ESP8266
-      ESP8266-xBroker:/settings/deviceID(state)
+      ESP8266-xServer:/settings/deviceID(state)
       deactivate ESP8266
-      activate Broker
-      Broker-xServer:/settings/deviceID(state)
-      deactivate Broker
     end
   end
 ```
@@ -72,7 +64,7 @@ sequenceDiagram
     "type": "dht11",
     "purpose": "Temperature/Humidity Sensor",
     "state": {
-      "status": "scalar",
+      "status": "enum",
       "temp": "scalar",
       "humi": "scalar"
     }
@@ -92,4 +84,17 @@ sequenceDiagram
   Server->>Operational State: [State Change] upsert new state
   Server-xTime Series: [State Change] oldState+=timeInState
   Server-x-Client: [State Change] onChange
+```
+
+## Client Push
+_Need to define protocol for client/server initialization (client must abstract from mqtt)_
+
+###### sd Client Push
+```{mermaid}
+sequenceDiagram
+  Client-x+Server: websocket(deviceID, new state || toggle)
+  activate ESP8266
+  Server-xESP8266: /updateStatus/deviceID(newState|toggle)
+  Note over ESP8266, Client: Status Update
+  deactivate ESP8266
 ```

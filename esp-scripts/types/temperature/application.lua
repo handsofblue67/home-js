@@ -3,10 +3,18 @@
 local module = {}
 m = nil
 
+local function syncTime() 
+  sntp.sync("pool.ntp.org", function()
+    seconds, millis=rtctime.get()
+    print(tonumber(tostring(seconds) .. tostring(math.floor(millis/1000))))
+  end, print)
+end
+
 local function send_state()
+  status, temp, humi, tempDec, humiDec = dht.read11(module.status.pins[0].number)
   seconds, millis=rtctime.get()
   module.status.timestamp=tonumber(tostring(seconds) .. tostring(math.floor(millis/1000)))
-  module.status.pins[0].status=adc.read(module.status.pins[0].number)
+  module.status.pins[0].status={status=status, temp=temp, humi=humi }
   m:publish(settings.topics.pub.status, cjson.encode(module.status),0,0)
   print(cjson.encode(module.status))
 end
@@ -17,20 +25,11 @@ local function init_settings()
   module.status.pins={}
 
   module.status.pins[0]={
-    number=0,
-    type="analogInput",
-    purpose="Light sensor",
-    status=nil
-  }
-  module.status.pins[1]={
-    number=2,
+    number=1,
     type="digitalInput",
-    purpose="Physical send status button",
+    purpose="Temperature/Humidity Sensor",
     status=nil
   }
-
-  gpio.mode(module.status.pins[1].number, gpio.INPUT)
-  gpio.trig(module.status.pins[1].number, "down", send_state)
 end
 
 local function send_settings()
@@ -58,7 +57,7 @@ local function mqtt_start(topics)
       if topic == topics.settings then
         alter_settings(cjson.decode(data))
       elseif topic == topics.reqStatus then
-        send_status()
+        send_state()
       end
     end
   end)
@@ -69,6 +68,8 @@ local function mqtt_start(topics)
     register_myself(settings.topics.sub)
     tmr.stop(6)
     tmr.alarm(6, settings.checkinFreq, 1, send_state)
+    tmr.stop(5)
+    tmr.alarm(5, 6870947, tmr.ALARM_SEMI, syncTime)
   end)
 
 end

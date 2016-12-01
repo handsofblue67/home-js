@@ -21,6 +21,7 @@ import { UserService } from './user.service'
 import { AuthGuard } from './auth-guard.service'
 import { routing, routedComponents } from './app.routing'
 import { FoodDispenserService } from './food-dispenser'
+import { TemperatureService } from './temperature'
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { FoodDispenserService } from './food-dispenser'
     ChatService,
     FoodDispenserService,
     GeofenceService,
+    TemperatureService,
     ToggleService,
     UserService,
   ],

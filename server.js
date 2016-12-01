@@ -61,7 +61,7 @@ mqtt.on('connect', () => {
       socket.on('joinFoodDispenser', data => {
         socket.join(`foodDispenser/${data.username}`)
         db.collection('statuses')
-          .findOne({name: 'food_dispenser'}, (err, device) => {
+          .findOne({ name: 'food_dispenser' }, (err, device) => {
             if (err) console.log(err)
             io.sockets.in(`foodDispenser/${data.username}`)
               .emit('initFoodDispenser', device)
@@ -71,7 +71,7 @@ mqtt.on('connect', () => {
       socket.on('joinToggle', data => {
         socket.join(`toggle/${data.username}`)
         db.collection('devices')
-          .find({ type: 'toggle',  })
+          .find({ type: 'toggle', })
           .toArray((err, devices) => {
             if (err) console.log(err)
             const deviceIDs = _.reduce(devices, (acc, device) => [...acc, device.deviceID], [])
@@ -81,6 +81,27 @@ mqtt.on('connect', () => {
                 if (err) console.log(err)
                 io.sockets.in(`toggle/${data.username}`)
                   .emit('initToggle', _.map(devices, (device, index) => {
+                    return _.extend({}, device, { status: states[index] })
+                  }))
+              })
+          })
+      })
+
+      socket.on('joinTemperature', data => {
+        socket.join(`temperature/${data.username}`)
+        db.collection('devices')
+          .find({ type: 'dht11' })
+          .toArray((err, devices) => {
+            if (err) console.log(err)
+            const deviceIDs = _.reduce(devices, (acc, device) => [...acc, device.deviceID], [])
+            db.collection('statuses')
+              .find({ deviceID: { $in: deviceIDs } })
+              .sort({ 'timestamp': -1 })
+              .limit(2)
+              .toArray((err, states) => {
+                if (err) console.log(err)
+                io.sockets.in(`temperature/${data.username}`)
+                  .emit('initTemperature', _.map(devices, (device, index) => {
                     return _.extend({}, device, { status: states[index] })
                   }))
               })
@@ -100,7 +121,6 @@ mqtt.on('connect', () => {
           io.emit('newMessage', message)
         })
       })
-
     })
 
     mqtt.on('message', (topic, message) => {
@@ -161,6 +181,7 @@ mqtt.on('connect', () => {
       .use('/chat', express.static(path.join(__dirname, 'dist')))
       .use('/login', express.static(path.join(__dirname, 'dist')))
       .use('/food-dispenser', express.static(path.join(__dirname, 'dist')))
+      .use('/temperature', express.static(path.join(__dirname, 'dist')))
 
       .post('/api/authenticate', (req, res) => {
         db.collection('users').findOne({ username: req.body.username }, (err, user) => {

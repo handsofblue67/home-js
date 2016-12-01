@@ -1,8 +1,9 @@
 local module={}
 
 module.deviceID=config.ID
-module.name='Bedroom DHT'
+module.name='Livingroom DHT'
 module.primaryType='digitalInput'
+module.type='dht11'
 
 module.checkinFreq=60000
 

@@ -5,11 +5,12 @@ import { AuthGuard } from './auth-guard.service'
 import { BrokerComponent } from './broker'
 import { ChartComponent } from './chart'
 import { ChatComponent } from './chat'
+import { FoodDispenserComponent } from './food-dispenser'
 import { HomeComponent } from './home'
 import { LoginComponent } from './login'
 import { MapComponent } from './map'
+import { TemperatureComponent } from './temperature'
 import { ToggleComponent } from './toggle'
-import { FoodDispenserComponent } from './food-dispenser'
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -21,7 +22,8 @@ const appRoutes: Routes = [
     { path: 'debug', component: BrokerComponent, canActivate: [AuthGuard] },
     { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
     { path: 'food-dispenser', component: FoodDispenserComponent, canActivate: [AuthGuard] },
-    { path: '**', redirectTo: ''}
+    {path: 'temperature', component: TemperatureComponent, canActivate: [AuthGuard] },
+    { path: '**', redirectTo: ''},
 ]
 
 export const routing = RouterModule.forRoot(appRoutes);
@@ -34,5 +36,6 @@ export const routedComponents = [
     HomeComponent,
     LoginComponent,
     MapComponent,
+    TemperatureComponent,
     ToggleComponent,
 ]

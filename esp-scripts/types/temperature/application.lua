@@ -14,7 +14,7 @@ local function send_state()
   status, temp, humi, tempDec, humiDec = dht.read11(module.status.pins[0].number)
   seconds, millis=rtctime.get()
   module.status.timestamp=tonumber(tostring(seconds) .. tostring(math.floor(millis/1000)))
-  module.status.pins[0].status={status=status, temp=temp, humi=humi, tempDec=tempDec, humiDec=humiDec}
+  module.status.pins[0].status={status=status, temp=temp, humi=humi }
   m:publish(settings.topics.pub.status, cjson.encode(module.status),0,0)
   print(cjson.encode(module.status))
 end

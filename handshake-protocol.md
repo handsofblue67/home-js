@@ -3,6 +3,7 @@
 ## Handshake
 
 ###### sd Handshake
+
 ```{mermaid}
 sequenceDiagram
   ESP8266-xServer:/settings/deviceID(state)
@@ -29,6 +30,7 @@ sequenceDiagram
 1. Upon connection, a device publishes a description of itself, including checkin behaviors, publish/subscribe topics, alterable settings etc.
 2. The server, which subscribes to all topics, validates the devices announcement, and sets up the environment for it (adds/upserts a record of the device in table/collection of devices)
 3. Server requests device state (publish to /reqStatus/deviceID)
+4. A device must also submit a will to the broker which the broker will release to subscribers in the event that the device disconnects
 
 ## Device Announcement/Declaration
 
@@ -40,6 +42,7 @@ sequenceDiagram
 5. list of all topics published/subscribed to
 
 ###### Example
+
 ```
 {
   "deviceID": 12736004,
@@ -90,11 +93,24 @@ sequenceDiagram
 _Need to define protocol for client/server initialization (client must abstract from mqtt)_
 
 ###### sd Client Push
+
+
+
+
 ```{mermaid}
-sequenceDiagram
+  sequenceDiagram
   Client-x+Server: websocket(deviceID, new state || toggle)
   activate ESP8266
   Server-xESP8266: /updateStatus/deviceID(newState|toggle)
   Note over ESP8266, Client: Status Update
   deactivate ESP8266
 ```
+
+
+#### Notes on using Mongodb for time-series
+_id: deviceID:time so that we can do range queries with regexp
+***Rollups:*** decrease resolution to save space and query time
+
+| doc-per-hour | doc-per-day  | doc-per-month
+| --- | --- | --- |
+2 days | 2 months | 2 years |

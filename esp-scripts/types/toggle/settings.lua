@@ -1,7 +1,7 @@
 local module={}
 
 module.deviceID=config.ID
-module.name='Nightstand lamp'
+module.name='Christmas Lights'
 module.primaryType="digitalOutput"
 module.type="toggle"
 

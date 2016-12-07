@@ -22,11 +22,13 @@ import { AuthGuard } from './auth-guard.service'
 import { routing, routedComponents } from './app.routing'
 import { FoodDispenserService } from './food-dispenser'
 import { TemperatureService } from './temperature'
+import { ShadowOnScrollDirective } from './shared'
 
 @NgModule({
   declarations: [
     AppComponent,
     routedComponents,
+    ShadowOnScrollDirective,
   ],
   imports: [
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDb-Foka_83ay6ofqqwuB33F_p11vtlBjY'}),

@@ -8,5 +8,10 @@ import { AuthService } from './auth.service'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  atTop: boolean = true
   constructor(private authService: AuthService) { }
+
+  scrolling(event: any) {
+    console.log(event.target.value)
+  }
 }

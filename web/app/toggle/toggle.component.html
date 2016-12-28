@@ -1,0 +1,7 @@
+<div *ngIf="states.length">
+	<md-card *ngFor="let switch of states">
+		<md-card-title>{{switch.name || switch.deviceID}}</md-card-title>
+		<md-slide-toggle [(ngModel)]="switch.status.pins[0].status" color="accent" (change)="toggle(switch)"></md-slide-toggle>
+		<!--<button *ngIf="!switch.status?.pins[0].status" md-raised-button color="warn" (click)="toggle(switch)">Off</button>-->
+	</md-card>
+</div>

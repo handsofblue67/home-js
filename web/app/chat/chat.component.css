@@ -1,0 +1,7 @@
+.chatContainer {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.chatContainer md-card {
+  margin: 16px;
+}

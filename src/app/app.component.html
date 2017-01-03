@@ -1,16 +1,6 @@
-<md-toolbar color="primary" shadowOnScoll="atTop" class="toolbar">
-	<button md-icon-button (click)="nav.toggle()">
-			<md-icon>menu</md-icon>
-		</button>
-	<md-icon svgSrc="/assets/homejs.svg"></md-icon>
-	<span>HomeJS</span>
-	<span class="fill"></span>
-	<button md-button *ngIf="authService.currentUser" routerLink="/home">{{authService.currentUser.firstName}}</button>
-	<span *ngIf="authService.currentUser?.picture"><img md-card-avatar [src]="authService.currentUser.picture"></span>
-</md-toolbar>
-
-<md-sidenav-layout class="sidenav-layout" (swipeleft)="nav.close()" (scroll)="scrolling($event)">
+<md-sidenav-layout class="sidenav-layout">
 	<md-sidenav #nav mode="side">
+		<!--<div><button md-button routerLink="/home">Home</button></div>-->
 		<div *ngIf="authService.currentUser"><button md-button routerLink="/charts">Charts</button></div>
 		<div *ngIf="authService.currentUser"><button md-button routerLink="/lights">Lights</button></div>
 		<div *ngIf="authService.currentUser"><button md-button routerLink="/maps">Map</button></div>
@@ -20,7 +10,16 @@
 		<!--<div *ngIf="authService.currentUser"><button md-button routerLink="/food-dispenser">Food Dispenser</button></div>-->
 	</md-sidenav>
 
-	<div class="card-container" >
+	<md-toolbar color="primary">
+		<button md-icon-button (click)="nav.toggle()"><md-icon>menu</md-icon></button>
+		<md-icon svgSrc="/assets/homejs.svg"></md-icon>
+		<span>HomeJS</span>
+		<span class="fill"></span>
+		<button md-button *ngIf="authService.currentUser" routerLink="/home">{{authService.currentUser.firstName}}</button>
+		<span *ngIf="authService.currentUser?.picture"><img md-card-avatar [src]="authService.currentUser.picture"></span>
+	</md-toolbar>
+
+	<div class="card-container">
 		<router-outlet></router-outlet>
 	</div>
 </md-sidenav-layout>

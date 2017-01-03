@@ -4,10 +4,8 @@ import { FormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
 import { MaterialModule } from '@angular/material'
 
-import { AUTH_PROVIDERS } from 'angular2-jwt'
 import { ChartModule } from 'angular2-highcharts'
 import { AgmCoreModule } from 'angular2-google-maps/core'
-import { AuthHttp } from 'angular2-jwt'
 
 import { AppComponent } from './app.component'
 import { BackendService } from './backend.service'
@@ -22,13 +20,11 @@ import { AuthGuard } from './auth-guard.service'
 import { routing, routedComponents } from './app.routing'
 import { FoodDispenserService } from './food-dispenser'
 import { TemperatureService } from './temperature'
-import { ShadowOnScrollDirective } from './shared'
 
 @NgModule({
   declarations: [
     AppComponent,
     routedComponents,
-    ShadowOnScrollDirective,
   ],
   imports: [
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDb-Foka_83ay6ofqqwuB33F_p11vtlBjY'}),
@@ -40,10 +36,8 @@ import { ShadowOnScrollDirective } from './shared'
     routing
   ],
   providers: [
-    AuthHttp,
     AuthGuard,
     AuthService,
-    AUTH_PROVIDERS,
     BackendService,
     BrokerService,
     ChartService,

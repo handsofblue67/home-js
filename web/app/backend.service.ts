@@ -14,21 +14,21 @@ export class BackendService {
 
   getDevicesByType(type: string): Observable<Array<Device>> {
     const options = new RequestOptions(this.generateHeaders())
-    return this.http.get(`api/devices/${type}`, options)
+    return this.http.get(`devices/${type}`, options)
       .map(res => res.json())
       .catch(this.handleError)
   }
 
   getDeviceData(device: Device): Observable<Array<DeviceStatus>> {
     const options = new RequestOptions(this.generateHeaders())
-    return this.http.get(`api/statuses/${device.deviceID}`, options)
+    return this.http.get(`statuses/${device.deviceID}`, options)
       .map(res => res.json())
       .catch(this.handleError)
   }
 
   publish(mqtt: Mqtt): Observable<any> {
     const options = new RequestOptions(this.generateHeaders())
-    return this.http.post('api/publish', JSON.stringify(mqtt), options)
+    return this.http.post('publish', JSON.stringify(mqtt), options)
       .map(res => res)
       .catch(this.handleError)
   }
@@ -41,19 +41,19 @@ export class BackendService {
 
   getGeofenceDevices() {
     const options = new RequestOptions(this.generateHeaders())
-    return this.http.get('api/geofence', options)
+    return this.http.get('geofence', options)
       .map(res => res.json())
       .catch(this.handleError)
   }
 
   getGeofenceByDevice(id: string) {
     const options = new RequestOptions(this.generateHeaders())
-    return this.http.get(`api/geofence/${id}`, options)
+    return this.http.get(`geofence/${id}`, options)
       .map(res => res.json())
       .catch(this.handleError)
   }
 
   generateHeaders() {
-    return { headers: new Headers({ 'x-access-token': this.authService.token }) }
+    return { headers: new Headers({ 'Authorization': this.authService.token }) }
   }
 }

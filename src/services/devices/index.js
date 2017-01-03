@@ -13,7 +13,7 @@ module.exports = function() {
       default: 5,
       max: 25
     }
-  };
+  }
 
   // Initialize our service with any options it requires
   app.use('/devices', service(options));
@@ -26,4 +26,4 @@ module.exports = function() {
 
   // Set up our after hooks
   devicesService.after(hooks.after);
-};
+}

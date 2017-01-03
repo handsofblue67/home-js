@@ -1,11 +1,11 @@
 {
   "host": "localhost",
   "port": 3030,
-  "mongodb": "mongodb://localhost:27017/homeJs",
+  "mongodb": "mongodb://db:27017/homeJs",
   "public": "../public/",
   "auth": {
     "token": {
-      "secret": "i8LBSer99nOde1fZ/x5+EXCgowB38A2f+7CWeE/I/3UbF76svMYlpS+V62lvk4N9rlpF2+oL/4aV3gFNB/DvGw=="
+      "secret": "pqs8IauoymKeteGQBjtGB/L8dRxsAgeiY6aIfp8bU2S/sAnX5vwtjys0FKwjLI1lTSOMzaZXRKPV3as6FiA19Q=="
     },
     "local": {}
   }

@@ -3,7 +3,7 @@ services:
   web:
     build: .
     ports:
-      - '3000:3000'
+      - '3030:3030'
     volumes:
       - .:/opt/home-js
       - /opt/home-js/node_modules
@@ -11,6 +11,8 @@ services:
       - db
   db:
     image: 'mongo:latest'
+    ports:
+      - '27018:27017'
   broker:
     image: 'ansi/mosquitto'
     ports:

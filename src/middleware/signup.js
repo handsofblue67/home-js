@@ -15,7 +15,7 @@ module.exports = function (app) {
       admin: body.admin,
     })
       // Then redirect to the login page
-      .then(user => res.send(user))
+      .then(user => res.sendStatus(200))
       // On errors, just call our error middleware
       .catch(next);
   };

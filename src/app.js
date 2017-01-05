@@ -24,6 +24,7 @@ app.use(compress())
   .use(favicon( path.join(app.get('public'), 'assets/favicon.ico') ))
   .use('/', serveStatic( app.get('public') ))
   .use('/login', serveStatic( app.get('public') ))
+  .use('/todo', serveStatic( app.get('public') ))
   
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))

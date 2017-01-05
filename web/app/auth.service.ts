@@ -24,7 +24,7 @@ export class AuthService {
   login(username: string, password: string): Observable<boolean> {
     const headers = new Headers({ 'Content-Type': 'application/json' })
     const options = new RequestOptions({ headers: headers })
-    return this.http.post('auth/local', JSON.stringify({ username: username, password: password }), options)
+    return this.http.post('auth/local', JSON.stringify({ strategy: 'local', username: username, password: password }), options)
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
         const token = response.json() && response.json().token

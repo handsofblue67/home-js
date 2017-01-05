@@ -10,6 +10,7 @@ import { HomeComponent } from './home'
 import { LoginComponent } from './login'
 import { MapComponent } from './map'
 import { TemperatureComponent } from './temperature'
+import { TodosComponent } from './todos'
 import { ToggleComponent } from './toggle'
 
 const appRoutes: Routes = [
@@ -22,7 +23,8 @@ const appRoutes: Routes = [
     { path: 'debug', component: BrokerComponent, canActivate: [AuthGuard] },
     { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
     { path: 'food-dispenser', component: FoodDispenserComponent, canActivate: [AuthGuard] },
-    {path: 'temperature', component: TemperatureComponent, canActivate: [AuthGuard] },
+    { path: 'temperature', component: TemperatureComponent, canActivate: [AuthGuard] },
+    { path: 'todos', component: TodosComponent },
     { path: '**', redirectTo: ''},
 ]
 
@@ -37,5 +39,6 @@ export const routedComponents = [
     LoginComponent,
     MapComponent,
     TemperatureComponent,
+    TodosComponent,
     ToggleComponent,
 ]

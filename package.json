@@ -31,7 +31,7 @@
     "@angular/core": "^2.2.3",
     "@angular/forms": "^2.2.3",
     "@angular/http": "^2.2.3",
-    "@angular/material": "^2.0.0-alpha.10",
+    "@angular/material": "^2.0.0-beta.1",
     "@angular/platform-browser": "^2.2.3",
     "@angular/platform-browser-dynamic": "^2.2.3",
     "@angular/router": "^3.2.3",
@@ -51,6 +51,7 @@
     "express": "^4.14.0",
     "feathers": "^2.0.3",
     "feathers-authentication": "^0.7.12",
+    "feathers-client": "^1.9.0",
     "feathers-configuration": "^0.3.3",
     "feathers-errors": "^2.5.0",
     "feathers-hooks": "^1.7.1",
@@ -72,7 +73,7 @@
     "superagent": "^3.3.1",
     "ts-helpers": "~1.1.1",
     "winston": "^2.3.0",
-    "zone.js": "~0.6.23"
+    "zone.js": "^0.6.26"
   },
   "devDependencies": {
     "@types/jasmine": "~2.2.30",

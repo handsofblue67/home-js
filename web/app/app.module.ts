@@ -8,19 +8,20 @@ import { ChartModule } from 'angular2-highcharts'
 import { AgmCoreModule } from 'angular2-google-maps/core'
 
 import { AppComponent } from './app.component'
+import { AuthGuard } from './auth-guard.service'
+import { AuthService } from './auth.service'
 import { BackendService } from './backend.service'
+import { BrokerService } from './broker'
+import { ChartService } from './chart'
 import { ChatService } from './chat'
 import { GeofenceService } from './map'
-import { ChartService } from './chart'
-import { ToggleService } from './toggle'
-import { BrokerService } from './broker'
-import { AuthService } from './auth.service'
-import { UserService } from './user.service'
-import { AuthGuard } from './auth-guard.service'
-import { routing, routedComponents } from './app.routing'
 import { FoodDispenserService } from './food-dispenser'
-import { TemperatureService } from './temperature'
+import { routing, routedComponents } from './app.routing'
 import { ShadowOnScrollDirective } from './shared'
+import { TemperatureService } from './temperature'
+import { TodoService } from './todos'
+import { ToggleService } from './toggle'
+import { UserService } from './user.service'
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ShadowOnScrollDirective } from './shared'
     FoodDispenserService,
     GeofenceService,
     TemperatureService,
+    TodoService,
     ToggleService,
     UserService,
   ],

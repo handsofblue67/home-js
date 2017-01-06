@@ -12,8 +12,8 @@ const userSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
+  firstName: { type: String },
+  lastName: { type: String },
   picture: { type: String, 'default': 'nopic_192.gif' },
   admin: { type: Boolean, 'default': false },
   

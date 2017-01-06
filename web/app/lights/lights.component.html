@@ -1,0 +1,5 @@
+<md-card *ngFor="let light of (lightsService.lights$ | async)?.data">
+	<!--<md-card-title>{{light.name || light.deviceID}}</md-card-title>-->
+	<!--<md-slide-toggle [(ngModel)]="light.status.pins[0].status" color="accent" (change)="toggle(light)"></md-slide-toggle>-->
+	<!--<button *ngIf="!light.status?.pins[0].status" md-raised-button color="warn" (click)="toggle(light)">Off</button>-->
+</md-card>

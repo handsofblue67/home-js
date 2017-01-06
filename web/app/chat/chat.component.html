@@ -2,14 +2,14 @@
   <md-card>
     <md-card-content>
       <md-input dividerColor="accent" placeholder="Send Message" [(ngModel)]="message"></md-input>
-      <button md-raised-button color="accent" (click)="sendMessage()">Send</button>
+      <button md-raised-button color="accent" (click)="create()">Send</button>
     </md-card-content>
   </md-card>
-  <md-card *ngFor="let message of messages">
+  <md-card *ngFor="let message of (chatService.messages$ | async)?.data">
     <md-card-header>
-      <img *ngIf="message.avatar" md-card-avatar [src]="message.avatar">
-      <md-card-title>{{message.user}}</md-card-title>
-      <md-card-subtitle>{{message.timestamp}}</md-card-subtitle>
+      <img *ngIf="message.picture" md-card-avatar [src]="message.picture">
+      <!--<md-card-title>{{message.user}}</md-card-title>-->
+      <!--<md-card-subtitle>{{message.createdAt}}</md-card-subtitle>-->
     </md-card-header>
     <md-card-content>{{message.text}}</md-card-content>
   </md-card>

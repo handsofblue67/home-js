@@ -1,4 +1,6 @@
 'use strict';
+const chat = require('./chat');
+const lights = require('./lights');
 const todos = require('./todos');
 const devices = require('./devices');
 const authentication = require('./authentication');
@@ -14,4 +16,6 @@ module.exports = function() {
   app.configure(user);
   app.configure(devices);
   app.configure(todos);
+  app.configure(lights);
+  app.configure(chat);
 };

@@ -20,8 +20,8 @@ import { routing, routedComponents } from './app.routing'
 import { ShadowOnScrollDirective } from './shared'
 import { TemperatureService } from './temperature'
 import { TodoService } from './todos'
-import { ToggleService } from './toggle'
-import { UserService } from './user.service'
+import { LightsService } from './lights'
+import { UsersService } from './users'
 
 @NgModule({
   declarations: [
@@ -47,10 +47,10 @@ import { UserService } from './user.service'
     ChatService,
     FoodDispenserService,
     GeofenceService,
+    LightsService,
     TemperatureService,
     TodoService,
-    ToggleService,
-    UserService,
+    UsersService,
   ],
   bootstrap: [ AppComponent ]
 })

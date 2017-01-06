@@ -6,9 +6,8 @@ import { AuthService } from '../auth.service'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: [ './login.component.css' ]
+  styleUrls: ['./login.component.css']
 })
-
 export class LoginComponent implements OnInit {
   model: any = {}
   loading = false
@@ -25,14 +24,16 @@ export class LoginComponent implements OnInit {
     this.loading = true
     this.authService.login(this.model.username, this.model.password)
       .subscribe(result => {
-        if (result === true) {
+        if (result) {
           // login successful
           console.log('login successful')
           this.loading = false
-          this.router.navigate(['/home'])
+          this.router.navigate(['/users'])
+            .then(result => console.log(`redirection ${result ? 'succeeded' : 'failed'}`))
+            .catch(console.warn)
         } else {
           // login failed
-          console.log('login failed')
+          console.log('login failed', result)
           this.error = this.authService.message
           this.loading = false
         }

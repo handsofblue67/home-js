@@ -25,6 +25,7 @@ app.use(compress())
   .use('/', serveStatic( app.get('public') ))
   .use('/login', serveStatic( app.get('public') ))
   .use('/todo', serveStatic( app.get('public') ))
+  .use('/home', serveStatic( app.get('public') ))
   
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))

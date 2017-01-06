@@ -5,6 +5,7 @@ const winston = require('winston');
 module.exports = function(app) {
   // Add a logger to our app object for convenience
   app.logger = winston;
+  winston.level = 'debug';
 
   return function(error, req, res, next) {
     if (error) {

@@ -9,9 +9,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const lightsSchema = new Schema({
-  text: { type: String, required: true },
-  createdAt: { type: Date, 'default': Date.now },
-  updatedAt: { type: Date, 'default': Date.now }
+  _id: { type: String, 'default': () => `${deviceID}_${timestamp}` },
+  deviceID: { type: String, required: true },
+  timestamp: { type: Date },
+  timeSeries: { type: Boolean },
+  dimmable: { type: Boolean, 'default': false },
+  purpose: { type: String },
+  state: { type: Boolean }
 });
 
 const lightsModel = mongoose.model('lights', lightsSchema);

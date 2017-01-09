@@ -8,7 +8,6 @@ module.exports = function (app) {
     app.service('users').create({
       username: body.username,
       password: body.password,
-
       firstName: body.firstName,
       lastName: body.lastName,
       picture: body.picture,

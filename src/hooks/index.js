@@ -7,7 +7,15 @@
 // on hooks.
 
 exports.myHook = function(options) {
-  return function(hook) {
+  return function (hook) {
     console.log('My custom global hook ran. Feathers is awesome!');
   };
+};
+
+exports.pushToDevice = function(options) {
+  return function (hook) {
+    console.log('pushToDevice Hook: ', hook);
+    app.mqttClient.publish(pub.topic, pub.message);
+    return Promise.resolve(hook);
+  }
 };

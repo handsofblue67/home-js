@@ -1,14 +1,14 @@
 'use strict';
 
 const service = require('feathers-mongoose');
-const lights = require('./lights-model');
+const componentState = require('./componentState-model');
 const hooks = require('./hooks');
 
 module.exports = function() {
   const app = this;
 
   const options = {
-    Model: lights,
+    Model: componentState,
     paginate: {
       default: 5,
       max: 25
@@ -16,14 +16,14 @@ module.exports = function() {
   };
 
   // Initialize our service with any options it requires
-  app.use('/lights', service(options));
+  app.use('/componentStates', service(options));
 
   // Get our initialize service to that we can bind hooks
-  const lightsService = app.service('/lights');
+  const componentStateService = app.service('/componentStates');
 
   // Set up our before hooks
-  lightsService.before(hooks.before);
+  componentStateService.before(hooks.before);
 
   // Set up our after hooks
-  lightsService.after(hooks.after);
+  componentStateService.after(hooks.after);
 };

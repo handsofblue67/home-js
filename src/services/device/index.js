@@ -1,29 +1,30 @@
 'use strict';
 
 const service = require('feathers-mongoose');
-const devices = require('./devices-model');
+const device = require('./device-model');
 const hooks = require('./hooks');
 
-module.exports = function() {
+module.exports = function () {
   const app = this;
 
   const options = {
-    Model: devices,
+    Model: device,
+    id: 'deviceID',
     paginate: {
       default: 5,
       max: 25
     }
-  }
+  };
 
   // Initialize our service with any options it requires
   app.use('/devices', service(options));
 
   // Get our initialize service to that we can bind hooks
-  const devicesService = app.service('/devices');
+  const deviceService = app.service('/devices');
 
   // Set up our before hooks
-  devicesService.before(hooks.before);
+  deviceService.before(hooks.before);
 
   // Set up our after hooks
-  devicesService.after(hooks.after);
+  deviceService.after(hooks.after);
 }

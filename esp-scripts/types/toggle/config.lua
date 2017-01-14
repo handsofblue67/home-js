@@ -1,11 +1,7 @@
--- file : config.lua
-local module = {}
+local module={}
 
+module.ID = node.chipid()
 module.SSID = {}
 module.SSID["Stormageddon"]= "WateryWater856"
-
-module.HOST = "192.168.1.6"
-module.PORT = 1883
-module.ID = node.chipid()
 
 return module

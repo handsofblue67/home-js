@@ -20,7 +20,6 @@ local function toggle_state()
 end
 
 local function init_settings()
-  -- initial output pin state
   module.status={}
   module.status.deviceID=config.ID
   module.status.pins={}
@@ -31,20 +30,11 @@ local function init_settings()
     purpose="Toggle lights",
     status=gpio.LOW
   }
-  -- module.status.pins[1]={
-  --   number=2,
-  --   type="digitalInput",
-  --   purpose="Physical toggle button",
-  --   status=nil
-  -- }
 
   print(tostring(cjson.encode(module.status)))
 
   gpio.mode(module.status.pins[0].number, gpio.OUTPUT)
   gpio.write(module.status.pins[0].number, module.status.pins[0].status)
-
-  -- gpio.mode(module.status.pins[1].number, gpio.INT, gpio.PULLUP)
-  -- gpio.trig(module.status.pins[1].number, "down", toggle_state)
 
 end
 

@@ -4,38 +4,24 @@ m = nil
 
 local function send_status()
   seconds, millis=rtctime.get()
-  module.status.timestamp=tonumber(tostring(seconds) .. tostring(math.floor(millis/1000)))
-  m:publish(settings.topics.pub.status, cjson.encode(module.status),0,0)
-  print(cjson.encode(module.status))
+  settings.dateCreated=tonumber(tostring(seconds) .. tostring(math.floor(millis/1000)))
+  m:publish(settings.topics.pub.status, cjson.encode(settings),0,0)
+  print(cjson.encode(settings))
 end
 
 local function toggle_state()
-  if module.status.pins[0].status == gpio.HIGH then
-    module.status.pins[0].status = gpio.LOW
-  else
-    module.status.pins[0].status = gpio.HIGH
+  settings.components.light1.controlState = if settings.components.lights.controlState == gpio.HIGH
+    then gpio.LOW 
+    else gpio.HIGH 
   end
-  gpio.write(module.status.pins[0].number, module.status.pins[0].status)
+  gpio.write(settings.components.light1.pinNumber, settings.components.light1.controlState)
   send_status()
 end
 
 local function init_settings()
-  module.status={}
-  module.status.deviceID=config.ID
-  module.status.pins={}
-
-  module.status.pins[0]={
-    number=1,
-    type="digitalOutput",
-    purpose="Toggle lights",
-    status=gpio.LOW
-  }
-
-  print(tostring(cjson.encode(module.status)))
-
-  gpio.mode(module.status.pins[0].number, gpio.OUTPUT)
-  gpio.write(module.status.pins[0].number, module.status.pins[0].status)
-
+  print(tostring(cjson.encode(settings)))
+  gpio.mode(settings.components.light1.pinNumber, gpio.OUTPUT)
+  gpio.write(settings.components.light1.pinNumber, settings.components.light1.controlState)
 end
 
 local function alter_settings(topic)

@@ -5,26 +5,20 @@
 		<div *ngIf="authService.currentUser"><button md-button routerLink="/lights">Lights</button></div>
 		<div *ngIf="authService.currentUser"><button md-button routerLink="/maps">Map</button></div>
 		<div *ngIf="authService.currentUser"><button md-button routerLink="/chat">Chat</button></div>
+		<div *ngIf="authService.currentUser"><button md-button routerLink="/temperature">Temperature</button></div>
 		<div *ngIf="authService.currentUser"><button md-button routerLink="/debug">Debug</button></div>
 		<!--<div *ngIf="authService.currentUser"><button md-button routerLink="/food-dispenser">Food Dispenser</button></div>-->
 	</md-sidenav>
 
 	<md-toolbar color="primary">
-		<button md-icon-button (click)="nav.toggle()">
-			<md-icon>menu</md-icon>
-		</button>
+		<button md-icon-button (click)="nav.toggle()"><md-icon>menu</md-icon></button>
 		<md-icon svgSrc="/assets/homejs.svg"></md-icon>
 		<span>HomeJS</span>
 		<span class="fill"></span>
-		<!--<button md-button (click)="auth.login()" *ngIf="!auth.loggedIn()">Log In</button>-->
-		<!--<button md-button (click)="auth.logout()" *ngIf="auth.loggedIn()">Log Out</button>-->
-		<button md-button *ngIf="authService.currentUser">{{authService.currentUser.firstName}}</button>
+		<button md-button *ngIf="authService.currentUser" routerLink="/home">{{authService.currentUser.firstName}}</button>
 		<span *ngIf="authService.currentUser?.picture"><img md-card-avatar [src]="authService.currentUser.picture"></span>
 	</md-toolbar>
 
-	<!--<div>Red<md-slider min="0" max="1023" #red (slide)="backend.publishRGB(red.value, green.value, blue.value)"></md-slider></div>-->
-	<!--<div>Green<md-slider min="0" max="1023" #green (slide)="backend.publishRGB(red.value, green.value, blue.value)"></md-slider></div>-->
-	<!--<div>Blue<md-slider min="0" max="1023" #blue (slide)="backend.publishRGB(red.value, green.value, blue.value)"></md-slider></div>-->
 	<div class="card-container">
 		<router-outlet></router-outlet>
 	</div>

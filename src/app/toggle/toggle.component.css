@@ -2,3 +2,8 @@ md-card {
   margin: 0 16px 16px 0;
   width: 110px;
 }
+
+md-card-actions {
+  display: flex;
+  flex-direction: column;
+}

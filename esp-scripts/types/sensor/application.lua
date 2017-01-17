@@ -33,12 +33,12 @@ local function init_settings()
   gpio.trig(module.status.pins[1].number, "down", send_state)
 end
 
-local function alter_settings(data)
-  send_settings()
-end
-
 local function send_settings()
   m:publish(settings.topics.pub.currentSettings, cjson.encode(settings),0,0)
+end
+
+local function alter_settings(data)
+  send_settings()
 end
 
 -- subscriptions

@@ -1,69 +1,53 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
+import { BehaviorSubject } from 'rxjs/BehaviorSubject'
+import { Router } from '@angular/router'
+
 import 'rxjs/add/operator/map'
 import * as feathers from 'feathers-client'
 import * as io from 'socket.io-client'
-import * as superagent from 'superagent'
 import * as _ from 'lodash'
 
 import { User } from './models'
 
 @Injectable()
 export class AuthService {
-  private _url: string = 'http://localhost:3030'
+  // private _url: string = 'http://localhost:3030'
+  authenticated = false
+  private authSource = new BehaviorSubject<boolean>(this.authenticated)
+  public auth$ = this.authSource.asObservable().skipWhile(x => x === false).share()
   public feathersApp: any
   public token: string
   public message = ''
   public currentUser: User
-  public socket = io(this._url)
-  public authenticated = false
-
-  constructor() {
-    if (localStorage.getItem('feathers-jwt')) {
-      this.feathersApp = feathers()
-        .configure(feathers.socketio(this.socket))
-        .configure(feathers.hooks())
-        .configure(feathers.authentication({ storage: window.localStorage }))
-    } else {
-      this.feathersApp = feathers()
-        .configure(feathers.rest(this._url).superagent(superagent))
-        .configure(feathers.hooks())
-        .configure(feathers.authentication({ storage: window.localStorage }))
-    }
+  public socket = io('/')
+  
+  constructor(private router: Router) {
+    this.feathersApp = feathers()
+      .configure(feathers.socketio(this.socket))
+      .configure(feathers.hooks())
+      .configure(feathers.authentication({ storage: localStorage }))
+    this.feathersApp.authenticate().then(() => {
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser'))
+      this.authenticated = true
+      this.authSource.next(this.authenticated)
+    }).catch(error => {
+      if (error.code === 401) {
+        router.navigate(['/login'])
+      }
+      console.error(error)
+    })
   }
 
-  authenticate() {
-    this.feathersApp.authenticate()
-  }
-
-  login(username: string, password: string): Observable<boolean> {
+  login(username: string, password: string) {
+    this.feathersApp.configure(feathers.authentication({ storage: localStorage }))
     return Observable.fromPromise(
       this.feathersApp.authenticate({
         type: 'local',
-        strategy: 'local',
         username: username,
         password: password
       }))
       .map((result: any) => {
-        console.log(result)
-        this.token = result && result.token
-        this.currentUser = result.data
-        localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
-        this.authenticated = this.token ? true : false
-        return this.authenticated
-      })
-      .catch(this.handleError)
-  }
-
-  tokenAuth(): Observable<any> {
-    // Authenticating using a token instead
-    return Observable.fromPromise(
-      this.feathersApp.authenticate({
-        type: 'token',
-        'token': localStorage.getItem('feathers-jwt')
-      }))
-      .map((result: any) => {
-        console.log(result)
         this.token = result && result.token
         this.currentUser = result.data
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
@@ -78,7 +62,9 @@ export class AuthService {
     this.token = null
     localStorage.removeItem('currentUser')
     localStorage.removeItem('feathers-jwt')
+    this.currentUser = null
     this.authenticated = false
+    this.router.navigate(['/login'])
   }
 
   private handleError(err: any) {
@@ -87,9 +73,9 @@ export class AuthService {
     return Observable.throw(errMsg)
   }
 
-  getService(route: string): Observable<any> {
-    return this.authenticated ?
-      Observable.of(this.feathersApp.service(route)) :
-      this.tokenAuth().map(res => this.feathersApp.service(route))
+  getService(route: string) {
+    return this.feathersApp.service(route)
   }
+
+
 }

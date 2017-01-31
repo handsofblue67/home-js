@@ -29,6 +29,7 @@
 - Data Models
 - Handshake Protocol
 - RFID R&D
+- modularization of device component code
 
 #### Schedule
 Week | Goal 

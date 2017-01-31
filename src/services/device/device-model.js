@@ -13,14 +13,15 @@ const deviceSchema = new Schema({
   name: { type: String },
   checkinFreq: { type: Number },
   deviceType: { type: String },
-  components: { type: Schema.Types.Mixed }, // we dont want this to be an array, we want to get the component by name... stupid mongoose
-  /*[{
-    type: { type: String },
-    name: { type: String },
-    controlState: { type: Schema.Types.Mixed },
-    changedAt: { type: Date, 'default': Date.now },
-    isTimeSeries: { type: Boolean, 'default': false }
-  }],*/
+  components: [
+    {
+      type: { type: String },
+      name: { type: String },
+      controlState: { type: Schema.Types.Mixed },
+      changedAt: { type: Date, 'default': Date.now },
+      isTimeSeries: { type: Boolean, 'default': false }
+    }
+  ],
   topics: {
     sub: {
       settings: { type: String },
@@ -44,11 +45,12 @@ module.exports = deviceModel;
 //   "name": "Test Device",
 //   "checkinFreq": 6000000,
 //   "deviceType": "Test",
-//   "components":[{
-//     "type": "testComponent",
-//     "name": "Test Component 1",
-//     "controlState":  false,
-//   }],
+//   "components": {
+//     "Test Component 1": {
+//       "type": "toggle",
+//       "controlState":  false,
+//     }
+//   },
 //   "topics": {
 //     "sub": {
 //       "settings": "/settings/testdevice",

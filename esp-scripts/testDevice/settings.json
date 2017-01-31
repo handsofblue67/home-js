@@ -1,0 +1,22 @@
+{
+  "deviceID": "testdevice",
+  "name": "Test Device",
+  "deviceType": "Test",
+  "components": [
+    {
+      "name": "Test Component 1",
+      "controlState": false,
+      "type": "toggle"
+    }
+  ],
+  "topics": {
+    "pub": {
+      "status": "/status/testdevice",
+      "currentSettings": "/currentSettings/testdevice"
+    },
+    "sub": {
+      "reqStatus": "/reqStatus/testdevice",
+      "settings": "/settings/testdevice"
+    }
+  }
+}

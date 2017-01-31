@@ -17,11 +17,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     // reset login status
-    this.authService.logout()
+    // this.authService.logout()
   }
 
   login() {
-    this.loading = true
+    // this.loading = true
     this.authService.login(this.model.username, this.model.password)
       .subscribe(result => {
         if (result) {
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
           console.log('login successful')
           this.loading = false
           this.router.navigate(['/users'])
-            .then(result => console.log(`redirection ${result ? 'succeeded' : 'failed'}`))
+            .then(didRoute => console.log(`redirection ${didRoute ? 'succeeded' : 'failed'}`))
             .catch(console.warn)
         } else {
           // login failed

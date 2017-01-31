@@ -10,7 +10,15 @@ const Schema = mongoose.Schema;
 
 const componentStateSchema = new Schema({
   _id: { type: String },
-  components: { type: Schema.Types.Mixed }
+  components: [
+    {
+      type: { type: String, required: true },
+      name: { type: String, required: true },
+      controlState: { type: Schema.Types.Mixed },
+      changedAt: { type: Date, 'default': Date.now },
+      isTimeSeries: { type: Boolean, 'default': false }
+    }
+  ]
 });
 
 const componentStateModel = mongoose.model('componentState', componentStateSchema);

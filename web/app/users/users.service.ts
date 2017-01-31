@@ -19,24 +19,25 @@ export class UsersService {
 
   // TODO: figure out how to not get a new token everytime a service is called...
   constructor(private authService: AuthService) {
-    authService.getService('users').subscribe(feathersService => {
-      this.feathersService = feathersService
+    this.dataStore = { users: [] }
+    this.users$ = <Observable<User[]>>new Observable(observer => this.usersObserver = observer).share()
+
+    // authService.auth$.subscribe(loggedIn => {
+      this.feathersService = this.authService.getService('users')
       this.feathersService
         .on('created', user => this.onCreated(user))
         .on('updated', user => this.onUpdated(user))
         .on('removed', user => this.onRemoved(user))
-      this.users$ = <Observable<User[]>>new Observable(observer => this.usersObserver = observer).share()
-      this.dataStore = { users: [] }
       this.find()
-    })
+    // })
   }
 
   public find() {
-    this.feathersService.find((err, users: User[]) => {
-      if (err) return console.error(err)
-      this.dataStore.users = users
-      this.usersObserver.next(this.dataStore.users)
-    })
+    this.feathersService.find({query: {}})
+      .then((users: any[]) => {
+        this.dataStore.users = users
+        this.usersObserver.next(this.dataStore.users)
+     })
   }
 
   private getIndex(id: string): number {

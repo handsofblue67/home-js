@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component } from '@angular/core'
+import { MdSnackBar } from '@angular/material'
 
 import { Subscription } from 'rxjs/Subscription'
 
@@ -9,23 +10,15 @@ import { DeviceService } from './device.service'
   templateUrl: './devices.component.html',
   styleUrls: [ './devices.component.css' ],
 })
-export class DevicesComponent implements OnInit, OnDestroy {
+export class DevicesComponent {
   connection: Subscription
   devices: any[] = []
 
-  constructor(private deviceService: DeviceService) { }
-
-  ngOnInit() {
-    this.connection = this.deviceService.devices$
-      .subscribe(devices => this.devices = devices)
-  }
+  constructor(private deviceService: DeviceService, public snackBar: MdSnackBar) { }
 
   toggle(device: any, index: number): void {
-    console.log('changed toggle state')
     this.deviceService.toggle(device, index)
-  }
-
-  ngOnDestroy() {
-    this.connection.unsubscribe()
+    let snackBarRef = this.snackBar.open('Pushed new state to device', null, {duration: 1000})
+    snackBarRef.afterOpened().subscribe(() => console.log('snackBar closed'))
   }
 }

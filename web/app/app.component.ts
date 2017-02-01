@@ -1,4 +1,6 @@
 import { Component } from '@angular/core'
+import {DomSanitizer} from '@angular/platform-browser';
+import { MdIconRegistry } from '@angular/material'
 
 import { AuthService } from './auth.service'
 
@@ -9,7 +11,13 @@ import { AuthService } from './auth.service'
 })
 export class AppComponent {
   atTop: boolean = true
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    public iconRegistry: MdIconRegistry,
+    private sanitizer: DomSanitizer) {
+      iconRegistry.addSvgIcon('homejs',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/homejs.svg'))
+  }
 
   scrolling(event: any) {
     console.log(event.target.value)

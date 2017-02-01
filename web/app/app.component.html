@@ -2,15 +2,17 @@
 	<button md-icon-button (click)="nav.toggle()">
 			<md-icon>menu</md-icon>
 		</button>
-	<md-icon svgSrc="/assets/homejs.svg"></md-icon>
+	<md-icon svgIcon="homejs"></md-icon>
 	<span>HomeJS</span>
 	<span class="fill"></span>
 	<button md-button *ngIf="authService.currentUser" routerLink="/users">{{authService.currentUser.firstName}}</button>
 	<span *ngIf="authService.currentUser?.picture"><img md-card-avatar [src]="authService.currentUser.picture"></span>
 </md-toolbar>
 
-<md-sidenav-layout class="sidenav-layout" (swipeleft)="nav.close()" (scroll)="scrolling($event)">
-	<md-sidenav #nav mode="side">
+<md-sidenav-container class="sidenav-container" (swipeleft)="nav.close()" (scroll)="scrolling($event)">
+	<md-sidenav #nav mode="side" class="">
+		<div class="scrolling-content">
+
 		<!--<div *ngIf="authService.currentUser"><button md-button routerLink="/charts">Charts</button></div>-->
 		<div *ngIf="authService.authenticated"><button md-button routerLink="/devices">Devices</button></div>
 		<!--<div *ngIf="authService.currentUser"><button md-button routerLink="/lights">Lights</button></div>-->
@@ -20,9 +22,10 @@
 		<!--<div *ngIf="authService.currentUser?.admin"><button md-button routerLink="/debug">Debug</button></div>-->
 		<!--<div><button md-button routerLink="/todos">Todos</button></div>-->
 		<!--<div *ngIf="authService.currentUser"><button md-button routerLink="/food-dispenser">Food Dispenser</button></div>-->
+		</div>
 	</md-sidenav>
 
-	<div class="card-container">
+	<div class="card-container scrolling-content">
 		<router-outlet></router-outlet>
 	</div>
-</md-sidenav-layout>
+</md-sidenav-container>

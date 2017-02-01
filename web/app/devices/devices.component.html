@@ -1,11 +1,10 @@
-<md-card *ngFor="let device of (deviceService.devices$ | async)?.data">
-  {{device | json}}
+<md-card *ngFor="let device of (deviceService.devices$ | async)">
+  <!--{{device | json}}-->
   <md-card-title>{{device.name || device.deviceID}}</md-card-title>
-  <md-card-content>{{device.type}}</md-card-content>
+  <md-card-content>{{device.deviceType}}</md-card-content>
   <div *ngFor="let component of device.components; let i = index">
-    <md-slide-toggle *ngIf="component.type === 'toggle'" color="accent"
-                     [(ngModel)]="component.controlState"
-                     (change)="deviceService.toggle(device, i)"></md-slide-toggle>
+    <md-slide-toggle *ngIf="component.type === 'toggle'" color="accent" [(ngModel)]="component.controlState" (change)="toggle(device, i)"
+      [mdTooltip]="'Slide to toggle ' + device.name || device.deviceID" mdTooltipPosition="right"></md-slide-toggle>
   </div>
   <!--<button md-raised-button color="warn" (click)="deviceService.toggle(device, 'Test Component 1')">Off</button>-->
 </md-card>

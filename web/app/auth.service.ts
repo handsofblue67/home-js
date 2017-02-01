@@ -32,9 +32,9 @@ export class AuthService {
       this.authenticated = true
       this.authSource.next(this.authenticated)
     }).catch(error => {
-      if (error.code === 401) {
+      // if (error.code === 401) {
         router.navigate(['/login'])
-      }
+      // }
       console.error(error)
     })
   }

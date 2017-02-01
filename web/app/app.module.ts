@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
-import { MaterialModule } from '@angular/material'
+import { MaterialModule, MdSnackBar } from '@angular/material'
 
 // import { ChartModule } from 'angular2-highcharts'
 // import { AgmCoreModule } from 'angular2-google-maps/core'
@@ -50,6 +50,7 @@ import { KeysPipe } from './keys.pipe'
     // FoodDispenserService,
     // GeofenceService,
     // LightsService,
+    MdSnackBar,
     // TemperatureService,
     // TodoService,
     UsersService,

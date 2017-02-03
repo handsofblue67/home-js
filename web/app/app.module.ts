@@ -22,7 +22,7 @@ import { routing, routedComponents } from './app.routing'
 // import { TodoService } from './todos'
 // import { LightsService } from './lights'
 import { UsersService } from './users';
-import { KeysPipe } from './keys.pipe'
+import { KeysPipe } from './keys.pipe';
 
 @NgModule({
   declarations: [

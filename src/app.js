@@ -26,6 +26,7 @@ app.use(compress())
   .use('/login', serveStatic(app.get('public')))
   .use('/home', serveStatic(app.get('public')))
   .use('/devices', serveStatic(app.get('public')))
+  .use('/calendar', serveStatic(app.get('public')))
   
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))

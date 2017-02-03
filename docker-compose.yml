@@ -17,3 +17,7 @@ services:
     image: 'ansi/mosquitto'
     ports:
       - '1883:1883'
+  mock-device:
+    build: mock-device
+    depends_on:
+      - broker

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router'
 // Add the AuthGuard service
 import { AuthGuard } from './auth-guard.service'
 // import { BrokerComponent } from './broker'
+import { CalendarComponent } from './calendar'
 // import { ChartComponent } from './chart'
 // import { ChatComponent } from './chat'
 import { DevicesComponent } from './devices'
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'devices', component: DevicesComponent, canActivate: [AuthGuard] },
     { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
+    { path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
     // { path: 'maps', component: MapComponent, canActivate: [AuthGuard] },
     // { path: 'charts', component: ChartComponent, canActivate: [AuthGuard] },
     // { path: 'lights', component: LightsComponent, canActivate: [AuthGuard] },
@@ -36,6 +38,7 @@ export const routedComponents = [
     // BrokerComponent,
     // ChartComponent,
     // ChatComponent,
+    CalendarComponent,
     DevicesComponent,
     // FoodDispenserComponent,
     UsersComponent,

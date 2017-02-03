@@ -1,0 +1,12 @@
+<!--<iframe src="https://calendar.google.com/calendar/embed?src=michaelrobison168%40gmail.com&ctz=America/Denver" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>-->
+
+<!--<md-grid-list cols="7" rowHeight="100px">
+  <md-grid-tile *ngFor="let tile of tiles" colspan="7" rowspan="5" [style.background]="'lightblue'">num</md-grid-tile>
+</md-grid-list>-->
+<md-grid-list cols="7" rowHeight="1:1">
+  <md-grid-tile *ngFor="let weekday of weekdays" [colspan]="'1'" [rowspan]="'1'">{{weekday}}</md-grid-tile>
+  <md-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color" [@tileState]="tile.state"
+    (mouseenter)="enter(tile)" (mouseleave)="leave(tile)">
+    {{tile.text}}
+    </md-grid-tile>
+</md-grid-list>

@@ -46,8 +46,8 @@ export class DeviceService {
     this.deviceSource.next(this.devices)
   }
 
-  private onRemoved(device) {
-    this.devices = _.without(this.devices, device)
+  private onRemoved(removedDevice) {
+    this.devices = _.reject(this.devices, ['deviceID', removedDevice.deviceID])
     this.deviceSource.next(this.devices)
   }
 

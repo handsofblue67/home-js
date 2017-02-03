@@ -24,7 +24,7 @@ exports.before = {
   get: [],
   create: [],
   update: [ 
-    debug(),
+    // debug(),
     commonHooks.iff(commonHooks.isProvider('external'), push())
   ],
   patch: [],

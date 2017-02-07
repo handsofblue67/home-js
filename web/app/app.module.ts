@@ -21,14 +21,16 @@ import { routing, routedComponents } from './app.routing'
 // import { TemperatureService } from './temperature'
 // import { TodoService } from './todos'
 // import { LightsService } from './lights'
-import { UsersService } from './users';
+import { UsersService } from './users'
 import { KeysPipe } from './keys.pipe';
+import { SensorComponent } from './devices/sensor/sensor.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     routedComponents,
     KeysPipe,
+    SensorComponent,
   ],
   imports: [
     // AgmCoreModule.forRoot({apiKey: 'AIzaSyDb-Foka_83ay6ofqqwuB33F_p11vtlBjY'}),

@@ -31,6 +31,7 @@ local function wifi_start(list_aps)
         print("Connecting to " .. key .. " ...")
         --config.SSID = nil  -- can save memory
         tmr.alarm(1, 2500, 1, wifi_wait_ip)
+
       end
     end
   else

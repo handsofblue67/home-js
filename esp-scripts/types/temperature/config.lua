@@ -2,9 +2,9 @@
 local module = {}
 
 module.SSID = {}
-module.SSID["Stormageddon"]= "WateryWater856"
+-- module.SSID["Stormageddon"] = "WateryWater856"
 
-module.HOST = "192.168.1.6"
+module.HOST = nil
 module.PORT = 1883
 module.ID = node.chipid()
 

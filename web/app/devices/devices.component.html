@@ -8,6 +8,11 @@
   <div *ngFor="let component of device.components; let i = index">
     <md-slide-toggle *ngIf="component.type === 'toggle'" color="accent" [(ngModel)]="component.controlState" (change)="toggle(device, i)"
       [mdTooltip]="'Slide to toggle ' + device.name || device.deviceID" mdTooltipPosition="right"></md-slide-toggle>
-    <app-sensor *ngIf="component.type === 'mock-sensor'" [sensorValue]="component.controlState"></app-sensor>
+    <app-sensor *ngIf="component.type === 'sensor'" [component]="component"></app-sensor>
+
   </div>
+  <!--<button md-raised-button color="warn" (click)="deviceService.toggle(device, 'Test Component 1')">Off</button>-->
 </md-card>
+
+<!--<button md-raised-button color="warn" (click)="deviceService.add()">Add Stuff</button>-->
+>>>>>>> e61be1cfbe951d8b36f6ddeed2b873f5894d14cf

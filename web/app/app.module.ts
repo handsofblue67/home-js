@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser'
+import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
@@ -35,6 +36,7 @@ import { SensorComponent } from './devices/sensor/sensor.component'
   imports: [
     // AgmCoreModule.forRoot({apiKey: 'AIzaSyDb-Foka_83ay6ofqqwuB33F_p11vtlBjY'}),
     BrowserModule,
+    CommonModule,
     // ChartModule,
     FormsModule,
     HttpModule,

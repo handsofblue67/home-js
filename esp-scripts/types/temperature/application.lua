@@ -10,29 +10,21 @@ local function syncTime()
   end, print)
 end
 
-local function send_state()
-  status, temp, humi, tempDec, humiDec = dht.read11(module.status.pins[0].number)
+local function update_settings()
+  status, temp, humi, tempDec, humiDec = dht.read11(1)
+  settings.components[1].controlState=temp
+  settings.components[2].controlState=humi
   seconds, millis=rtctime.get()
-  module.status.timestamp=tonumber(tostring(seconds) .. tostring(math.floor(millis/1000)))
-  module.status.pins[0].status={status=status, temp=temp, humi=humi }
-  m:publish(settings.topics.pub.status, cjson.encode(module.status),0,0)
-  print(cjson.encode(module.status))
+  settings.dateCreated=tonumber(tostring(seconds) .. tostring(math.floor(millis/1000))) 
 end
-
-local function init_settings()
-  module.status={}
-  module.status.deviceID=config.ID
-  module.status.pins={}
-
-  module.status.pins[0]={
-    number=1,
-    type="digitalInput",
-    purpose="Temperature/Humidity Sensor",
-    status=nil
-  }
+local function send_state(topic)
+  update_settings()
+  m:publish(settings.topics.pub.status, cjson.encode(settings),0,0) 
+  -- print(cjson.encode(settings)) 
 end
 
 local function send_settings()
+  update_settings()
   m:publish(settings.topics.pub.currentSettings, cjson.encode(settings),0,0)
 end
 
@@ -62,9 +54,10 @@ local function mqtt_start(topics)
     end
   end)
 
+  m:lwt(settings.topics.pub.will, "remove", 0, 0)
+
   -- connect
   m:connect(config.HOST, config.PORT, 0, 1, function(con)
-    init_settings()
     register_myself(settings.topics.sub)
     tmr.stop(6)
     tmr.alarm(6, settings.checkinFreq, 1, send_state)

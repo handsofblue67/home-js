@@ -10,6 +10,8 @@
     <md-slide-toggle *ngIf="component.type === 'toggle'" color="accent" [(ngModel)]="component.controlState" (change)="toggle(device, i)"
       [mdTooltip]="'Slide to toggle ' + device.name || device.deviceID" mdTooltipPosition="right"></md-slide-toggle>
     <div *ngIf="component.type === 'mock-sensor'">{{component.controlState}}</div>
+    <div *ngIf="component.type === 'sensor' && component?.units === 'celsius'"><strong>{{component.name}}:</strong> {{component.controlState}}&deg;C</div>
+    <div *ngIf="component.type === 'sensor' && component?.units === 'percent'"><strong>{{component.name}}:</strong> {{component.controlState}}%</div>
   </div>
   <!--<button md-raised-button color="warn" (click)="deviceService.toggle(device, 'Test Component 1')">Off</button>-->
 </md-card>

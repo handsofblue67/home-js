@@ -14,11 +14,17 @@ export class DevicesComponent {
   connection: Subscription
   devices: any[] = []
 
-  constructor(private deviceService: DeviceService, public snackBar: MdSnackBar) { }
+  constructor(private deviceService: DeviceService, public snackBar: MdSnackBar) {
+    this.connection = deviceService.devices$.subscribe(devices => this.devices = devices)
+  }
 
   toggle(device: any, index: number): void {
     this.deviceService.toggle(device, index)
     const snackBarRef = this.snackBar.open('Pushed new state to device', null, { duration: 1000 })
     snackBarRef.afterOpened().subscribe(() => console.log('snackBar closed'))
+  }
+
+  ngOnDestroy() {
+    this.connection.unsubscribe()
   }
 }

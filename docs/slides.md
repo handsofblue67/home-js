@@ -1,23 +1,23 @@
 <!-- slide -->
-# Problem
-![Physical_Layout](Problem.png)
-
-<!-- slide -->
 # Internet-of-Things
 ### IoT
 ### Home Automation
+<!-- slide -->
+# Problem
+![Physical_Layout](/docs/assets/Problem.png)
+
+
 <!-- slide -->
 # Existing Alternates
 - Hub
   - Homekit
   - Philips Hue
   - Z-Wave
-- Temporary Access Point
-  -
+  - Temporary Access Point
 <!-- slide -->
 # Goals
 - Cheaper
-- Extensible (works with anything)
+- Extensible
 - Secure
 - Easier
 - Total control

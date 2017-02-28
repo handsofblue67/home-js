@@ -1,11 +1,11 @@
 'use strict';
-const _ = require('lodash');
-// const GoogleStrategy = require('passport-google').Strategy;
-
-
 
 const authentication = require('feathers-authentication');
-
+const FacebookStrategy = require('passport-facebook').Strategy;
+const FacebookTokenStrategy = require('passport-facebook-token');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GoogleTokenStrategy = require('passport-google-token').Strategy;
+const _ = require('lodash');
 
 module.exports = function () {
   const app = this;
@@ -18,20 +18,10 @@ module.exports = function () {
     passwordField: 'password',
   });
 
-  // let google = {
-  //   strategy: GoogleStrategy,
-  //   clientID: '423630458653-nig8sgfkjd26rmpcqttkei15jc48pkjh.apps.googleusercontent.com',
-  //   clientSecret: '8K-WJklPpLFoHFS1owpFOxg-',
-  //   callbackURL: "http://localhost:8082/auth/callback",
-  //   permissions: {
-  //     scope: ['openid', 'email', 'https://www.googleapis.com/auth/calendar'] 
-  //   }
-  // }
-   
-  // app.get('/auth/success', function(req, res){
-  //   console.log(req.body);
-  //   res.redirect('/users');
-  // })
+  config.facebook.strategy = FacebookStrategy;
+  config.facebook.tokenStrategy = FacebookTokenStrategy;
+  config.google.strategy = GoogleStrategy;
+  config.google.tokenStrategy = GoogleTokenStrategy;
 
   app.configure(authentication(config));
 };

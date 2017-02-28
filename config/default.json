@@ -7,6 +7,22 @@
     "token": {
       "secret": "pqs8IauoymKeteGQBjtGB/L8dRxsAgeiY6aIfp8bU2S/sAnX5vwtjys0FKwjLI1lTSOMzaZXRKPV3as6FiA19Q=="
     },
-    "local": {}
+    "local": {},
+    "facebook": {
+      "clientID": "139499403154553",
+      "clientSecret": "98b5c7dad466cf3c56cc5de189e8e75e",
+      "permissions": {
+        "scope": ["public_profile","email"]
+      }
+    },
+    "google": {
+      
+      "clientID": "423630458653-rfnvit7fkji2smlsc6bdd7ju55jobpc0.apps.googleusercontent.com",
+      "clientSecret": "PhfK19MVxRGrHNSjmgi4Pddf",
+      "permissions": {
+        "scope": ["profile", "openid", "email", "https://www.googleapis.com/auth/calendar"]
+      }
+    }
   }
 }
+

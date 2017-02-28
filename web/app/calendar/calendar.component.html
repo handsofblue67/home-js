@@ -3,7 +3,7 @@
 <!--<md-grid-list cols="7" rowHeight="100px">
   <md-grid-tile *ngFor="let tile of tiles" colspan="7" rowspan="5" [style.background]="'lightblue'">num</md-grid-tile>
 </md-grid-list>-->
-<md-grid-list cols="7" rowHeight="20px">
+<!--<md-grid-list cols="7" rowHeight="20px">
   <md-grid-tile *ngFor="let weekday of weekdays" [colspan]="'1'" [rowspan]="'1'">{{weekday}}</md-grid-tile>
 </md-grid-list>
 
@@ -12,4 +12,18 @@
     (mouseenter)="enter(tile)" (mouseleave)="leave(tile)">
     {{tile.text}}
     </md-grid-tile>
-</md-grid-list>
+</md-grid-list>-->
+
+<md-button-toggle-group #group="mdButtonToggleGroup" >
+  <md-button-toggle value="month" [checked]="true">Month</md-button-toggle>
+  <md-button-toggle value="week">Week</md-button-toggle>
+  <md-button-toggle value="day">Day</md-button-toggle>
+</md-button-toggle-group>
+
+<div class="example-selected-value">Selected value: {{group.value}}</div>
+
+<div [ngSwitch]="group.value">
+  <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events"></mwl-calendar-month-view>
+  <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events"></mwl-calendar-week-view>
+  <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events"></mwl-calendar-day-view>
+</div>

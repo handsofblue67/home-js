@@ -21,7 +21,7 @@ export class AuthService {
   public message = ''
   public currentUser: User
   public socket = io('/')
-  
+
   constructor(private router: Router) {
     this.feathersApp = feathers()
       .configure(feathers.socketio(this.socket))
@@ -31,6 +31,7 @@ export class AuthService {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'))
       this.authenticated = true
       this.authSource.next(this.authenticated)
+      router.navigate(['/users'])
     }).catch(error => {
       // if (error.code === 401) {
         router.navigate(['/login'])
@@ -68,14 +69,13 @@ export class AuthService {
   }
 
   private handleError(err: any) {
-    let errMsg = (err.message) ? err.message :
-      err.status ? `${err.status} - ${err.statusTest}` : 'Server error'
+    const errMsg = err.message || err.status ?
+      `${err.status} - ${err.statusTest}` :
+      'Server error'
     return Observable.throw(errMsg)
   }
 
   getService(route: string) {
     return this.feathersApp.service(route)
   }
-
-
 }

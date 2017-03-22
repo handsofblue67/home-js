@@ -1,4 +1,4 @@
-import { Component, trigger, state, style, transition, animate } from '@angular/core'
+import { Component, OnDestroy, trigger, state, style, transition, animate } from '@angular/core'
 import { MdSnackBar } from '@angular/material'
 
 import { Subscription } from 'rxjs/Subscription'
@@ -10,7 +10,7 @@ import { DeviceService } from './device.service'
   templateUrl: './devices.component.html',
   styleUrls: ['./devices.component.css'],
 })
-export class DevicesComponent {
+export class DevicesComponent implements OnDestroy {
   connection: Subscription
   devices: any[] = []
 

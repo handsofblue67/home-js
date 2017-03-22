@@ -18,7 +18,7 @@ sequenceDiagram
     deactivate ESP8266
   else invalid
     loop tries < max
-      Server-x+ESP8266:/reqSettings/deviceID('invalid')
+      Server-x+ESP8266:/reqSettings/deviceID
       deactivate Server
       activate ESP8266
       ESP8266-xServer:/settings/deviceID(state)

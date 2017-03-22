@@ -2,54 +2,32 @@
 local module = {}
 m = nil
 
-local function send_status()
+local function syncTime() 
+  sntp.sync("pool.ntp.org", function()
+    seconds, millis=rtctime.get()
+    print(tonumber(tostring(seconds) .. tostring(math.floor(millis/1000))))
+  end, print)
+end
+
+local function send_state()
   seconds, millis=rtctime.get()
-  module.status.timestamp=tonumber(tostring(seconds) .. tostring(math.floor(millis/1000)))
+  settings.dateCreated=tonumber(tostring(seconds) .. tostring(math.floor(millis/1000)))
   m:publish(settings.topics.pub.status, cjson.encode(module.status),0,0)
   print(cjson.encode(module.status))
 end
 
 local function toggle_state()
-  if module.status.pins[0].status == gpio.HIGH then
-    module.status.pins[0].status = gpio.LOW
+  if settings.components[1].controlState == gpio.HIGH then
+    settings.components[1].controlState = gpio.LOW
   else
-    module.status.pins[0].status = gpio.HIGH
+    settings.components[1].controlState = gpio.HIGH
   end
-  gpio.write(module.status.pins[0].number, module.status.pins[0].status)
-  send_status()
-end
-
-local function init_settings()
-  -- initial output pin state
-  module.status={}
-  module.status.deviceID=config.ID
-  module.status.pins={}
-
-  module.status.pins[0]={
-    number=1,
-    type="digitalOutput",
-    purpose="Toggle lights",
-    status=gpio.LOW
-  }
-  -- module.status.pins[1]={
-  --   number=2,
-  --   type="digitalInput",
-  --   purpose="Physical toggle button",
-  --   status=nil
-  -- }
-
-  print(tostring(cjson.encode(module.status)))
-
-  gpio.mode(module.status.pins[0].number, gpio.OUTPUT)
-  gpio.write(module.status.pins[0].number, module.status.pins[0].status)
-
-  -- gpio.mode(module.status.pins[1].number, gpio.INT, gpio.PULLUP)
-  -- gpio.trig(module.status.pins[1].number, "down", toggle_state)
-
+  gpio.write(settings.components[1].number, settings.components[1].controlState)
+  send_state()
 end
 
 local function alter_settings(topic)
-  send_settings()
+  send_state()
 end
 
 local function send_settings()
@@ -59,7 +37,7 @@ end
 -- Sends my id to the broker for registration
 local function register_myself(topics)
   -- sub = settings.topics.subscribe
-  m:subscribe({[topics.toggle]=0, [topics.settings]=0, [topics.reqStatus]=0},function(conn)
+  m:subscribe({[topics.updateState]=0, [topics.settings]=0, [topics.reqStatus]=0}, function(conn)
     print("Successfully subscribed to data endpoints: " .. cjson.encode(topics) )
     send_settings()
   end)
@@ -70,8 +48,7 @@ local function mqtt_start(topics)
   -- register message callback beforehand
   m:on("message", function(conn, topic, data)
     if data ~= nil then
-      print(topic .. ": " .. data)
-      if topic == topics.toggle then
+      if topic == topics.updateState then
         print(topic)
         toggle_state()
       elseif topic == topics.settings then
@@ -84,8 +61,11 @@ local function mqtt_start(topics)
 
   -- Connect to broker
   m:connect(config.HOST, config.PORT, 0, 1, function(con)
-    init_settings()
     register_myself(settings.topics.sub)
+    gpio.mode(settings.components[1].pinNumber, gpio.OUTPUT)
+    gpio.write(settings.components[1].pinNumber, settings.components[1].controlState)
+    tmr.stop(5)
+    tmr.alarm(5, 6870947, tmr.ALARM_SEMI, syncTime)
   end)
 end
 

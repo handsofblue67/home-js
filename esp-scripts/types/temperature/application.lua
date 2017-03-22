@@ -17,6 +17,7 @@ local function update_settings()
   seconds, millis=rtctime.get()
   settings.dateCreated=tonumber(tostring(seconds) .. tostring(math.floor(millis/1000))) 
 end
+
 local function send_state(topic)
   update_settings()
   m:publish(settings.topics.pub.status, cjson.encode(settings),0,0) 

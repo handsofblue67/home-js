@@ -12,8 +12,8 @@ end
 local function send_state()
   seconds, millis=rtctime.get()
   settings.dateCreated=tonumber(tostring(seconds) .. tostring(math.floor(millis/1000)))
-  m:publish(settings.topics.pub.status, cjson.encode(module.status),0,0)
-  print(cjson.encode(module.status))
+  m:publish(settings.topics.pub.status, cjson.encode(settings),0,0)
+  print(cjson.encode(settings))
 end
 
 local function toggle_state()
@@ -22,11 +22,7 @@ local function toggle_state()
   else
     settings.components[1].controlState = gpio.HIGH
   end
-  gpio.write(settings.components[1].number, settings.components[1].controlState)
-  send_state()
-end
-
-local function alter_settings(topic)
+  gpio.write(settings.components[1].pinNumber, settings.components[1].controlState)
   send_state()
 end
 
@@ -37,7 +33,7 @@ end
 -- Sends my id to the broker for registration
 local function register_myself(topics)
   -- sub = settings.topics.subscribe
-  m:subscribe({[topics.updateState]=0, [topics.settings]=0, [topics.reqStatus]=0}, function(conn)
+  m:subscribe({[topics.settings]=0, [topics.reqStatus]=0}, function(conn)
     print("Successfully subscribed to data endpoints: " .. cjson.encode(topics) )
     send_settings()
   end)
@@ -48,11 +44,8 @@ local function mqtt_start(topics)
   -- register message callback beforehand
   m:on("message", function(conn, topic, data)
     if data ~= nil then
-      if topic == topics.updateState then
-        print(topic)
+      if topic == topics.settings then
         toggle_state()
-      elseif topic == topics.settings then
-        alter_settings(settings.topics.pub.currentSettings)
       elseif topic == topics.reqStatus then
         send_status()
       end

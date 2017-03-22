@@ -13,7 +13,6 @@ module.topics={}
 module.topics.sub={}
 module.topics.sub.settings="/settings/" .. config.ID
 module.topics.sub.reqStatus="/reqStatus/" .. config.ID
-module.topics.sub.updateState="/updateState/" .. config.ID
 
 module.topics.pub={}
 module.topics.pub.status="/status/" .. config.ID

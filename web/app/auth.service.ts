@@ -21,7 +21,7 @@ export class AuthService {
   public message = ''
   public currentUser: User
   public socket = io('/')
-  
+
   constructor(private router: Router) {
     this.feathersApp = feathers()
       .configure(feathers.socketio(this.socket))

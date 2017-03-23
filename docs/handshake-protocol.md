@@ -4,7 +4,7 @@
 
 ###### sd Handshake
 
-```{mermaid}
+```@mermaid
 sequenceDiagram
   ESP8266-xServer:/settings/deviceID(state)
   activate Server
@@ -81,7 +81,7 @@ sequenceDiagram
   - Compares state to current operatonal state in database if changed store old data (including length of time in that state) to a time-series collection or database (if time-series data)
 
 ###### sd Status Update
-```{mermaid}
+```@mermaid
 sequenceDiagram
   ESP8266-x+Server: /status/deviceID
   Server->>Operational State: [State Change] upsert new state
@@ -97,7 +97,7 @@ _Need to define protocol for client/server initialization (client must abstract 
 
 
 
-```{mermaid}
+```@mermaid
   sequenceDiagram
   Client-x+Server: websocket(deviceID, new state || toggle)
   activate ESP8266

@@ -9,7 +9,7 @@
 <!-- slide -->
 ## Existing Alternates
 - Hub
-  - <strong>Homekit</string>
+  - <strong>Homekit</strong>
   - <a style="color: grey">Philips Hue</a>
   - <a style="color: grey">Z-Wave</a>
   - <a style="color: grey">Temporary Access Point</a>
@@ -18,7 +18,7 @@
 ## Existing Alternates
 - Hub
   - <a style="color: grey">Homekit</a>
-  - <strong>Philips Hue</string>
+  - <strong>Philips Hue</strong>
   - <a style="color: grey">Z-Wave</a>
   - <a style="color: grey">Temporary Access Point</a>
 
@@ -36,11 +36,11 @@
   - <a style="color: grey">Homekit</a>
   - <a style="color: grey">Philips Hue</a>
   - <a style="color: grey">Z-Wave</a>
-  - <strong>Temporary Access Point</string>
+  - <strong>Temporary Access Point</strong>
 
 <!-- slide -->
 ## Goals
-- <strong>Cheaper</string>
+- <strong>Cheaper</strong>
 - <a style="color: grey">Extensible</a>
 - <a style="color: grey">Secure</a>
 - <a style="color: grey">Easier</a>
@@ -50,7 +50,7 @@
 <!-- slide -->
 ## Goals
 - <a style="color: grey">Cheaper</a>
-- <strong>Extensible</string>
+- <strong>Extensible</strong>
 - <a style="color: grey">Secure</a>
 - <a style="color: grey">Easier</a>
 - <a style="color: grey">Total control</a>
@@ -60,7 +60,7 @@
 ## Goals
 - <a style="color: grey">Cheaper</a>
 - <a style="color: grey">Extensible</a>
-- <strong>Secure</string>
+- <strong>Secure</strong>
 - <a style="color: grey">Easier</a>
 - <a style="color: grey">Total control</a>
 - <a style="color: grey">Limitless</a>
@@ -70,7 +70,7 @@
 - <a style="color: grey">Cheaper</a>
 - <a style="color: grey">Extensible</a>
 - <a style="color: grey">Secure</a>
-- <strong>Easier</string>
+- <strong>Easier</strong>
 - <a style="color: grey">Total control</a>
 - <a style="color: grey">Limitless</a>
 
@@ -80,7 +80,7 @@
 - <a style="color: grey">Extensible</a>
 - <a style="color: grey">Secure</a>
 - <a style="color: grey">Easier</a>
-- <strong>Total control</string>
+- <strong>Total control</strong>
 - <a style="color: grey">Limitless</a>
 
 <!-- slide -->
@@ -98,61 +98,20 @@
 
 <!-- slide -->
 ## Physical Specifics
+<!--  DHT11 is a temperature/humidity sensor-->
 ![Physical Specifics](/docs/assets/Physical_Specifics.png)
 
 <!-- slide -->
 ## Logical View
-
+<!--  explain that the server is running three different servers that could be hosted on different machines-->
 ![Logical View](/docs/assets/logical_view.png)
-<!-- slide -->
-## Subsystems
-
-![Subsystems](/docs/assets/subsystems.png)
-<!-- slide -->
-
-## Sequence Diagrams
-
-```@mermaid
-sequenceDiagram
-  ESP8266-xServer:/settings/deviceID(state)
-  activate Server
-  activate Server
-  alt valid
-    Server-xDevice Collection: upsert(deviceID)
-    Server-x+ESP8266:/reqStatus/deviceID
-    deactivate Server
-    activate ESP8266
-    Note over ESP8266, Server: Update State
-    deactivate ESP8266
-  else invalid
-    loop tries < max
-      Server-x+ESP8266:/reqSettings/deviceID
-      deactivate Server
-      activate ESP8266
-      ESP8266-xServer:/settings/deviceID(state)
-      deactivate ESP8266
-    end
-  end
-```
-<!-- slide -->
-## Status Update
-
-```@mermaid
-sequenceDiagram
-  ESP8266-x+Server: /status/deviceID
-  Server->>Operational State: [State Change] upsert new state
-  Server-xTime Series: [State Change] oldState+=timeInState
-  Server-x-Client: [State Change] onChange
-```
 
 <!-- slide -->
-##  Client Push
+# Example #1
 
-```@mermaid
-  sequenceDiagram
-  Client-x+Server: websocket(deviceID, new state || toggle)
-  activate ESP8266
-  Server-xESP8266: /updateStatus/deviceID(newState|toggle)
-  Note over ESP8266, Client: Status Update
-  deactivate ESP8266
-```
+
+<!-- slide -->
+## Lessons Learned
+
+<!-- slide -->
+## Future Plans

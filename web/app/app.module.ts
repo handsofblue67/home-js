@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser'
+import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
@@ -21,18 +22,21 @@ import { routing, routedComponents } from './app.routing'
 // import { TemperatureService } from './temperature'
 // import { TodoService } from './todos'
 // import { LightsService } from './lights'
-import { UsersService } from './users';
+import { UsersService } from './users'
 import { KeysPipe } from './keys.pipe';
+import { SensorComponent } from './devices/sensor/sensor.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     routedComponents,
     KeysPipe,
+    SensorComponent,
   ],
   imports: [
     // AgmCoreModule.forRoot({apiKey: 'AIzaSyDb-Foka_83ay6ofqqwuB33F_p11vtlBjY'}),
     BrowserModule,
+    CommonModule,
     // ChartModule,
     FormsModule,
     HttpModule,

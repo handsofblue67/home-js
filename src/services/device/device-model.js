@@ -19,7 +19,8 @@ const deviceSchema = new Schema({
       name: { type: String },
       controlState: { type: Schema.Types.Mixed },
       changedAt: { type: Date, 'default': Date.now },
-      isTimeSeries: { type: Boolean, 'default': false }
+      isTimeSeries: { type: Boolean, 'default': false },
+      units: { type: String }
     }
   ],
   topics: {

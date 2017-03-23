@@ -31,7 +31,7 @@ let settings = {
     {
       name: randComponentName,
       controlState: checkin ? chance.natural({min:0, max: 1023}) : false,
-      type: checkin ? 'mock-sensor' : 'toggle'
+      type: checkin ? 'sensor' : 'toggle'
     }
   ],
   topics: {

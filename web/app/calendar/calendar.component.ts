@@ -1,5 +1,6 @@
-import { Component, OnInit, trigger, state, style, transition, animate} from '@angular/core'
+import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core'
 import * as _ from 'lodash'
+import * as moment from 'moment'
 
 @Component({
   selector: 'app-calendar',
@@ -25,11 +26,11 @@ import * as _ from 'lodash'
   ]
 })
 export class CalendarComponent implements OnInit {
-  weekdays = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ]
+  weekdays = moment.weekdaysShort()
   tiles: Array<any>
 
   ngOnInit() {
-    this.tiles = _.times(38, iter => {
+    this.tiles = _.times(31, iter => {
       return {
         text: iter + 1,
         cols: 1,

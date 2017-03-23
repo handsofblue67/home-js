@@ -1,6 +1,0 @@
-<md-card *ngFor="let chart of chartService.chart$ | async">
-  <md-card-title>{{chart.title.title}}</md-card-title>
-  <md-card-content>
-    <chart [options]="chart"></chart>
-	</md-card-content>
-</md-card>

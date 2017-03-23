@@ -52,6 +52,8 @@ local function mqtt_start(topics)
     end
   end)
 
+  m:lwt(settings.topics.pub.will, "remove", 0, 0)
+
   -- Connect to broker
   m:connect(config.HOST, config.PORT, 0, 1, function(con)
     register_myself(settings.topics.sub)

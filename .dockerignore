@@ -1,2 +1,5 @@
-node_modules
+docs
+e2e
+esp-scripts
+test
 npm-debug.log

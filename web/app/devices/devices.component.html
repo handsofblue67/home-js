@@ -9,9 +9,5 @@
     <md-slide-toggle *ngIf="component.type === 'toggle'" color="accent" [(ngModel)]="component.controlState" (change)="toggle(device, i)"
       [mdTooltip]="'Slide to toggle ' + device.name || device.deviceID" mdTooltipPosition="right"></md-slide-toggle>
     <app-sensor *ngIf="component.type === 'sensor'" [component]="component"></app-sensor>
-
   </div>
-  <!--<button md-raised-button color="warn" (click)="deviceService.toggle(device, 'Test Component 1')">Off</button>-->
 </md-card>
-
-<!--<button md-raised-button color="warn" (click)="deviceService.add()">Add Stuff</button>-->

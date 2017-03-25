@@ -313,35 +313,35 @@ end
 --      data             a table of bytes to write
 --  returns:  
 --      error         true = error; false = success
-function module.writeTag(block_address, data)
-    buf = {}
-    table.insert(buf, act_write)
-    table.insert(buf, block_address)
-    crc = module.calculate_crc(buf)
-    table.insert(buf, crc[1])
-    table.insert(buf, crc[2])
-    err, back_data, back_length = module.card_write(mode_transrec, buf)
-    if not(back_length == 4) or not((bit.band(back_data[1], 0x0F)) == 0x0A) then
-        err = true
-    end
+-- function module.writeTag(block_address, data)
+--     buf = {}
+--     table.insert(buf, act_write)
+--     table.insert(buf, block_address)
+--     crc = module.calculate_crc(buf)
+--     table.insert(buf, crc[1])
+--     table.insert(buf, crc[2])
+--     err, back_data, back_length = module.card_write(mode_transrec, buf)
+--     if not(back_length == 4) or not((bit.band(back_data[1], 0x0F)) == 0x0A) then
+--         err = true
+--     end
 
-    if not err then
-        buf_w = {}
-        for i=0, 16 do
-            table.insert(buf_w, data[i])
-        end
+--     if not err then
+--         buf_w = {}
+--         for i=0, 16 do
+--             table.insert(buf_w, data[i])
+--         end
            
-        crc = module.calculate_crc(buf_w)
-        table.insert(buf_w, crc[1])
-        table.insert(buf_w, crc[2])
-        err, back_data, back_length = module.card_write(mode_transrec, buf_w)
-        if not(back_length == 4) or not(bit.band(back_data[1], 0x0F) == 0x0A) then
-            err = true
-        end
-    end
+--         crc = module.calculate_crc(buf_w)
+--         table.insert(buf_w, crc[1])
+--         table.insert(buf_w, crc[2])
+--         err, back_data, back_length = module.card_write(mode_transrec, buf_w)
+--         if not(back_length == 4) or not(bit.band(back_data[1], 0x0F) == 0x0A) then
+--             err = true
+--         end
+--     end
 
-    return err
-end
+--     return err
+-- end
 
 --------------------------------------------------------
 --  Authenticates a sector of a tag.  Required before tag memory operations

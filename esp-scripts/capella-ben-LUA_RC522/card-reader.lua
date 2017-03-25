@@ -1,5 +1,4 @@
-local module = {}
-----------------------------------------------------------------
+---------------------------------------------------------------
 -- RC522 RFID Reader for NodeMCU LUA
 -- By Ben Jackson
 
@@ -8,7 +7,8 @@ local module = {}
 --   https://github.com/ljos/MFRC522             -> Arduino
 
 -- to be used with MFRC522 RFID reader and s50 tag (but can work with other tags)
-      
+local module = {}
+
 local pin_rst = 3                 -- Enable/reset pin
 local pin_ss = 4                  -- SS (marked as SDA) pin
 local mode_transrec = 0x0C
@@ -91,32 +91,16 @@ function module.start()
                 -- Read card data
                     err, tagData = RC522.readTag(i)
                     if not err then
-                      -- if i == 12 then
-                      --   configuration.SSID = appendHex(tagData)
-                      --   print(configuration.SSID)
-                      -- elseif i == 13 then
-                      --   configuration.PSK = appendHex(tagData)
-                      --   print(configuration.PSK)
-                      -- elseif i == 14 then
-                      --   configuration.HOST = appendHex(tagData)
-                      --   print(configuration.HOST)
-                      -- end
-
-                      if i == 12 then   -- write to block 2
-                        err = RC522.writeTag(i, { 0x53, 0x74, 0x6F, 0x72, 0x6D, 0x61, 0x67, 0x65, 0x64, 0x64, 0x6F, 0x6E, 0x00, 0x00, 0x00, 0x00 })
-                        if err then print("ERROR Writing to the Tag") end
+                      if i == 12 then
+                        configuration.SSID = appendHex(tagData)
+                        print(configuration.SSID)
+                      elseif i == 13 then
+                        configuration.PSK = appendHex(tagData)
+                        print(configuration.PSK)
+                      elseif i == 14 then
+                        configuration.HOST = appendHex(tagData)
+                        print(configuration.HOST)
                       end
-            
-                      if i == 13 then
-                        err = RC522.writeTag(i, { 0x57, 0x61, 0x74, 0x65, 0x72, 0x79, 0x57, 0x61, 0x74, 0x65, 0x72, 0x38, 0x35, 0x36, 0x00, 0x00 })
-                        if err then print("ERROR Writing to the Tag") end
-                      end
-                    
-                      if i == 14 then
-                        err = RC522.writeTag(i, { 0x31, 0x39, 0x32, 0x2e, 0x31, 0x36, 0x38, 0x2e , 0x31, 0x2e, 0x31, 0x39, 0x00, 0x00, 0x00, 0x00 })
-                        if err then print("ERROR Writing to the Tag") end
-                      end
-    
                     end
                 end
             end
@@ -134,14 +118,14 @@ function module.start()
           table.insert(buf, crc[2])
           err, back_data, back_length = RC522.card_write(mode_transrec, buf)
           RC522.clear_bitmask(0x08, 0x08)    -- Turn off encryption
-          -- if configuration.SSID ~= nil and configuration.PSK ~= nil and configuration.HOST ~= nil then
-          --   file.remove("config.lua")
-          --   if file.open("config.lua", "w") then
-          --     file.write(string.format("local module = {}\nmodule.SSID = {}\nmodule.SSID[\"%s\"]=\"%s\"\nmodule.HOST = \"%s\"\nmodule.PORT = 1883\nmodule.ID = node.chipid()\nreturn module", configuration.SSID, configuration.PSK, configuration.HOST))
-          --     file.close()
-          --     node.restart()
-          --   end
-          -- end
+          if configuration.SSID ~= nil and configuration.PSK ~= nil and configuration.HOST ~= nil then
+            file.remove("config.lua")
+            if file.open("config.lua", "w") then
+              file.write(string.format("local module = {}\nmodule.SSID = {}\nmodule.SSID[\"%s\"]=\"%s\"\nmodule.HOST = \"%s\"\nmodule.PORT = 1883\nmodule.ID = node.chipid()\nreturn module", configuration.SSID, configuration.PSK, configuration.HOST))
+              file.close()
+              node.restart()
+            end
+          end
       end
   end)  -- timer
 end

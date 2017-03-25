@@ -5,7 +5,7 @@ networks:
 services:
   web:
     # build: .
-    image: 'localhost:5000/homejs'
+    image: 'handsofblue67/homejs'
     ports:
       - '3030:3030'
     # volumes:
@@ -30,7 +30,7 @@ services:
       - homejs 
   mock-device:
     # build: mock-device
-    image: 'localhost:5000/mockdevice' 
+    image: 'handsofblue67/mockdevice' 
     depends_on:
       - broker
     networks:

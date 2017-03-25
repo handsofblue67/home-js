@@ -1,7 +1,5 @@
+FROM node:6.10
 
-FROM node:6.9.1
-
- 
 RUN mkdir /opt/home-js && chown -R node:node /opt/home-js
 WORKDIR /opt/home-js
 

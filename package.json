@@ -81,7 +81,6 @@
     "zone.js": "^0.7.2"
   },
   "devDependencies": {
-    "@angular/compiler-cli": "^2.3.1",
     "@types/fullcalendar": "^2.7.36",
     "@types/jasmine": "2.5.38",
     "@types/jquery": "git://github.com/magnitronus/types-jquery.git",

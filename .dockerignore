@@ -3,3 +3,7 @@ e2e
 esp-scripts
 test
 npm-debug.log
+web
+node_modules
+mock-device
+.vscode

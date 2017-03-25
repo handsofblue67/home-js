@@ -1,9 +1,0 @@
-.card-container {
-  display: flex;
-  flex-flow: column nowrap;
-  padding: 16px;
-}
-
-md-sidenav { padding: 16px; }
-
-.sidenav-layout { min-height: 100%; }

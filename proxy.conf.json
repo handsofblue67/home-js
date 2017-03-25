@@ -1,6 +1,6 @@
 {
     "/": {
-        "target": "http://handsofblue67.mynetgear.com:3000",
+        "target": "http://localhost:3030",
         "secure": false
     }
 }

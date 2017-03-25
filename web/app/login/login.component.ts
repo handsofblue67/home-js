@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 import { Router } from '@angular/router'
 
 import { AuthService } from '../auth.service'
@@ -8,17 +8,12 @@ import { AuthService } from '../auth.service'
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   model: any = {}
   loading = false
   error = ''
 
-  constructor(private router: Router, private authService: AuthService) { }
-
-  ngOnInit() {
-    // reset login status
-    // this.authService.logout()
-  }
+  constructor(public router: Router, public authService: AuthService) { }
 
   login() {
     // this.loading = true
@@ -28,7 +23,7 @@ export class LoginComponent implements OnInit {
           // login successful
           console.log('login successful')
           this.loading = false
-          this.router.navigate(['/users'])
+          this.router.navigate(['/devices'])
             .then(didRoute => console.log(`redirection ${didRoute ? 'succeeded' : 'failed'}`))
             .catch(console.warn)
         } else {

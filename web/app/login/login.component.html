@@ -3,9 +3,13 @@
   <md-card-content>
     <!--<form id="login-form" name="login-form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>-->
     <form id="login-form" name="login-form" (ngSubmit)="login()" #f="ngForm" novalidate>
-      <div><md-input placeholder="username" name="username" [(ngModel)]="model.username" #username="ngModel" required></md-input></div>
-      <div><md-input type="password" placeholder="password" name="password" [(ngModel)]="model.password" #password="ngModel" required></md-input></div>
-      <div><button md-raised-button [disabled]="loading" color="primary">Login</button></div>
+      <div><md-input-container>
+        <input mdInput placeholder="username" name="username" [(ngModel)]="model.username"/>
+      </md-input-container></div>
+      <div><md-input-container>
+        <input mdInput type="password" placeholder="password" name="password" [(ngModel)]="model.password"/>
+      </md-input-container></div>
+      <button md-raised-button [disabled]="loading" color="primary">Login</button>
     </form>
     <md-spinner *ngIf="loading"></md-spinner>
     <div *ngIf="error">{{error}}</div>

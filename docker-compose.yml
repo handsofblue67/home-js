@@ -1,6 +1,6 @@
 version: '3'
 networks:
-  homejs:
+  main:
     driver: overlay
 services:
   web:
@@ -14,24 +14,24 @@ services:
     depends_on:
       - db
     networks:
-      - homejs
+      - main
   db:
     image: 'mongo:latest'
     ports:
-      - '27018:27017'
+      - '27017:27017'
     networks:
-      - homejs
+      - main
     deploy:
       placement:
         constraints: [node.role == manager]
   broker:
     image: 'ansi/mosquitto'
     networks:
-      - homejs 
+      - main 
   mock-device:
     # build: mock-device
     image: 'handsofblue67/mockdevice' 
     depends_on:
       - broker
     networks:
-      - homejs 
+      - main 

@@ -1,8 +1,10 @@
-import { Component, Input, trigger, state, style, transition, animate, group } from '@angular/core'
+import { Component, Input } from '@angular/core'
+import { trigger, state, style, transition, animate, group } from '@angular/animations'
 
 @Component({
   selector: 'app-sensor',
-  template: `<span [@growShrink]="'in'">
+  template: `
+  <span [@growShrink]="'in'">
     <strong>{{_component.name}}:</strong> {{_component.controlState}}
     <span [ngSwitch]="_component?.units">
       <span *ngSwitchCase="'percent'">%</span>
@@ -29,7 +31,7 @@ import { Component, Input, trigger, state, style, transition, animate, group } f
   ],
 })
 export class SensorComponent {
-  private _component: any
+  _component: any
 
   @Input()
   set component(component: any) {
@@ -37,5 +39,4 @@ export class SensorComponent {
   }
 
   constructor() { }
-
 }

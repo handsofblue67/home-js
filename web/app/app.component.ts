@@ -12,9 +12,9 @@ import { AuthService } from './auth.service'
 export class AppComponent {
   atTop: boolean = true
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     public iconRegistry: MdIconRegistry,
-    private sanitizer: DomSanitizer) {
+    public sanitizer: DomSanitizer) {
       iconRegistry.addSvgIcon('homejs',
       sanitizer.bypassSecurityTrustResourceUrl('assets/homejs.svg'))
   }

@@ -1,5 +1,6 @@
-import { Component, OnDestroy, trigger, state, style, transition, animate } from '@angular/core'
-import { MdSnackBar } from '@angular/material'
+import { Component, OnDestroy } from '@angular/core'
+import { MdSnackBar, LiveAnnouncer } from '@angular/material'
+
 
 import { Subscription } from 'rxjs/Subscription'
 
@@ -14,8 +15,11 @@ export class DevicesComponent implements OnDestroy {
   connection: Subscription
   devices: any[] = []
 
-  constructor(private deviceService: DeviceService, public snackBar: MdSnackBar) {
-    this.connection = deviceService.devices$.subscribe(devices => this.devices = devices)
+  constructor(public deviceService: DeviceService,
+              public live: LiveAnnouncer,
+              public snackBar: MdSnackBar) {
+    this.connection = deviceService.devices$
+      .subscribe(devices => this.devices = devices)
   }
 
   toggle(device: any, index: number): void {

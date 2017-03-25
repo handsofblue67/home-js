@@ -1,0 +1,5518 @@
+[
+ {
+   "courseTitle": "ACC2010",
+   "profName": "Lynn R Smith"
+ },
+ {
+   "courseTitle": "ACC2010",
+   "profName": "Geoffrey David Bartlett"
+ },
+ {
+   "courseTitle": "ACC2010",
+   "profName": "Benjamin W Bean"
+ },
+ {
+   "courseTitle": "ACC2020",
+   "profName": "Lynn R Smith"
+ },
+ {
+   "courseTitle": "ACC2020",
+   "profName": "Steven D Johnson"
+ },
+ {
+   "courseTitle": "ACC2020",
+   "profName": "Geoffrey David Bartlett"
+ },
+ {
+   "courseTitle": "ACC281R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "ACC281R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "ACC281R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "ACC281R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "ACC281R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "ACC3000",
+   "profName": "Benjamin W Bean"
+ },
+ {
+   "courseTitle": "ACC3020",
+   "profName": "Sheldon Ray Smith"
+ },
+ {
+   "courseTitle": "ACC312G",
+   "profName": "James A Bailey"
+ },
+ {
+   "courseTitle": "ACC3300",
+   "profName": "Steven D Johnson"
+ },
+ {
+   "courseTitle": "ACC3510",
+   "profName": "Joel H Helquist"
+ },
+ {
+   "courseTitle": "ACC4020",
+   "profName": "Kevin R Smith"
+ },
+ {
+   "courseTitle": "ACC4110",
+   "profName": "James A Bailey"
+ },
+ {
+   "courseTitle": "ACC481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "ACC481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "ACC481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "ACC481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "ACC481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "ACC6960",
+   "profName": "Kevin R Smith"
+ },
+ {
+   "courseTitle": "ANTH101G",
+   "profName": "Daymon M Smith"
+ },
+ {
+   "courseTitle": "ANTH101G",
+   "profName": "Brett Michael Miller"
+ },
+ {
+   "courseTitle": "ANTH101G",
+   "profName": "Amanda Valora Nash"
+ },
+ {
+   "courseTitle": "ANTH101G",
+   "profName": "Daymon M Smith"
+ },
+ {
+   "courseTitle": "ANTH3000",
+   "profName": "Bryan K Eldredge"
+ },
+ {
+   "courseTitle": "ART1010",
+   "profName": "Jerry Keith Day"
+ },
+ {
+   "courseTitle": "ART1010",
+   "profName": "Jeffrey Newell Bushman"
+ },
+ {
+   "courseTitle": "ART1010",
+   "profName": "Kamree Diane Gale"
+ },
+ {
+   "courseTitle": "ART1110",
+   "profName": "Marcus A Vincent"
+ },
+ {
+   "courseTitle": "ART1120",
+   "profName": "Rand C Smith"
+ },
+ {
+   "courseTitle": "ART1120",
+   "profName": "Rand C Smith"
+ },
+ {
+   "courseTitle": "ART1130",
+   "profName": "Jason P Millward"
+ },
+ {
+   "courseTitle": "ART1130",
+   "profName": "Jason P Millward"
+ },
+ {
+   "courseTitle": "ART1350",
+   "profName": "Mark Allen Talbert"
+ },
+ {
+   "courseTitle": "ART1350",
+   "profName": "Brian L Jensen"
+ },
+ {
+   "courseTitle": "ART1350",
+   "profName": "Mark Allen Talbert"
+ },
+ {
+   "courseTitle": "ART1350",
+   "profName": "Brian L Jensen"
+ },
+ {
+   "courseTitle": "ART1410",
+   "profName": "Brandon Truscott"
+ },
+ {
+   "courseTitle": "ART1420",
+   "profName": "Patrick T Wilkey"
+ },
+ {
+   "courseTitle": "ART281R",
+   "profName": "Perry Alan Stewart"
+ },
+ {
+   "courseTitle": "ART281R",
+   "profName": "Perry Alan Stewart"
+ },
+ {
+   "courseTitle": "ART281R",
+   "profName": "Perry Alan Stewart"
+ },
+ {
+   "courseTitle": "ART281R",
+   "profName": "Perry Alan Stewart"
+ },
+ {
+   "courseTitle": "ART281R",
+   "profName": "Travis Dar Lovell"
+ },
+ {
+   "courseTitle": "ART281R",
+   "profName": "Perry Alan Stewart"
+ },
+ {
+   "courseTitle": "ART361R",
+   "profName": "Perry Alan Stewart"
+ },
+ {
+   "courseTitle": "ART481R",
+   "profName": "Perry Alan Stewart"
+ },
+ {
+   "courseTitle": "ART481R",
+   "profName": "Perry Alan Stewart"
+ },
+ {
+   "courseTitle": "ART481R",
+   "profName": "Perry Alan Stewart"
+ },
+ {
+   "courseTitle": "ART481R",
+   "profName": "Perry Alan Stewart"
+ },
+ {
+   "courseTitle": "ART481R",
+   "profName": "Perry Alan Stewart"
+ },
+ {
+   "courseTitle": "ART481R",
+   "profName": "Travis Dar Lovell"
+ },
+ {
+   "courseTitle": "ART481R",
+   "profName": "Travis Dar Lovell"
+ },
+ {
+   "courseTitle": "ART481R",
+   "profName": "Travis Dar Lovell"
+ },
+ {
+   "courseTitle": "ART491R",
+   "profName": "Howard W Fullmer"
+ },
+ {
+   "courseTitle": "ART491R",
+   "profName": "Howard W Fullmer"
+ },
+ {
+   "courseTitle": "ART491R",
+   "profName": "Perry Alan Stewart"
+ },
+ {
+   "courseTitle": "ART491R",
+   "profName": "Perry Alan Stewart"
+ },
+ {
+   "courseTitle": "ART491R",
+   "profName": "Howard W Fullmer"
+ },
+ {
+   "courseTitle": "ART491R",
+   "profName": "Nancy J Steele-Makasci"
+ },
+ {
+   "courseTitle": "ART491R",
+   "profName": "Courtney R Davis"
+ },
+ {
+   "courseTitle": "ART491R",
+   "profName": "Mark Allen Talbert"
+ },
+ {
+   "courseTitle": "ART491R",
+   "profName": "Brandon Truscott"
+ },
+ {
+   "courseTitle": "ART491R",
+   "profName": "Courtney R Davis"
+ },
+ {
+   "courseTitle": "ART491R",
+   "profName": "Perry Alan Stewart"
+ },
+ {
+   "courseTitle": "ART491R",
+   "profName": "John S Rees"
+ },
+ {
+   "courseTitle": "ART499R",
+   "profName": "John S Rees"
+ },
+ {
+   "courseTitle": "ART499R",
+   "profName": "Perry Alan Stewart"
+ },
+ {
+   "courseTitle": "ARTH2710",
+   "profName": "Robert B Dewitt"
+ },
+ {
+   "courseTitle": "ARTH2710",
+   "profName": "Tonya Dee Bassett"
+ },
+ {
+   "courseTitle": "ARTH2720",
+   "profName": "Courtney R Davis"
+ },
+ {
+   "courseTitle": "ARTH3015",
+   "profName": "Robert B Dewitt"
+ },
+ {
+   "courseTitle": "ASL3310",
+   "profName": "Travas A Young"
+ },
+ {
+   "courseTitle": "ASL3350",
+   "profName": "Jamie Shawn Hardman"
+ },
+ {
+   "courseTitle": "ASL3360",
+   "profName": "Dale H Boam"
+ },
+ {
+   "courseTitle": "ASL3370",
+   "profName": "Dale H Boam"
+ },
+ {
+   "courseTitle": "ASL3530",
+   "profName": "Dana L Hoffman"
+ },
+ {
+   "courseTitle": "ASL3610",
+   "profName": "Benjamin O Jarashow"
+ },
+ {
+   "courseTitle": "ASL4410",
+   "profName": "Dana L Hoffman"
+ },
+ {
+   "courseTitle": "ASL4610",
+   "profName": "Benjamin O Jarashow"
+ },
+ {
+   "courseTitle": "ASTR1040",
+   "profName": "Christian D Draper"
+ },
+ {
+   "courseTitle": "ASTR1040",
+   "profName": "Christian D Draper"
+ },
+ {
+   "courseTitle": "ASTR1040",
+   "profName": "Christian D Draper"
+ },
+ {
+   "courseTitle": "ASTR1040",
+   "profName": "Christian D Draper"
+ },
+ {
+   "courseTitle": "ASTR2040",
+   "profName": "Karl Erwin Haisch"
+ },
+ {
+   "courseTitle": "AUTS3850",
+   "profName": "Francine Barbara Baffa"
+ },
+ {
+   "courseTitle": "AUTS4650",
+   "profName": "Francine Barbara Baffa"
+ },
+ {
+   "courseTitle": "AVSC1010",
+   "profName": "Carlin Laviolet Clarke"
+ },
+ {
+   "courseTitle": "AVSC1050",
+   "profName": "Carlin Laviolet Clarke"
+ },
+ {
+   "courseTitle": "AVSC1050",
+   "profName": "Charles H Jones"
+ },
+ {
+   "courseTitle": "AVSC1050",
+   "profName": "Charles H Jones"
+ },
+ {
+   "courseTitle": "AVSC1100",
+   "profName": "Michael Lewis Hollister"
+ },
+ {
+   "courseTitle": "AVSC1100",
+   "profName": "Victoria L Dunbar"
+ },
+ {
+   "courseTitle": "AVSC1110",
+   "profName": "Daniel Richard Sutliff"
+ },
+ {
+   "courseTitle": "AVSC1110",
+   "profName": "Benjamin B Lowe"
+ },
+ {
+   "courseTitle": "AVSC1230",
+   "profName": "Daniel Richard Sutliff"
+ },
+ {
+   "courseTitle": "AVSC1250",
+   "profName": "Daniel Richard Sutliff"
+ },
+ {
+   "courseTitle": "AVSC1250",
+   "profName": "Manuel De Jesus Boltz"
+ },
+ {
+   "courseTitle": "AVSC1260",
+   "profName": "Frank J Manderino"
+ },
+ {
+   "courseTitle": "AVSC1260",
+   "profName": "Marcy Grace Metzger-Lemaitre"
+ },
+ {
+   "courseTitle": "AVSC2070",
+   "profName": "Leslie Ann Patching"
+ },
+ {
+   "courseTitle": "AVSC2110",
+   "profName": "Camron B Comish"
+ },
+ {
+   "courseTitle": "AVSC2110",
+   "profName": "Camron B Comish"
+ },
+ {
+   "courseTitle": "AVSC2120",
+   "profName": "Jeremy K Gray"
+ },
+ {
+   "courseTitle": "AVSC2120",
+   "profName": "Jeremy K Gray"
+ },
+ {
+   "courseTitle": "AVSC2120",
+   "profName": "Steven Michael Smith"
+ },
+ {
+   "courseTitle": "AVSC2130",
+   "profName": "Jayme Crehan Scifres"
+ },
+ {
+   "courseTitle": "AVSC2150",
+   "profName": "Jeffrey Lester LaPoint"
+ },
+ {
+   "courseTitle": "AVSC2160",
+   "profName": "Darrell J Green"
+ },
+ {
+   "courseTitle": "AVSC2160",
+   "profName": "Thomas Albert Bahr"
+ },
+ {
+   "courseTitle": "AVSC2310",
+   "profName": "Daniel Richard Sutliff"
+ },
+ {
+   "courseTitle": "AVSC2410",
+   "profName": "Daniel Richard Sutliff"
+ },
+ {
+   "courseTitle": "AVSC2440",
+   "profName": "Daniel Richard Sutliff"
+ },
+ {
+   "courseTitle": "AVSC2440",
+   "profName": "Stephen W Shure"
+ },
+ {
+   "courseTitle": "AVSC2450",
+   "profName": "Daniel Richard Sutliff"
+ },
+ {
+   "courseTitle": "AVSC2450",
+   "profName": "Stephen W Shure"
+ },
+ {
+   "courseTitle": "AVSC2710",
+   "profName": "Ryan Leick"
+ },
+ {
+   "courseTitle": "AVSC2750",
+   "profName": "Charles S Williams"
+ },
+ {
+   "courseTitle": "AVSC2750",
+   "profName": "Charles S Williams"
+ },
+ {
+   "courseTitle": "AVSC3010",
+   "profName": "Brice Nixon Williams"
+ },
+ {
+   "courseTitle": "AVSC3010",
+   "profName": "Michael William Gillen"
+ },
+ {
+   "courseTitle": "AVSC3030",
+   "profName": "Gregory Lee Schwab"
+ },
+ {
+   "courseTitle": "AVSC3030",
+   "profName": "Robert E Jackson"
+ },
+ {
+   "courseTitle": "AVSC3060",
+   "profName": "Ryan Leick"
+ },
+ {
+   "courseTitle": "AVSC3060",
+   "profName": "Jayme Crehan Scifres"
+ },
+ {
+   "courseTitle": "AVSC3090",
+   "profName": "Frank J Manderino"
+ },
+ {
+   "courseTitle": "AVSC3090",
+   "profName": "Darrell John Pugmire"
+ },
+ {
+   "courseTitle": "AVSC3110",
+   "profName": "Stanley U Snow"
+ },
+ {
+   "courseTitle": "AVSC3110",
+   "profName": "Charles H Jones"
+ },
+ {
+   "courseTitle": "AVSC3150",
+   "profName": "Robert E Jackson"
+ },
+ {
+   "courseTitle": "AVSC3200",
+   "profName": "James R Stewart"
+ },
+ {
+   "courseTitle": "AVSC3200",
+   "profName": "James R Stewart"
+ },
+ {
+   "courseTitle": "AVSC3210",
+   "profName": "Darrell J Green"
+ },
+ {
+   "courseTitle": "AVSC3210",
+   "profName": "Todd D Deshler"
+ },
+ {
+   "courseTitle": "AVSC3300",
+   "profName": "Brice Nixon Williams"
+ },
+ {
+   "courseTitle": "AVSC3300",
+   "profName": "Bryan Gregory Lesko"
+ },
+ {
+   "courseTitle": "AVSC3320",
+   "profName": "Brandon C Hayes"
+ },
+ {
+   "courseTitle": "AVSC3320",
+   "profName": "Brandon C Hayes"
+ },
+ {
+   "courseTitle": "AVSC3350",
+   "profName": "Patricia C Forbes"
+ },
+ {
+   "courseTitle": "AVSC3350",
+   "profName": "Patricia C Forbes"
+ },
+ {
+   "courseTitle": "AVSC3400",
+   "profName": "Brice Nixon Williams"
+ },
+ {
+   "courseTitle": "AVSC3400",
+   "profName": "Stanley U Snow"
+ },
+ {
+   "courseTitle": "AVSC3530",
+   "profName": "Darrell J Green"
+ },
+ {
+   "courseTitle": "AVSC3530",
+   "profName": "Jeffrey Lester LaPoint"
+ },
+ {
+   "courseTitle": "AVSC3600",
+   "profName": "James Carlyle Green"
+ },
+ {
+   "courseTitle": "AVSC3600",
+   "profName": "Jennifer A Shamsy"
+ },
+ {
+   "courseTitle": "AVSC4020",
+   "profName": "Jeremy K Gray"
+ },
+ {
+   "courseTitle": "AVSC4020",
+   "profName": "Jeremy K Gray"
+ },
+ {
+   "courseTitle": "AVSC410G",
+   "profName": "Robert B Marcus"
+ },
+ {
+   "courseTitle": "AVSC410G",
+   "profName": "Robert B Marcus"
+ },
+ {
+   "courseTitle": "AVSC4700",
+   "profName": "Gregory Lee Schwab"
+ },
+ {
+   "courseTitle": "AVSC4700",
+   "profName": "Shawn M Flanagan"
+ },
+ {
+   "courseTitle": "AVSC475R",
+   "profName": "Nathan Douglas Skene"
+ },
+ {
+   "courseTitle": "AVSC4800",
+   "profName": "Bryan Gregory Lesko"
+ },
+ {
+   "courseTitle": "AVSC4800",
+   "profName": "Bryan Gregory Lesko"
+ },
+ {
+   "courseTitle": "AVSC4900",
+   "profName": "Ryan Leick"
+ },
+ {
+   "courseTitle": "AVSC4900",
+   "profName": "Allan Richard Bardos"
+ },
+ {
+   "courseTitle": "BESC3010",
+   "profName": "Russell T Warne"
+ },
+ {
+   "courseTitle": "BESC3010",
+   "profName": "Steven Christian Clark"
+ },
+ {
+   "courseTitle": "BESC3010",
+   "profName": "Barton L Poulson"
+ },
+ {
+   "courseTitle": "BESC3020",
+   "profName": "Rongxun Liang"
+ },
+ {
+   "courseTitle": "BESC3020",
+   "profName": "Sandra L McGunigall-Smith"
+ },
+ {
+   "courseTitle": "BESC3100",
+   "profName": "Travis B Reynolds"
+ },
+ {
+   "courseTitle": "BESC3420",
+   "profName": "LeeAnn Glade"
+ },
+ {
+   "courseTitle": "BESC4040",
+   "profName": "Rongxun Liang"
+ },
+ {
+   "courseTitle": "BESC481R",
+   "profName": "Matthew R Draper"
+ },
+ {
+   "courseTitle": "BESC481R",
+   "profName": "Matthew R Draper"
+ },
+ {
+   "courseTitle": "BESC481R",
+   "profName": "Ronald J Hammond"
+ },
+ {
+   "courseTitle": "BESC481R",
+   "profName": "Matthew R Draper"
+ },
+ {
+   "courseTitle": "BIOL1010",
+   "profName": "Ruhul Haque Kuddus"
+ },
+ {
+   "courseTitle": "BIOL1010",
+   "profName": "Robert R Robbins"
+ },
+ {
+   "courseTitle": "BIOL1010",
+   "profName": "Sebastien Jean-Marie Tauzin"
+ },
+ {
+   "courseTitle": "BIOL1010",
+   "profName": "Robert R Robbins"
+ },
+ {
+   "courseTitle": "BIOL1010",
+   "profName": "James R Bradshaw"
+ },
+ {
+   "courseTitle": "BIOL1010",
+   "profName": "Sebastien Jean-Marie Tauzin"
+ },
+ {
+   "courseTitle": "BIOL1010",
+   "profName": "Maren C Bauer"
+ },
+ {
+   "courseTitle": "BIOL1010",
+   "profName": "Bruce D Parker"
+ },
+ {
+   "courseTitle": "BIOL1010",
+   "profName": "Bruce D Parker"
+ },
+ {
+   "courseTitle": "BIOL1015",
+   "profName": "Mandy Harker Marvel"
+ },
+ {
+   "courseTitle": "BIOL1610",
+   "profName": "Olga Ruiz Kopp"
+ },
+ {
+   "courseTitle": "BIOL1615",
+   "profName": "Brad V Graham"
+ },
+ {
+   "courseTitle": "BIOL1615",
+   "profName": "Courtney Elizabeth Demmitt-Rice"
+ },
+ {
+   "courseTitle": "BIOL1620",
+   "profName": "Paul J Bybee"
+ },
+ {
+   "courseTitle": "BIOL1625",
+   "profName": "Joshua Paul Snyder"
+ },
+ {
+   "courseTitle": "BIOL1625",
+   "profName": "Joshua Paul Snyder"
+ },
+ {
+   "courseTitle": "BIOL1625",
+   "profName": "Melissa Sue Cavan"
+ },
+ {
+   "courseTitle": "BIOL295R",
+   "profName": "Donald P Homan"
+ },
+ {
+   "courseTitle": "BIOL295R",
+   "profName": "Donald P Homan"
+ },
+ {
+   "courseTitle": "BIOL295R",
+   "profName": "Donald P Homan"
+ },
+ {
+   "courseTitle": "BIOL295R",
+   "profName": "Olga Ruiz Kopp"
+ },
+ {
+   "courseTitle": "BIOL3300",
+   "profName": "James R Bradshaw"
+ },
+ {
+   "courseTitle": "BIOL3400",
+   "profName": "Colleen Delia Hough"
+ },
+ {
+   "courseTitle": "BIOL3500",
+   "profName": "Eric Thomas Domyan"
+ },
+ {
+   "courseTitle": "BIOL3505",
+   "profName": "Eric Thomas Domyan"
+ },
+ {
+   "courseTitle": "BIOL3550",
+   "profName": "Ruhul Haque Kuddus"
+ },
+ {
+   "courseTitle": "BIOL3600",
+   "profName": "Craig Dan Thulin"
+ },
+ {
+   "courseTitle": "BIOL3700",
+   "profName": "Lawrence James Gray"
+ },
+ {
+   "courseTitle": "BIOL481R",
+   "profName": "Mark E Bracken"
+ },
+ {
+   "courseTitle": "BIOL481R",
+   "profName": "Timothy E Doyle"
+ },
+ {
+   "courseTitle": "BIOL481R",
+   "profName": "Heather Ann Wilson-Ashworth"
+ },
+ {
+   "courseTitle": "BIOL481R",
+   "profName": "Virginia Eileen Bayer"
+ },
+ {
+   "courseTitle": "BIOL481R",
+   "profName": "Virginia Eileen Bayer"
+ },
+ {
+   "courseTitle": "BIOL481R",
+   "profName": "Michael T. Stevens"
+ },
+ {
+   "courseTitle": "BIOL489R",
+   "profName": "James V Price"
+ },
+ {
+   "courseTitle": "BIOL489R",
+   "profName": "Olga Ruiz Kopp"
+ },
+ {
+   "courseTitle": "BIOL489R",
+   "profName": "Timothy E Doyle"
+ },
+ {
+   "courseTitle": "BIOL489R",
+   "profName": "Timothy E Doyle"
+ },
+ {
+   "courseTitle": "BIOL489R",
+   "profName": "Olga Ruiz Kopp"
+ },
+ {
+   "courseTitle": "BIOL489R",
+   "profName": "Ruhul Haque Kuddus"
+ },
+ {
+   "courseTitle": "BIOL489R",
+   "profName": "Ruhul Haque Kuddus"
+ },
+ {
+   "courseTitle": "BIOL489R",
+   "profName": "Janice E Sugiyama"
+ },
+ {
+   "courseTitle": "BIOL489R",
+   "profName": "Thomas Heath Ogden"
+ },
+ {
+   "courseTitle": "BIOL489R",
+   "profName": "Thomas Heath Ogden"
+ },
+ {
+   "courseTitle": "BIOL489R",
+   "profName": "Eric Thomas Domyan"
+ },
+ {
+   "courseTitle": "BIOL489R",
+   "profName": "Virginia Eileen Bayer"
+ },
+ {
+   "courseTitle": "BIOL489R",
+   "profName": "Thomas Heath Ogden"
+ },
+ {
+   "courseTitle": "BIOL489R",
+   "profName": "Thomas Heath Ogden"
+ },
+ {
+   "courseTitle": "BIOL499R",
+   "profName": "Timothy E Doyle"
+ },
+ {
+   "courseTitle": "BIOL525R",
+   "profName": "Colleen Delia Hough"
+ },
+ {
+   "courseTitle": "BOT2100",
+   "profName": "James G Harris"
+ },
+ {
+   "courseTitle": "BOT2100",
+   "profName": "Allyson Noel Bench Searle"
+ },
+ {
+   "courseTitle": "BTEC1010",
+   "profName": "Mandy Harker Marvel"
+ },
+ {
+   "courseTitle": "BTEC481R",
+   "profName": "Colleen Delia Hough"
+ },
+ {
+   "courseTitle": "BTEC481R",
+   "profName": "Colleen Delia Hough"
+ },
+ {
+   "courseTitle": "BTEC481R",
+   "profName": "Janice E Sugiyama"
+ },
+ {
+   "courseTitle": "BTEC481R",
+   "profName": "Colleen Delia Hough"
+ },
+ {
+   "courseTitle": "BTEC481R",
+   "profName": "Virginia Eileen Bayer"
+ },
+ {
+   "courseTitle": "BTEC481R",
+   "profName": "Janice E Sugiyama"
+ },
+ {
+   "courseTitle": "BTEC481R",
+   "profName": "Colleen Delia Hough"
+ },
+ {
+   "courseTitle": "BTEC489R",
+   "profName": "Colleen Delia Hough"
+ },
+ {
+   "courseTitle": "CA1150",
+   "profName": "Jennette Kilgrow"
+ },
+ {
+   "courseTitle": "CA1160",
+   "profName": "Kenneth J Francom"
+ },
+ {
+   "courseTitle": "CA1490",
+   "profName": "Ramzy Philip Asmar"
+ },
+ {
+   "courseTitle": "CA282R",
+   "profName": "Todd Curtis Leonard"
+ },
+ {
+   "courseTitle": "CHEM1010",
+   "profName": "Lilia P White"
+ },
+ {
+   "courseTitle": "CHEM1110",
+   "profName": "Donald C Bastian"
+ },
+ {
+   "courseTitle": "CHEM1110",
+   "profName": "Donald C Bastian"
+ },
+ {
+   "courseTitle": "CHEM1210",
+   "profName": "Elena Laricheva"
+ },
+ {
+   "courseTitle": "CHEM1220",
+   "profName": "Matthew A Horn"
+ },
+ {
+   "courseTitle": "CHEM1220",
+   "profName": "Merrill D Halling"
+ },
+ {
+   "courseTitle": "CHEM2310",
+   "profName": "Young Wan Ham"
+ },
+ {
+   "courseTitle": "CHEM2320",
+   "profName": "Tyler Kent Olsen"
+ },
+ {
+   "courseTitle": "CHEM3600",
+   "profName": "Craig Dan Thulin"
+ },
+ {
+   "courseTitle": "CHEM489R",
+   "profName": "Young Wan Ham"
+ },
+ {
+   "courseTitle": "CHEM489R",
+   "profName": "Fern M Caka"
+ },
+ {
+   "courseTitle": "CHEM489R",
+   "profName": "Craig Dan Thulin"
+ },
+ {
+   "courseTitle": "CHEM489R",
+   "profName": "Fern M Caka"
+ },
+ {
+   "courseTitle": "CHEM489R",
+   "profName": "Fern M Caka"
+ },
+ {
+   "courseTitle": "CHEM499R",
+   "profName": "Fern M Caka"
+ },
+ {
+   "courseTitle": "CHIN1010",
+   "profName": "Guofang Yuan"
+ },
+ {
+   "courseTitle": "CHIN1020",
+   "profName": "Guofang Yuan"
+ },
+ {
+   "courseTitle": "CHIN3050",
+   "profName": "Guofang Yuan"
+ },
+ {
+   "courseTitle": "CJ1010",
+   "profName": "Matthew L Duffin"
+ },
+ {
+   "courseTitle": "CJ1010",
+   "profName": "Bobbi Kassel"
+ },
+ {
+   "courseTitle": "CJ1010",
+   "profName": "Matthew L Duffin"
+ },
+ {
+   "courseTitle": "CJ1330",
+   "profName": "Stott P Harston"
+ },
+ {
+   "courseTitle": "CJ1340",
+   "profName": "Wade Jay Raab"
+ },
+ {
+   "courseTitle": "CJ1350",
+   "profName": "Mark A Robinson"
+ },
+ {
+   "courseTitle": "CJ2330",
+   "profName": "Marcy Lynn Hehnly"
+ },
+ {
+   "courseTitle": "CJ2350",
+   "profName": "Stott P Harston"
+ },
+ {
+   "courseTitle": "CJ3020",
+   "profName": "Richard Allen Los"
+ },
+ {
+   "courseTitle": "CJ3040",
+   "profName": "Darren J Falslev"
+ },
+ {
+   "courseTitle": "CJ3270",
+   "profName": "Kenneth Lynn Crook"
+ },
+ {
+   "courseTitle": "CJ3300",
+   "profName": "Bobbi Kassel"
+ },
+ {
+   "courseTitle": "CJ3390",
+   "profName": "Daniel M Terry"
+ },
+ {
+   "courseTitle": "CJ4160",
+   "profName": "James R Taylor"
+ },
+ {
+   "courseTitle": "CJ4200",
+   "profName": "Gregory A Petersen"
+ },
+ {
+   "courseTitle": "CJ4250",
+   "profName": "Ryan Joseph Vogel"
+ },
+ {
+   "courseTitle": "CJ470G",
+   "profName": "Kenneth Lynn Crook"
+ },
+ {
+   "courseTitle": "CJ475R",
+   "profName": "Ryan Joseph Vogel"
+ },
+ {
+   "courseTitle": "CJ475R",
+   "profName": "Marcy Lynn Hehnly"
+ },
+ {
+   "courseTitle": "CJ481R",
+   "profName": "Melissa Noyes"
+ },
+ {
+   "courseTitle": "CJ4990",
+   "profName": "Matthew L Duffin"
+ },
+ {
+   "courseTitle": "CMGT1010",
+   "profName": "Barry Keith Hallsted"
+ },
+ {
+   "courseTitle": "CMGT1150",
+   "profName": "Robert D Warcup"
+ },
+ {
+   "courseTitle": "CMGT281R",
+   "profName": "James Allen Cox"
+ },
+ {
+   "courseTitle": "CMGT281R",
+   "profName": "Steven K Pugmire"
+ },
+ {
+   "courseTitle": "CMGT481R",
+   "profName": "James Allen Cox"
+ },
+ {
+   "courseTitle": "CMGT481R",
+   "profName": "Steven K Pugmire"
+ },
+ {
+   "courseTitle": "CMGT497R",
+   "profName": "John Eric Linfield"
+ },
+ {
+   "courseTitle": "COMM1020",
+   "profName": "David O Litchford"
+ },
+ {
+   "courseTitle": "COMM1020",
+   "profName": "David O Litchford"
+ },
+ {
+   "courseTitle": "COMM1020",
+   "profName": "Jordan Makin"
+ },
+ {
+   "courseTitle": "COMM1020",
+   "profName": "Stevie Michelle Munz"
+ },
+ {
+   "courseTitle": "COMM1020",
+   "profName": "Jordan Makin"
+ },
+ {
+   "courseTitle": "COMM1020",
+   "profName": "Nancy Tobler"
+ },
+ {
+   "courseTitle": "COMM1130",
+   "profName": "Jingdong Liang"
+ },
+ {
+   "courseTitle": "COMM1130",
+   "profName": "James A Fisher"
+ },
+ {
+   "courseTitle": "COMM1500",
+   "profName": "Philip S Gordon"
+ },
+ {
+   "courseTitle": "COMM1610",
+   "profName": "James A Fisher"
+ },
+ {
+   "courseTitle": "COMM2110",
+   "profName": "Kimberly Anne Hanson"
+ },
+ {
+   "courseTitle": "COMM2110",
+   "profName": "Kimberly Anne Hanson"
+ },
+ {
+   "courseTitle": "COMM2110",
+   "profName": "Kimberly Anne Hanson"
+ },
+ {
+   "courseTitle": "COMM2110",
+   "profName": "Spencer D Patterson"
+ },
+ {
+   "courseTitle": "COMM2110",
+   "profName": "Spencer D Patterson"
+ },
+ {
+   "courseTitle": "COMM2110",
+   "profName": "Spencer D Patterson"
+ },
+ {
+   "courseTitle": "COMM2120",
+   "profName": "Maria D Blevins"
+ },
+ {
+   "courseTitle": "COMM2300",
+   "profName": "Stephen L Whyte"
+ },
+ {
+   "courseTitle": "COMM2300",
+   "profName": "Stephen L Whyte"
+ },
+ {
+   "courseTitle": "COMM2400",
+   "profName": "Janet W Colvin"
+ },
+ {
+   "courseTitle": "COMM2510",
+   "profName": "David T Morin"
+ },
+ {
+   "courseTitle": "COMM281R",
+   "profName": "Natalie A Shelley"
+ },
+ {
+   "courseTitle": "COMM281R",
+   "profName": "Leslie Gae Robinson"
+ },
+ {
+   "courseTitle": "COMM3020",
+   "profName": "Nancy Tobler"
+ },
+ {
+   "courseTitle": "COMM3050",
+   "profName": "Earl Henry McIntire"
+ },
+ {
+   "courseTitle": "COMM3115",
+   "profName": "Maria D Blevins"
+ },
+ {
+   "courseTitle": "COMM3120",
+   "profName": "Farah Ann Chase-Dunn Sanders"
+ },
+ {
+   "courseTitle": "COMM3140",
+   "profName": "David T Morin"
+ },
+ {
+   "courseTitle": "COMM332G",
+   "profName": "Bernd A Kupka"
+ },
+ {
+   "courseTitle": "COMM332G",
+   "profName": "Jeffrey B Call"
+ },
+ {
+   "courseTitle": "COMM3420",
+   "profName": "LeeAnn Glade"
+ },
+ {
+   "courseTitle": "COMM350R",
+   "profName": "Steven A Hall"
+ },
+ {
+   "courseTitle": "COMM3520",
+   "profName": "Farah Ann Chase-Dunn Sanders"
+ },
+ {
+   "courseTitle": "COMM3530",
+   "profName": "Farah Ann Chase-Dunn Sanders"
+ },
+ {
+   "courseTitle": "COMM3540",
+   "profName": "Farah Ann Chase-Dunn Sanders"
+ },
+ {
+   "courseTitle": "COMM3700",
+   "profName": "David William Scott"
+ },
+ {
+   "courseTitle": "COMM3780",
+   "profName": "David William Scott"
+ },
+ {
+   "courseTitle": "COMM401G",
+   "profName": "Stevie Michelle Munz"
+ },
+ {
+   "courseTitle": "COMM4180",
+   "profName": "Janet W Colvin"
+ },
+ {
+   "courseTitle": "COMM481R",
+   "profName": "Leslie Gae Robinson"
+ },
+ {
+   "courseTitle": "COMM481R",
+   "profName": "Natalie A Shelley"
+ },
+ {
+   "courseTitle": "COMM481R",
+   "profName": "Natalie A Shelley"
+ },
+ {
+   "courseTitle": "COMM481R",
+   "profName": "Leslie Gae Robinson"
+ },
+ {
+   "courseTitle": "COMM481R",
+   "profName": "Leslie Gae Robinson"
+ },
+ {
+   "courseTitle": "COMM481R",
+   "profName": "Leslie Gae Robinson"
+ },
+ {
+   "courseTitle": "COMM481R",
+   "profName": "Leslie Gae Robinson"
+ },
+ {
+   "courseTitle": "COMM4930",
+   "profName": "David T Morin"
+ },
+ {
+   "courseTitle": "COMM4930",
+   "profName": "Nancy Tobler"
+ },
+ {
+   "courseTitle": "COMP301R",
+   "profName": "Doreen Smith"
+ },
+ {
+   "courseTitle": "COMP301R",
+   "profName": "Doreen Smith"
+ },
+ {
+   "courseTitle": "CRT100R",
+   "profName": "Terrance K Orr"
+ },
+ {
+   "courseTitle": "CRT100R",
+   "profName": "Don T Wilson"
+ },
+ {
+   "courseTitle": "CS1400",
+   "profName": "Huda Ali Al-Ghaib"
+ },
+ {
+   "courseTitle": "CS1400",
+   "profName": "Bruce Albert Embry"
+ },
+ {
+   "courseTitle": "CS1400",
+   "profName": "Jingpeng Tang"
+ },
+ {
+   "courseTitle": "CS1410",
+   "profName": "Reza Kamali-Sarvestani"
+ },
+ {
+   "courseTitle": "CS1410",
+   "profName": "Reza Kamali-Sarvestani"
+ },
+ {
+   "courseTitle": "CS2300",
+   "profName": "David Alexander Wagstaff"
+ },
+ {
+   "courseTitle": "CS2420",
+   "profName": "Reza Sanati-Mehrizy"
+ },
+ {
+   "courseTitle": "CS2450",
+   "profName": "Jingpeng Tang"
+ },
+ {
+   "courseTitle": "CS2550",
+   "profName": "David Alexander Wagstaff"
+ },
+ {
+   "courseTitle": "CS2550",
+   "profName": "Brian L Durney"
+ },
+ {
+   "courseTitle": "CS2810",
+   "profName": "Afsaneh Minaie"
+ },
+ {
+   "courseTitle": "CS281R",
+   "profName": "Steven K Pugmire"
+ },
+ {
+   "courseTitle": "CS281R",
+   "profName": "Steven K Pugmire"
+ },
+ {
+   "courseTitle": "CS3060",
+   "profName": "Brian L Durney"
+ },
+ {
+   "courseTitle": "CS3260",
+   "profName": "Lynn Roy Thackeray"
+ },
+ {
+   "courseTitle": "CS3520",
+   "profName": "Reza Sanati-Mehrizy"
+ },
+ {
+   "courseTitle": "CS3660",
+   "profName": "David Alexander Wagstaff"
+ },
+ {
+   "courseTitle": "DANC1010",
+   "profName": "Sarah Jean Donohue"
+ },
+ {
+   "courseTitle": "DANC143R",
+   "profName": "Monica C Campbell"
+ },
+ {
+   "courseTitle": "DANC144R",
+   "profName": "Monica C Campbell"
+ },
+ {
+   "courseTitle": "DANC227R",
+   "profName": "Nichole Ortega"
+ },
+ {
+   "courseTitle": "DANC3630",
+   "profName": "Angela Banchero-Kelleher"
+ },
+ {
+   "courseTitle": "DANC481R",
+   "profName": "Doris Ann Hudson Trujillo"
+ },
+ {
+   "courseTitle": "DENT3200",
+   "profName": "Dianne Bradshaw Knight"
+ },
+ {
+   "courseTitle": "DENT489R",
+   "profName": "Deborah Hayes Dowd"
+ },
+ {
+   "courseTitle": "DENT490R",
+   "profName": "Sandra Kay Wilson"
+ },
+ {
+   "courseTitle": "DGM1061",
+   "profName": "Dennis R Lisonbee"
+ },
+ {
+   "courseTitle": "DGM1110",
+   "profName": "Cory Dee Loughmiller"
+ },
+ {
+   "courseTitle": "DGM1110",
+   "profName": "Russell Scott Mayo"
+ },
+ {
+   "courseTitle": "DGM1110",
+   "profName": "Braden W Boss"
+ },
+ {
+   "courseTitle": "DGM1110",
+   "profName": "Kim P Brown"
+ },
+ {
+   "courseTitle": "DGM1600",
+   "profName": "Anthony J Romrell"
+ },
+ {
+   "courseTitle": "DGM2110",
+   "profName": "Stuart P Heimdal"
+ },
+ {
+   "courseTitle": "DGM2120",
+   "profName": "Paul W Cheney"
+ },
+ {
+   "courseTitle": "DGM2130",
+   "profName": "Owen Mathew Peterson"
+ },
+ {
+   "courseTitle": "DGM2250",
+   "profName": "Anthony J Romrell"
+ },
+ {
+   "courseTitle": "DGM2271",
+   "profName": "Michael Forrest Harper"
+ },
+ {
+   "courseTitle": "DGM2320",
+   "profName": "Reese M Christensen"
+ },
+ {
+   "courseTitle": "DGM270R",
+   "profName": "Daniel Hatch"
+ },
+ {
+   "courseTitle": "DGM270R",
+   "profName": "Daniel Hatch"
+ },
+ {
+   "courseTitle": "DGM2740",
+   "profName": "Paul W Cheney"
+ },
+ {
+   "courseTitle": "DGM281R",
+   "profName": "Michael Forrest Harper"
+ },
+ {
+   "courseTitle": "DGM281R",
+   "profName": "Steven K Pugmire"
+ },
+ {
+   "courseTitle": "DGM281R",
+   "profName": "Michael Forrest Harper"
+ },
+ {
+   "courseTitle": "DGM281R",
+   "profName": "Steven K Pugmire"
+ },
+ {
+   "courseTitle": "DGM281R",
+   "profName": "Michael Forrest Harper"
+ },
+ {
+   "courseTitle": "DGM281R",
+   "profName": "Michael Forrest Harper"
+ },
+ {
+   "courseTitle": "DGM281R",
+   "profName": "Steven K Pugmire"
+ },
+ {
+   "courseTitle": "DGM3110",
+   "profName": "Arlen L Card"
+ },
+ {
+   "courseTitle": "DGM312G",
+   "profName": "Edwin Peter Hansen II"
+ },
+ {
+   "courseTitle": "DGM3220",
+   "profName": "Trudy Kowallis Christensen"
+ },
+ {
+   "courseTitle": "DGM3320",
+   "profName": "Reese M Christensen"
+ },
+ {
+   "courseTitle": "DGM340R",
+   "profName": "Michael Garner Wisland"
+ },
+ {
+   "courseTitle": "DGM340R",
+   "profName": "Michael Garner Wisland"
+ },
+ {
+   "courseTitle": "DGM340R",
+   "profName": "Arlen L Card"
+ },
+ {
+   "courseTitle": "DGM3570",
+   "profName": "Larry Rodayne Esmay"
+ },
+ {
+   "courseTitle": "DGM4000",
+   "profName": "Robert N Conder"
+ },
+ {
+   "courseTitle": "DGM481R",
+   "profName": "Arlen L Card"
+ },
+ {
+   "courseTitle": "DGM481R",
+   "profName": "Steven K Pugmire"
+ },
+ {
+   "courseTitle": "DGM481R",
+   "profName": "Arlen L Card"
+ },
+ {
+   "courseTitle": "DGM481R",
+   "profName": "Steven K Pugmire"
+ },
+ {
+   "courseTitle": "DGM481R",
+   "profName": "Arlen L Card"
+ },
+ {
+   "courseTitle": "DGM481R",
+   "profName": "Steven K Pugmire"
+ },
+ {
+   "courseTitle": "DGM481R",
+   "profName": "Arlen L Card"
+ },
+ {
+   "courseTitle": "DGM481R",
+   "profName": "Steven K Pugmire"
+ },
+ {
+   "courseTitle": "DGM497R",
+   "profName": "Michael Forrest Harper"
+ },
+ {
+   "courseTitle": "DGM497R",
+   "profName": "Arlen L Card"
+ },
+ {
+   "courseTitle": "DGM497R",
+   "profName": "Anthony J Romrell"
+ },
+ {
+   "courseTitle": "EART281R",
+   "profName": "David Mack Adams"
+ },
+ {
+   "courseTitle": "EART281R",
+   "profName": "David Mack Adams"
+ },
+ {
+   "courseTitle": "ECE3710",
+   "profName": "Afsaneh Minaie"
+ },
+ {
+   "courseTitle": "ECON2010",
+   "profName": "Brandon M Adams"
+ },
+ {
+   "courseTitle": "ECON2020",
+   "profName": "Abdus Samad"
+ },
+ {
+   "courseTitle": "ECON2020",
+   "profName": "Abdus Samad"
+ },
+ {
+   "courseTitle": "ECON2020",
+   "profName": "Gary Wixom"
+ },
+ {
+   "courseTitle": "ECON6300",
+   "profName": "Maritza L Sotomayor"
+ },
+ {
+   "courseTitle": "ECON6460",
+   "profName": "Andre Luis Rossi de Oliveira"
+ },
+ {
+   "courseTitle": "ECON6460",
+   "profName": "Andre Luis Rossi de Oliveira"
+ },
+ {
+   "courseTitle": "EDEL4550",
+   "profName": "Elaine Allen Tuft"
+ },
+ {
+   "courseTitle": "EDSC3050",
+   "profName": "Axel Donizetti Ramirez"
+ },
+ {
+   "courseTitle": "EDSP3840",
+   "profName": "Nichole Wangsgard"
+ },
+ {
+   "courseTitle": "EDUC5300",
+   "profName": "Debora L Escalante"
+ },
+ {
+   "courseTitle": "EDUC5340",
+   "profName": "Bryan Robert Waite"
+ },
+ {
+   "courseTitle": "EDUC5350",
+   "profName": "Bryan Robert Waite"
+ },
+ {
+   "courseTitle": "EDUC5370",
+   "profName": "Bryan Robert Waite"
+ },
+ {
+   "courseTitle": "EDUC5530",
+   "profName": "Mary Sowder"
+ },
+ {
+   "courseTitle": "EDUC5530",
+   "profName": "Melissa Garber "
+ },
+ {
+   "courseTitle": "EDUC5530",
+   "profName": "Bruce B Gunn"
+ },
+ {
+   "courseTitle": "EDUC5810",
+   "profName": "Debora L Escalante"
+ },
+ {
+   "courseTitle": "EDUC5820",
+   "profName": "Krista Ruggles"
+ },
+ {
+   "courseTitle": "EDUC5830",
+   "profName": "Krista Ruggles"
+ },
+ {
+   "courseTitle": "EDUC6083",
+   "profName": "Krista Ruggles"
+ },
+ {
+   "courseTitle": "EDUC6100",
+   "profName": "Vessela K Ilieva"
+ },
+ {
+   "courseTitle": "EDUC6110",
+   "profName": "Elaine Allen Tuft"
+ },
+ {
+   "courseTitle": "EDUC6110",
+   "profName": "Elaine Allen Tuft"
+ },
+ {
+   "courseTitle": "EDUC6300",
+   "profName": "Debora L Escalante"
+ },
+ {
+   "courseTitle": "EDUC6300",
+   "profName": "Debora L Escalante"
+ },
+ {
+   "courseTitle": "EDUC6320",
+   "profName": "Krista Ruggles"
+ },
+ {
+   "courseTitle": "EDUC6340",
+   "profName": "Bryan Robert Waite"
+ },
+ {
+   "courseTitle": "EDUC6350",
+   "profName": "Bryan Robert Waite"
+ },
+ {
+   "courseTitle": "EDUC6370",
+   "profName": "Bryan Robert Waite"
+ },
+ {
+   "courseTitle": "EDUC6410",
+   "profName": "Mary Sowder"
+ },
+ {
+   "courseTitle": "EDUC693R",
+   "profName": "Mary Sowder"
+ },
+ {
+   "courseTitle": "EGDT1020",
+   "profName": "Robert D Price"
+ },
+ {
+   "courseTitle": "EGDT1040",
+   "profName": "Danial L Perry"
+ },
+ {
+   "courseTitle": "EGDT1071",
+   "profName": "Sidney D Smith"
+ },
+ {
+   "courseTitle": "EGDT1100",
+   "profName": "Howard Lloyd Bezzant"
+ },
+ {
+   "courseTitle": "EGDT1400",
+   "profName": "David E Manning"
+ },
+ {
+   "courseTitle": "EGDT1400",
+   "profName": "Darin Taylor"
+ },
+ {
+   "courseTitle": "EGDT1720",
+   "profName": "David R Barker"
+ },
+ {
+   "courseTitle": "ENGL1010",
+   "profName": "Erna Lorraine Wallace"
+ },
+ {
+   "courseTitle": "ENGL1010",
+   "profName": "Jacob Levi Robertson"
+ },
+ {
+   "courseTitle": "ENGL1010",
+   "profName": "Stephen Fullmer"
+ },
+ {
+   "courseTitle": "ENGL1010",
+   "profName": "Jacob Levi Robertson"
+ },
+ {
+   "courseTitle": "ENGL1010",
+   "profName": "Erna Lorraine Wallace"
+ },
+ {
+   "courseTitle": "ENGL1010",
+   "profName": "Christopher S Lee"
+ },
+ {
+   "courseTitle": "ENGL1010",
+   "profName": "Sandra L Vogel"
+ },
+ {
+   "courseTitle": "ENGL1010",
+   "profName": "Mark E Crane"
+ },
+ {
+   "courseTitle": "ENGL1010",
+   "profName": "Richard B McDonald"
+ },
+ {
+   "courseTitle": "ENGL1010",
+   "profName": "Christopher S Lee"
+ },
+ {
+   "courseTitle": "ENGL1010",
+   "profName": "Mark E Crane"
+ },
+ {
+   "courseTitle": "ENGL1010",
+   "profName": "Zachary L Largey"
+ },
+ {
+   "courseTitle": "ENGL2010",
+   "profName": "Julie J Nichols"
+ },
+ {
+   "courseTitle": "ENGL2010",
+   "profName": "Thomas B Smith"
+ },
+ {
+   "courseTitle": "ENGL2010",
+   "profName": "Stephen Dale Gibson"
+ },
+ {
+   "courseTitle": "ENGL2010",
+   "profName": "Boyd J Petersen"
+ },
+ {
+   "courseTitle": "ENGL2010",
+   "profName": "Nathan A Gale"
+ },
+ {
+   "courseTitle": "ENGL2010",
+   "profName": "John Charles Goshert"
+ },
+ {
+   "courseTitle": "ENGL2010",
+   "profName": "Stephen Dale Gibson"
+ },
+ {
+   "courseTitle": "ENGL2010",
+   "profName": "Mark D Pepper"
+ },
+ {
+   "courseTitle": "ENGL2010",
+   "profName": "Ethan M Sproat"
+ },
+ {
+   "courseTitle": "ENGL2010",
+   "profName": "Ethan M Sproat"
+ },
+ {
+   "courseTitle": "ENGL2010",
+   "profName": "John Charles Goshert"
+ },
+ {
+   "courseTitle": "ENGL2010",
+   "profName": "Steven A Harrison"
+ },
+ {
+   "courseTitle": "ENGL2010",
+   "profName": "Steven A Harrison"
+ },
+ {
+   "courseTitle": "ENGL2010",
+   "profName": "Amanda L Cherrington"
+ },
+ {
+   "courseTitle": "ENGL2010",
+   "profName": "Linda K Shelton"
+ },
+ {
+   "courseTitle": "ENGL2020",
+   "profName": "Paul A Tanner"
+ },
+ {
+   "courseTitle": "ENGL2020",
+   "profName": "Charles A Vogel"
+ },
+ {
+   "courseTitle": "ENGL2020",
+   "profName": "Charles A Vogel"
+ },
+ {
+   "courseTitle": "ENGL2200",
+   "profName": "Sandra L Vogel"
+ },
+ {
+   "courseTitle": "ENGL2230",
+   "profName": "Stephen Fullmer"
+ },
+ {
+   "courseTitle": "ENGL2250",
+   "profName": "Julie J Nichols"
+ },
+ {
+   "courseTitle": "ENGL2310",
+   "profName": "Mark D Pepper"
+ },
+ {
+   "courseTitle": "ENGL2510",
+   "profName": "Robert J Cousins"
+ },
+ {
+   "courseTitle": "ENGL2520",
+   "profName": "Lydia R Kerr"
+ },
+ {
+   "courseTitle": "ENGL2600",
+   "profName": "Lydia R Kerr"
+ },
+ {
+   "courseTitle": "ENGL2610",
+   "profName": "Richard B McDonald"
+ },
+ {
+   "courseTitle": "ENGL2620",
+   "profName": "Boyd J Petersen"
+ },
+ {
+   "courseTitle": "ENGL3020",
+   "profName": "Linda K Shelton"
+ },
+ {
+   "courseTitle": "ENGL3060",
+   "profName": "Jerry L Petersen"
+ },
+ {
+   "courseTitle": "ENGL3090",
+   "profName": "Paul A Tanner"
+ },
+ {
+   "courseTitle": "ENGL3440",
+   "profName": "Laura J Hamblin"
+ },
+ {
+   "courseTitle": "ENGL3530",
+   "profName": "Debra L Thornton"
+ },
+ {
+   "courseTitle": "ENGL3630",
+   "profName": "Kathryn Read McPherson"
+ },
+ {
+   "courseTitle": "ENGL3660",
+   "profName": "Charles A Vogel"
+ },
+ {
+   "courseTitle": "ENGL3670",
+   "profName": "Brian S Whaley"
+ },
+ {
+   "courseTitle": "ENGL3890",
+   "profName": "Christa Despina Albrecht-Crane"
+ },
+ {
+   "courseTitle": "ENGL412R",
+   "profName": "Karin Anderson"
+ },
+ {
+   "courseTitle": "ENGL4250",
+   "profName": "Thomas B Smith"
+ },
+ {
+   "courseTitle": "ENGL463R",
+   "profName": "David Grant Moss"
+ },
+ {
+   "courseTitle": "ENTR3170",
+   "profName": "Peter Burton Robinson"
+ },
+ {
+   "courseTitle": "ENTR3180",
+   "profName": "Mark J Stoddard"
+ },
+ {
+   "courseTitle": "ENTR4200",
+   "profName": "Peter Burton Robinson"
+ },
+ {
+   "courseTitle": "ENTR4450",
+   "profName": "Vance Peter John Gough"
+ },
+ {
+   "courseTitle": "ENVT1110",
+   "profName": "James C Callison"
+ },
+ {
+   "courseTitle": "ENVT1110",
+   "profName": "Eddy L Cadet"
+ },
+ {
+   "courseTitle": "ENVT2560",
+   "profName": "Eddy L Cadet"
+ },
+ {
+   "courseTitle": "ENVT282R",
+   "profName": "Eddy L Cadet"
+ },
+ {
+   "courseTitle": "ENVT482R",
+   "profName": "Eddy L Cadet"
+ },
+ {
+   "courseTitle": "ENVT495R",
+   "profName": "Eddy L Cadet"
+ },
+ {
+   "courseTitle": "ENVT495R",
+   "profName": "Eddy L Cadet"
+ },
+ {
+   "courseTitle": "ENVT495R",
+   "profName": "James C Callison"
+ },
+ {
+   "courseTitle": "ES1150",
+   "profName": "John R Fisher"
+ },
+ {
+   "courseTitle": "ESEC4110",
+   "profName": "Steven D Allred"
+ },
+ {
+   "courseTitle": "ESEC4110",
+   "profName": "Kevin P McCarthy "
+ },
+ {
+   "courseTitle": "ESEC4120",
+   "profName": "Steven D Allred"
+ },
+ {
+   "courseTitle": "ESEC4120",
+   "profName": "Kevin P McCarthy "
+ },
+ {
+   "courseTitle": "ESFF1000",
+   "profName": "Gary Brian Noll"
+ },
+ {
+   "courseTitle": "ESFF1000",
+   "profName": "Jenny Anne Nicholson"
+ },
+ {
+   "courseTitle": "ESFF1000",
+   "profName": "Gary Brian Noll"
+ },
+ {
+   "courseTitle": "ESFF1000",
+   "profName": "Jenny Anne Nicholson"
+ },
+ {
+   "courseTitle": "ESFF1120",
+   "profName": "Andrew J Byrnes"
+ },
+ {
+   "courseTitle": "ESFF1120",
+   "profName": "Andrew J Byrnes"
+ },
+ {
+   "courseTitle": "ESFF1360",
+   "profName": "Matthew L Rhoades"
+ },
+ {
+   "courseTitle": "ESFF1370",
+   "profName": "Bonnie Lamb"
+ },
+ {
+   "courseTitle": "ESFF1380",
+   "profName": "Bonnie Lamb"
+ },
+ {
+   "courseTitle": "ESFF2100",
+   "profName": "Eric J Russell"
+ },
+ {
+   "courseTitle": "ESFF2100",
+   "profName": "Eric J Russell"
+ },
+ {
+   "courseTitle": "ESFF281R",
+   "profName": "Margaret A Mittelman"
+ },
+ {
+   "courseTitle": "ESFO2100",
+   "profName": "Bonnie Lamb"
+ },
+ {
+   "courseTitle": "ESMG310G",
+   "profName": "Matthew C McNabb"
+ },
+ {
+   "courseTitle": "ESMG310G",
+   "profName": "Eric J Russell"
+ },
+ {
+   "courseTitle": "ESMG310G",
+   "profName": "Matthew C McNabb"
+ },
+ {
+   "courseTitle": "ESMG310G",
+   "profName": "Eric J Russell"
+ },
+ {
+   "courseTitle": "ESMG3200",
+   "profName": "Thomas Sturtevant"
+ },
+ {
+   "courseTitle": "ESMG3200",
+   "profName": "Thomas Sturtevant"
+ },
+ {
+   "courseTitle": "ESMG3250",
+   "profName": "Margaret A Mittelman"
+ },
+ {
+   "courseTitle": "ESMG3250",
+   "profName": "Margaret A Mittelman"
+ },
+ {
+   "courseTitle": "ESMG3600",
+   "profName": "Rodger Earle Broome"
+ },
+ {
+   "courseTitle": "ESMG3600",
+   "profName": "Rodger Earle Broome"
+ },
+ {
+   "courseTitle": "ESMG4150",
+   "profName": "John R Fisher"
+ },
+ {
+   "courseTitle": "ESMG4150",
+   "profName": "John R Fisher"
+ },
+ {
+   "courseTitle": "ESMG4200",
+   "profName": "Gaylen H Fish"
+ },
+ {
+   "courseTitle": "ESMG4200",
+   "profName": "Gaylen H Fish"
+ },
+ {
+   "courseTitle": "ESMG445G",
+   "profName": "Rodger Earle Broome"
+ },
+ {
+   "courseTitle": "ESMG445G",
+   "profName": "Rodger Earle Broome"
+ },
+ {
+   "courseTitle": "ESMG4500",
+   "profName": "Robert Jeffery Maxfield"
+ },
+ {
+   "courseTitle": "ESMG4500",
+   "profName": "Karl Thomas Lieb"
+ },
+ {
+   "courseTitle": "ESMG4500",
+   "profName": "Robert Jeffery Maxfield"
+ },
+ {
+   "courseTitle": "ESMG4500",
+   "profName": "Karl Thomas Lieb"
+ },
+ {
+   "courseTitle": "ESMG4650",
+   "profName": "Robert Jeffery Maxfield"
+ },
+ {
+   "courseTitle": "ESMG4650",
+   "profName": "Robert Jeffery Maxfield"
+ },
+ {
+   "courseTitle": "ESMG481R",
+   "profName": "Bryan R Crump"
+ },
+ {
+   "courseTitle": "ESMG481R",
+   "profName": "Bryan R Crump"
+ },
+ {
+   "courseTitle": "ESMG481R",
+   "profName": "Bryan R Crump"
+ },
+ {
+   "courseTitle": "ESMG481R",
+   "profName": "Bryan R Crump"
+ },
+ {
+   "courseTitle": "ESMG481R",
+   "profName": "Bryan R Crump"
+ },
+ {
+   "courseTitle": "ESMG481R",
+   "profName": "Bryan R Crump"
+ },
+ {
+   "courseTitle": "ESMG481R",
+   "profName": "Bryan R Crump"
+ },
+ {
+   "courseTitle": "ESMG481R",
+   "profName": "Bryan R Crump"
+ },
+ {
+   "courseTitle": "ESMG481R",
+   "profName": "Bryan R Crump"
+ },
+ {
+   "courseTitle": "ESMG481R",
+   "profName": "Bryan R Crump"
+ },
+ {
+   "courseTitle": "ESMG489R",
+   "profName": "Gary Brian Noll"
+ },
+ {
+   "courseTitle": "ESMG489R",
+   "profName": "Gary Brian Noll"
+ },
+ {
+   "courseTitle": "ESMG491R",
+   "profName": "Kevin P McCarthy"
+ },
+ {
+   "courseTitle": "ESMG491R",
+   "profName": "Kevin P McCarthy"
+ },
+ {
+   "courseTitle": "ESMG492R",
+   "profName": "Kevin P McCarthy"
+ },
+ {
+   "courseTitle": "ESMG492R",
+   "profName": "Kevin P McCarthy"
+ },
+ {
+   "courseTitle": "ESMG493R",
+   "profName": "Kevin P McCarthy"
+ },
+ {
+   "courseTitle": "ESMG493R",
+   "profName": "Kevin P McCarthy"
+ },
+ {
+   "courseTitle": "ESWF1410",
+   "profName": "Wade CM Snyder"
+ },
+ {
+   "courseTitle": "ESWF1410",
+   "profName": "Daniel Paul Cather"
+ },
+ {
+   "courseTitle": "ESWF1410",
+   "profName": "Daniel Paul Cather"
+ },
+ {
+   "courseTitle": "ESWF1420",
+   "profName": "Wade CM Snyder"
+ },
+ {
+   "courseTitle": "ESWF1420",
+   "profName": "Daniel Paul Cather"
+ },
+ {
+   "courseTitle": "ESWF1420",
+   "profName": "Daniel Paul Cather"
+ },
+ {
+   "courseTitle": "ESWF2430",
+   "profName": "Wade CM Snyder"
+ },
+ {
+   "courseTitle": "ESWF2430",
+   "profName": "Daniel Paul Cather"
+ },
+ {
+   "courseTitle": "ESWF2430",
+   "profName": "Daniel Paul Cather"
+ },
+ {
+   "courseTitle": "EXSC2500",
+   "profName": "Bret H. Boyer"
+ },
+ {
+   "courseTitle": "EXSC2510",
+   "profName": "Paul Eugene Webb"
+ },
+ {
+   "courseTitle": "EXSC270G",
+   "profName": "Steven F Namanny"
+ },
+ {
+   "courseTitle": "EXSC270G",
+   "profName": "Steven F Namanny"
+ },
+ {
+   "courseTitle": "EXSC3500",
+   "profName": "Tyler Whitney Standifird"
+ },
+ {
+   "courseTitle": "EXSC3550",
+   "profName": "Michael J Bohne"
+ },
+ {
+   "courseTitle": "EXSC3700",
+   "profName": "Andrew R Creer"
+ },
+ {
+   "courseTitle": "EXSC3700",
+   "profName": "Andrew R Creer"
+ },
+ {
+   "courseTitle": "EXSC3705",
+   "profName": "Ellis B Jensen"
+ },
+ {
+   "courseTitle": "EXSC3705",
+   "profName": "Ellis B Jensen"
+ },
+ {
+   "courseTitle": "EXSC3750",
+   "profName": "M Vinson Miner"
+ },
+ {
+   "courseTitle": "EXSC4300",
+   "profName": "Ellis B Jensen"
+ },
+ {
+   "courseTitle": "EXSC481R",
+   "profName": "Bret H. Boyer"
+ },
+ {
+   "courseTitle": "EXSC481R",
+   "profName": "Bret H. Boyer"
+ },
+ {
+   "courseTitle": "EXSC481R",
+   "profName": "Bret H. Boyer"
+ },
+ {
+   "courseTitle": "EXSC481R",
+   "profName": "Bret H. Boyer"
+ },
+ {
+   "courseTitle": "FAMS101G",
+   "profName": "Lori Lynn Duke"
+ },
+ {
+   "courseTitle": "FAMS101G",
+   "profName": "Nathan R Cottle"
+ },
+ {
+   "courseTitle": "FAMS101G",
+   "profName": "Nathan R Cottle"
+ },
+ {
+   "courseTitle": "FAMS1150",
+   "profName": "Julie K Nelson"
+ },
+ {
+   "courseTitle": "FAMS1150",
+   "profName": "Sherry Lynn Cowen"
+ },
+ {
+   "courseTitle": "FAMS1150",
+   "profName": "Jerevie Malig Canlas"
+ },
+ {
+   "courseTitle": "FAMS3250",
+   "profName": "Karl Nathan Meng"
+ },
+ {
+   "courseTitle": "FAMS3410",
+   "profName": "LeeAnn Glade"
+ },
+ {
+   "courseTitle": "FAMS4400",
+   "profName": "Ronald J Hammond"
+ },
+ {
+   "courseTitle": "FAMS4500",
+   "profName": "Nathan R Cottle"
+ },
+ {
+   "courseTitle": "FAMS4660",
+   "profName": "Sherry Lynn Cowen"
+ },
+ {
+   "courseTitle": "FAMS4670",
+   "profName": "Jeremy S Boden"
+ },
+ {
+   "courseTitle": "FAMS481R",
+   "profName": "Nathan R Cottle"
+ },
+ {
+   "courseTitle": "FAMS481R",
+   "profName": "Nathan R Cottle"
+ },
+ {
+   "courseTitle": "FAMS481R",
+   "profName": "Nathan R Cottle"
+ },
+ {
+   "courseTitle": "FAMS482R",
+   "profName": "Nathan R Cottle"
+ },
+ {
+   "courseTitle": "FAMS482R",
+   "profName": "Nathan R Cottle"
+ },
+ {
+   "courseTitle": "FAMS485R",
+   "profName": "Nathan R Cottle"
+ },
+ {
+   "courseTitle": "FIN1060",
+   "profName": "Qianwen Bi"
+ },
+ {
+   "courseTitle": "FIN3060",
+   "profName": "Laura Catherine Ricaldi"
+ },
+ {
+   "courseTitle": "FIN3100",
+   "profName": "Mark Owen Cherrington"
+ },
+ {
+   "courseTitle": "FIN3100",
+   "profName": "Christopher James Gilbert"
+ },
+ {
+   "courseTitle": "FIN3100",
+   "profName": "Xu Sun"
+ },
+ {
+   "courseTitle": "FIN3100",
+   "profName": "Vaughn Cox"
+ },
+ {
+   "courseTitle": "FIN3150",
+   "profName": "Vaughn Scherbel Armstrong"
+ },
+ {
+   "courseTitle": "FIN3200",
+   "profName": "Ryan Helmer Law"
+ },
+ {
+   "courseTitle": "FIN3210",
+   "profName": "Hyrum L Smith"
+ },
+ {
+   "courseTitle": "FIN3400",
+   "profName": "Xu Sun"
+ },
+ {
+   "courseTitle": "FIN4180",
+   "profName": "Vaughn Scherbel Armstrong"
+ },
+ {
+   "courseTitle": "FIN457R",
+   "profName": "Cary David Wasden"
+ },
+ {
+   "courseTitle": "FIN481R",
+   "profName": "Lukas Ray Dean"
+ },
+ {
+   "courseTitle": "FIN482R",
+   "profName": "Vaughn Cox"
+ },
+ {
+   "courseTitle": "FIN482R",
+   "profName": "Vaughn Cox"
+ },
+ {
+   "courseTitle": "FREN1010",
+   "profName": "Adrielle Lynn Herring"
+ },
+ {
+   "courseTitle": "FREN1020",
+   "profName": "George G King"
+ },
+ {
+   "courseTitle": "FREN1020",
+   "profName": "Tammy Christensen"
+ },
+ {
+   "courseTitle": "FREN2010",
+   "profName": "Tammy Christensen"
+ },
+ {
+   "courseTitle": "FREN202G",
+   "profName": "Tammy Christensen"
+ },
+ {
+   "courseTitle": "FREN490R",
+   "profName": "Tammy Christensen"
+ },
+ {
+   "courseTitle": "FREN490R",
+   "profName": "Walter Shawn Temple"
+ },
+ {
+   "courseTitle": "FSCI3820",
+   "profName": "Diane Shafter"
+ },
+ {
+   "courseTitle": "FSCI3850",
+   "profName": "Bryan C Holden"
+ },
+ {
+   "courseTitle": "FSCI443R",
+   "profName": "Gary H Naisbitt"
+ },
+ {
+   "courseTitle": "FSCI481R",
+   "profName": "Melissa Noyes"
+ },
+ {
+   "courseTitle": "GEO1010",
+   "profName": "Richard Scott Kelly"
+ },
+ {
+   "courseTitle": "GEO1010",
+   "profName": "Patricia Kim Garcia"
+ },
+ {
+   "courseTitle": "GEO1010",
+   "profName": "Eric Rudolph Meyer"
+ },
+ {
+   "courseTitle": "GEO1010",
+   "profName": "Patricia Kim Garcia"
+ },
+ {
+   "courseTitle": "GEO1010",
+   "profName": "Eric Rudolph Meyer"
+ },
+ {
+   "courseTitle": "GEO1010",
+   "profName": "Shane M Waters"
+ },
+ {
+   "courseTitle": "GEO1015",
+   "profName": "Andrew W Stanton"
+ },
+ {
+   "courseTitle": "GEO1015",
+   "profName": "Andrew W Stanton"
+ },
+ {
+   "courseTitle": "GEO1080",
+   "profName": "Emily Bartlett Lamas"
+ },
+ {
+   "courseTitle": "GEO1080",
+   "profName": "Emily Bartlett Lamas"
+ },
+ {
+   "courseTitle": "GEO4600",
+   "profName": "Michael Patrick Bunds"
+ },
+ {
+   "courseTitle": "GEO4600",
+   "profName": "Steven Howard Emerman "
+ },
+ {
+   "courseTitle": "GEO4600",
+   "profName": "Steven A Fellows "
+ },
+ {
+   "courseTitle": "GEO4600",
+   "profName": "Daniel A Stephen "
+ },
+ {
+   "courseTitle": "GEO4600",
+   "profName": "Nathan A Toke"
+ },
+ {
+   "courseTitle": "GEO489R",
+   "profName": "Michael Patrick Bunds"
+ },
+ {
+   "courseTitle": "GEO489R",
+   "profName": "Daniel A Stephen"
+ },
+ {
+   "courseTitle": "GEO489R",
+   "profName": "Steven A Fellows"
+ },
+ {
+   "courseTitle": "GEO495R",
+   "profName": "Michael Patrick Bunds"
+ },
+ {
+   "courseTitle": "GEO495R",
+   "profName": "Michael Patrick Bunds"
+ },
+ {
+   "courseTitle": "GEO495R",
+   "profName": "Michael Patrick Bunds"
+ },
+ {
+   "courseTitle": "GEO495R",
+   "profName": "Michael Patrick Bunds"
+ },
+ {
+   "courseTitle": "GER1010",
+   "profName": "Jeffrey M Packer"
+ },
+ {
+   "courseTitle": "GER1020",
+   "profName": "Jeffrey M Packer"
+ },
+ {
+   "courseTitle": "HIST1500",
+   "profName": "JaNae Brown Haas"
+ },
+ {
+   "courseTitle": "HIST151G",
+   "profName": "Kristine W Frederickson"
+ },
+ {
+   "courseTitle": "HIST151G",
+   "profName": "Jenna C Nigro"
+ },
+ {
+   "courseTitle": "HIST1700",
+   "profName": "Desiree Sedgwick"
+ },
+ {
+   "courseTitle": "HIST1700",
+   "profName": "Brad Ronald Dennis"
+ },
+ {
+   "courseTitle": "HIST1700",
+   "profName": "John P Christensen"
+ },
+ {
+   "courseTitle": "HIST1700",
+   "profName": "Amy Lynn Williamson"
+ },
+ {
+   "courseTitle": "HIST1700",
+   "profName": "Chad Kenneth Ostler"
+ },
+ {
+   "courseTitle": "HIST1700",
+   "profName": "Gary R Griffin"
+ },
+ {
+   "courseTitle": "HIST1700",
+   "profName": "Stormy M Vehnekamp"
+ },
+ {
+   "courseTitle": "HIST1700",
+   "profName": "Stormy M Vehnekamp"
+ },
+ {
+   "courseTitle": "HIST1700",
+   "profName": "Stormy M Vehnekamp"
+ },
+ {
+   "courseTitle": "HIST1740",
+   "profName": "F Dennis Farnsworth"
+ },
+ {
+   "courseTitle": "HIST2700",
+   "profName": "Michaele Katherine Smith"
+ },
+ {
+   "courseTitle": "HIST2700",
+   "profName": "Joshua R Thayne"
+ },
+ {
+   "courseTitle": "HIST2710",
+   "profName": "Scott R Birrell"
+ },
+ {
+   "courseTitle": "HIST3010",
+   "profName": "Keith V Snedegar"
+ },
+ {
+   "courseTitle": "HIST3260",
+   "profName": "Lynn England"
+ },
+ {
+   "courseTitle": "HIST3440",
+   "profName": "Kristine W Frederickson"
+ },
+ {
+   "courseTitle": "HIST3540",
+   "profName": "Keith V Snedegar"
+ },
+ {
+   "courseTitle": "HIST3880",
+   "profName": "Garth Kevin Jones"
+ },
+ {
+   "courseTitle": "HLTH1100",
+   "profName": "Matthew O Flint"
+ },
+ {
+   "courseTitle": "HLTH1100",
+   "profName": "Terisue Smith Jackson"
+ },
+ {
+   "courseTitle": "HLTH1100",
+   "profName": "Sarah McKenzie Hall"
+ },
+ {
+   "courseTitle": "HLTH1100",
+   "profName": "Robert O Walsh"
+ },
+ {
+   "courseTitle": "HLTH1100",
+   "profName": "Brian Richard Barthel"
+ },
+ {
+   "courseTitle": "HLTH1100",
+   "profName": "James E Bemel"
+ },
+ {
+   "courseTitle": "HLTH1100",
+   "profName": "Sarah McKenzie Hall"
+ },
+ {
+   "courseTitle": "HLTH1100",
+   "profName": "Merilee M Larsen"
+ },
+ {
+   "courseTitle": "HLTH1100",
+   "profName": "Brian Richard Barthel"
+ },
+ {
+   "courseTitle": "HLTH2600",
+   "profName": "Robert O Walsh"
+ },
+ {
+   "courseTitle": "HLTH2800",
+   "profName": "Robert S Robison"
+ },
+ {
+   "courseTitle": "HLTH2800",
+   "profName": "Bennion Lloyd Spencer"
+ },
+ {
+   "courseTitle": "HLTH2800",
+   "profName": "Kristin Elizabeth Stanley"
+ },
+ {
+   "courseTitle": "HLTH2800",
+   "profName": "Cynthia C Keetch"
+ },
+ {
+   "courseTitle": "HLTH3000",
+   "profName": "Mary V Brown"
+ },
+ {
+   "courseTitle": "HLTH3200",
+   "profName": "Terisue Smith Jackson"
+ },
+ {
+   "courseTitle": "HLTH3200",
+   "profName": "James E Bemel"
+ },
+ {
+   "courseTitle": "HLTH3220",
+   "profName": "Merilee M Larsen"
+ },
+ {
+   "courseTitle": "HLTH3230",
+   "profName": "Mary V Brown"
+ },
+ {
+   "courseTitle": "HLTH3240",
+   "profName": "Mary V Brown"
+ },
+ {
+   "courseTitle": "HLTH3260",
+   "profName": "Brian Richard Barthel"
+ },
+ {
+   "courseTitle": "HLTH3400",
+   "profName": "Merilee M Larsen"
+ },
+ {
+   "courseTitle": "HLTH350G",
+   "profName": "Lynley Murphy"
+ },
+ {
+   "courseTitle": "HLTH3700",
+   "profName": "Matthew O Flint"
+ },
+ {
+   "courseTitle": "HLTH3800",
+   "profName": "Robert O Walsh"
+ },
+ {
+   "courseTitle": "HLTH4300",
+   "profName": "Sarah McKenzie Hall"
+ },
+ {
+   "courseTitle": "HLTH490R",
+   "profName": "James E Bemel"
+ },
+ {
+   "courseTitle": "HLTH490R",
+   "profName": "Rebecca L Brimhall"
+ },
+ {
+   "courseTitle": "HM1010",
+   "profName": "Douglas G Miller"
+ },
+ {
+   "courseTitle": "HM1130",
+   "profName": "Marc N Brown"
+ },
+ {
+   "courseTitle": "HM281R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "HM281R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "HM281R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "HM3200",
+   "profName": "Yang Hwae Huo"
+ },
+ {
+   "courseTitle": "HM3640",
+   "profName": "Douglas G Miller"
+ },
+ {
+   "courseTitle": "HM481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "HM481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "HM481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "HM481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "HM481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "HONR2100",
+   "profName": "Christopher B Nguyen"
+ },
+ {
+   "courseTitle": "HR3430",
+   "profName": "Bernd A Kupka"
+ },
+ {
+   "courseTitle": "HR3430",
+   "profName": "Connie Elaine Barker"
+ },
+ {
+   "courseTitle": "HR3430",
+   "profName": "Ronald Gregory Smith"
+ },
+ {
+   "courseTitle": "HUM1010",
+   "profName": "Eric J Robertson"
+ },
+ {
+   "courseTitle": "HUM1010",
+   "profName": "Kimberly D Abunuwara"
+ },
+ {
+   "courseTitle": "HUM1010",
+   "profName": "Edwin J Firmage"
+ },
+ {
+   "courseTitle": "HUM1010",
+   "profName": "Alex Caldiero"
+ },
+ {
+   "courseTitle": "HUM1010",
+   "profName": "Eric Paul Fossum"
+ },
+ {
+   "courseTitle": "HUM1010",
+   "profName": "Randall Lee Bernhard"
+ },
+ {
+   "courseTitle": "HUM1010",
+   "profName": "Eric Paul Fossum"
+ },
+ {
+   "courseTitle": "HUM1010",
+   "profName": "Eric Paul Fossum"
+ },
+ {
+   "courseTitle": "HUM1010",
+   "profName": "Eric Paul Fossum"
+ },
+ {
+   "courseTitle": "HUM320R",
+   "profName": "Steven A Hall"
+ },
+ {
+   "courseTitle": "IM1010",
+   "profName": "Richard Allen Smith"
+ },
+ {
+   "courseTitle": "IM1010",
+   "profName": "Carolyn D Kuehne"
+ },
+ {
+   "courseTitle": "IM2010",
+   "profName": "Pat R Ormond"
+ },
+ {
+   "courseTitle": "IM2010",
+   "profName": "Josie L Reynaud"
+ },
+ {
+   "courseTitle": "IM2010",
+   "profName": "Cynthia O Krebs"
+ },
+ {
+   "courseTitle": "IM2600",
+   "profName": "Doreen Smith"
+ },
+ {
+   "courseTitle": "IM2600",
+   "profName": "Marshall L Krebs"
+ },
+ {
+   "courseTitle": "IM2600",
+   "profName": "Kodey S Crandall"
+ },
+ {
+   "courseTitle": "IM2600",
+   "profName": "Jan Bentley"
+ },
+ {
+   "courseTitle": "IM290R",
+   "profName": "Cynthia O Krebs"
+ },
+ {
+   "courseTitle": "IM481R",
+   "profName": "Steven K Pugmire"
+ },
+ {
+   "courseTitle": "INFO1120",
+   "profName": "Pat R Ormond"
+ },
+ {
+   "courseTitle": "INFO2200",
+   "profName": "Kodey S Crandall"
+ },
+ {
+   "courseTitle": "INFO2410",
+   "profName": "John E Anderson"
+ },
+ {
+   "courseTitle": "INFO2420",
+   "profName": "Jan Bentley"
+ },
+ {
+   "courseTitle": "INFO281R",
+   "profName": "Steven K Pugmire"
+ },
+ {
+   "courseTitle": "INFO281R",
+   "profName": "Steven K Pugmire"
+ },
+ {
+   "courseTitle": "INFO3120",
+   "profName": "John E Anderson"
+ },
+ {
+   "courseTitle": "INFO3120",
+   "profName": "Matthew A North"
+ },
+ {
+   "courseTitle": "INFO3410",
+   "profName": "Daniel M McDonald"
+ },
+ {
+   "courseTitle": "INFO3420",
+   "profName": "Daniel M McDonald"
+ },
+ {
+   "courseTitle": "INFO3430",
+   "profName": "Kimberly W Bartholomew"
+ },
+ {
+   "courseTitle": "INFO405G",
+   "profName": "Keith Raymond Mulbery"
+ },
+ {
+   "courseTitle": "INFO405G",
+   "profName": "Cynthia O Krebs"
+ },
+ {
+   "courseTitle": "INFO4430",
+   "profName": "Kimberly W Bartholomew"
+ },
+ {
+   "courseTitle": "INFO481R",
+   "profName": "Steven K Pugmire"
+ },
+ {
+   "courseTitle": "IS350R",
+   "profName": "Wayne Bruce Hanewicz"
+ },
+ {
+   "courseTitle": "IS4980",
+   "profName": "Wayne Bruce Hanewicz"
+ },
+ {
+   "courseTitle": "IS4990",
+   "profName": "Scott H Abbott"
+ },
+ {
+   "courseTitle": "IT1600",
+   "profName": "Richard J Ivie"
+ },
+ {
+   "courseTitle": "IT2400",
+   "profName": "Chad A Smith"
+ },
+ {
+   "courseTitle": "IT2600",
+   "profName": "Richard J Ivie"
+ },
+ {
+   "courseTitle": "IT2700",
+   "profName": "George D Hickman"
+ },
+ {
+   "courseTitle": "IT3510",
+   "profName": "Chris A Fredrickson"
+ },
+ {
+   "courseTitle": "IT3540",
+   "profName": "George D Hickman"
+ },
+ {
+   "courseTitle": "IT3600",
+   "profName": "David Brian Peterson"
+ },
+ {
+   "courseTitle": "IT3700",
+   "profName": "Robert Michael Jorgensen"
+ },
+ {
+   "courseTitle": "IT4700",
+   "profName": "Charles Paul Morrey"
+ },
+ {
+   "courseTitle": "IT481R",
+   "profName": "Steven K Pugmire"
+ },
+ {
+   "courseTitle": "IT6370",
+   "profName": "Robert Michael Jorgensen"
+ },
+ {
+   "courseTitle": "IT6770",
+   "profName": "Basil Jihad Mohammad Hamdan"
+ },
+ {
+   "courseTitle": "JPNS1010",
+   "profName": "Kyoko Herlevi"
+ },
+ {
+   "courseTitle": "LANG291R",
+   "profName": "Tammy Christensen"
+ },
+ {
+   "courseTitle": "LANG291R",
+   "profName": "Walter Shawn Temple"
+ },
+ {
+   "courseTitle": "LANG3000",
+   "profName": "Bryan K Eldredge"
+ },
+ {
+   "courseTitle": "LEGL3000",
+   "profName": "Jill Oliphant Jasperson"
+ },
+ {
+   "courseTitle": "LEGL3000",
+   "profName": "Carolyn Elease Howard"
+ },
+ {
+   "courseTitle": "LEGL3000",
+   "profName": "Carolyn Elease Howard"
+ },
+ {
+   "courseTitle": "LEGL3000",
+   "profName": "Jill Oliphant Jasperson"
+ },
+ {
+   "courseTitle": "LEGL3000",
+   "profName": "Aaron S Bartholomew"
+ },
+ {
+   "courseTitle": "LEGL3020",
+   "profName": "Scott Lindsey Smith"
+ },
+ {
+   "courseTitle": "LEGL3250",
+   "profName": "Rick Alan Griffin"
+ },
+ {
+   "courseTitle": "LEGL6000",
+   "profName": "Aaron S Bartholomew"
+ },
+ {
+   "courseTitle": "LEGL6000",
+   "profName": "Aaron S Bartholomew"
+ },
+ {
+   "courseTitle": "MATH100R",
+   "profName": "Yingxian Zhu"
+ },
+ {
+   "courseTitle": "MATH1040",
+   "profName": "Brian Robert Hansen Knaeble"
+ },
+ {
+   "courseTitle": "MATH1040",
+   "profName": "Julie Ruth Humphreys"
+ },
+ {
+   "courseTitle": "MATH1040",
+   "profName": "Scott Calvin Lewis"
+ },
+ {
+   "courseTitle": "MATH1050",
+   "profName": "Colin J Brinkerhoff"
+ },
+ {
+   "courseTitle": "MATH1050",
+   "profName": "Scott Calvin Lewis"
+ },
+ {
+   "courseTitle": "MATH1050",
+   "profName": "Melissa Brown Quinn"
+ },
+ {
+   "courseTitle": "MATH1050",
+   "profName": "Reinhard Oskar Wilhelm Franz"
+ },
+ {
+   "courseTitle": "MATH1050",
+   "profName": "Jia He"
+ },
+ {
+   "courseTitle": "MATH1050",
+   "profName": "Wendy L Burgun"
+ },
+ {
+   "courseTitle": "MATH1050",
+   "profName": "Ya Li"
+ },
+ {
+   "courseTitle": "MATH1050",
+   "profName": "Bruce Marshall McMaster"
+ },
+ {
+   "courseTitle": "MATH1050",
+   "profName": "Konchol Lee"
+ },
+ {
+   "courseTitle": "MATH1050",
+   "profName": "JiHyun Kim"
+ },
+ {
+   "courseTitle": "MATH1050",
+   "profName": "Douglas G Schiffman"
+ },
+ {
+   "courseTitle": "MATH1050",
+   "profName": "Christine Walker"
+ },
+ {
+   "courseTitle": "MATH1050",
+   "profName": "Jong S Hwang"
+ },
+ {
+   "courseTitle": "MATH1050",
+   "profName": "Christine Walker"
+ },
+ {
+   "courseTitle": "MATH1050",
+   "profName": "Christine Walker"
+ },
+ {
+   "courseTitle": "MATH1050",
+   "profName": "Christine Walker"
+ },
+ {
+   "courseTitle": "MATH1060",
+   "profName": "Brian Robert Hansen Knaeble"
+ },
+ {
+   "courseTitle": "MATH1060",
+   "profName": "Alan Reid Parry"
+ },
+ {
+   "courseTitle": "MATH1100",
+   "profName": "Colin J Brinkerhoff"
+ },
+ {
+   "courseTitle": "MATH1210",
+   "profName": "Debanjan Bhattacharjee"
+ },
+ {
+   "courseTitle": "MATH1210",
+   "profName": "Alan Reid Parry"
+ },
+ {
+   "courseTitle": "MATH1220",
+   "profName": "David Lawrence Fearnley"
+ },
+ {
+   "courseTitle": "MATH1220",
+   "profName": "Yingxian Zhu"
+ },
+ {
+   "courseTitle": "MATH2010",
+   "profName": "Jia He"
+ },
+ {
+   "courseTitle": "MATH2010",
+   "profName": "Heidi Lula Lindsey"
+ },
+ {
+   "courseTitle": "MATH2020",
+   "profName": "Samaneh Gholizadeh Hamidi"
+ },
+ {
+   "courseTitle": "MATH2020",
+   "profName": "Jared E Huff"
+ },
+ {
+   "courseTitle": "MATH2040",
+   "profName": "Richard C Bennett"
+ },
+ {
+   "courseTitle": "MATH2040",
+   "profName": "Xiao Yi Ji"
+ },
+ {
+   "courseTitle": "MATH2040",
+   "profName": "Konchol Lee"
+ },
+ {
+   "courseTitle": "MATH2210",
+   "profName": "Jun Ling"
+ },
+ {
+   "courseTitle": "MATH2270",
+   "profName": "Reinhard Oskar Wilhelm Franz"
+ },
+ {
+   "courseTitle": "MATH3200",
+   "profName": "David Lawrence Fearnley"
+ },
+ {
+   "courseTitle": "METO1010",
+   "profName": "Richard Scott Kelly"
+ },
+ {
+   "courseTitle": "METO1010",
+   "profName": "Joseph A Chenworth"
+ },
+ {
+   "courseTitle": "METO1010",
+   "profName": "Andrew W Stanton"
+ },
+ {
+   "courseTitle": "METO1010",
+   "profName": "Paul L Tayler"
+ },
+ {
+   "courseTitle": "METO1010",
+   "profName": "Andrew W Stanton"
+ },
+ {
+   "courseTitle": "METO1010",
+   "profName": "Paul L Tayler"
+ },
+ {
+   "courseTitle": "MGMT1010",
+   "profName": "Hans P Warmbier"
+ },
+ {
+   "courseTitle": "MGMT1010",
+   "profName": "Douglas G Miller"
+ },
+ {
+   "courseTitle": "MGMT2110",
+   "profName": "Spencer D Patterson"
+ },
+ {
+   "courseTitle": "MGMT2110",
+   "profName": "Spencer D Patterson"
+ },
+ {
+   "courseTitle": "MGMT2240",
+   "profName": "Jenny Nehring"
+ },
+ {
+   "courseTitle": "MGMT2240",
+   "profName": "Carolyn R Hamilton"
+ },
+ {
+   "courseTitle": "MGMT2240",
+   "profName": "Jenny Nehring"
+ },
+ {
+   "courseTitle": "MGMT2240",
+   "profName": "Lynn L Adams"
+ },
+ {
+   "courseTitle": "MGMT2340",
+   "profName": "Mohammed El-Saidi"
+ },
+ {
+   "courseTitle": "MGMT2340",
+   "profName": "Mohammed El-Saidi"
+ },
+ {
+   "courseTitle": "MGMT2340",
+   "profName": "Gary Mercado"
+ },
+ {
+   "courseTitle": "MGMT2340",
+   "profName": "James Francis O'Connor"
+ },
+ {
+   "courseTitle": "MGMT281R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "MGMT281R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "MGMT3000",
+   "profName": "Jared R Chapman"
+ },
+ {
+   "courseTitle": "MGMT3000",
+   "profName": "Katherine Mallory Klemme"
+ },
+ {
+   "courseTitle": "MGMT3000",
+   "profName": "Eugene Lyle Seeley"
+ },
+ {
+   "courseTitle": "MGMT3020",
+   "profName": "Gregory Parks Madsen"
+ },
+ {
+   "courseTitle": "MGMT3020",
+   "profName": "Gordon Earl Whitehead"
+ },
+ {
+   "courseTitle": "MGMT3200",
+   "profName": "Yang Hwae Huo"
+ },
+ {
+   "courseTitle": "MGMT330G",
+   "profName": "Eugene Lyle Seeley"
+ },
+ {
+   "courseTitle": "MGMT330G",
+   "profName": "Yang Hwae Huo"
+ },
+ {
+   "courseTitle": "MGMT332G",
+   "profName": "Bernd A Kupka"
+ },
+ {
+   "courseTitle": "MGMT332G",
+   "profName": "Jeffrey B Call"
+ },
+ {
+   "courseTitle": "MGMT332G",
+   "profName": "Hans P Warmbier"
+ },
+ {
+   "courseTitle": "MGMT3450",
+   "profName": "Mohsen Hamidi"
+ },
+ {
+   "courseTitle": "MGMT3450",
+   "profName": "Lynn L Adams"
+ },
+ {
+   "courseTitle": "MGMT3450",
+   "profName": "Mohsen Hamidi"
+ },
+ {
+   "courseTitle": "MGMT3450",
+   "profName": "Cenk Caliskan"
+ },
+ {
+   "courseTitle": "MGMT481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "MGMT481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "MGMT481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "MGMT481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "MGMT481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "MGMT481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "MGMT4860",
+   "profName": "David Noel McArthur"
+ },
+ {
+   "courseTitle": "MGMT4860",
+   "profName": "Patrick Lee Milligan"
+ },
+ {
+   "courseTitle": "MGMT4860",
+   "profName": "Ralph Jason Barnes"
+ },
+ {
+   "courseTitle": "MGMT4860",
+   "profName": "Jason Alan Plant"
+ },
+ {
+   "courseTitle": "MGMT4860",
+   "profName": "Tammy R Huffman"
+ },
+ {
+   "courseTitle": "MGMT490R",
+   "profName": "William Galen Neal"
+ },
+ {
+   "courseTitle": "MGMT490R",
+   "profName": "David Noel McArthur"
+ },
+ {
+   "courseTitle": "MGMT493R",
+   "profName": "Pauline Mary Clauson"
+ },
+ {
+   "courseTitle": "MGMT6940",
+   "profName": "James B Mortensen"
+ },
+ {
+   "courseTitle": "MICR2060",
+   "profName": "Jorma Juhani Kirsi"
+ },
+ {
+   "courseTitle": "MICR2060",
+   "profName": "Michaela Anne Gazdik Stofer"
+ },
+ {
+   "courseTitle": "MICR2065",
+   "profName": "Kenneth A Slater"
+ },
+ {
+   "courseTitle": "MICR2065",
+   "profName": "Kenneth A Slater"
+ },
+ {
+   "courseTitle": "MICR2065",
+   "profName": "Kenneth A Slater"
+ },
+ {
+   "courseTitle": "MKTG2200",
+   "profName": "Duane Miller"
+ },
+ {
+   "courseTitle": "MKTG2200",
+   "profName": "Duane Miller"
+ },
+ {
+   "courseTitle": "MKTG2200",
+   "profName": "Alyssa Devey"
+ },
+ {
+   "courseTitle": "MKTG2200",
+   "profName": "Alyssa Devey"
+ },
+ {
+   "courseTitle": "MKTG2200",
+   "profName": "Amy Janette Bettridge"
+ },
+ {
+   "courseTitle": "MKTG2200",
+   "profName": "Amy Janette Bettridge"
+ },
+ {
+   "courseTitle": "MKTG2200",
+   "profName": "Jennie Arlene Barber"
+ },
+ {
+   "courseTitle": "MKTG2200",
+   "profName": "Sheila K Christensen"
+ },
+ {
+   "courseTitle": "MKTG2390",
+   "profName": "Neal Dean Maxfield"
+ },
+ {
+   "courseTitle": "MKTG2390",
+   "profName": "Neal Dean Maxfield"
+ },
+ {
+   "courseTitle": "MKTG2390",
+   "profName": "Kent W Oliver"
+ },
+ {
+   "courseTitle": "MKTG2390",
+   "profName": "Laurie Stokes Bott"
+ },
+ {
+   "courseTitle": "MKTG2390",
+   "profName": "Laurie Stokes Bott"
+ },
+ {
+   "courseTitle": "MKTG2390",
+   "profName": "Neal Dean Maxfield"
+ },
+ {
+   "courseTitle": "MKTG2390",
+   "profName": "Joshua Ryan Hawkes"
+ },
+ {
+   "courseTitle": "MKTG335G",
+   "profName": "Larry L Carter"
+ },
+ {
+   "courseTitle": "MKTG3600",
+   "profName": "Paul L Dishman"
+ },
+ {
+   "courseTitle": "MKTG3600",
+   "profName": "Letty Workman"
+ },
+ {
+   "courseTitle": "MKTG3600",
+   "profName": "Jason David Lee"
+ },
+ {
+   "courseTitle": "MKTG3600",
+   "profName": "Stephanie P Gardiner"
+ },
+ {
+   "courseTitle": "MKTG3600",
+   "profName": "Stephanie P Gardiner"
+ },
+ {
+   "courseTitle": "MKTG3620",
+   "profName": "Letty Workman"
+ },
+ {
+   "courseTitle": "MKTG3650",
+   "profName": "Alan Dale Jolley"
+ },
+ {
+   "courseTitle": "MKTG3660",
+   "profName": "Mitchel Richard Murdock"
+ },
+ {
+   "courseTitle": "MKTG3890",
+   "profName": "Joshua Ryan Hawkes"
+ },
+ {
+   "courseTitle": "MKTG3890",
+   "profName": "Carol A Parker"
+ },
+ {
+   "courseTitle": "MKTG459R",
+   "profName": "Laurie Stokes Bott"
+ },
+ {
+   "courseTitle": "MKTG481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "MKTG481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "MKTG481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "MUSC1010",
+   "profName": "Hugh K Oliver"
+ },
+ {
+   "courseTitle": "MUSC1010",
+   "profName": "Daniel L Ferguson"
+ },
+ {
+   "courseTitle": "MUSC1010",
+   "profName": "William R Hagen"
+ },
+ {
+   "courseTitle": "MUSC102G",
+   "profName": "William R Hagen"
+ },
+ {
+   "courseTitle": "MUSC1030",
+   "profName": "Victor D Angulo"
+ },
+ {
+   "courseTitle": "MUSC1100",
+   "profName": "Nathan L Hofheins"
+ },
+ {
+   "courseTitle": "MUSC1120",
+   "profName": "Bryce Rytting"
+ },
+ {
+   "courseTitle": "MUSC1140",
+   "profName": "Alex B Heitlinger"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Joanna L Oshida"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Hilary C Demske"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Melissa L Heath"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Christopher A Holmes "
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Constance Rae Jensen "
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Serena Kanig "
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Heide-Marie Slezak"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Jon P Yerby"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Justin Tad Leslie"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Yeagi K Broadwell "
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Paula Cho"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Paula Cho"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Cheung Chau"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Monika Rosborough-Bowman"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Cheung Chau"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Victor D Angulo"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Janet M Peterson"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Rebecca Swain Chapman"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Lucas Noel Florin"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Jeffrey Evan O'Flynn"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Jory D Woodis"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Brian L Hicks"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Jeb M Wallace"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Kyra M Sovronsky"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Seretta G Hart"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Jeb M Wallace"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Craig M Moore"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Jeb M Wallace"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Michael James McCawley"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Douglas A Smith"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Gavin B Ryan"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Douglas A Smith"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Gavin B Ryan"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Reed Criddle"
+ },
+ {
+   "courseTitle": "MUSC160R",
+   "profName": "Alex B Heitlinger"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Hilary C Demske"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Joanna L Oshida"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Melissa L Heath"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Christopher A Holmes "
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Constance Rae Jensen "
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Serena Kanig "
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Heide-Marie Slezak"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Jon P Yerby"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Justin Tad Leslie"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Yeagi K Broadwell"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Paula Cho"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Monika Rosborough-Bowman"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Victor D Angulo"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Janet M Peterson"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Rebecca Swain Chapman"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Lucas Noel Florin"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Jeffrey Evan O'Flynn"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Jory D Woodis"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Brian L Hicks"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Jeb M Wallace"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Jeb M Wallace"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Seretta G Hart "
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Kyra M Sovronsky"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Jeb M Wallace"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Craig M Moore"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Jeb M Wallace"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Michael James McCawley"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Gavin B Ryan"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Douglas A Smith"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Douglas A Smith"
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Jay U Lawrence "
+ },
+ {
+   "courseTitle": "MUSC250R",
+   "profName": "Gavin B Ryan"
+ },
+ {
+   "courseTitle": "MUSC251R",
+   "profName": "Hilary C Demske"
+ },
+ {
+   "courseTitle": "MUSC251R",
+   "profName": "Joanna L Oshida"
+ },
+ {
+   "courseTitle": "MUSC251R",
+   "profName": "Melissa L Heath"
+ },
+ {
+   "courseTitle": "MUSC251R",
+   "profName": "Christopher A Holmes "
+ },
+ {
+   "courseTitle": "MUSC251R",
+   "profName": "Constance Rae Jensen "
+ },
+ {
+   "courseTitle": "MUSC251R",
+   "profName": "Serena Kanig "
+ },
+ {
+   "courseTitle": "MUSC251R",
+   "profName": "Heide-Marie Slezak"
+ },
+ {
+   "courseTitle": "MUSC251R",
+   "profName": "Jon P Yerby"
+ },
+ {
+   "courseTitle": "MUSC251R",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC251R",
+   "profName": "Jeffrey Evan O'Flynn"
+ },
+ {
+   "courseTitle": "MUSC251R",
+   "profName": "Jeb M Wallace"
+ },
+ {
+   "courseTitle": "MUSC251R",
+   "profName": "Douglas A Smith"
+ },
+ {
+   "courseTitle": "MUSC290R",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC290R",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC290R",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC3800",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Hilary C Demske"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Joanna L Oshida"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Melissa L Heath"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Christopher A Holmes "
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Constance Rae Jensen "
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Serena Kanig "
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Heide-Marie Slezak"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Jon P Yerby"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Kristen R Bromley "
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Justin Tad Leslie"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Paula Cho"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Monika Rosborough-Bowman"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Victor D Angulo"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Janet M Peterson"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Rebecca Swain Chapman"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Lucas Noel Florin"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Jeffrey Evan O'Flynn"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Jory D Woodis"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Brian L Hicks"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Jeb M Wallace"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Jeb M Wallace"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Seretta G Hart "
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Kyra M Sovronsky"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Craig M Moore"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Jeb M Wallace"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Jeb M Wallace"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Michael James McCawley"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Gavin B Ryan"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Douglas A Smith"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Douglas A Smith"
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Jay U Lawrence "
+ },
+ {
+   "courseTitle": "MUSC450R",
+   "profName": "Gavin B Ryan"
+ },
+ {
+   "courseTitle": "MUSC451R",
+   "profName": "Hilary C Demske"
+ },
+ {
+   "courseTitle": "MUSC451R",
+   "profName": "Joanna L Oshida"
+ },
+ {
+   "courseTitle": "MUSC451R",
+   "profName": "Melissa L Heath"
+ },
+ {
+   "courseTitle": "MUSC451R",
+   "profName": "Christopher A Holmes "
+ },
+ {
+   "courseTitle": "MUSC451R",
+   "profName": "Constance Rae Jensen "
+ },
+ {
+   "courseTitle": "MUSC451R",
+   "profName": "Serena Kanig "
+ },
+ {
+   "courseTitle": "MUSC451R",
+   "profName": "Heide-Marie Slezak"
+ },
+ {
+   "courseTitle": "MUSC451R",
+   "profName": "Jon P Yerby"
+ },
+ {
+   "courseTitle": "MUSC451R",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC451R",
+   "profName": "Jeffrey Evan O'Flynn"
+ },
+ {
+   "courseTitle": "MUSC451R",
+   "profName": "Jeb M Wallace"
+ },
+ {
+   "courseTitle": "MUSC451R",
+   "profName": "Douglas A Smith"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Hilary C Demske"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Melissa L Heath"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Christopher A Holmes "
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Constance Rae Jensen "
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Serena Kanig "
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Heide-Marie Slezak"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Jon P Yerby"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Paula Cho"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Cheung Chau"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Victor D Angulo"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Janet M Peterson"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Rebecca Swain Chapman"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Lucas Noel Florin"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Jeffrey Evan O'Flynn"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Jory D Woodis"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Brian L Hicks"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Jeb M Wallace"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Kyra M Sovronsky"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Craig M Moore"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Michael James McCawley"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Douglas A Smith"
+ },
+ {
+   "courseTitle": "MUSC455R",
+   "profName": "Douglas A Smith"
+ },
+ {
+   "courseTitle": "MUSC4800",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC481R",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC481R",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC481R",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC490R",
+   "profName": "Nathan L Hofheins"
+ },
+ {
+   "courseTitle": "MUSC490R",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "MUSC490R",
+   "profName": "Donna Pauley Fairbanks"
+ },
+ {
+   "courseTitle": "NURS4320",
+   "profName": "Troy Alan Nelson"
+ },
+ {
+   "courseTitle": "NURS4325",
+   "profName": "Troy Alan Nelson"
+ },
+ {
+   "courseTitle": "NURS481R",
+   "profName": "Allison K Swenson"
+ },
+ {
+   "courseTitle": "NURS481R",
+   "profName": "Allison K Swenson"
+ },
+ {
+   "courseTitle": "NURS490R",
+   "profName": "Gary J Measom"
+ },
+ {
+   "courseTitle": "NURS495R",
+   "profName": "Marianne Craven"
+ },
+ {
+   "courseTitle": "NURS495R",
+   "profName": "Marianne Craven"
+ },
+ {
+   "courseTitle": "NUTR1020",
+   "profName": "Matthew O Flint"
+ },
+ {
+   "courseTitle": "NUTR1020",
+   "profName": "Brian Richard Barthel"
+ },
+ {
+   "courseTitle": "NUTR1020",
+   "profName": "Terisue Smith Jackson"
+ },
+ {
+   "courseTitle": "PES1010",
+   "profName": "Rebecca Ramona Moller"
+ },
+ {
+   "courseTitle": "PES1050",
+   "profName": "Barbara W Neal"
+ },
+ {
+   "courseTitle": "PES1055",
+   "profName": "Denise A Preston"
+ },
+ {
+   "courseTitle": "PES1055",
+   "profName": "Barbara W Neal"
+ },
+ {
+   "courseTitle": "PES1057",
+   "profName": "Denise A Preston"
+ },
+ {
+   "courseTitle": "PES1057",
+   "profName": "Denise A Preston"
+ },
+ {
+   "courseTitle": "PES1097",
+   "profName": "Jed G Gibson"
+ },
+ {
+   "courseTitle": "PES1100",
+   "profName": "Edwin B Miner"
+ },
+ {
+   "courseTitle": "PES1100",
+   "profName": "Edwin B Miner"
+ },
+ {
+   "courseTitle": "PES1130",
+   "profName": "M Vinson Miner"
+ },
+ {
+   "courseTitle": "PES1130",
+   "profName": "Paul Eugene Webb"
+ },
+ {
+   "courseTitle": "PETE2150",
+   "profName": "Shaunna McGhie"
+ },
+ {
+   "courseTitle": "PHIL1000",
+   "profName": "Robert Dennis Potter"
+ },
+ {
+   "courseTitle": "PHIL1000",
+   "profName": "Shaun Pierre Lamarche"
+ },
+ {
+   "courseTitle": "PHIL1250",
+   "profName": "Robert Dennis Potter"
+ },
+ {
+   "courseTitle": "PHIL1620",
+   "profName": "Kenneth Reed White"
+ },
+ {
+   "courseTitle": "PHIL2050",
+   "profName": "Jeffrey Scott Nielsen"
+ },
+ {
+   "courseTitle": "PHIL2050",
+   "profName": "Shannon Marie Mussett"
+ },
+ {
+   "courseTitle": "PHIL2050",
+   "profName": "Michael Marx Shaw"
+ },
+ {
+   "courseTitle": "PHIL2050",
+   "profName": "Nicholas Webster"
+ },
+ {
+   "courseTitle": "PHIL2050",
+   "profName": "Jeffrey Scott Nielsen"
+ },
+ {
+   "courseTitle": "PHIL2050",
+   "profName": "Michael Marx Shaw"
+ },
+ {
+   "courseTitle": "PHIL2050",
+   "profName": "Jorgen A Hansen"
+ },
+ {
+   "courseTitle": "PHIL2050",
+   "profName": "Steven A Hall"
+ },
+ {
+   "courseTitle": "PHIL2050",
+   "profName": "Jorgen A Hansen"
+ },
+ {
+   "courseTitle": "PHIL2050",
+   "profName": "David Michael Jackson"
+ },
+ {
+   "courseTitle": "PHIL2050",
+   "profName": "Gregory Blake Spendlove"
+ },
+ {
+   "courseTitle": "PHIL2050",
+   "profName": "Shannon S Atkinson"
+ },
+ {
+   "courseTitle": "PHIL2050",
+   "profName": "Anastasia Rees"
+ },
+ {
+   "courseTitle": "PHIL2050",
+   "profName": "John P Christensen"
+ },
+ {
+   "courseTitle": "PHIL205G",
+   "profName": "Mary Annette Velarde"
+ },
+ {
+   "courseTitle": "PHIL205H",
+   "profName": "Shannon Marie Mussett"
+ },
+ {
+   "courseTitle": "PHIL205H",
+   "profName": "Michael Marx Shaw"
+ },
+ {
+   "courseTitle": "PHIL481R",
+   "profName": "Brian D Birch"
+ },
+ {
+   "courseTitle": "PHSC1000",
+   "profName": "Ivan G Okhrimenko"
+ },
+ {
+   "courseTitle": "PHYS1010",
+   "profName": "Steven R Wasserbaech"
+ },
+ {
+   "courseTitle": "PHYS2015",
+   "profName": "Duke Norvel Dayton"
+ },
+ {
+   "courseTitle": "PHYS2015",
+   "profName": "Duke Norvel Dayton"
+ },
+ {
+   "courseTitle": "PHYS2015",
+   "profName": "Duke Norvel Dayton"
+ },
+ {
+   "courseTitle": "PHYS2020",
+   "profName": "Paul S Mills"
+ },
+ {
+   "courseTitle": "PHYS2210",
+   "profName": "Kim Nielsen"
+ },
+ {
+   "courseTitle": "PHYS2210",
+   "profName": "Paul Weber"
+ },
+ {
+   "courseTitle": "PHYS2215",
+   "profName": "Kim Nielsen"
+ },
+ {
+   "courseTitle": "PHYS2215",
+   "profName": "Paul Weber"
+ },
+ {
+   "courseTitle": "PHYS2215",
+   "profName": "Paul Weber"
+ },
+ {
+   "courseTitle": "PHYS2220",
+   "profName": "Paul S Mills"
+ },
+ {
+   "courseTitle": "PHYS2800",
+   "profName": "Timothy E Doyle"
+ },
+ {
+   "courseTitle": "PHYS489R",
+   "profName": "Steven R Wasserbaech"
+ },
+ {
+   "courseTitle": "PHYS489R",
+   "profName": "Karl Erwin Haisch"
+ },
+ {
+   "courseTitle": "PHYS489R",
+   "profName": "Timothy E Doyle"
+ },
+ {
+   "courseTitle": "PHYS489R",
+   "profName": "Kim Nielsen"
+ },
+ {
+   "courseTitle": "PHYS489R",
+   "profName": "Timothy E Doyle"
+ },
+ {
+   "courseTitle": "PHYS489R",
+   "profName": "Timothy E Doyle"
+ },
+ {
+   "courseTitle": "PJST3100",
+   "profName": "Susan Merrill"
+ },
+ {
+   "courseTitle": "PJST481R",
+   "profName": "Michael L Minch"
+ },
+ {
+   "courseTitle": "PJST4900",
+   "profName": "Lynn England"
+ },
+ {
+   "courseTitle": "POLS1000",
+   "profName": "Dustin O Jansen"
+ },
+ {
+   "courseTitle": "POLS1000",
+   "profName": "Luke E Peterson"
+ },
+ {
+   "courseTitle": "POLS1000",
+   "profName": "Ernest James Istook"
+ },
+ {
+   "courseTitle": "POLS1000",
+   "profName": "F Dennis Farnsworth"
+ },
+ {
+   "courseTitle": "POLS1000",
+   "profName": "Rick Alan Griffin"
+ },
+ {
+   "courseTitle": "POLS1000",
+   "profName": "Dustin O Jansen"
+ },
+ {
+   "courseTitle": "POLS1000",
+   "profName": "Nathan L Melton"
+ },
+ {
+   "courseTitle": "POLS1010",
+   "profName": "Andrew Scott Bibby"
+ },
+ {
+   "courseTitle": "POLS1010",
+   "profName": "Steven Michael Sylvester"
+ },
+ {
+   "courseTitle": "POLS1020",
+   "profName": "Lynn England"
+ },
+ {
+   "courseTitle": "POLS1100",
+   "profName": "David Robert Connelly"
+ },
+ {
+   "courseTitle": "POLS1100",
+   "profName": "Angela L Chavez"
+ },
+ {
+   "courseTitle": "POLS1100",
+   "profName": "Jay Allen DeSart"
+ },
+ {
+   "courseTitle": "POLS1100",
+   "profName": "David Robert Connelly"
+ },
+ {
+   "courseTitle": "POLS1100",
+   "profName": "Steven Michael Sylvester"
+ },
+ {
+   "courseTitle": "POLS1100",
+   "profName": "Nathan L Melton"
+ },
+ {
+   "courseTitle": "POLS1100",
+   "profName": "Nathan L Melton"
+ },
+ {
+   "courseTitle": "POLS1100",
+   "profName": "Nathan L Melton"
+ },
+ {
+   "courseTitle": "POLS2100",
+   "profName": "Baktybek Abdrisaev"
+ },
+ {
+   "courseTitle": "POLS2200",
+   "profName": "John P Macfarlane"
+ },
+ {
+   "courseTitle": "POLS3000",
+   "profName": "Jay Allen DeSart"
+ },
+ {
+   "courseTitle": "POLS3250",
+   "profName": "Rick Alan Griffin"
+ },
+ {
+   "courseTitle": "POLS3500",
+   "profName": "Baktybek Abdrisaev"
+ },
+ {
+   "courseTitle": "POLS420R",
+   "profName": "Susan Merrill"
+ },
+ {
+   "courseTitle": "POLS480R",
+   "profName": "Jay Allen DeSart"
+ },
+ {
+   "courseTitle": "POLS480R",
+   "profName": "Jay Allen DeSart"
+ },
+ {
+   "courseTitle": "POLS480R",
+   "profName": "Jay Allen DeSart"
+ },
+ {
+   "courseTitle": "POLS480R",
+   "profName": "Jay Allen DeSart"
+ },
+ {
+   "courseTitle": "POLS480R",
+   "profName": "Jay Allen DeSart"
+ },
+ {
+   "courseTitle": "POLS490R",
+   "profName": "David Robert Connelly"
+ },
+ {
+   "courseTitle": "PORT3050",
+   "profName": "Debora Ribeiro de Sena Ferreira"
+ },
+ {
+   "courseTitle": "PRLG281R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "PRLG281R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "PRLG281R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "PRLG481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "PRLG481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "PRLG481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "PRLG481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "PRLG481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "PRLG481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "PRLG481R",
+   "profName": "Jessica A McArthur"
+ },
+ {
+   "courseTitle": "PSY1010",
+   "profName": "Brett M Breton"
+ },
+ {
+   "courseTitle": "PSY1010",
+   "profName": "David Linn Rockwood"
+ },
+ {
+   "courseTitle": "PSY1010",
+   "profName": "David Linn Rockwood"
+ },
+ {
+   "courseTitle": "PSY1010",
+   "profName": "Johnny M Ortiz"
+ },
+ {
+   "courseTitle": "PSY1010",
+   "profName": "Johnny M Ortiz"
+ },
+ {
+   "courseTitle": "PSY1010",
+   "profName": "Johnny M Ortiz"
+ },
+ {
+   "courseTitle": "PSY1010",
+   "profName": "Johnny M Ortiz"
+ },
+ {
+   "courseTitle": "PSY1010",
+   "profName": "Johnny M Ortiz"
+ },
+ {
+   "courseTitle": "PSY1010",
+   "profName": "Johnny M Ortiz"
+ },
+ {
+   "courseTitle": "PSY1010",
+   "profName": "Johnny M Ortiz"
+ },
+ {
+   "courseTitle": "PSY1010",
+   "profName": "Johnny M Ortiz"
+ },
+ {
+   "courseTitle": "PSY1010",
+   "profName": "Jessica C Hill"
+ },
+ {
+   "courseTitle": "PSY1010",
+   "profName": "Jessica C Hill"
+ },
+ {
+   "courseTitle": "PSY1100",
+   "profName": "Michael D Christensen"
+ },
+ {
+   "courseTitle": "PSY1100",
+   "profName": "Matthew Alan Hiatt"
+ },
+ {
+   "courseTitle": "PSY1100",
+   "profName": "Dana L Erskine"
+ },
+ {
+   "courseTitle": "PSY1100",
+   "profName": "Bruce Jensen Bergen"
+ },
+ {
+   "courseTitle": "PSY2400",
+   "profName": "Grant L Richards"
+ },
+ {
+   "courseTitle": "PSY2710",
+   "profName": "David Yells"
+ },
+ {
+   "courseTitle": "PSY2800",
+   "profName": "Robert S Robison"
+ },
+ {
+   "courseTitle": "PSY2800",
+   "profName": "Bennion Lloyd Spencer"
+ },
+ {
+   "courseTitle": "PSY2800",
+   "profName": "Kristin Elizabeth Stanley"
+ },
+ {
+   "courseTitle": "PSY2800",
+   "profName": "Cynthia C Keetch"
+ },
+ {
+   "courseTitle": "PSY3100",
+   "profName": "Larinda Nilsen"
+ },
+ {
+   "courseTitle": "PSY3200",
+   "profName": "Leo Schlosnagle"
+ },
+ {
+   "courseTitle": "PSY3200",
+   "profName": "Veronika Rudd Tait"
+ },
+ {
+   "courseTitle": "PSY3210",
+   "profName": "Cynthia C Keetch"
+ },
+ {
+   "courseTitle": "PSY3400",
+   "profName": "Dana L Erskine"
+ },
+ {
+   "courseTitle": "PSY3400",
+   "profName": "Michael D Christensen"
+ },
+ {
+   "courseTitle": "PSY3400",
+   "profName": "Aubree Bushman"
+ },
+ {
+   "courseTitle": "PSY3400",
+   "profName": "Aubree Bushman"
+ },
+ {
+   "courseTitle": "PSY3400",
+   "profName": "Aubree Bushman"
+ },
+ {
+   "courseTitle": "PSY3400",
+   "profName": "Aubree Bushman"
+ },
+ {
+   "courseTitle": "PSY3420",
+   "profName": "Dana L Erskine"
+ },
+ {
+   "courseTitle": "PSY3420",
+   "profName": "Jessica C Hill"
+ },
+ {
+   "courseTitle": "PSY3430",
+   "profName": "David Yells"
+ },
+ {
+   "courseTitle": "PSY3430",
+   "profName": "Christopher D Anderson"
+ },
+ {
+   "courseTitle": "PSY3460",
+   "profName": "Cameron R John"
+ },
+ {
+   "courseTitle": "PSY3460",
+   "profName": "Jan C Booth"
+ },
+ {
+   "courseTitle": "PSY3500",
+   "profName": "Brett M Breton"
+ },
+ {
+   "courseTitle": "PSY3500",
+   "profName": "Brett M Breton"
+ },
+ {
+   "courseTitle": "PSY3500",
+   "profName": "Hui-Tzu Chou"
+ },
+ {
+   "courseTitle": "PSY4300",
+   "profName": "Matthew R Draper"
+ },
+ {
+   "courseTitle": "PSY475R",
+   "profName": "Matthew R Draper"
+ },
+ {
+   "courseTitle": "PSY475R",
+   "profName": "Jessica C Hill"
+ },
+ {
+   "courseTitle": "PSY475R",
+   "profName": "Christopher D Anderson"
+ },
+ {
+   "courseTitle": "PSY475R",
+   "profName": "Teresa A Cardon"
+ },
+ {
+   "courseTitle": "PSY475R",
+   "profName": "Francine Barbara Baffa"
+ },
+ {
+   "courseTitle": "PSY475R",
+   "profName": "Brandon Erik Condie"
+ },
+ {
+   "courseTitle": "PSY475R",
+   "profName": "David Yells"
+ },
+ {
+   "courseTitle": "PSY475R",
+   "profName": "Richard J Tafalla"
+ },
+ {
+   "courseTitle": "REC1500",
+   "profName": "Betsy Rebecca Lindley"
+ },
+ {
+   "courseTitle": "REC1525",
+   "profName": "Garth Jason Tino"
+ },
+ {
+   "courseTitle": "REC1527",
+   "profName": "Willis J Knapp"
+ },
+ {
+   "courseTitle": "REC1535",
+   "profName": "Garth Jason Tino"
+ },
+ {
+   "courseTitle": "REC1535",
+   "profName": "Scott David Williams"
+ },
+ {
+   "courseTitle": "REC1535",
+   "profName": "Betsy Rebecca Lindley"
+ },
+ {
+   "courseTitle": "REC1550",
+   "profName": "Garth Jason Tino"
+ },
+ {
+   "courseTitle": "REC1580",
+   "profName": "Scott David Williams"
+ },
+ {
+   "courseTitle": "REC420R",
+   "profName": "Betsy Rebecca Lindley"
+ },
+ {
+   "courseTitle": "REC430R",
+   "profName": "Betsy Rebecca Lindley"
+ },
+ {
+   "courseTitle": "REC430R",
+   "profName": "Betsy Rebecca Lindley"
+ },
+ {
+   "courseTitle": "REC430R",
+   "profName": "Betsy Rebecca Lindley"
+ },
+ {
+   "courseTitle": "REC430R",
+   "profName": "Betsy Rebecca Lindley"
+ },
+ {
+   "courseTitle": "REC481R",
+   "profName": "Scott David Williams"
+ },
+ {
+   "courseTitle": "REC481R",
+   "profName": "Scott David Williams"
+ },
+ {
+   "courseTitle": "RUS1020",
+   "profName": "Emma Jane Top-Kaufman"
+ },
+ {
+   "courseTitle": "SLSS1050",
+   "profName": "Benjamin T Wilson"
+ },
+ {
+   "courseTitle": "SLSS1050",
+   "profName": "Benjamin T Wilson"
+ },
+ {
+   "courseTitle": "SLSS1195",
+   "profName": "Nancy Susan Cannon"
+ },
+ {
+   "courseTitle": "SLSS120R",
+   "profName": "Marni B Sanft"
+ },
+ {
+   "courseTitle": "SLSS240R",
+   "profName": "Stephen Frederick Crook"
+ },
+ {
+   "courseTitle": "SLSS281R",
+   "profName": "Michael A Jensen"
+ },
+ {
+   "courseTitle": "SLSS281R",
+   "profName": "Michael A Jensen"
+ },
+ {
+   "courseTitle": "SLSS281R",
+   "profName": "Michael A Jensen"
+ },
+ {
+   "courseTitle": "SLSS281R",
+   "profName": "Michael A Jensen"
+ },
+ {
+   "courseTitle": "SLSS281R",
+   "profName": "Michael A Jensen"
+ },
+ {
+   "courseTitle": "SLSS281R",
+   "profName": "Michael A Jensen"
+ },
+ {
+   "courseTitle": "SOC1010",
+   "profName": "Hui-Tzu Chou"
+ },
+ {
+   "courseTitle": "SOC1010",
+   "profName": "Hui-Tzu Chou"
+ },
+ {
+   "courseTitle": "SOC1020",
+   "profName": "Ronald J Hammond"
+ },
+ {
+   "courseTitle": "SOC1020",
+   "profName": "Ronald J Hammond"
+ },
+ {
+   "courseTitle": "SOC1200",
+   "profName": "Ronald J Hammond"
+ },
+ {
+   "courseTitle": "SOC1200",
+   "profName": "Ronald J Hammond"
+ },
+ {
+   "courseTitle": "SOC1200",
+   "profName": "Ronald J Hammond"
+ },
+ {
+   "courseTitle": "SOC1200",
+   "profName": "Ronald J Hammond"
+ },
+ {
+   "courseTitle": "SOC1200",
+   "profName": "Ronald J Hammond"
+ },
+ {
+   "courseTitle": "SOC1200",
+   "profName": "Hui-Tzu Chou"
+ },
+ {
+   "courseTitle": "SOC1200",
+   "profName": "Hui-Tzu Chou"
+ },
+ {
+   "courseTitle": "SOC320G",
+   "profName": "Lynn England"
+ },
+ {
+   "courseTitle": "SOC320G",
+   "profName": "Hui-Tzu Chou"
+ },
+ {
+   "courseTitle": "SOC3310",
+   "profName": "Debjani Chakravarty"
+ },
+ {
+   "courseTitle": "SOC4020",
+   "profName": "Ronald J Hammond"
+ },
+ {
+   "courseTitle": "SOC4020",
+   "profName": "Ronald J Hammond"
+ },
+ {
+   "courseTitle": "SOC490R",
+   "profName": "Ronald J Hammond"
+ },
+ {
+   "courseTitle": "SOC490R",
+   "profName": "Ronald J Hammond"
+ },
+ {
+   "courseTitle": "SPAN1010",
+   "profName": "Elizabeth D Banford"
+ },
+ {
+   "courseTitle": "SPAN1010",
+   "profName": "Tempe Mabe Willey"
+ },
+ {
+   "courseTitle": "SPAN1010",
+   "profName": "Jay Lynn Jensen"
+ },
+ {
+   "courseTitle": "SPAN1020",
+   "profName": "Ana Maria Lopez-Aguilera"
+ },
+ {
+   "courseTitle": "SPAN1020",
+   "profName": "Michael Thomas Judd"
+ },
+ {
+   "courseTitle": "SPAN2010",
+   "profName": "Rebeca Lindheimer"
+ },
+ {
+   "courseTitle": "SPAN2010",
+   "profName": "Diana A Sanzana"
+ },
+ {
+   "courseTitle": "SPAN202G",
+   "profName": "Jason Michael Wilber"
+ },
+ {
+   "courseTitle": "SPAN3050",
+   "profName": "Ana M Chaparro"
+ },
+ {
+   "courseTitle": "SPAN3050",
+   "profName": "Sara T Ulloa"
+ },
+ {
+   "courseTitle": "SPAN3200",
+   "profName": "Mari C De Dios"
+ },
+ {
+   "courseTitle": "SPAN351G",
+   "profName": "Jorge Nisguritzer"
+ },
+ {
+   "courseTitle": "SPAN352G",
+   "profName": "Jorge Nisguritzer"
+ },
+ {
+   "courseTitle": "SPAN4050",
+   "profName": "Sara T Ulloa"
+ },
+ {
+   "courseTitle": "SPAN412R",
+   "profName": "Ana Maria Lopez-Aguilera"
+ },
+ {
+   "courseTitle": "SPAN4500",
+   "profName": "Douglas C Jensen"
+ },
+ {
+   "courseTitle": "SUDC481R",
+   "profName": "Theresa Ellen Young"
+ },
+ {
+   "courseTitle": "SURV481R",
+   "profName": "Danial L Perry"
+ },
+ {
+   "courseTitle": "SURV481R",
+   "profName": "Danial L Perry"
+ },
+ {
+   "courseTitle": "SURV481R",
+   "profName": "Danial L Perry"
+ },
+ {
+   "courseTitle": "SW1010",
+   "profName": "LaShawn Camille Williams"
+ },
+ {
+   "courseTitle": "SW1010",
+   "profName": "Elijah Kimball Nielson"
+ },
+ {
+   "courseTitle": "SW1010",
+   "profName": "Francine Barbara Baffa"
+ },
+ {
+   "courseTitle": "SW1010",
+   "profName": "Lars M Eggertsen"
+ },
+ {
+   "courseTitle": "SW1010",
+   "profName": "Eric R Jenkins"
+ },
+ {
+   "courseTitle": "SW1010",
+   "profName": "Kristine Doty"
+ },
+ {
+   "courseTitle": "SW3000",
+   "profName": "Kristine Doty"
+ },
+ {
+   "courseTitle": "SW475R",
+   "profName": "Lars M Eggertsen"
+ },
+ {
+   "courseTitle": "SW481R",
+   "profName": "Teresa A Cardon"
+ },
+ {
+   "courseTitle": "SW481R",
+   "profName": "Teresa A Cardon"
+ },
+ {
+   "courseTitle": "SW481R",
+   "profName": "Teresa A Cardon"
+ },
+ {
+   "courseTitle": "SW481R",
+   "profName": "Alan Ray Misbach"
+ },
+ {
+   "courseTitle": "TECH1010",
+   "profName": "Merrill Richard Oveson"
+ },
+ {
+   "courseTitle": "TECH1010",
+   "profName": "Larry Thomas Willis"
+ },
+ {
+   "courseTitle": "TECH1010",
+   "profName": "Janel Mitchell"
+ },
+ {
+   "courseTitle": "TECH1010",
+   "profName": "Stanley L Heal"
+ },
+ {
+   "courseTitle": "TECH1010",
+   "profName": "Anne Marie Arendt"
+ },
+ {
+   "courseTitle": "TECH1010",
+   "profName": "Carrie L Peterson"
+ },
+ {
+   "courseTitle": "TECH1010",
+   "profName": "Sanford Brett Healey"
+ },
+ {
+   "courseTitle": "TECH1010",
+   "profName": "Justin Zsiros"
+ },
+ {
+   "courseTitle": "TECH3000",
+   "profName": "Ross K Ford"
+ },
+ {
+   "courseTitle": "TECH3000",
+   "profName": "Randall Kevin Smith"
+ },
+ {
+   "courseTitle": "TECH3010",
+   "profName": "Richard M Hartley"
+ },
+ {
+   "courseTitle": "TECH3850",
+   "profName": "Armen Ilikchyan"
+ },
+ {
+   "courseTitle": "TECH405G",
+   "profName": "David W Johnson"
+ },
+ {
+   "courseTitle": "TECH4200",
+   "profName": "Kyle John Merrill"
+ },
+ {
+   "courseTitle": "TECH4910",
+   "profName": "Scott R Seals"
+ },
+ {
+   "courseTitle": "THEA1013",
+   "profName": "Christopher Layton Clark"
+ },
+ {
+   "courseTitle": "THEA1013",
+   "profName": "George Randall King"
+ },
+ {
+   "courseTitle": "THEA1013",
+   "profName": "George Randall King"
+ },
+ {
+   "courseTitle": "THEA1023",
+   "profName": "Jill Robinson"
+ },
+ {
+   "courseTitle": "THEA1023",
+   "profName": "Richard L Moody"
+ },
+ {
+   "courseTitle": "THEA1023",
+   "profName": "Jill Robinson"
+ },
+ {
+   "courseTitle": "THEA1023",
+   "profName": "Jill Robinson"
+ },
+ {
+   "courseTitle": "THEA1023",
+   "profName": "George Randall King"
+ },
+ {
+   "courseTitle": "THEA1023",
+   "profName": "Jill Robinson"
+ },
+ {
+   "courseTitle": "THEA1033",
+   "profName": "Laurie C Harrop-Purser"
+ },
+ {
+   "courseTitle": "THEA159R",
+   "profName": "Don B Parker"
+ },
+ {
+   "courseTitle": "THEA259R",
+   "profName": "Don B Parker"
+ },
+ {
+   "courseTitle": "THEA281R",
+   "profName": "Christopher Layton Clark"
+ },
+ {
+   "courseTitle": "THEA359R",
+   "profName": "Don B Parker"
+ },
+ {
+   "courseTitle": "THEA3721",
+   "profName": "Christopher Layton Clark"
+ },
+ {
+   "courseTitle": "THEA3722",
+   "profName": "Christopher Layton Clark"
+ },
+ {
+   "courseTitle": "THEA481R",
+   "profName": "Isaac Clayton Walters"
+ },
+ {
+   "courseTitle": "THEA481R",
+   "profName": "Christopher Layton Clark"
+ },
+ {
+   "courseTitle": "THEA481R",
+   "profName": "Christopher Layton Clark"
+ },
+ {
+   "courseTitle": "THEA4993",
+   "profName": "Christopher Layton Clark"
+ },
+ {
+   "courseTitle": "UVST481R",
+   "profName": "Michael A Jensen"
+ },
+ {
+   "courseTitle": "UVST481R",
+   "profName": "Michael A Jensen"
+ },
+ {
+   "courseTitle": "UVST481R",
+   "profName": "Michael A Jensen"
+ },
+ {
+   "courseTitle": "UVST481R",
+   "profName": "Michael A Jensen"
+ },
+ {
+   "courseTitle": "UVST481R",
+   "profName": "Michael A Jensen"
+ },
+ {
+   "courseTitle": "UVST481R",
+   "profName": "Michael A Jensen"
+ },
+ {
+   "courseTitle": "UVST481R",
+   "profName": "Michael A Jensen"
+ },
+ {
+   "courseTitle": "ZOOL1090",
+   "profName": "Justin A Hill"
+ },
+ {
+   "courseTitle": "ZOOL1090",
+   "profName": "Heather Ann Wilson-Ashworth"
+ },
+ {
+   "courseTitle": "ZOOL2320",
+   "profName": "Michael J Shively"
+ },
+ {
+   "courseTitle": "ZOOL2320",
+   "profName": "Michael J Shively"
+ },
+ {
+   "courseTitle": "ZOOL2325",
+   "profName": "Donald P Homan"
+ },
+ {
+   "courseTitle": "ZOOL2325",
+   "profName": "Donald P Homan"
+ },
+ {
+   "courseTitle": "ZOOL2325",
+   "profName": "Donald P Homan"
+ },
+ {
+   "courseTitle": "ZOOL2420",
+   "profName": "Sara Junette Flood"
+ },
+ {
+   "courseTitle": "ZOOL2420",
+   "profName": "Mark E Bracken"
+ },
+ {
+   "courseTitle": "ZOOL2425",
+   "profName": "Olga Sambu"
+ },
+ {
+   "courseTitle": "ZOOL2425",
+   "profName": "Olga Sambu"
+ },
+ {
+   "courseTitle": "ZOOL2425",
+   "profName": "Alison Miller Woods"
+ },
+ {
+   "courseTitle": "ZOOL2425",
+   "profName": "Olga Sambu"
+ },
+ {
+   "courseTitle": "ZOOL2425",
+   "profName": "Alison Miller Woods"
+ },
+ {
+   "courseTitle": "ZOOL3100",
+   "profName": "Paul J Bybee"
+ },
+ {
+   "courseTitle": "ZOOL3105",
+   "profName": "Melissa Sue Cavan"
+ },
+ {
+   "courseTitle": "ZOOL4400",
+   "profName": "Mark E Bracken"
+ },
+ {
+   "courseTitle": "ZOOL4600",
+   "profName": "Wayne H Whaley"
+ }
+]

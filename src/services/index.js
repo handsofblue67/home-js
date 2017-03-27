@@ -70,4 +70,5 @@ module.exports = function () {
   app.configure(user);
   app.configure(device);
   app.configure(componentState);
+  app.configure(user);
 };

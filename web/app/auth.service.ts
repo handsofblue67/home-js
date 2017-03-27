@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
-import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import { Router } from '@angular/router'
 
-import 'rxjs/add/operator/map'
+import 'rxjs/add/observable/fromPromise'
+import 'rxjs/add/operator/skipWhile'
+import { Observable } from 'rxjs/Observable'
+import { BehaviorSubject } from 'rxjs/BehaviorSubject'
+
 import * as feathers from 'feathers-client'
 import * as io from 'socket.io-client'
 import * as _ from 'lodash'
@@ -15,7 +17,10 @@ export class AuthService {
   // private _url: string = 'http://localhost:3030'
   authenticated = false
   private authSource = new BehaviorSubject<boolean>(this.authenticated)
-  public auth$ = this.authSource.asObservable().skipWhile(x => x === false).share()
+  public auth$ = this.authSource
+    .asObservable()
+    .skipWhile(x => x === false)
+    .share()
   public feathersApp: any
   public token: string
   public message = ''
@@ -27,15 +32,19 @@ export class AuthService {
       .configure(feathers.socketio(this.socket))
       .configure(feathers.hooks())
       .configure(feathers.authentication({ storage: localStorage }))
+    this.tokenLogin()
+  }
+
+  private tokenLogin(): void {
+    // check local storage for a valid token, redirect accordingly
     this.feathersApp.authenticate().then(() => {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'))
       this.authenticated = true
       this.authSource.next(this.authenticated)
-      router.navigate(['/users'])
+      // TODO: make this route dynamic based off user preferences
+      this.router.navigate([ `/${this.currentUser.onLoginRoute || 'devices'}`])
     }).catch(error => {
-      // if (error.code === 401) {
-        router.navigate(['/login'])
-      // }
+      this.router.navigate(['/login'])
       console.error(error)
     })
   }
@@ -53,13 +62,16 @@ export class AuthService {
         this.currentUser = result.data
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
         this.authenticated = this.token ? true : false
+        if (this.token) {
+          this.tokenLogin()
+        }
         return this.authenticated
       })
       .catch(this.handleError)
   }
 
   logout(): void {
-    // clear token remove user from local storage to log user out
+    // clear token and remove user from local storage
     this.token = null
     localStorage.removeItem('currentUser')
     localStorage.removeItem('feathers-jwt')
@@ -70,8 +82,7 @@ export class AuthService {
 
   private handleError(err: any) {
     const errMsg = err.message || err.status ?
-      `${err.status} - ${err.statusTest}` :
-      'Server error'
+      `${err.status} - ${err.statusTest}` : 'Server error'
     return Observable.throw(errMsg)
   }
 

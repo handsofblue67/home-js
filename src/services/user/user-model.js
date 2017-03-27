@@ -18,7 +18,9 @@ const userSchema = new Schema({
   admin: { type: Boolean, 'default': false },
   
   createdAt: { type: Date, 'default': Date.now },
-  updatedAt: { type: Date, 'default': Date.now }
+  updatedAt: { type: Date, 'default': Date.now },
+
+  onLoginRoute: { type: String },
 });
 
 const userModel = mongoose.model('user', userSchema);

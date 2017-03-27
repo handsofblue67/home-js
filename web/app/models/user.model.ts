@@ -6,4 +6,5 @@ export class User {
     lastName: string
     admin?: boolean
     picture: string
+    onLoginRoute?: string
 }

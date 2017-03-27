@@ -26,6 +26,8 @@ services:
         constraints: [node.role == manager]
   broker:
     image: 'ansi/mosquitto'
+    ports:
+      - '1883:1883'
     networks:
       - main 
   mock-device:

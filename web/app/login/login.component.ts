@@ -16,13 +16,12 @@ export class LoginComponent {
   constructor(public router: Router, public authService: AuthService) { }
 
   login() {
-    // this.loading = true
-    this.authService.login(this.model.username, this.model.password)
+    this.authService
+      .login(this.model.username, this.model.password)
       .subscribe(result => {
         if (result) {
           // login successful
           console.log('login successful')
-          this.loading = false
           this.router.navigate(['/devices'])
             .then(didRoute => console.log(`redirection ${didRoute ? 'succeeded' : 'failed'}`))
             .catch(console.warn)
@@ -30,7 +29,6 @@ export class LoginComponent {
           // login failed
           console.log('login failed', result)
           this.error = this.authService.message
-          this.loading = false
         }
       })
   }

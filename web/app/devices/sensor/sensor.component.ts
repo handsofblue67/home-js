@@ -5,8 +5,7 @@ import { trigger, state, style, transition, animate, group } from '@angular/anim
   selector: 'app-sensor',
   template: `
   <span [@growShrink]="'in'">
-    <strong>{{_component.name}}:</strong> {{_component.controlState}}
-    <span [ngSwitch]="_component?.units">
+    <strong>{{_component.name}}:</strong> {{_component.controlState}}<span [ngSwitch]="_component?.units">
       <span *ngSwitchCase="'percent'">%</span>
       <span *ngSwitchCase="'celsius'">&deg;C</span>
     </span>

@@ -107,11 +107,34 @@
 ![Logical View](/docs/assets/logical_view.png)
 
 <!-- slide -->
-# Example #1
+# Modifying the state of a device
+![Screen Shot 2017-03-27 at 3.43.26 PM](</assets/Screen Shot 2017-03-27 at 3.43.26 PM_x1vxm2hes.png>)
 
+<!-- slide -->
+- button sends request to change state
+- server authorizes the action
+- server forwards request over MQTT
+- broker passes message to the subscribed devices
+- device attempts to handle the new state
+- stores the new state in flash memory
+- pushes the new state to the broker
+- server, which is a client of the broker gets the new state
+- compares the state to the state stored in the database
+- if different the server updates the record and appends the old state to the historical database if required
+- server pushes new state the the user
+- user renders the new state
+
+<!-- slide -->
+```@mermaid
+graph LR
+user-->server
+```
+
+<!-- slide -->
+![Screen Shot 2017-03-27 at 3.43.57 PM](</assets/Screen Shot 2017-03-27 at 3.43.57 PM_b4byx9vof.png>)
 
 <!-- slide -->
 ## Lessons Learned
 
 <!-- slide -->
-## Future Plans
+## Future Plans/Possibilities

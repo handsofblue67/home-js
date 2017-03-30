@@ -15,13 +15,11 @@
       "passwordField": "password"
     },
     "google": {
-      "clientID": "423630458653-rfnvit7fkji2smlsc6bdd7ju55jobpc0.apps.googleusercontent.com",
-      "clientSecret": "PhfK19MVxRGrHNSjmgi4Pddf",
+      "clientID": "423630458653-nig8sgfkjd26rmpcqttkei15jc48pkjh.apps.googleusercontent.com",
+      "clientSecret": "8K-WJklPpLFoHFS1owpFOxg-",
       "permissions": {
         "scope": [
           "profile",
-          "openid",
-          "email",
           "https://www.googleapis.com/auth/calendar"
         ]
       }

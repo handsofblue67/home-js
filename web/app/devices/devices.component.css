@@ -1,3 +1,8 @@
 md-slide-toggle {
   display: inline-flex;
 }
+
+.device-card {
+  margin-bottom: 10px;
+  width: 254px;
+}

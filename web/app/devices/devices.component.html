@@ -2,12 +2,31 @@
   <md-card-title>No Devices</md-card-title>
   <md-card-content>Any devices connected to your HomeJS system will appear here</md-card-content>
 </md-card>
-<md-card *ngFor="let device of devices">
-  <md-card-title>{{device.name || device.deviceID}}</md-card-title>
+
+<md-card *ngFor="let device of devices" class="device-card">
+
+  <md-menu #deviceOptionsMenu="mdMenu">
+    <button md-menu-item *ngIf="isSensor(device)" [routerLink]="['/device-trigger', device.deviceID]"> Create Trigger </button>
+    <button md-menu-item> Edit </button>
+    <button md-menu-item> Favorite </button>
+  </md-menu>
+
+  <md-card-title>
+    <div class="flex-container">
+      <span>{{device.name || device.deviceID}}</span>
+      <span class="fill"></span>
+      <button md-icon-button [mdMenuTriggerFor]="deviceOptionsMenu">
+  			<md-icon>more_vert</md-icon>
+	    </button>
+    </div>
+  </md-card-title>
+
   <md-card-content>{{device.deviceType}}</md-card-content>
+
   <div *ngFor="let component of device.components; let i = index">
     <md-slide-toggle *ngIf="component.type === 'toggle'" color="accent" [(ngModel)]="component.controlState" (change)="toggle(device, i)"
       [mdTooltip]="'Slide to toggle ' + device.name || device.deviceID" mdTooltipPosition="right"></md-slide-toggle>
     <app-sensor *ngIf="component.type === 'sensor'" [component]="component"></app-sensor>
   </div>
+
 </md-card>

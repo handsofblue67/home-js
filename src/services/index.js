@@ -5,6 +5,7 @@ const moment = require('moment');
 const mongoose = require('mongoose');
 const mqtt = require('mqtt');
 
+const deviceTrigger = require('./deviceTrigger');
 const componentState = require('./componentState');
 const device = require('./device');
 const authentication = require('./authentication');
@@ -25,7 +26,7 @@ module.exports = function () {
 
   // Published messages get handled here
   app.mqttClient.on('message', (topic, message) => {
-    const deviceService = app.service('devices')
+    const deviceService = app.service('devices');
     const stringMessage = message.toString();
     if (/currentSettings\/.*/.test(topic)) {
       const parsedMessage = JSON.parse(stringMessage);
@@ -68,6 +69,7 @@ module.exports = function () {
 
   app.configure(authentication);
   app.configure(user);
+  app.configure(deviceTrigger);
   app.configure(device);
   app.configure(componentState);
   app.configure(user);

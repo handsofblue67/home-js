@@ -13,14 +13,12 @@ import { DeviceService } from './devices'
 import { routing, routedComponents } from './app.routing'
 import { UsersService } from './users'
 import { KeysPipe } from './keys.pipe'
-import { SensorComponent } from './devices/sensor/sensor.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     routedComponents,
     KeysPipe,
-    SensorComponent,
   ],
   imports: [
     BrowserModule,

@@ -82,7 +82,7 @@ mqttClient.on('message', (topic, message) => {
       break
     case settings.topics.sub.settings:
       console.log(`Topic: ${topic}
-      new state: ${parsedMessage}`)
+      new state: ${JSON.stringify(parsedMessage, null, 2)}`)
       settings.components = [ ...parsedMessage ]
       mqttClient.publish(settings.topics.pub.status, JSON.stringify(settings))
       break

@@ -3,6 +3,7 @@ import { MdSnackBar, LiveAnnouncer } from '@angular/material'
 
 
 import { Subscription } from 'rxjs/Subscription'
+import * as _ from 'lodash'
 
 import { DeviceService } from './device.service'
 
@@ -30,5 +31,9 @@ export class DevicesComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.connection.unsubscribe()
+  }
+
+  private isSensor(device) {
+    return _.find(device.components, ['type', 'sensor'])
   }
 }

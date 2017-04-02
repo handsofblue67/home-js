@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core'
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
-// import { Observable } from 'rxjs/Observable'
-// import { Observer } from 'rxjs/Observer'
 import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/map'
 import * as _ from 'lodash'
@@ -15,7 +13,7 @@ export class DeviceService {
   public devices$ = this.deviceSource.asObservable().share()
 
   private feathersService: any
-  private devices = []
+  devices = []
   authSubscription: Subscription
 
   // TODO: figure out how to not get a new token everytime a service is called...
@@ -38,7 +36,7 @@ export class DeviceService {
   }
 
   private onUpdated(updatedDevice: any) {
-    if (typeof updatedDevice === 'number') return
+    if (typeof updatedDevice === 'number') { return }
 
     this.devices = _.map(this.devices, device => {
       return _.cloneDeep((device.deviceID === updatedDevice.deviceID) ? updatedDevice : device)
@@ -53,5 +51,9 @@ export class DeviceService {
 
   public toggle(device: any, index: number) {
     this.feathersService.update(device.deviceID, device)
+  }
+
+  public findDevice(deviceID: string): Promise<any> {
+    return Promise.resolve(this.devices).then(devices => _.find(devices, ['deviceID', deviceID]))
   }
 }

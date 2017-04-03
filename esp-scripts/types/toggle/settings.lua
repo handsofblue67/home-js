@@ -1,13 +1,19 @@
 local module={}
 
 module.deviceID=config.ID
-module.name="Bedroom Light"
+module.name="Bedroom Humidifier"
 module.checkinFreq=0
 module.deviceType="Toggle"
 
 module.components={}
-module.components[1]={ name="Light", type="toggle", pinNumber=1, units="boolean", isTimeSeries=false, controlState=gpio.LOW}
-
+module.components[1]={
+    name="Humidifier",
+    type="toggle",
+    pinNumber=1,
+    units="boolean",
+    isTimeSeries=false,
+    controlState=gpio.LOW
+}
 module.topics={}
 
 module.topics.sub={}

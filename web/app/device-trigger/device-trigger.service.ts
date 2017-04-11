@@ -62,4 +62,7 @@ export class DeviceTriggerService {
       .catch(error => console.error(error))
   }
 
+  public findTriggers(deviceID): Promise<any> {
+    return Promise.resolve(this.triggers).then(triggers => _.filter(triggers, ['source', deviceID]))
+  }
 }

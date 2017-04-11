@@ -11,6 +11,7 @@ const Schema = mongoose.Schema;
 
 const deviceTriggerSchema = new Schema({
   source: { type: String, ref: 'device', required: true },
+  sourceComponent: { type: String }, 
   trigger: { 
     operator: { type: String, required: true },
     state: { type: Number, required: true }

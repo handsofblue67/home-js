@@ -8,17 +8,17 @@ let chance = new Chance()
 
 const randID = chance.natural() + ''
 const randDeviceName = chance.word()
-const randComponentName = chance.word()
-const checkin = chance.bool({likelihood: 30})
+const randComponentNames = _.times(chance.natural({ min: 1, max: 3 }), () => chance.word())
+const checkin = chance.bool({ likelihood: 30 })
 
 const host = 'mqtt://broker:1883'
 
-var options = {
+const options = {
   will: {
     topic: `/will/${randID}`,
     payload: 'remove',
     qos: 0,
-    retain: false
+    retain: false,
   },
 }
 
@@ -27,21 +27,21 @@ let settings = {
   name: randDeviceName,
   deviceType: 'Test',
   checkinFreq: checkin ? 10000 : null,
-  components: [
-    {
-      name: randComponentName,
-      controlState: checkin ? chance.natural({min:0, max: 1023}) : false,
-      type: checkin ? 'sensor' : 'toggle'
+  components: _.map(randComponentNames, compName => {
+    return {
+      name: compName,
+      controlState: checkin ? chance.natural({ min: 0, max: 1023 }) : false,
+      type: checkin ? 'sensor' : 'toggle',
     }
-  ],
+  }),
   topics: {
     pub: {
       status: `/status/${randID}`,
-      currentSettings: `/currentSettings/${randID}`
+      currentSettings: `/currentSettings/${randID}`,
     },
     sub: {
       reqStatus: `/reqStatus/${randID}`,
-      settings: `/settings/${randID}`
+      settings: `/settings/${randID}`,
     }
   }
 }
@@ -62,14 +62,15 @@ mqttClient.on('connect', () => {
 if (checkin) {
   let timer = Rx.Observable
     .interval(settings.checkinFreq)
-    .map(() => chance.natural({min:0, max: 1023}))
+    .map(() => chance.natural({ min: 0, max: 1023 }))
     .subscribe(value => {
       console.log('.')
-      settings.components[0].controlState = value
+      const selectedComponent = settings.components.length === 1 ? 0 : chance.natural({ min: 0, max: settings.components.length-1})
+      settings.components[selectedComponent].controlState = value
       mqttClient.publish(settings.topics.pub.status, JSON.stringify(settings))
     })
 }
-  
+
 console.log(settings)
 
 mqttClient.publish(settings.topics.pub.currentSettings, JSON.stringify(settings))

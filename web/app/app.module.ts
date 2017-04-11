@@ -10,15 +10,20 @@ import { AppComponent } from './app.component'
 import { AuthGuard } from './auth-guard.service'
 import { AuthService } from './auth.service'
 import { DeviceService } from './devices'
+import { DeviceTriggerService } from './device-trigger'
 import { routing, routedComponents } from './app.routing'
 import { UsersService } from './users'
-import { KeysPipe } from './keys.pipe'
+import { KeysPipe } from './keys.pipe';
+import { TriggerFormComponent } from './device-trigger/trigger-form/trigger-form.component';
+import { DeviceComponent } from './models/device/device.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     routedComponents,
     KeysPipe,
+    TriggerFormComponent,
+    DeviceComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +39,7 @@ import { KeysPipe } from './keys.pipe'
     AuthGuard,
     AuthService,
     DeviceService,
+    DeviceTriggerService,
     LiveAnnouncer,
     MdSnackBar,
     UsersService,

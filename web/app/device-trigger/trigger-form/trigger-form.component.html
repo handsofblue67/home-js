@@ -1,0 +1,49 @@
+<div *ngIf="triggerDefinition">
+
+  <h2>Create a action for {{triggerDefinition?.source?.name || triggerDefinition?.source?.deviceID}}</h2>
+  <h3>Define a trigger</h3>
+
+  <md-select placeholder="Source Component" [(ngModel)]="triggerDefinition.sourceComponent">
+    <md-option *ngFor="let sourceComponent of triggerDefinition?.source?.components" [value]="sourceComponent">{{ sourceComponent?.name }}</md-option>
+  </md-select>
+
+  <md-select placeholder="Comparison" [(ngModel)]="triggerDefinition.trigger.operator">
+    <md-option *ngFor="let operator of comparisonOperators" [value]="operator">{{ operator }}</md-option>
+  </md-select>
+
+  <md-input-container>
+    <input mdInput placeholder="Triggering State" type="number" value="component?.controlState" [(ngModel)]="triggerDefinition.trigger.state">
+  </md-input-container>
+
+</div>
+
+<div *ngIf="otherDevices">
+
+  <h3>Create a target action</h3>
+
+  <md-select placeholder="Target Device" [(ngModel)]="triggerDefinition.target">
+    <md-option *ngFor="let otherDevice of otherDevices" [value]="otherDevice">{{ otherDevice?.name || otherDevice?.deviceID}}</md-option>
+  </md-select>
+
+  <md-select placeholder="Target Component" [(ngModel)]="triggerDefinition.targetComponent">
+    <md-option *ngFor="let targetComponent of triggerDefinition?.target?.components" [value]="targetComponent">{{ targetComponent?.name }}</md-option>
+  </md-select>
+
+  <!--<span [ngSwitch]="triggerDefinition.targetComponent">-->
+      <!--<span *ngSwitchCase="'number'">
+        <md-input-container>
+          <input mdInput placeholder="Target State" type="number" value="0" [(ngModel)]="triggerDefinition.action">
+        </md-input-container>
+      </span>
+
+  <span *ngSwitchDefault>-->
+        <md-select placeholder="Target State" [(ngModel)]="triggerDefinition.action">
+          <md-option [value]="true">true</md-option>
+          <md-option [value]="false">false</md-option>
+        </md-select>
+      <!--</span>-->
+  <!--</span>-->
+
+  <button md-raised-button color="primary" (click)="submit(triggerDefinition)">Submit</button>
+
+</div>

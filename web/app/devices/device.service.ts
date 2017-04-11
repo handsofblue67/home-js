@@ -20,8 +20,7 @@ export class DeviceService {
   constructor(private authService: AuthService) {
     this.feathersService = this.authService.getService('devices')
     this.feathersService.find().then((update: any) => {
-      const devices = update.data
-      this.devices = devices
+      this.devices = update.data
       this.deviceSource.next(this.devices)
     })
     this.feathersService
@@ -31,7 +30,7 @@ export class DeviceService {
   }
 
   private onCreated(device: any) {
-    this.devices = [...this.devices, device]
+    this.devices = [ ...this.devices, device ]
     this.deviceSource.next(this.devices)
   }
 

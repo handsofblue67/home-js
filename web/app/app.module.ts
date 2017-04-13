@@ -13,9 +13,10 @@ import { DeviceService } from './devices'
 import { DeviceTriggerService } from './device-trigger'
 import { routing, routedComponents } from './app.routing'
 import { UsersService } from './users'
-import { KeysPipe } from './keys.pipe';
+import { KeysPipe } from './keys.pipe'
 import { TriggerFormComponent } from './device-trigger/trigger-form/trigger-form.component';
 import { DeviceComponent } from './models/device/device.component'
+import { CalendarService } from './calendar'
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { DeviceComponent } from './models/device/device.component'
   providers: [
     AuthGuard,
     AuthService,
+    CalendarService,
     DeviceService,
     DeviceTriggerService,
     LiveAnnouncer,

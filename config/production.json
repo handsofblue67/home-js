@@ -1,19 +1,4 @@
 {
-  "host": "home-js-app.feathersjs.com",
-  "port": 80,
-  "mongodb": "DATABASE_URL",
-  "public": "../public/",
-  "auth": {
-    "token": {
-      "secret": "FEATHERS_AUTH_SECRET"
-    },
-    "local": {},
-    "google": {
-      "clientID": "your google client id",
-      "clientSecret": "your google client secret",
-      "permissions": {
-        "scope": ["profile"]
-      }
-    }
-  }
+  "host": "oauth-app.feathersjs.com",
+  "port": "PORT"
 }

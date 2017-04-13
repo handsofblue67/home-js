@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import {DomSanitizer} from '@angular/platform-browser';
+import {DomSanitizer} from '@angular/platform-browser'
 import { MdIconRegistry } from '@angular/material'
 
 import { AuthService } from './auth.service'
@@ -10,7 +10,7 @@ import { AuthService } from './auth.service'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  atTop: boolean = true
+  atTop = true
   constructor(
     public authService: AuthService,
     public iconRegistry: MdIconRegistry,

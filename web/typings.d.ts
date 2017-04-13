@@ -4,5 +4,5 @@
 
 declare var System: any;
 declare module 'feathers-client'; 
+// declare module 'feathers/client'; 
 declare module 'feathers-authentication/client'; 
-

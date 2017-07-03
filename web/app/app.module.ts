@@ -5,7 +5,7 @@ import { CalendarModule } from 'angular-calendar'
 import { NgModule } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
-import { MaterialModule, MdSnackBar, LiveAnnouncer } from '@angular/material'
+import { MdSnackBar, LiveAnnouncer, MdButtonModule, MdButtonToggleModule, MdOptionModule, MdCardModule, MdSidenavModule, MdMenuModule, MdSlideToggleModule, MdSelectModule, MdInputModule, MdToolbarModule, MdIconModule, MdTooltipModule, } from '@angular/material'
 import { AppComponent } from './app.component'
 import { AuthGuard } from './auth-guard.service'
 import { AuthService } from './auth.service'
@@ -33,7 +33,17 @@ import { CalendarService } from './calendar'
     CalendarModule.forRoot(),
     FormsModule,
     HttpModule,
-    MaterialModule.forRoot(),
+    MdButtonModule,
+    MdCardModule,
+    MdInputModule,
+    MdSidenavModule,
+    MdMenuModule,
+    MdSlideToggleModule,
+    MdIconModule,
+    MdOptionModule,
+    MdButtonToggleModule,
+    MdTooltipModule,
+    MdToolbarModule,
     routing
   ],
   providers: [
@@ -46,6 +56,6 @@ import { CalendarService } from './calendar'
     MdSnackBar,
     UsersService,
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

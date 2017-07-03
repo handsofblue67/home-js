@@ -1,17 +1,17 @@
-version: '3.1'
+version: '3.2'
 networks:
   main:
     driver: overlay
 services:
   web:
-    build: .
-    # image: 'handsofblue67/homejs'
+    # build: .
+    image: 'homejs_web'
     ports:
       - '3030:3030'
       - '5858:5858'
     volumes:
-      - .:/opt/home-js
-      - /opt/home-js/node_modules
+      - .:/home/node/home-js
+      - /home/node/home-js/node_modules
     depends_on:
       - db
     networks:
@@ -32,8 +32,8 @@ services:
     networks:
       - main 
   mock-device:
-    build: mock-device
-    # image: 'handsofblue67/mockdevice' 
+    # build: mock-device
+    image: 'handsofblue67/mockdevice' 
     depends_on:
       - broker
     networks:

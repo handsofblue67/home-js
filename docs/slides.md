@@ -1,140 +1,77 @@
-<!-- slide -->
-# Internet-of-Things
-### IoT
-### Home Automation
-<!-- slide -->
-## Problem
+---
+presentation:
+  enableSpeakerNotes: true
+  transition: zoom
+  controls: false
+---
+
+<!-- slide data-notes:"- There has been a lot of talk lately about Internet-of-Things \n- like all good buzzwords we need a 3 letter acronym; IoT\n- IoT generally references home automation.\n- let me show you what I did." -->
+<h1 style="color: #275d38">Internet-of-Things</h1>
+<h3 style="color: #275d38">IoT</h3>
+<h3 style="color: #275d38">Home Automation</h3>
+
+<!-- slide data-background-video:"/docs/assets/20170419_202922.mp4" data-notes:"- Notice that the longest part of user setup is plugging the device in\n- The problem I am trying to solve is simple..." -->
+
+<!-- slide data-notes:"- control devices from anywhere\n- I realize that there are plenty of out-of-the-box solutions..." -->
+<h2 style="color: #275d38">The Problem</h2>
 ![Physical_Layout](/docs/assets/Problem.png)
 
-<!-- slide -->
-## Existing Alternates
-- Hub
-  - <strong>Homekit</strong>
-  - <a style="color: grey">Philips Hue</a>
-  - <a style="color: grey">Z-Wave</a>
-  - <a style="color: grey">Temporary Access Point</a>
 
-<!-- slide -->
-## Existing Alternates
-- Hub
-  - <a style="color: grey">Homekit</a>
-  - <strong>Philips Hue</strong>
-  - <a style="color: grey">Z-Wave</a>
-  - <a style="color: grey">Temporary Access Point</a>
+<!-- slide data-notes:"- TALK NICE FIRST\n- but they did not meet my goals" -->
+<h2 style="color: #275d38">Existing Solutions</h2>
+<ul>
+  <li class="fragment fade-up">Homekit</li>
+  <li class="fragment fade-up">Philips Hue</li>
+  <li class="fragment fade-up">Z-Wave</li>
+  <!-- <li class="fragment fade-up">Temporary Access Point</li> -->
+</ul>
 
-<!-- slide -->
-## Existing Alternates
-- Hub
-  - <a style="color: grey">Homekit</a>
-  - <a style="color: grey">Philips Hue</a>
-  - <strong>Z-Wave</strong>
-  - <a style="color: grey">Temporary Access Point</a>
+<!-- slide data-notes:"- (I wanted it to be extensible, I did not want to be locked-in, this could make a system limitless)\n- We have seen the (admittedly) rough implmentation already, but let me show you the part that I am most proud of. -- the part that makes what I built beautiful" -->
+<h2 style="color: #275d38">Goals</h2>
+<ul>
+  <li class="fragment fade-up">Cheaper</li>
+  <li class="fragment fade-up">Secure</li>
+  <li class="fragment fade-up">Easier</li>
+  <li class="fragment fade-up">Total control</li>
+  <!-- <li class="fragment fade-up">Limitless</li> -->
+  <li class="fragment fade-up">Extensible</li>
+</ul>
 
-<!-- slide -->
-## Existing Alternates
-- Hub
-  - <a style="color: grey">Homekit</a>
-  - <a style="color: grey">Philips Hue</a>
-  - <a style="color: grey">Z-Wave</a>
-  - <strong>Temporary Access Point</strong>
-
-<!-- slide -->
-## Goals
-- <strong>Cheaper</strong>
-- <a style="color: grey">Extensible</a>
-- <a style="color: grey">Secure</a>
-- <a style="color: grey">Easier</a>
-- <a style="color: grey">Total control</a>
-- <a style="color: grey">Limitless</a>
-
-<!-- slide -->
-## Goals
-- <a style="color: grey">Cheaper</a>
-- <strong>Extensible</strong>
-- <a style="color: grey">Secure</a>
-- <a style="color: grey">Easier</a>
-- <a style="color: grey">Total control</a>
-- <a style="color: grey">Limitless</a>
-
-<!-- slide -->
-## Goals
-- <a style="color: grey">Cheaper</a>
-- <a style="color: grey">Extensible</a>
-- <strong>Secure</strong>
-- <a style="color: grey">Easier</a>
-- <a style="color: grey">Total control</a>
-- <a style="color: grey">Limitless</a>
-
-<!-- slide -->
-## Goals
-- <a style="color: grey">Cheaper</a>
-- <a style="color: grey">Extensible</a>
-- <a style="color: grey">Secure</a>
-- <strong>Easier</strong>
-- <a style="color: grey">Total control</a>
-- <a style="color: grey">Limitless</a>
-
-<!-- slide -->
-## Goals
-- <a style="color: grey">Cheaper</a>
-- <a style="color: grey">Extensible</a>
-- <a style="color: grey">Secure</a>
-- <a style="color: grey">Easier</a>
-- <strong>Total control</strong>
-- <a style="color: grey">Limitless</a>
-
-<!-- slide -->
-## Goals
-- <a style="color: grey">Cheaper</a>
-- <a style="color: grey">Extensible</a>
-- <a style="color: grey">Secure</a>
-- <a style="color: grey">Easier</a>
-- <a style="color: grey">Total control</a>
-- <strong>Limitless</strong>
-
-<!-- slide -->
-## Physical Layout
+<!-- slide data-notes:"- The specific hardware that I used to implement the system" -->
+<h2 style="color: #275d38">Physical Layout</h2>
 ![Physical_Layout](/docs/assets/Physical_Layout.png)
 
-<!-- slide -->
-## Physical Specifics
-<!--  DHT11 is a temperature/humidity sensor-->
+<!-- slide data-notes:"- DHT11 is a temperature/humidity sensor\n- logically the setup is a bit different" -->
+<h2 style="color: #275d38">Physical Specifics</h2>
 ![Physical Specifics](/docs/assets/Physical_Specifics.png)
 
-<!-- slide -->
-## Logical View
-<!--  explain that the server is running three different servers that could be hosted on different machines-->
+<!-- slide data-notes:"- explain that the server is running three different servers that could be hosted on different machines\n- I am very proud of the end result, but I learned quite a few things before getting to this point" -->
+<h2 style="color: #275d38">Logical View</h2>
 ![Logical View](/docs/assets/logical_view.png)
 
-<!-- slide -->
-# Modifying the state of a device
-![Screen Shot 2017-03-27 at 3.43.26 PM](</assets/Screen Shot 2017-03-27 at 3.43.26 PM_x1vxm2hes.png>)
+<!-- slide data-notes:"- One of my goals was to have an extensible design, and I think I achieved this. here are some of my plans for the platform" -->
+<h2 style="color: #275d38">Lessons Learned</h2>
+<ul>
+<li class="fragment fade-up">Need more man power</li>
+<li class="fragment fade-up">Adding features while the data model is still in flux is bad</li>
+<li class="fragment fade-up">Scope creep is real even without clients</li>
+<li class="fragment fade-up">The balance of time spent planning and implementing is delicate</li>
+<li class="fragment fade-up">Frameworks are fantastic, but they have bugs too</li>
+<li class="fragment fade-up">Front end web development is as complex as the back end</li>
+</ul>
+
+<!-- slide data-notes:"show me the code" -->
+<h2 style="color: #275d38">Future Plans/Possibilities</h2>
+<ul>
+<li class="fragment fade-up">External API data</li>
+<li class="fragment fade-up">Time series data</li>
+<li class="fragment fade-up">True constraints for triggers</li>
+<li class="fragment fade-up">Better user interface</li>
+<li class="fragment fade-up">Artificial Intelligence</li>
+<li class="fragment fade-up">IaaS and SaaS</li>
+<li class="fragment fade-up">Better physical devices (fewer fire hazards)</li>
+<li class="fragment fade-up">More types of device</li>
+</ul>
 
 <!-- slide -->
-- button sends request to change state
-- server authorizes the action
-- server forwards request over MQTT
-- broker passes message to the subscribed devices
-- device attempts to handle the new state
-- stores the new state in flash memory
-- pushes the new state to the broker
-- server, which is a client of the broker gets the new state
-- compares the state to the state stored in the database
-- if different the server updates the record and appends the old state to the historical database if required
-- server pushes new state the the user
-- user renders the new state
-
-<!-- slide -->
-```@mermaid
-graph LR
-user-->server
-```
-
-<!-- slide -->
-![Screen Shot 2017-03-27 at 3.43.57 PM](</assets/Screen Shot 2017-03-27 at 3.43.57 PM_b4byx9vof.png>)
-
-<!-- slide -->
-## Lessons Learned
-
-<!-- slide -->
-## Future Plans/Possibilities
+[https://github.com/handsofblue67/home-js](https://github.com/handsofblue67/home-js)

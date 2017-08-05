@@ -6,7 +6,12 @@ import 'rxjs/add/operator/skipWhile'
 import { Observable } from 'rxjs/Observable'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 
+// import feathers from 'feathers/client'
 import * as feathers from 'feathers-client'
+import authentication from 'feathers-authentication/client'
+// import * as socketio from 'feathers-socketio/client'
+// import * as hooks from 'feathers-hooks'
+// import * as authentication from 'feathers-authentication-client'
 import * as io from 'socket.io-client'
 import * as _ from 'lodash'
 
@@ -21,57 +26,48 @@ export class AuthService {
     .asObservable()
     .skipWhile(x => x === false)
     .share()
+
+  public currentUser
+  private userSource = new BehaviorSubject<any>(this.currentUser)
+  public user$ = this.userSource.asObservable().share()
+
   public feathersApp: any
   public token: string
   public message = ''
-  public currentUser: User
-  public socket = io('/')
+  // public socket = io('/')
+  public socket = io('/', { transports: ['websocket'] })
 
   constructor(private router: Router) {
     this.feathersApp = feathers()
       .configure(feathers.socketio(this.socket))
       .configure(feathers.hooks())
-      .configure(feathers.authentication({ storage: localStorage }))
-    this.tokenLogin()
-  }
+      .configure(authentication({ cookie: 'feathers-jwt' }))
 
-  private tokenLogin(): void {
-    // check local storage for a valid token, redirect accordingly
-    this.feathersApp.authenticate().then(() => {
-      this.currentUser = JSON.parse(localStorage.getItem('currentUser'))
-      this.authenticated = true
-      this.authSource.next(this.authenticated)
-      // TODO: make this route dynamic based off user preferences
-      this.router.navigate([ `/${this.currentUser.onLoginRoute || 'devices'}`])
-    }).catch(error => {
-      this.router.navigate(['/login'])
-      console.error(error)
-    })
-  }
-
-  login(username: string, password: string) {
-    this.feathersApp.configure(feathers.authentication({ storage: localStorage }))
-    return Observable.fromPromise(
-      this.feathersApp.authenticate({
-        type: 'local',
-        username: username,
-        password: password
-      }))
-      .map((result: any) => {
-        this.token = result && result.token
-        this.currentUser = result.data
-        localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
-        this.authenticated = this.token ? true : false
-        if (this.token) {
-          this.tokenLogin()
-        }
-        return this.authenticated
+    this.feathersApp.authenticate()
+      .then(response => {
+        console.info('Feathers Client has Authenticated with the JWT access token!')
+        this.authenticated = true
+        this.authSource.next(this.authenticated)
+        return this.feathersApp.passport.verifyJWT(response.accessToken)
       })
-      .catch(this.handleError)
+      .then(payload => {
+        return this.feathersApp.service('users').get(payload.userId)
+      })
+      .then(user => {
+        this.currentUser = user
+        localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
+        this.userSource.next(this.currentUser)
+      })
+      .catch(error => {
+        this.router.navigate(['/login'])
+        console.info('We have not logged in with OAuth, yet.  This means there\'s no cookie storing the accessToken.  As a result, feathersClient.authenticate() failed.')
+        console.log(error)
+      })
   }
 
   logout(): void {
     // clear token and remove user from local storage
+    this.feathersApp.logout()
     this.token = null
     localStorage.removeItem('currentUser')
     localStorage.removeItem('feathers-jwt')

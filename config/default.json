@@ -1,28 +1,40 @@
 {
   "host": "localhost",
   "port": 3030,
-  "mongodb": "mongodb://db:27017/homeJs",
   "public": "../public/",
-  "auth": {
-    "token": {
-      "secret": "pqs8IauoymKeteGQBjtGB/L8dRxsAgeiY6aIfp8bU2S/sAnX5vwtjys0FKwjLI1lTSOMzaZXRKPV3as6FiA19Q=="
-    },
-    "local": {
-      "name": "auth/local",
-      "entity": "user",
-      "service": "users",
-      "usernameField": "username",
-      "passwordField": "password"
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "authentication": {
+    "secret": "pqs8IauoymKeteGQBjtGB/L8dRxsAgeiY6aIfp8bU2S/sAnX5vwtjys0FKwjLI1lTSOMzaZXRKPV3as6FiA19Q==",
+    "strategies": [
+      "jwt"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "type": "access"
+      },
+      "audience": "http://localhost:3030",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
     },
     "google": {
       "clientID": "423630458653-nig8sgfkjd26rmpcqttkei15jc48pkjh.apps.googleusercontent.com",
       "clientSecret": "8K-WJklPpLFoHFS1owpFOxg-",
-      "permissions": {
-        "scope": [
-          "profile",
-          "https://www.googleapis.com/auth/calendar"
-        ]
-      }
+      "scope": [ "profile", "https://www.googleapis.com/auth/calendar", "https://www.googleapis.com/auth/calendar.readonly" ],
+      "successRedirect": "/devices"
+    },
+    "cookie": {
+      "enabled": true,
+      "name": "feathers-jwt",
+      "httpOnly": false,
+      "secure": false
     }
-  }
+  },
+  "mongodb": "mongodb://db:27017/home-js"
 }

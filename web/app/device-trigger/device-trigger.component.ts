@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, Input } from '@angular/core'
 import { ActivatedRoute, Params } from '@angular/router'
 import { Location } from '@angular/common'
 
@@ -7,25 +7,16 @@ import * as _ from 'lodash'
 
 import { DeviceService } from '../devices/device.service'
 import { DeviceTriggerService } from './'
+import { Device } from 'app/models'
 
 @Component({
   selector: 'app-device-trigger',
   templateUrl: './device-trigger.component.html',
   styleUrls: ['./device-trigger.component.css'],
-  providers: [ DeviceTriggerService ],
 })
-export class DeviceTriggerComponent implements OnInit, OnDestroy {
-  otherDevices: any[] = []
-  device: any
-  selectedOperator = null
-  triggerComponent: any
-  triggerState: number
-
-  targetDevice: any
-  targetComponent: any
-  targetState: any
-
-  comparisonOperators = [ '<', '>', '≤', '≥', '=', '≠' ]
+export class DeviceTriggerComponent implements OnInit {
+  otherDevices: Device[] = []
+  device: Device
 
   constructor(
     public deviceService: DeviceService,
@@ -44,22 +35,5 @@ export class DeviceTriggerComponent implements OnInit, OnDestroy {
         this.device = device
         subscribeToDevices(device)
       })
-  }
-
-  ngOnDestroy() {
-  }
-
-  create() {
-    const triggerAction = {
-      source: this.device.deviceID,
-      trigger: {
-        operator: this.selectedOperator,
-        state: this.triggerState,
-      },
-      target: this.targetDevice.deviceID,
-      targetComponent: this.targetComponent.name,
-      action: this.targetState,
-    }
-    this.deviceTriggerService.createTrigger(triggerAction)
   }
 }

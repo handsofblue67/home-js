@@ -1,37 +1,35 @@
 export class Device {
-    deviceID: number
-    name?: string
-    topics?: Topics
-    timestamp?: Date | number
-    primaryType?: DeviceType
-    status: Array<DeviceStatus>
-    checkinFreq: number
+    _id: string
+    deviceID: string
+    name: string
+    deviceType: string
+    checkinFreq?: number
+    components: DeviceComponent[]
+    topics: Topics
+    createdAt: Date
+    updatedAt: Date
 }
 
-export class DeviceStatus {
-    deviceID: number
-    timestamp?: number
-    pins: Array<Pin>
-}
-
-export enum DeviceType { digitalOutput, digitalInput, analogOutput, analogInput }
-
-export class Pin {
-    number: number
-    purpose?: string
-    status: any
-    type: DeviceType
+export class DeviceComponent {
+    type: string
+    controlState: number
+    name: string
+    _id: string
+    isTimeSeries?: boolean
+    changedAt: string
 }
 
 export class Topics {
-    sub: {
-        toggle?: string
-        settings?: string
-        reqStatus?: string
-        setPins?: string
-    }
-    pub: {
-        status?: string
-        currentSettings?: string
-    }
+    sub: SubTopics
+    pub: PubTopics
+}
+
+export class SubTopics {
+    settings: string
+    reqStatus: string
+}
+
+export class PubTopics {
+    currentSettings: string
+    status: string
 }

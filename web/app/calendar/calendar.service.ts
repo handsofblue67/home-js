@@ -1,25 +1,21 @@
 import { Injectable } from '@angular/core'
-import { CalendarEvent } from 'calendar-utils'
-import { BehaviorSubject } from 'rxjs/BehaviorSubject'
-import { Subscription } from 'rxjs/Subscription'
-import 'rxjs/add/operator/map'
-import * as _ from 'lodash'
-import { filter, flatMap, flow, reduce, map, uniqBy } from 'lodash/fp'
+
+import { Observable } from 'rxjs/Observable'
+import { cloneDeep, compact, filter, flatMap, flow, reduce, reject, map, uniqBy } from 'lodash/fp'
 import * as moment from 'moment'
+import { CalendarEvent } from 'calendar-utils'
+import 'rxjs/add/operator/map'
+import 'rxjs/add/observable/of'
 
 import { AuthService } from '../auth.service'
 
 @Injectable()
 export class CalendarService {
-  private calendarSource = new BehaviorSubject<any>([])
-  public calendars$ = this.calendarSource.asObservable().share()
-  private eventSource = new BehaviorSubject<CalendarEvent<any>[]>([])
-  public events$ = this.eventSource.asObservable().share()
+  public events$: Observable<CalendarEvent<any>[]>
 
   private feathersService: any
   calendars = []
   events: Array<CalendarEvent> = []
-  authSubscription: Subscription
 
   // TODO: figure out how to not get a new token everytime a service is called...
   constructor(private authService: AuthService) {
@@ -41,50 +37,49 @@ export class CalendarService {
   private onCreated(calendar: any): void {
     console.log('onCreated')
     this.calendars = [ ...this.calendars, calendar ]
-    this.calendarSource.next(this.calendars)
-    this.calendarToEvents(this.calendars)
+    this.events$ = Observable.of(this.calendarToEvents(this.calendars))
   }
 
   private onUpdated(updatedCalendar: any): void {
     console.log('onUpdated')
     if (typeof updatedCalendar === 'number') { return }
 
-    this.calendars = _.map(this.calendars, calendar => {
-      return _.cloneDeep((calendar.calendarID === updatedCalendar.calendarID) ? updatedCalendar : calendar)
-    })
-
-    this.calendarSource.next(this.calendars)
-    this.calendarToEvents(this.calendars)
+    // TODO: I hate this... find a better way
+    this.calendars = map(calendar => {
+      return {
+        ...(calendar.calendarID === updatedCalendar.calendarID) ? updatedCalendar : calendar
+      }
+    })(this.calendars)
+    this.events$ = Observable.of(this.calendarToEvents(this.calendars))
   }
 
   private onRemoved(removedCalendar): void {
     console.log('onRemoved')
-    this.calendars = _.reject(this.calendars, ['calendarID', removedCalendar.calendarID])
-    this.calendarSource.next(this.calendars)
-    this.calendarToEvents(this.calendars)
+    this.calendars = reject(['calendarID', removedCalendar.calendarID])(this.calendars)
+    this.events$ = Observable.of(this.calendarToEvents(this.calendars))
   }
 
-  findNext(timeMin, timeMax): void {
+  async findNext(timeMin, timeMax) {
     console.log('findNext')
-    this.feathersService.find({ query: { timeMin: timeMin, timeMax: timeMax } })
-      .then((update: any) => {
-        this.calendars = update.data
-        this.calendarSource.next(this.calendars)
-        this.calendarToEvents(this.calendars)
-      })
+    const update = await this.feathersService.find({ query: { timeMin: timeMin, timeMax: timeMax } })
+    console.log(update)
+    this.calendars = update.data
+    this.events$ = Observable.of(this.calendarToEvents(this.calendars))
   }
 
   calendarToEvents(calendars) {
     console.log('calendars:', this.calendars)
     const events = flow(
+      compact, //remove nulls from calendar list
       flatMap(this.mapColorsToEvents),
-      uniqBy('_id'),
-      map(this.mapToEvents)
+      uniqBy('id'),
+      map(this.mapToEvents),
+      compact // remove nulls from event list
     )(calendars)
 
     this.events = [...this.events, ...events]
     console.log('events:', this.events)
-    this.eventSource.next(this.events)
+    return this.events
   }
 
   mapColorsToEvents(calendar) {
@@ -99,15 +94,26 @@ export class CalendarService {
     })(calendar.events)
   }
 
-  // still plenty to fix here
+  // TODO: still plenty to fix here
   mapToEvents(event) {
-    const { _id, color, summary: title, start: { date: startDate, dateTime: startDateTime }, end: { date: endDate, dateTime: endDateTime } } = event
-    return {
-      id: _id,
-      title,
-      start: new Date(startDate || startDateTime),
-      end: new Date(endDate || endDateTime),
-      color
+    try {
+      const { id, color, summary: title, start: { date: startDate, dateTime: startDateTime }, end: { date: endDate, dateTime: endDateTime } } = event
+      
+      const startHour: number = +moment(startDate || startDateTime).format('HH')
+      const endHour: number = +moment(endDate || endDateTime).format('HH')
+      const allDay: boolean =  endHour - startHour === 0
+
+      return {
+        id,
+        title,
+        start: new Date(startDate || startDateTime),
+        end: allDay ? undefined : new Date(endDate || endDateTime),
+        color,
+        allDay
+      }
+
+    } catch (err) {
+      return
     }
   }
 }

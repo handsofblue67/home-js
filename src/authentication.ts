@@ -12,10 +12,11 @@ export default function() {
   app.configure(authentication(config))
   app.configure(jwt())
 
-  app.configure(oauth2(Object.assign({
+  app.configure(oauth2({
+    ...config.google,
     name: 'google',
-    Strategy: GoogleStrategy
-  }, config.google)))
+    Strategy: GoogleStrategy,
+  }))
 
   // The `authentication` service is used to create a JWT.
   // The before `create` hook registers strategies that can be used

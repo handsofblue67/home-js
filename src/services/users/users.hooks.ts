@@ -17,9 +17,9 @@ export const hooks: HooksObject = {
   before: {
     all: [],
     find: [ auth.hooks.authenticate('jwt') ],
-    get: [...restrict],
+    get: [ ...restrict ],
     create: [],
-    update: [...restrict],
+    update: [ ...restrict ],
     patch: [ ...restrict ],
     remove: [ ...restrict ]
   },

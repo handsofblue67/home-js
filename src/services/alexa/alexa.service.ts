@@ -1,7 +1,7 @@
-// Initializes the `devices` service on path `/devices`
+// Initializes the `alexa` service on path `/alexa`
 import * as createService from 'feathers-mongodb'
-import { hooks } from './devices.hooks'
-import filters from './devices.filters'
+import { hooks } from './alexa.hooks'
+import filters from './alexa.filters'
 
 export default async function() {
   const app = this
@@ -11,13 +11,13 @@ export default async function() {
   const options = { id, paginate }
 
   // Initialize our service with any options it requires
-  app.use('/devices', createService(options))
+  app.use('/alexa', createService(options))
 
   // Get our initialized service so that we can register hooks and filters
-  const service = app.service('devices')
+  const service = app.service('alexa')
 
   const db = await mongoClient
-  service.Model = db.collection('devices')
+  service.Model = db.collection('alexa')
 
   await service.Model.createIndex({ deviceID: 1 })
 

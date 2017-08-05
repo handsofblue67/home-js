@@ -2,65 +2,63 @@
 //
 // Use this hook to manipulate incoming or outgoing data.
 // For more information on hooks see: http://docs.feathersjs.com/hooks/readme.html
+import { some, filter, each, find, findIndex } from 'lodash'
 
-const _ = require('lodash')
-
-export default function() {
-  return function(hook) {
+export default function () {
+  return async function (hook) {
     // let logger = hook.app.logger
     const triggerService = hook.app.service('deviceTriggers')
     const deviceService = hook.app.service('devices')
     hook.data.deviceID = hook.data.deviceID + ''
     const source = hook.data
 
-    triggerService.find().then(triggerResults => {
-      if (_.some(triggerResults.data, ['source', source.deviceID])) {
-        const triggers = _.filter(triggerResults.data, ['source', source.deviceID + ''])
+    const triggerResults = await triggerService.find()
 
-        deviceService.find().then(deviceResults => {
-          _.each(triggers, trigger => {
-            const targetID = trigger.target
-            let target = _.find(deviceResults.data, ['deviceID', targetID])
+    // if none of the results match the source
+    if (!some(triggerResults.data, ['source', source.deviceID])) return
 
-            const sourceComponentIndex = _.findIndex(source.components, ['name', trigger.sourceComponent])
-            const targetComponentIndex = _.findIndex(target.components, ['name', trigger.targetComponent])
+    const triggers = filter(triggerResults.data, ['source', source.deviceID + ''])
 
-            // logger.info(`checking: ${source.components[sourceComponentIndex].controlState} ${trigger.trigger.operator} ${trigger.trigger.state}\n...`)
+    const deviceResults = await deviceService.find()
+    each(triggers, (trigger: any) => {
+      const targetID = trigger.target
+      const target: any = find(deviceResults.data, ['deviceID', targetID])
 
-            const fireAction = () => {
-              if (target.components[targetComponentIndex].controlState == trigger.action) {
-                return
-              }
-              target.components[targetComponentIndex].controlState = trigger.action
-              hook.app.mqttClient.publish(target.topics.sub.settings, JSON.stringify(target.components))
-            }
+      const sourceComponentIndex = findIndex(source.components, ['name', trigger.sourceComponent])
+      const targetComponentIndex = findIndex(target.components, ['name', trigger.targetComponent])
 
-            const sourceState = source.components[sourceComponentIndex].controlState
-            switch (trigger.trigger.operator) {
-            case '<':
-              if (sourceState < trigger.trigger.state) fireAction()
-              break
-            case '>':
-              if (sourceState > trigger.trigger.state) fireAction()
-              break
-            case '≤':
-              if (sourceState <= trigger.trigger.state) fireAction()
-              break
-            case '≥':
-              if (sourceState >= trigger.trigger.state) fireAction()
-              break
-            case '=':
-              if (sourceState == trigger.trigger.state) fireAction()
-              break
-            case '≠':
-              if (sourceState != trigger.trigger.state) fireAction()
-              break
-            }
-          })
-        }).catch(err => { })
+      // logger.info(`checking: ${source.components[sourceComponentIndex].controlState} ${trigger.trigger.operator} ${trigger.trigger.state}\n...`)
+
+      const fireAction = () => {
+        if (target.components[targetComponentIndex].controlState == trigger.action) {
+          return
+        }
+        target.components[targetComponentIndex].controlState = trigger.action
+        hook.app.mqttClient.publish(target.topics.sub.settings, JSON.stringify(target.components))
       }
-    }).catch(err => { })
 
-    return Promise.resolve(hook)
+      const sourceState = source.components[sourceComponentIndex].controlState
+      switch (trigger.trigger.operator) {
+        case '<':
+          if (sourceState < trigger.trigger.state) fireAction()
+          break
+        case '>':
+          if (sourceState > trigger.trigger.state) fireAction()
+          break
+        case '≤':
+          if (sourceState <= trigger.trigger.state) fireAction()
+          break
+        case '≥':
+          if (sourceState >= trigger.trigger.state) fireAction()
+          break
+        case '=':
+          if (sourceState == trigger.trigger.state) fireAction()
+          break
+        case '≠':
+          if (sourceState != trigger.trigger.state) fireAction()
+          break
+      }
+    })
+    return hook
   }
 }

@@ -10,11 +10,12 @@ import { AuthService } from '../auth.service'
 @Injectable()
 export class DeviceTriggerService {
   private triggerSource = new BehaviorSubject<any[]>([])
-  public triggers$ = this.triggerSource.asObservable().share()
+  public triggers$ = this.triggerSource
+    .asObservable()
+    .share()
 
   private feathersService: any
   triggers = []
-  authSubscription: Subscription
 
   // TODO: figure out how to not get a new token everytime a service is called...
   constructor(private authService: AuthService) {
@@ -30,7 +31,7 @@ export class DeviceTriggerService {
   }
 
   private onCreated(device: any) {
-    this.triggers = [...this.triggers, device]
+    this.triggers = [ ...this.triggers, device ]
     this.triggerSource.next(this.triggers)
   }
 
@@ -52,17 +53,20 @@ export class DeviceTriggerService {
     this.feathersService.update(trigger._id, trigger)
   }
 
-  public findTrigger(id: string): Promise<any> {
-    return Promise.resolve(this.triggers).then(triggers => _.find(triggers, ['_id', id]))
+  public async findTrigger(id: string): Promise<any> {
+    return _.find(this.triggers, ['_id', id])
   }
 
-  public createTrigger(trigger) {
-    this.feathersService.create(trigger)
-      .then(result => console.log(result))
-      .catch(error => console.error(error))
+  public async createTrigger(trigger) {
+    try {
+      const result = await this.feathersService.create(trigger)
+      console.log(result)
+    } catch (err) {
+      console.error(err)
+    }
   }
 
-  public findTriggers(deviceID): Promise<any> {
-    return Promise.resolve(this.triggers).then(triggers => _.filter(triggers, ['source', deviceID]))
+  public async findTriggers(deviceID): Promise<any> {
+    return _.filter(this.triggers, ['source', deviceID])
   }
 }

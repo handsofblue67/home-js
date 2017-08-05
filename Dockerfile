@@ -14,10 +14,10 @@ RUN set -x \
 RUN mkdir /home/node/home-js
 WORKDIR /home/node/home-js
 
-COPY package.json /home/node/home-js/
+# COPY package.json /home/node/home-js/
+COPY . /home/node/home-js
 RUN chown -R node:node /home/node && chown -R node:node /usr/local
 RUN gosu node npm cache clean && gosu node npm install
 
-# COPY . /home/node/home-js
 
 CMD [ "gosu", "node", "npm", "start" ]

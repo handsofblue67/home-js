@@ -1,9 +1,9 @@
 import { Component, OnDestroy } from '@angular/core'
-import { MdSnackBar, LiveAnnouncer } from '@angular/material'
+import { MdSnackBar } from '@angular/material'
 
 
 import { Subscription } from 'rxjs/Subscription'
-import * as _ from 'lodash'
+import { find } from 'lodash'
 
 import { DeviceService } from './device.service'
 
@@ -16,9 +16,7 @@ export class DevicesComponent implements OnDestroy {
   connection: Subscription
   devices: any[] = []
 
-  constructor(public deviceService: DeviceService,
-              public live: LiveAnnouncer,
-              public snackBar: MdSnackBar) {
+  constructor(public deviceService: DeviceService, public snackBar: MdSnackBar) {
     this.connection = deviceService.devices$
       .subscribe(devices => this.devices = devices)
   }
@@ -34,6 +32,6 @@ export class DevicesComponent implements OnDestroy {
   }
 
   private isSensor(device) {
-    return _.find(device.components, ['type', 'sensor'])
+    return find(device.components, ['type', 'sensor'])
   }
 }

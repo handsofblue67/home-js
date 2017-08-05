@@ -5,7 +5,20 @@ import { CalendarModule } from 'angular-calendar'
 import { NgModule } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { HttpModule } from '@angular/http'
-import { MdSnackBar, LiveAnnouncer, MdButtonModule, MdButtonToggleModule, MdOptionModule, MdCardModule, MdSidenavModule, MdMenuModule, MdSlideToggleModule, MdSelectModule, MdInputModule, MdToolbarModule, MdIconModule, MdTooltipModule, } from '@angular/material'
+import {
+  MdButtonModule,
+  MdButtonToggleModule,
+  MdCardModule,
+  MdIconModule,
+  MdMenuModule,
+  MdSidenavModule,
+  MdSlideToggleModule,
+  MdSelectModule,
+  MdInputModule,
+  MdSnackBarModule,
+  MdToolbarModule,
+  MdTooltipModule,
+} from '@angular/material'
 import { AppComponent } from './app.component'
 import { AuthGuard } from './auth-guard.service'
 import { AuthService } from './auth.service'
@@ -14,17 +27,21 @@ import { DeviceTriggerService } from './device-trigger'
 import { routing, routedComponents } from './app.routing'
 import { UsersService } from './users'
 import { KeysPipe } from './keys.pipe'
+import { PrettyDatePipe } from './shared/pretty-date.pipe'
 import { TriggerFormComponent } from './device-trigger/trigger-form/trigger-form.component';
 import { DeviceComponent } from './models/device/device.component'
 import { CalendarService } from './calendar'
+import { CdkTableModule } from '@angular/cdk'
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    DeviceComponent,
     routedComponents,
     KeysPipe,
+    PrettyDatePipe,
     TriggerFormComponent,
-    DeviceComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,16 +51,17 @@ import { CalendarService } from './calendar'
     FormsModule,
     HttpModule,
     MdButtonModule,
-    MdCardModule,
-    MdInputModule,
-    MdSidenavModule,
-    MdMenuModule,
-    MdSlideToggleModule,
-    MdIconModule,
-    MdOptionModule,
     MdButtonToggleModule,
-    MdTooltipModule,
+    MdCardModule,
+    MdIconModule,
+    MdInputModule,
+    MdMenuModule,
+    MdSidenavModule,
+    MdSlideToggleModule,
+    MdSelectModule,
+    MdSnackBarModule,
     MdToolbarModule,
+    MdTooltipModule,
     routing
   ],
   providers: [
@@ -52,8 +70,8 @@ import { CalendarService } from './calendar'
     CalendarService,
     DeviceService,
     DeviceTriggerService,
-    LiveAnnouncer,
-    MdSnackBar,
+    // LiveAnnouncer,
+    // MdSnackBar,
     UsersService,
   ],
   bootstrap: [AppComponent]

@@ -4,8 +4,6 @@ import { filter, flatMap, flow, reduce, map } from 'lodash/fp'
 import * as moment from 'moment'
 import { CalendarEvent } from 'calendar-utils'
 import { CalendarService } from './'
-import { Subject } from 'rxjs/Subject'
-
 
 @Component({
   selector: 'app-calendar',
@@ -13,21 +11,30 @@ import { Subject } from 'rxjs/Subject'
   styleUrls: ['./calendar.component.css'],
 })
 export class CalendarComponent {
-  // events: Array<CalendarEvent> = []
   viewDate = new Date()
-  // calendars = []
+  currentDate = moment(this.viewDate)
   timeMin
   timeMax
-  refresh: Subject<any> = new Subject()
   displayDate = moment(this.viewDate).format('MMMM YYYY')
-  // selectedCalendar
+
   constructor(public calendarService: CalendarService) { }
 
-  setView(viewMode) {
-    this.timeMin = moment().startOf(viewMode).toDate()
-    this.timeMax = moment(this.timeMin).endOf(viewMode).toDate()
+  // TODO: getting closer
+  changePage(turnTo: string, viewMode) {
+    switch (turnTo) {
+      case 'prev':
+        this.currentDate = this.currentDate.subtract(1, 'month')
+        break
+      case 'next':
+        this.currentDate = this.currentDate.add(1, 'month')
+        break
+      default:
+        this.currentDate = moment(new Date())
+        break
+    }
+    this.timeMin = moment(this.currentDate).startOf(viewMode).toDate()
+    this.timeMax = moment(this.currentDate).endOf(viewMode).toDate()
     this.calendarService.findNext(this.timeMin, this.timeMax)
-    this.displayDate = moment(this.timeMin).format('MMMM YYYY')
-    this.refresh.next(true)
+    this.displayDate = moment(this.currentDate).format('MMMM YYYY')
   }
 }

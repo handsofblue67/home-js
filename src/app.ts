@@ -32,6 +32,7 @@ app.use(favicon(path.join(app.get('public'), 'assets', 'favicon.ico')))
 app.use('/', feathers.static(app.get('public')))
 app.use('/calendar', feathers.static(app.get('public')))
 app.use('/devices', feathers.static(app.get('public')))
+app.use('/login', feathers.static(app.get('public')))
 
 // Set up Plugins and providers
 app.configure(hooks())

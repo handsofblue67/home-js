@@ -17,9 +17,8 @@ module.exports = function (options) {
     const source = hook.data;
 
     triggerService.find().then(results => {
-      if (_.some(results.data, ['source', hook.data.deviceID])) {
+      if (_.some(results.data, ['source', source.deviceID])) {
         const triggers = _.filter(results.data, ['source', source.deviceID]);
-
 
         deviceService.find().then(deviceResults => {
           _.each(triggers, trigger => {
@@ -31,65 +30,44 @@ module.exports = function (options) {
 
             logger.info(`checking: ${source.components[componentIndex].controlState} ${trigger.trigger.operator} ${trigger.trigger.state}`)
 
+            const doAction = () => {
+              logger.info('found device with trigger');
+              logger.info(trigger.trigger.operator);
+              if (target.components[componentIndex].controlState === trigger.action) break;
+              target.components[componentIndex].controlState = trigger.action;
+              logger.info(JSON.stringify(target.components[componentIndex], null, 2));
+              hook.app.mqttClient.publish(target.topics.sub.settings, JSON.stringify(target.components));
+            }
+
             switch (trigger.trigger.operator) {
               case '<':
                 if (source.components[componentIndex].controlState < trigger.trigger.state) {
-                  logger.info('found device with trigger');
-                  logger.info(trigger.trigger.operator);
-                  if (target.components[componentIndex].controlState === trigger.action) break;
-                  target.components[componentIndex].controlState = trigger.action;
-                  logger.info(JSON.stringify(target.components[componentIndex], null, 2));
-                  hook.app.mqttClient.publish(target.topics.sub.settings, JSON.stringify(target.components));
+                  doAction();
                 }
                 break;
               case '>':
                 if (source.components[componentIndex].controlState > trigger.trigger.state) {
-                  logger.info('found device with trigger');
-                  logger.info(trigger.trigger.operator);
-                  if (target.components[componentIndex].controlState === trigger.action) break;
-                  target.components[componentIndex].controlState = trigger.action;
-                  logger.info(JSON.stringify(target.components[componentIndex], null, 2));
-                  hook.app.mqttClient.publish(target.topics.sub.settings, JSON.stringify(target.components));
+                  doAction();
                 }
                 break;
               case '≤':
                 if (source.components[componentIndex].controlState <= trigger.trigger.state) {
-                  logger.info('found device with trigger');
-                  logger.info(trigger.trigger.operator);
-                  if (target.components[componentIndex].controlState === trigger.action) break;
-                  target.components[componentIndex].controlState = trigger.action;
-                  logger.info(JSON.stringify(target.components[componentIndex], null, 2));
-                  hook.app.mqttClient.publish(target.topics.sub.settings, JSON.stringify(target.components));
+                  doAction();
                 }
                 break;
               case '≥':
                 if (source.components[componentIndex].controlState >= trigger.trigger.state) {
-                  logger.info('found device with trigger');
-                  logger.info(trigger.trigger.operator);
-                  if (target.components[componentIndex].controlState === trigger.action) break;
-                  target.components[componentIndex].controlState = trigger.action;
-                  logger.info(JSON.stringify(target.components[componentIndex], null, 2));
-                  hook.app.mqttClient.publish(target.topics.sub.settings, JSON.stringify(target.components));
+                  doAction();
                 }
                 break;
               case '=':
                 if (source.components[componentIndex].controlState == trigger.trigger.state) {
-                  logger.info('found device with trigger');
-                  logger.info(trigger.trigger.operator);
-                  if (target.components[componentIndex].controlState === trigger.action) break;
-                  target.components[componentIndex].controlState = trigger.action;
-                  logger.info(JSON.stringify(target.components[componentIndex], null, 2));
-                  hook.app.mqttClient.publish(target.topics.sub.settings, JSON.stringify(target.components));
+                  doAction();
                 }
                 break;
               case '≠':
                 if (source.components[componentIndex].controlState != trigger.trigger.state) {
-                  logger.info('found device with trigger');
-                  logger.info(trigger.trigger.operator);
-                  if (target.components[componentIndex].controlState === trigger.action) break;
-                  target.components[componentIndex].controlState = trigger.action;
-                  logger.info(JSON.stringify(target.components[componentIndex], null, 2));
-                  hook.app.mqttClient.publish(target.topics.sub.settings, JSON.stringify(target.components));
+                  doAction();
                 }
                 break;
             }

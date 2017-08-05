@@ -1,8 +1,8 @@
 local module={}
 
 module.deviceID=config.ID
-module.name="Livingroom DHT11"
-module.checkinFreq=600000
+module.name="Bedroom Temp/Humidity"
+module.checkinFreq=60000
 module.deviceType="DHT11"
 
 module.components={}

@@ -1,13 +1,13 @@
 local module={}
 
 module.deviceID=config.ID
-module.name="Bedroom Humidifier"
+module.name="Livingroom Lamp"
 module.checkinFreq=0
 module.deviceType="Toggle"
 
 module.components={}
 module.components[1]={
-    name="Humidifier",
+    name="light switch",
     type="toggle",
     pinNumber=1,
     units="boolean",

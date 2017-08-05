@@ -42,7 +42,7 @@ const convertDocs = docs => {
   fs.writeFile('temps.json', JSON.stringify(temps, null, 2))
 }
 
-client.connect('mongodb://192.168.1.252:27017/homeJs', (err, db) => {
+client.connect('mongodb://192.168.1.252:27017/home-js', (err, db) => {
   if (err) {
     console.error(err)
     return

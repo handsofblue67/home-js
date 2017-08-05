@@ -11,7 +11,7 @@ import { AuthService } from '../auth.service'
 
 @Injectable()
 export class CalendarService {
-  public events$: Observable<CalendarEvent<any>[]>
+  public events$: Observable<CalendarEvent[]>
 
   private feathersService: any
   calendars = []

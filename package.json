@@ -31,19 +31,19 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^4.0.0",
+    "@angular/animations": "^4.3.3",
     "@angular/cdk": "^2.0.0-beta.8",
-    "@angular/common": "^4.0.0",
-    "@angular/compiler": "^4.0.0",
-    "@angular/compiler-cli": "^4.0.0",
-    "@angular/core": "^4.0.0",
-    "@angular/forms": "^4.0.0",
-    "@angular/http": "^4.0.0",
+    "@angular/common": "^4.3.3",
+    "@angular/compiler": "^4.3.3",
+    "@angular/compiler-cli": "^4.3.3",
+    "@angular/core": "^4.3.3",
+    "@angular/forms": "^4.3.3",
+    "@angular/http": "^4.3.3",
     "@angular/material": "^2.0.0-beta.8",
-    "@angular/platform-browser": "^4.0.0",
-    "@angular/platform-browser-dynamic": "^4.0.0",
-    "@angular/platform-server": "^4.0.0",
-    "@angular/router": "^4.0.0",
+    "@angular/platform-browser": "^4.3.3",
+    "@angular/platform-browser-dynamic": "^4.3.3",
+    "@angular/platform-server": "^4.3.3",
+    "@angular/router": "^4.3.3",
     "angular-calendar": "^0.18.3",
     "async-mqtt": "^1.0.1",
     "body-parser": "^1.17.1",
@@ -81,15 +81,15 @@
     "passport-google-oauth20": "^1.0.0",
     "passport-google-token": "^0.1.2",
     "request": "^2.81.0",
-    "rxjs": "^5.4.1",
+    "rxjs": "^5.4.2",
     "serve-favicon": "^2.4.3",
     "socket.io": "^1.5.1",
     "socket.io-client": "^1.7.3",
     "winston": "^2.3.1",
-    "zone.js": "^0.8.5"
+    "zone.js": "^0.8.16"
   },
   "devDependencies": {
-    "@angular/cli": "^1.0.0",
+    "@angular/cli": "^1.2.7",
     "@angular/compiler-cli": "^4.0.0",
     "@types/body-parser": "^1.16.4",
     "@types/compression": "0.0.33",
@@ -133,6 +133,6 @@
     "request-promise": "^4.2.0",
     "ts-node": "^2.1.2",
     "tslint": "^4.5.1",
-    "typescript": "^2.4.0"
+    "typescript": "^2.4.2"
   }
 }

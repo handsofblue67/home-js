@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
 
-import * as _ from 'lodash'
+import { find } from 'lodash'
 
 import { DeviceService } from '../../devices/device.service'
 import { DeviceTriggerService } from '../'
@@ -20,17 +20,15 @@ export class TriggerFormComponent {
   triggerDefinition: any = {}
 
   @Input()
-  trigger(trigger: TriggerDefinition) {
-    let sourceDevice
-    this.deviceService.findDevice(trigger.source).then(device => sourceDevice = device)
-    let targetDevice
-    this.deviceService.findDevice(trigger.target).then(device => targetDevice = device)
+  async trigger(trigger: TriggerDefinition) {
+    const source = await this.deviceService.findDevice(trigger.source)
+    const target = await this.deviceService.findDevice(trigger.target)
 
     this.triggerDefinition = {
-      source: sourceDevice,
-      sourceComponent: _.find(sourceDevice.components, ['name', trigger.sourceComponent]),
-      target: targetDevice,
-      targetComponent: _.find(targetDevice.components, ['name', trigger.targetComponent]),
+      source,
+      sourceComponent: find(source.components, ['name', trigger.sourceComponent]),
+      target,
+      targetComponent: find(target.components, ['name', trigger.targetComponent]),
       action: trigger.action,
       trigger: trigger.trigger,
     }

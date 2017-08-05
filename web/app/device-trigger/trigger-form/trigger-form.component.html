@@ -4,7 +4,9 @@
   <h3>Define a trigger</h3>
 
   <md-select placeholder="Source Component" [(ngModel)]="triggerDefinition.sourceComponent">
-    <md-option *ngFor="let sourceComponent of triggerDefinition?.source?.components" [value]="sourceComponent">{{ sourceComponent?.name }}</md-option>
+    <md-option *ngFor="let sourceComponent of triggerDefinition?.source?.components" [value]="sourceComponent">
+      {{ sourceComponent?.name }}
+    </md-option>
   </md-select>
 
   <md-select placeholder="Comparison" [(ngModel)]="triggerDefinition.trigger.operator">

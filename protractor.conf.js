@@ -3,6 +3,7 @@
 
 /*global jasmine */
 var SpecReporter = require('jasmine-spec-reporter');
+const { user = 'default', testName = 'default' } = process.env
 
 exports.config = {
   allScriptsTimeout: 11000,
@@ -28,5 +29,7 @@ exports.config = {
   },
   onPrepare: function() {
     jasmine.getEnv().addReporter(new SpecReporter());
-  }
+  },
+  user,
+  testName
 };

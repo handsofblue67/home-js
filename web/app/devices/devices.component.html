@@ -24,6 +24,7 @@
   <md-card-content>{{device.deviceType}}</md-card-content>
 
   <div *ngFor="let component of device.components; let i = index">
+    <div><b>Last seen:</b> {{device.lastSeen | prettyDate}}</div>
     <md-slide-toggle *ngIf="component.type === 'toggle'" color="accent" [(ngModel)]="component.controlState" (change)="toggle(device, i)"
       [mdTooltip]="'Slide to toggle ' + device.name || device.deviceID" mdTooltipPosition="right"></md-slide-toggle>
     <app-sensor *ngIf="component.type === 'sensor'" [component]="component"></app-sensor>

@@ -1,4 +1,40 @@
 {
-  "host": "oauth-app.feathersjs.com",
-  "port": "PORT"
+  "host": "handsofblue67.mynetgear.com",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "authentication": {
+    "secret": "pqs8IauoymKeteGQBjtGB/L8dRxsAgeiY6aIfp8bU2S/sAnX5vwtjys0FKwjLI1lTSOMzaZXRKPV3as6FiA19Q==",
+    "strategies": [
+      "jwt"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "type": "access"
+      },
+      "audience": "http://handsofblue67.mynetgear.com",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "google": {
+      "clientID": "423630458653-nig8sgfkjd26rmpcqttkei15jc48pkjh.apps.googleusercontent.com",
+      "clientSecret": "8K-WJklPpLFoHFS1owpFOxg-",
+      "scope": [ "profile", "https://www.googleapis.com/auth/calendar", "https://www.googleapis.com/auth/calendar.readonly" ],
+      "successRedirect": "/devices"
+    },
+    "cookie": {
+      "enabled": true,
+      "name": "feathers-jwt",
+      "httpOnly": false,
+      "secure": false
+    }
+  },
+  "mongodb": "mongodb://db:27017/home-js"
 }

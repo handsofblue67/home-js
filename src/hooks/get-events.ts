@@ -1,16 +1,15 @@
-import { each, map } from 'lodash'
+import { each, map, uniqBy } from 'lodash'
 import * as rp from 'request-promise'
 import * as moment from 'moment'
+import * as hook from 'feathers'
 
 // Use this hook to manipulate incoming or outgoing data.
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
 
 // client must set the beginning and end time for currently viewed time period (month, week day)
-export default function (options = {}) { // eslint-disable-line no-unused-vars
+export default function () { // eslint-disable-line no-unused-vars
   return async function getEvents(hook) {
     try {
-
-      // console.log('HOOK PARAMS:', JSON.stringify(hook.params.query))
 
       const { userId = undefined, user: queryUser = undefined } = hook.params.query
 
@@ -24,7 +23,6 @@ export default function (options = {}) { // eslint-disable-line no-unused-vars
       const userResponse = await hook.app.service('users').get(hook.params.query.userId)
 
       const { googleId, google: { accessToken } } = userResponse
-      // console.log(`Access Token: ${accessToken}`)
 
       // get each calendar
       const url = `https://www.googleapis.com/calendar/v3/users/me/calendarList?access_token=${accessToken}`
@@ -38,7 +36,6 @@ export default function (options = {}) { // eslint-disable-line no-unused-vars
           importedFor: googleId
         }
       })
-      console.log(JSON.stringify(calendars, null, 2))
 
       // for each of the users calendars, get all events for the month requested by the client
       each(calendars, async (calendar: any) => {
@@ -46,33 +43,36 @@ export default function (options = {}) { // eslint-disable-line no-unused-vars
           timeMax = moment().endOf('month').toDate(),
           timeMin = moment().startOf('month').toDate()
         } = hook.params.query
-        const eventsUrl = `https://www.googleapis.com/calendar/v3/calendars/${calendar.id}/events?timeMax=${timeMax}&timeMin=${timeMin}&access_token=${accessToken}`
-        console.log(eventsUrl)
 
-        // const qs = {
-        //   timeMax,
-        //   timeMin,
-        //   access_token: accessToken
-        // }
+        const eventsOptions: rp.Options = {
+          uri: `https://www.googleapis.com/calendar/v3/calendars/${calendar.id}/events`,
+          qs: {
+            timeMax,
+            timeMin,
+            access_token: accessToken
+          }
+        }
 
-        // const eventsUrl = `https://www.googleapis.com/calendar/v3/calendars/${calendar.id}/events?access_token=${accessToken}`
-
-        const eventsRes = await rp.get(eventsUrl)
+        const eventsRes = await rp.get(eventsOptions)
         const events = JSON.parse(eventsRes).items
 
         if (events && events.length) {
           const calendarWithEvents = { ...calendar, events }
-          hook.service.get(calendar.id, { query: { ...hook.params.query, userResponse } })
-            .then(() => hook.service.update(calendar.id, calendarWithEvents))
-            .catch(() => hook.service.create(calendarWithEvents))
+          try {
+            const { events: existingEvents } = await hook.service.get(calendar.id, { query: { ...hook.params.query, userResponse } })
+            hook.service.update(calendar.id, {
+              ...calendarWithEvents,
+              events: uniqBy([...existingEvents, events], 'id')
+            })
+          } catch (err) {
+            hook.service.create(calendarWithEvents)
+          }
         }
-
       })
       hook.params.query = {}
       return hook
     } catch (err) {
-      console.error(err)
+      console.error('error in calendar logic')
     }
-
   }
 }

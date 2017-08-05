@@ -43,26 +43,25 @@ export class AuthService {
       .configure(feathers.hooks())
       .configure(authentication({ cookie: 'feathers-jwt' }))
 
-    this.feathersApp.authenticate()
-      .then(response => {
-        console.info('Feathers Client has Authenticated with the JWT access token!')
-        this.authenticated = true
-        this.authSource.next(this.authenticated)
-        return this.feathersApp.passport.verifyJWT(response.accessToken)
-      })
-      .then(payload => {
-        return this.feathersApp.service('users').get(payload.userId)
-      })
-      .then(user => {
-        this.currentUser = user
-        localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
-        this.userSource.next(this.currentUser)
-      })
-      .catch(error => {
-        this.router.navigate(['/login'])
-        console.info('We have not logged in with OAuth, yet.  This means there\'s no cookie storing the accessToken.  As a result, feathersClient.authenticate() failed.')
-        console.log(error)
-      })
+    this.initAuth()
+  }
+
+  private async initAuth() {
+    try {
+      const authResponse = await this.feathersApp.authenticate()
+      console.info('Feathers Client has Authenticated with the JWT access token!')
+      this.authenticated = true
+      this.authSource.next(this.authenticated)
+      const verifyJWTPayload = await this.feathersApp.passport.verifyJWT(authResponse.accessToken)
+      const user = await this.feathersApp.service('users').get(verifyJWTPayload.userId)
+      this.currentUser = user
+      localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
+      this.userSource.next(this.currentUser)
+    } catch (err) {
+      this.router.navigate(['/login'])
+      console.info('We have not logged in with OAuth, yet.  This means there\'s no cookie storing the accessToken.  As a result, feathersClient.authenticate() failed.')
+      console.log(err)
+    }
   }
 
   logout(): void {

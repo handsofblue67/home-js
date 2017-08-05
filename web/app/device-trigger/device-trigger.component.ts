@@ -3,7 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router'
 import { Location } from '@angular/common'
 
 import { Subscription } from 'rxjs/Subscription'
-import * as _ from 'lodash'
+import { without } from 'lodash'
 
 import { DeviceService } from '../devices/device.service'
 import { DeviceTriggerService } from './'
@@ -26,14 +26,14 @@ export class DeviceTriggerComponent implements OnInit {
 
   ngOnInit(): void {
     const subscribeToDevices = device => {
-      this.otherDevices = _.without(this.deviceService.devices, device)
+      this.otherDevices = without(this.deviceService.devices, device)
     }
 
     this.route.params
-      .switchMap((params: Params) => this.deviceService.findDevice(params['deviceID']))
-      .subscribe(device => {
-        this.device = device
-        subscribeToDevices(device)
+      .map((params: Params) => this.deviceService.findDevice(params['deviceID']))
+      .subscribe(async device => {
+        this.device = await device
+        subscribeToDevices(this.device)
       })
   }
 }

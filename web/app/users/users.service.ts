@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core'
 
 import 'rxjs/add/operator/map'
-import * as _ from 'lodash'
-import * as io from 'socket.io-client'
+import { findIndex, without } from 'lodash'
 import * as feathers from 'feathers-client'
 
 import { AuthService } from '../auth.service'
@@ -24,8 +23,6 @@ export class UsersService {
       const users = update.data
       this.users = users
       this.userSource.next(this.users)
-      // this.currentUser = _.find(this.users, user => user.google.displayName === 'Michael Robison')
-      // if (this.currentUser) { authService.setUser(this.currentUser) }
     })
     this.feathersService
       .on('created', user => this.onCreated(user))
@@ -34,7 +31,7 @@ export class UsersService {
   }
 
   private getIndex(id: string): number {
-    return _.findIndex(this.users, user => user.googleId === id)
+    return findIndex(this.users, user => user.googleId === id)
   }
 
   private onCreated(user) {
@@ -49,7 +46,7 @@ export class UsersService {
   }
 
   private onRemoved(user) {
-    this.users = _.without(this.users, user)
+    this.users = without(this.users, user)
     this.userSource.next(this.users)
   }
 

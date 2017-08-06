@@ -3,17 +3,14 @@ import { Router } from '@angular/router'
 
 import 'rxjs/add/observable/fromPromise'
 import 'rxjs/add/operator/skipWhile'
+import 'rxjs/add/operator/share'
+
 import { Observable } from 'rxjs/Observable'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 
-// import feathers from 'feathers/client'
 import * as feathers from 'feathers-client'
 import authentication from 'feathers-authentication/client'
-// import * as socketio from 'feathers-socketio/client'
-// import * as hooks from 'feathers-hooks'
-// import * as authentication from 'feathers-authentication-client'
 import * as io from 'socket.io-client'
-import * as _ from 'lodash'
 
 import { User } from './models'
 
@@ -34,16 +31,40 @@ export class AuthService {
   public feathersApp: any
   public token: string
   public message = ''
-  // public socket = io('/')
   public socket = io('/', { transports: ['websocket'] })
 
   constructor(private router: Router) {
     this.feathersApp = feathers()
       .configure(feathers.socketio(this.socket))
       .configure(feathers.hooks())
-      .configure(authentication({ cookie: 'feathers-jwt' }))
+      .configure(authentication({
+        storage: window.localStorage,
+        cookie: 'feathers-jwt',
+      }))
 
     this.initAuth()
+  }
+
+  async login(username: string, password: string): Promise<any> {
+    const opts = { strategy: 'local', username, password }
+    const result = await this.feathersApp.authenticate(opts)
+    this.authenticated = true
+    this.authSource.next(this.authenticated)
+
+    const payload = await this.feathersApp.passport.verifyJWT(result.accessToken)
+    console.log('payload', payload)
+    this.currentUser = await this.feathersApp
+      .service('users')
+      .get(payload.userId)
+    this.feathersApp.set('currentUser', this.currentUser)
+    this.userSource.next(this.currentUser)
+    console.log('Current User', this.feathersApp.get('currentUser'))
+    // console.log(result)
+    // this.token = result && result.token
+    // this.currentUser = result.data
+    // localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
+    this.authenticated = this.token ? true : false
+    return this.authenticated
   }
 
   private async initAuth() {
@@ -53,9 +74,10 @@ export class AuthService {
       this.authenticated = true
       this.authSource.next(this.authenticated)
       const verifyJWTPayload = await this.feathersApp.passport.verifyJWT(authResponse.accessToken)
-      const user = await this.feathersApp.service('users').get(verifyJWTPayload.userId)
-      this.currentUser = user
-      localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
+      this.currentUser = await this.feathersApp
+        .service('users')
+        .get(verifyJWTPayload.userId)
+      this.feathersApp.set('currentUser', this.currentUser)
       this.userSource.next(this.currentUser)
     } catch (err) {
       this.router.navigate(['/login'])

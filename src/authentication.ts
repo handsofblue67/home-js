@@ -1,6 +1,7 @@
 import * as authentication from 'feathers-authentication'
 import * as jwt from 'feathers-authentication-jwt'
 
+import * as local from 'feathers-authentication-local'
 import * as oauth2 from 'feathers-authentication-oauth2'
 import * as GoogleStrategy from 'passport-google-oauth20'
 
@@ -11,6 +12,7 @@ export default function() {
   // Set up authentication with the secret
   app.configure(authentication(config))
   app.configure(jwt())
+  app.configure(local(config.local))
 
   app.configure(oauth2({
     ...config.google,

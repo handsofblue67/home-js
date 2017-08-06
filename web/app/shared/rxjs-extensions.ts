@@ -4,6 +4,7 @@ import 'rxjs/add/observable/throw'
 import 'rxjs/add/observable/from'
 import 'rxjs/add/observable/fromEvent'
 import 'rxjs/add/observable/fromPromise'
+import 'rxjs/add/observable/share'
 
 // Observable operators
 import 'rxjs/add/operator/catch'

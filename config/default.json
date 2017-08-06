@@ -9,7 +9,8 @@
   "authentication": {
     "secret": "pqs8IauoymKeteGQBjtGB/L8dRxsAgeiY6aIfp8bU2S/sAnX5vwtjys0FKwjLI1lTSOMzaZXRKPV3as6FiA19Q==",
     "strategies": [
-      "jwt"
+      "jwt",
+      "local"
     ],
     "path": "/authentication",
     "service": "users",
@@ -22,6 +23,11 @@
       "issuer": "feathers",
       "algorithm": "HS256",
       "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "usernameField": "username",
+      "passwordField": "password"
     },
     "google": {
       "clientID": "423630458653-nig8sgfkjd26rmpcqttkei15jc48pkjh.apps.googleusercontent.com",

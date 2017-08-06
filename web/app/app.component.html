@@ -7,6 +7,7 @@
 	<span class="fill"></span>
 	<button *ngIf="authService?.currentUser?.google" md-button routerLink="/users">{{authService.currentUser.google.profile.displayName}}</button>
 	<span *ngIf="authService?.currentUser?.google"><img [src]="(authService.user$ | async)?.google.profile.photos[0].value" class="avatar"></span>
+	<button *ngIf="authService?.currentUser?.username" md-button routerLink="/users">{{authService.currentUser.username}}</button>
 </md-toolbar>
 
 <md-sidenav-container class="sidenav-container" (scroll)="scrolling($event)">

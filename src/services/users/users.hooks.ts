@@ -1,12 +1,16 @@
 import * as auth from 'feathers-authentication'
 import * as commonHooks from 'feathers-hooks-common'
 import * as authHooks from 'feathers-authentication-hooks'
+
+import * as localHooks from 'feathers-authentication-local'
+
 import { HooksObject } from 'feathers-hooks'
 
-// const getCalendarData = require('../../hooks/get-calendar-data');
+const { authenticate } = auth.hooks
+const { hashPassword } = localHooks.hooks
 
 const restrict = [
-  auth.hooks.authenticate('jwt'),
+  authenticate('jwt'),
   authHooks.restrictToOwner({
     idField: '_id',
     ownerField: '_id'
@@ -16,11 +20,11 @@ const restrict = [
 export const hooks: HooksObject = {
   before: {
     all: [],
-    find: [ auth.hooks.authenticate('jwt') ],
+    find: [ authenticate('jwt') ],
     get: [ ...restrict ],
-    create: [],
-    update: [ ...restrict ],
-    patch: [ ...restrict ],
+    create: [ hashPassword() ],
+    update: [ ...restrict, hashPassword() ],
+    patch: [ ...restrict, hashPassword() ],
     remove: [ ...restrict ]
   },
 
@@ -48,4 +52,4 @@ export const hooks: HooksObject = {
     patch: [],
     remove: []
   }
-};
+}

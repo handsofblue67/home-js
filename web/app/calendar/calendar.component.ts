@@ -37,4 +37,8 @@ export class CalendarComponent {
     this.calendarService.findNext(this.timeMin, this.timeMax)
     this.displayDate = moment(this.currentDate).format('MMMM YYYY')
   }
+
+  setView(event) {
+    console.log(event)
+  }
 }

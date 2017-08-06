@@ -16,7 +16,6 @@ import { User } from './models'
 
 @Injectable()
 export class AuthService {
-  // private _url: string = 'http://localhost:3030'
   authenticated = false
   private authSource = new BehaviorSubject<boolean>(this.authenticated)
   public auth$ = this.authSource
@@ -43,6 +42,11 @@ export class AuthService {
       }))
 
     this.initAuth()
+    this.feathersApp.on('reauthentication-error', this.errorHandler)
+  }
+
+  private async errorHandler() {
+    return await this.feathersApp.authenticate()
   }
 
   async login(username: string, password: string): Promise<any> {
